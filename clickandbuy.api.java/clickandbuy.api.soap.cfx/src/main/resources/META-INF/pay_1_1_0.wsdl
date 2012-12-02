@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://api.clickandbuy.com/webservices/pay_1_1_0/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" name="pay_1_1_0" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://api.clickandbuy.com/webservices/pay_1_1_0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http" xmlns:cab="http://api.clickandbuy.com/webservices/pay_1_1_0/">
+  <wsdl:types>
+    <xs:schema>
+            <xs:import namespace="http://api.clickandbuy.com/webservices/pay_1_1_0/" schemaLocation="https://api.clickandbuy.com/webservices/pay_1_1_0.xsd"/>
+    </xs:schema>
+  </wsdl:types>
+
+  <wsdl:message name="payRequest_Request">
+    <wsdl:part name="parameters" element="payRequest_Request"/>
+  </wsdl:message>
+  <wsdl:message name="payRequest_Response">
+    <wsdl:part name="return" element="payRequest_Response"/>
+  </wsdl:message>
+  <wsdl:message name="payRequestRecurring_Request">
+    <wsdl:part name="parameters" element="payRequestRecurring_Request"/>
+  </wsdl:message>
+  <wsdl:message name="payRequestRecurring_Response">
+    <wsdl:part name="return" element="payRequestRecurring_Response"/>
+  </wsdl:message>
+  <wsdl:message name="refundRequest_Request">
+    <wsdl:part name="parameters" element="refundRequest_Request"/>
+  </wsdl:message>
+  <wsdl:message name="refundRequest_Response">
+    <wsdl:part name="return" element="refundRequest_Response"/>
+  </wsdl:message>
+  <wsdl:message name="cancelRequest_Request">
+    <wsdl:part name="parameters" element="cancelRequest_Request"/>
+  </wsdl:message>
+  <wsdl:message name="cancelRequest_Response">
+    <wsdl:part name="return" element="cancelRequest_Response"/>
+  </wsdl:message>
+  <wsdl:message name="creditRequest_Request">
+    <wsdl:part name="parameters" element="creditRequest_Request"/>
+  </wsdl:message>
+  <wsdl:message name="creditRequest_Response">
+    <wsdl:part name="return" element="creditRequest_Response"/>
+  </wsdl:message>
+  <wsdl:message name="statusRequest_Request">
+    <wsdl:part name="parameters" element="statusRequest_Request"/>
+  </wsdl:message>
+  <wsdl:message name="statusRequest_Response">
+    <wsdl:part name="return" element="statusRequest_Response"/>
+  </wsdl:message>
+  <wsdl:message name="createBatch_Request">
+    <wsdl:part name="parameters" element="createBatch_Request"/>
+  </wsdl:message>
+  <wsdl:message name="createBatch_Response">
+    <wsdl:part name="return" element="createBatch_Response"/>
+  </wsdl:message>
+  <wsdl:message name="addBatchItem_Request">
+    <wsdl:part name="parameters" element="addBatchItem_Request"/>
+  </wsdl:message>
+  <wsdl:message name="addBatchItem_Response">
+    <wsdl:part name="return" element="addBatchItem_Response"/>
+  </wsdl:message>
+  <wsdl:message name="executeBatch_Request">
+    <wsdl:part name="parameters" element="executeBatch_Request"/>
+  </wsdl:message>
+  <wsdl:message name="executeBatch_Response">
+    <wsdl:part name="return" element="executeBatch_Response"/>
+  </wsdl:message>
+  <wsdl:message name="cancelBatch_Request">
+    <wsdl:part name="parameters" element="cancelBatch_Request"/>
+  </wsdl:message>
+  <wsdl:message name="cancelBatch_Response">
+    <wsdl:part name="return" element="cancelBatch_Response"/>
+  </wsdl:message>
+  <wsdl:message name="getBatchStatus_Request">
+    <wsdl:part name="parameters" element="getBatchStatus_Request"/>
+  </wsdl:message>
+  <wsdl:message name="getBatchStatus_Response">
+    <wsdl:part name="return" element="getBatchStatus_Response"/>
+  </wsdl:message>
+  <wsdl:message name="getAccountingDocuments_Request">
+    <wsdl:part name="parameters" element="getAccountingDocuments_Request"/>
+  </wsdl:message>
+  <wsdl:message name="getAccountingDocuments_Response">
+    <wsdl:part name="return" element="getAccountingDocuments_Response"/>
+  </wsdl:message>
+  <wsdl:message name="createMerchantRegistration_Request">
+    <wsdl:part name="parameters" element="createMerchantRegistration_Request"/>
+  </wsdl:message>
+  <wsdl:message name="createMerchantRegistration_Response">
+    <wsdl:part name="return" element="createMerchantRegistration_Response"/>
+  </wsdl:message>
+  <wsdl:message name="getMerchantRegistrationStatus_Request">
+    <wsdl:part name="parameters" element="getMerchantRegistrationStatus_Request"/>
+  </wsdl:message>
+  <wsdl:message name="getMerchantRegistrationStatus_Response">
+    <wsdl:part name="return" element="getMerchantRegistrationStatus_Response"/>
+  </wsdl:message>
+  <wsdl:message name="getFeeCardCategories_Request">
+    <wsdl:part name="parameters" element="getFeeCardCategories_Request"/>
+  </wsdl:message>
+  <wsdl:message name="getFeeCardCategories_Response">
+    <wsdl:part name="return" element="getFeeCardCategories_Response"/>
+  </wsdl:message>
+  <wsdl:message name="getFeeCardCurrencies_Request">
+    <wsdl:part name="parameters" element="getFeeCardCurrencies_Request"/>
+  </wsdl:message>
+  <wsdl:message name="getFeeCardCurrencies_Response">
+    <wsdl:part name="return" element="getFeeCardCurrencies_Response"/>
+  </wsdl:message>
+  <wsdl:message name="getFeeCardInvoicingCycles_Request">
+    <wsdl:part name="parameters" element="getFeeCardInvoicingCycles_Request"/>
+  </wsdl:message>
+  <wsdl:message name="getFeeCardInvoicingCycles_Response">
+    <wsdl:part name="return" element="getFeeCardInvoicingCycles_Response"/>
+  </wsdl:message>
+  <wsdl:message name="getFeeCardSettlementDelays_Request">
+    <wsdl:part name="parameters" element="getFeeCardSettlementDelays_Request"/>
+  </wsdl:message>
+  <wsdl:message name="getFeeCardSettlementDelays_Response">
+    <wsdl:part name="return" element="getFeeCardSettlementDelays_Response"/>
+  </wsdl:message>
+  <wsdl:message name="getFeeCardAverageTicketSizes_Request">
+    <wsdl:part name="parameters" element="getFeeCardAverageTicketSizes_Request"/>
+  </wsdl:message>
+  <wsdl:message name="getFeeCardAverageTicketSizes_Response">
+    <wsdl:part name="return" element="getFeeCardAverageTicketSizes_Response"/>
+  </wsdl:message>
+  <wsdl:message name="getFeeCard_Request">
+    <wsdl:part name="parameters" element="getFeeCard_Request"/>
+  </wsdl:message>
+  <wsdl:message name="getFeeCard_Response">
+    <wsdl:part name="return" element="getFeeCard_Response"/>
+  </wsdl:message>
+  <wsdl:message name="errorDetails">
+    <wsdl:part name="fault" element="errorDetails"/>
+  </wsdl:message>
+  <wsdl:portType name="PayPortType">
+    <wsdl:operation name="payRequest">
+      <wsdl:input message="payRequest_Request"/>
+      <wsdl:output message="payRequest_Response"/>
+      <wsdl:fault name="payInvocationException" message="errorDetails"/>
+    </wsdl:operation>
+    <wsdl:operation name="payRequestRecurring">
+      <wsdl:input message="payRequestRecurring_Request"/>
+      <wsdl:output message="payRequestRecurring_Response"/>
+      <wsdl:fault name="payInvocationException" message="errorDetails"/>
+    </wsdl:operation>
+    <wsdl:operation name="refundRequest">
+      <wsdl:input message="refundRequest_Request"/>
+      <wsdl:output message="refundRequest_Response"/>
+      <wsdl:fault name="payInvocationException" message="errorDetails"/>
+    </wsdl:operation>
+    <wsdl:operation name="cancelRequest">
+      <wsdl:input message="cancelRequest_Request"/>
+      <wsdl:output message="cancelRequest_Response"/>
+      <wsdl:fault name="payInvocationException" message="errorDetails"/>
+    </wsdl:operation>
+    <wsdl:operation name="creditRequest">
+      <wsdl:input message="creditRequest_Request"/>
+      <wsdl:output message="creditRequest_Response"/>
+      <wsdl:fault name="payInvocationException" message="errorDetails"/>
+    </wsdl:operation>
+    <wsdl:operation name="statusRequest">
+      <wsdl:input message="statusRequest_Request"/>
+      <wsdl:output message="statusRequest_Response"/>
+      <wsdl:fault name="payInvocationException" message="errorDetails"/>
+    </wsdl:operation>
+    <wsdl:operation name="createBatch">
+      <wsdl:input message="createBatch_Request"/>
+      <wsdl:output message="createBatch_Response"/>
+      <wsdl:fault name="payInvocationException" message="errorDetails"/>
+    </wsdl:operation>
+    <wsdl:operation name="addBatchItem">
+      <wsdl:input message="addBatchItem_Request"/>
+      <wsdl:output message="addBatchItem_Response"/>
+      <wsdl:fault name="payInvocationException" message="errorDetails"/>
+    </wsdl:operation>
+    <wsdl:operation name="executeBatch">
+      <wsdl:input message="executeBatch_Request"/>
+      <wsdl:output message="executeBatch_Response"/>
+      <wsdl:fault name="payInvocationException" message="errorDetails"/>
+    </wsdl:operation>
+    <wsdl:operation name="cancelBatch">
+      <wsdl:input message="cancelBatch_Request"/>
+      <wsdl:output message="cancelBatch_Response"/>
+      <wsdl:fault name="payInvocationException" message="errorDetails"/>
+    </wsdl:operation>
+    <wsdl:operation name="getBatchStatus">
+      <wsdl:input message="getBatchStatus_Request"/>
+      <wsdl:output message="getBatchStatus_Response"/>
+      <wsdl:fault name="payInvocationException" message="errorDetails"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="AccountingPortType">
+    <wsdl:operation name="getAccountingDocuments">
+      <wsdl:input message="getAccountingDocuments_Request"/>
+      <wsdl:output message="getAccountingDocuments_Response"/>
+      <wsdl:fault name="accountingInvocationException" message="errorDetails"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="RegistrationPortType">
+    <wsdl:operation name="createMerchantRegistration">
+      <wsdl:input message="createMerchantRegistration_Request"/>
+      <wsdl:output message="createMerchantRegistration_Response"/>
+      <wsdl:fault name="registrationInvocationException" message="errorDetails"/>
+    </wsdl:operation>
+    <wsdl:operation name="getMerchantRegistrationStatus">
+      <wsdl:input message="getMerchantRegistrationStatus_Request"/>
+      <wsdl:output message="getMerchantRegistrationStatus_Response"/>
+      <wsdl:fault name="registrationInvocationException" message="errorDetails"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="FeeCalculatorPortType">
+    <wsdl:operation name="getFeeCardCategories">
+      <wsdl:input message="getFeeCardCategories_Request"/>
+      <wsdl:output message="getFeeCardCategories_Response"/>
+      <wsdl:fault name="feeCalculatorInvocationException" message="errorDetails"/>
+    </wsdl:operation>
+    <wsdl:operation name="getFeeCardCurrencies">
+      <wsdl:input message="getFeeCardCurrencies_Request"/>
+      <wsdl:output message="getFeeCardCurrencies_Response"/>
+      <wsdl:fault name="feeCalculatorInvocationException" message="errorDetails"/>
+    </wsdl:operation>
+    <wsdl:operation name="getFeeCardInvoicingCycles">
+      <wsdl:input message="getFeeCardInvoicingCycles_Request"/>
+      <wsdl:output message="getFeeCardInvoicingCycles_Response"/>
+      <wsdl:fault name="feeCalculatorInvocationException" message="errorDetails"/>
+    </wsdl:operation>
+    <wsdl:operation name="getFeeCardSettlementDelays">
+      <wsdl:input message="getFeeCardSettlementDelays_Request"/>
+      <wsdl:output message="getFeeCardSettlementDelays_Response"/>
+      <wsdl:fault name="feeCalculatorInvocationException" message="errorDetails"/>
+    </wsdl:operation>
+    <wsdl:operation name="getFeeCardAverageTicketSizes">
+      <wsdl:input message="getFeeCardAverageTicketSizes_Request"/>
+      <wsdl:output message="getFeeCardAverageTicketSizes_Response"/>
+      <wsdl:fault name="feeCalculatorInvocationException" message="errorDetails"/>
+    </wsdl:operation>
+    <wsdl:operation name="getFeeCard">
+      <wsdl:input message="getFeeCard_Request"/>
+      <wsdl:output message="getFeeCard_Response"/>
+      <wsdl:fault name="feeCalculatorInvocationException" message="errorDetails"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PayBinding" type="PayPortType">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="payRequest">
+      <wsdlsoap:operation soapAction="urn:payRequest" style="document"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal" parts="return"/>
+      </wsdl:output>
+      <wsdl:fault name="payInvocationException">
+        <wsdlsoap:fault use="literal" name="payInvocationException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="payRequestRecurring">
+      <wsdlsoap:operation soapAction="urn:payRequestRecurring" style="document"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal" parts="return"/>
+      </wsdl:output>
+      <wsdl:fault name="payInvocationException">
+        <wsdlsoap:fault use="literal" name="payInvocationException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="refundRequest">
+      <wsdlsoap:operation soapAction="urn:refundRequest" style="document"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal" parts="return"/>
+      </wsdl:output>
+      <wsdl:fault name="payInvocationException">
+        <wsdlsoap:fault use="literal" name="payInvocationException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="cancelRequest">
+      <wsdlsoap:operation soapAction="urn:cancelRequest" style="document"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal" parts="return"/>
+      </wsdl:output>
+      <wsdl:fault name="payInvocationException">
+        <wsdlsoap:fault use="literal" name="payInvocationException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="creditRequest">
+      <wsdlsoap:operation soapAction="urn:creditRequest" style="document"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal" parts="return"/>
+      </wsdl:output>
+      <wsdl:fault name="payInvocationException">
+        <wsdlsoap:fault use="literal" name="payInvocationException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="statusRequest">
+      <wsdlsoap:operation soapAction="urn:statusRequest" style="document"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal" parts="return"/>
+      </wsdl:output>
+      <wsdl:fault name="payInvocationException">
+        <wsdlsoap:fault use="literal" name="payInvocationException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createBatch">
+      <wsdlsoap:operation soapAction="urn:createBatch" style="document"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal" parts="return"/>
+      </wsdl:output>
+      <wsdl:fault name="payInvocationException">
+        <wsdlsoap:fault use="literal" name="payInvocationException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addBatchItem">
+      <wsdlsoap:operation soapAction="urn:addBatchItem" style="document"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal" parts="return"/>
+      </wsdl:output>
+      <wsdl:fault name="payInvocationException">
+        <wsdlsoap:fault use="literal" name="payInvocationException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="executeBatch">
+      <wsdlsoap:operation soapAction="urn:executeBatch" style="document"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal" parts="return"/>
+      </wsdl:output>
+      <wsdl:fault name="payInvocationException">
+        <wsdlsoap:fault use="literal" name="payInvocationException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="cancelBatch">
+      <wsdlsoap:operation soapAction="urn:cancelBatch" style="document"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal" parts="return"/>
+      </wsdl:output>
+      <wsdl:fault name="payInvocationException">
+        <wsdlsoap:fault use="literal" name="payInvocationException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getBatchStatus">
+      <wsdlsoap:operation soapAction="urn:getBatchStatus" style="document"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal" parts="return"/>
+      </wsdl:output>
+      <wsdl:fault name="payInvocationException">
+        <wsdlsoap:fault use="literal" name="payInvocationException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AccountingBinding" type="AccountingPortType">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="getAccountingDocuments">
+      <wsdlsoap:operation soapAction="urn:getAccountingDocuments" style="document"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal" parts="return"/>
+      </wsdl:output>
+      <wsdl:fault name="accountingInvocationException">
+        <wsdlsoap:fault use="literal" name="accountingInvocationException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RegistrationBinding" type="RegistrationPortType">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="createMerchantRegistration">
+      <wsdlsoap:operation soapAction="urn:createMerchantRegistration" style="document"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal" parts="return"/>
+      </wsdl:output>
+      <wsdl:fault name="registrationInvocationException">
+        <wsdlsoap:fault use="literal" name="registrationInvocationException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getMerchantRegistrationStatus">
+      <wsdlsoap:operation soapAction="urn:getMerchantRegistrationStatus" style="document"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal" parts="return"/>
+      </wsdl:output>
+      <wsdl:fault name="registrationInvocationException">
+        <wsdlsoap:fault use="literal" name="registrationInvocationException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FeeCalculatorBinding" type="FeeCalculatorPortType">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="getFeeCardCategories">
+      <wsdlsoap:operation soapAction="urn:getFeeCardCategories" style="document"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal" parts="return"/>
+      </wsdl:output>
+      <wsdl:fault name="feeCalculatorInvocationException">
+        <wsdlsoap:fault use="literal" name="feeCalculatorInvocationException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getFeeCardCurrencies">
+      <wsdlsoap:operation soapAction="urn:getFeeCardCurrencies" style="document"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal" parts="return"/>
+      </wsdl:output>
+      <wsdl:fault name="feeCalculatorInvocationException">
+        <wsdlsoap:fault use="literal" name="feeCalculatorInvocationException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getFeeCardInvoicingCycles">
+      <wsdlsoap:operation soapAction="urn:getFeeCardInvoicingCycles" style="document"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal" parts="return"/>
+      </wsdl:output>
+      <wsdl:fault name="feeCalculatorInvocationException">
+        <wsdlsoap:fault use="literal" name="feeCalculatorInvocationException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getFeeCardSettlementDelays">
+      <wsdlsoap:operation soapAction="urn:getFeeCardSettlementDelays" style="document"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal" parts="return"/>
+      </wsdl:output>
+      <wsdl:fault name="feeCalculatorInvocationException">
+        <wsdlsoap:fault use="literal" name="feeCalculatorInvocationException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getFeeCardAverageTicketSizes">
+      <wsdlsoap:operation soapAction="urn:getFeeCardAverageTicketSizes" style="document"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal" parts="return"/>
+      </wsdl:output>
+      <wsdl:fault name="feeCalculatorInvocationException">
+        <wsdlsoap:fault use="literal" name="feeCalculatorInvocationException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getFeeCard">
+      <wsdlsoap:operation soapAction="urn:getFeeCard" style="document"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal" parts="return"/>
+      </wsdl:output>
+      <wsdl:fault name="feeCalculatorInvocationException">
+        <wsdlsoap:fault use="literal" name="feeCalculatorInvocationException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Pay">
+    <wsdl:port name="PayPortType" binding="PayBinding">
+      <wsdlsoap:address location="https://api.clickandbuy.com/webservices/soap/pay_1_1_0/"/>
+    </wsdl:port>
+    <wsdl:port name="AccountingPortType" binding="AccountingBinding">
+      <wsdlsoap:address location="https://api.clickandbuy.com/webservices/soap/pay_1_1_0/"/>
+    </wsdl:port>
+    <wsdl:port name="RegistrationPortType" binding="RegistrationBinding">
+      <wsdlsoap:address location="https://api.clickandbuy.com/webservices/soap/pay_1_1_0/"/>
+    </wsdl:port>
+    <wsdl:port name="FeeCalculatorPortType" binding="FeeCalculatorBinding">
+      <wsdlsoap:address location="https://api.clickandbuy.com/webservices/soap/pay_1_1_0/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
