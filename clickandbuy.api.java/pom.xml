@@ -41,6 +41,7 @@
 		<module>clickandbuy.api.util</module>
 		<!--module>clickandbuy.api.schema</module -->
 		<module>clickandbuy.api.soap.cfx</module>
+		<module>clickandbuy.api.soap.axis2</module>
 	</modules>
 	<pluginRepositories>
 		<pluginRepository>

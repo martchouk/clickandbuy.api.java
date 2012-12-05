@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+  			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+			
+	<context:annotation-config/>
+	<context:component-scan base-package="com.clickandbuy.api"/>
+         
+	<beans profile="PRODUCTION">          
+		<context:property-placeholder location="classpath*:clickandbuy.api.PRODUCTION.properties"/>
+		<bean id="clickandbuyApiClient" class="com.clickandbuy.api.soap.axis2.PayStub"/>
+	</beans>
+	
+	<beans profile="SANDBOX">          
+		<context:property-placeholder location="classpath*:clickandbuy.api.SANDBOX.properties"/>
+		<bean id="clickandbuyApiClient" class="com.clickandbuy.api.soap.axis2.PayStub">
+		<constructor-arg type="String">
+		    <value>"${clickandbuy.api.endpoint.soap}"</value>
+		</constructor-arg>    
+		</bean>
+	</beans>	
+	
+</beans>
+
