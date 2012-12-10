@@ -48,7 +48,8 @@
 					<generateServerSide>false</generateServerSide>
 					<generateServerSideInterface>false</generateServerSideInterface>
 					<generateServicesXml>false</generateServicesXml>
-					<allPorts>true</allPorts>
+					<portName>PayPortType</portName>
+					<!--allPorts>true</allPorts-->
 					<namespaceURIs>
 						<namespaceURI>
 							<uri>http://api.clickandbuy.com/webservices/pay_1_1_0/</uri>

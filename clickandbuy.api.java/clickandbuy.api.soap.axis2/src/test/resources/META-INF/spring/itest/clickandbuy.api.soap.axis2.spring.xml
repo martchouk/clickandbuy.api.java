@@ -17,15 +17,19 @@
          
 	<beans profile="PRODUCTION">          
 		<context:property-placeholder location="classpath*:clickandbuy.api.PRODUCTION.properties"/>
-		<bean id="clickandbuyApiClient" class="com.clickandbuy.api.soap.axis2.PayStub"/>
+		<bean id="clickandbuyApiClient" class="com.clickandbuy.api.soap.axis2.PayStub">
+			<constructor-arg type="String">
+			    <value>"${clickandbuy.api.endpoint.soap}"</value>
+			</constructor-arg>
+		</bean>
 	</beans>
 	
 	<beans profile="SANDBOX">          
 		<context:property-placeholder location="classpath*:clickandbuy.api.SANDBOX.properties"/>
 		<bean id="clickandbuyApiClient" class="com.clickandbuy.api.soap.axis2.PayStub">
-		<constructor-arg type="String">
-		    <value>"${clickandbuy.api.endpoint.soap}"</value>
-		</constructor-arg>    
+			<constructor-arg type="String">
+			    <value>"${clickandbuy.api.endpoint.soap}"</value>
+			</constructor-arg>
 		</bean>
 	</beans>	
 	

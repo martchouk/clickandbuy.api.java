@@ -17,7 +17,7 @@
 			http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
 			
 	<context:annotation-config/>
-	<context:component-scan base-package="clickandbuy.api"/>
+	<context:component-scan base-package="com.clickandbuy.api"/>
 	
 	<cxf:bus>
 	   <cxf:features>
@@ -28,26 +28,26 @@
 	<beans profile="PRODUCTION">          
 		<context:property-placeholder location="classpath*:clickandbuy.api.PRODUCTION.properties"/>
 		<jaxws:client id="clickandbuyApiClientPay"
-                  serviceClass="clickandbuy.api.soap.cfx.PayPortType"
+                  serviceClass="com.clickandbuy.api.soap.cfx.PayPortType"
                   address="${clickandbuy.api.endpoint.soap}"/>
 		<jaxws:client id="clickandbuyApiClientReg"
-                  serviceClass="clickandbuy.api.soap.cfx.RegistrationPortType"
+                  serviceClass="com.clickandbuy.api.soap.cfx.RegistrationPortType"
                   address="${clickandbuy.api.endpoint.soap}"/>
 		<jaxws:client id="clickandbuyApiClientAccounting"
-                  serviceClass="clickandbuy.api.soap.cfx.AccountingPortType"
+                  serviceClass="com.clickandbuy.api.soap.cfx.AccountingPortType"
                   address="${clickandbuy.api.endpoint.soap}"/>
 	</beans>
 	
 	<beans profile="SANDBOX">          
 		<context:property-placeholder location="classpath*:clickandbuy.api.SANDBOX.properties"/>
 		<jaxws:client id="clickandbuyApiClientPay"
-                  serviceClass="clickandbuy.api.soap.cfx.PayPortType"
+                  serviceClass="com.clickandbuy.api.soap.cfx.PayPortType"
                   address="${clickandbuy.api.endpoint.soap}"/>
 		<jaxws:client id="clickandbuyApiClientReg"
-                  serviceClass="clickandbuy.api.soap.cfx.RegistrationPortType"
+                  serviceClass="com.clickandbuy.api.soap.cfx.RegistrationPortType"
                   address="${clickandbuy.api.endpoint.soap}"/>
 		<jaxws:client id="clickandbuyApiClientAccounting"
-                  serviceClass="clickandbuy.api.soap.cfx.AccountingPortType"
+                  serviceClass="com.clickandbuy.api.soap.cfx.AccountingPortType"
                   address="${clickandbuy.api.endpoint.soap}"/>
 	</beans>	
 	

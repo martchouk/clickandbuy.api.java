@@ -23,8 +23,8 @@ import com.clickandbuy.api.soap.axis2.PayRequestDetails;
 import com.clickandbuy.api.soap.axis2.PayRequestRequest;
 import com.clickandbuy.api.soap.axis2.PayRequestResponse;
 import com.clickandbuy.api.soap.axis2.PayStub;
+import com.clickandbuy.api.util.auth.SignatureHandler;
 
-import clickandbuy.api.util.auth.SignatureHandler;
 
 @Configuration
 @ActiveProfiles("SANDBOX") 
@@ -34,7 +34,7 @@ public class ClickandbuyApiSoapAxis2ClientTest {
 	private static final Logger logger = Logger.getLogger(ClickandbuyApiSoapAxis2ClientTest.class);
 	@Autowired private SignatureHandler signatureHandler;
 	
-	@Autowired private PayStub clickandbuyApiClientPay; 
+	@Autowired private PayStub clickandbuyApiClient; 
 	
 	/** Test data */
 	@Value("${externalId}")	private String externalId;
@@ -68,7 +68,7 @@ public class ClickandbuyApiSoapAxis2ClientTest {
 		req.setAuthentication(prepareAuthentication(merchantId, projectId, secretKey));
 		req.setDetails(preparePayRequestDetails());
 		try{
-			tx = clickandbuyApiClientPay.payRequest(req);
+			tx = clickandbuyApiClient.payRequest(req);
 			logger.debug("Created transaction with Id: " + tx.getTransaction().getTransactionID());
 		} catch (ErrorDetailsException e){
 			logger.error(e.getFaultMessage().getDescription());

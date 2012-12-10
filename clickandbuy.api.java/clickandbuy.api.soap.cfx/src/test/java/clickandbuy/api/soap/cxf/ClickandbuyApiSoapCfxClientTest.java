@@ -13,6 +13,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.clickandbuy.api.util.auth.SignatureHandler;
+
 import clickandbuy.api.soap.cfx.AccountingPortType;
 import clickandbuy.api.soap.cfx.Authentication;
 import clickandbuy.api.soap.cfx.ErrorDetails_Exception;
@@ -24,7 +26,6 @@ import clickandbuy.api.soap.cfx.PayRequestDetails;
 import clickandbuy.api.soap.cfx.PayRequestRequest;
 import clickandbuy.api.soap.cfx.PayRequestResponse;
 import clickandbuy.api.soap.cfx.RegistrationPortType;
-import clickandbuy.api.util.auth.SignatureHandler;
 
 @Configuration
 @ActiveProfiles("SANDBOX") 

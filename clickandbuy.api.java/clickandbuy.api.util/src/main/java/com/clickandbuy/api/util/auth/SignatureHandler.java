@@ -1,4 +1,4 @@
-package clickandbuy.api.util.auth;
+package com.clickandbuy.api.util.auth;
 
 import java.security.MessageDigest;
 import java.text.DateFormat;

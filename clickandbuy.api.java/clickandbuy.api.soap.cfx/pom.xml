@@ -42,10 +42,10 @@
 							<wsdlOptions>
 								<wsdlOption>
 									<!--<wsdl>https://api.clickandbuy.com/webservices/pay_1_1_0.wsdl</wsdl> -->
-									<wsdl>src/main/resources/META-INF/pay_1_1_0.wsdl</wsdl>
+									<wsdl>src/main/resources/META-INF/_pay_1_1_0.wsdl</wsdl>
 									<extraargs>
 										<extraarg>-p</extraarg>
-										<extraarg>clickandbuy.api.soap.cfx</extraarg>
+										<extraarg>com.clickandbuy.api.soap.cfx</extraarg>
 										<extraarg>-impl</extraarg>
 										<extraarg>-client</extraarg>
 									</extraargs>
