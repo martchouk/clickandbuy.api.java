@@ -15,17 +15,17 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.clickandbuy.api.util.auth.SignatureHandler;
 
-import clickandbuy.api.soap.cfx.AccountingPortType;
-import clickandbuy.api.soap.cfx.Authentication;
-import clickandbuy.api.soap.cfx.ErrorDetails_Exception;
-import clickandbuy.api.soap.cfx.Money;
-import clickandbuy.api.soap.cfx.OrderDetailItemList;
-import clickandbuy.api.soap.cfx.OrderDetails;
-import clickandbuy.api.soap.cfx.PayPortType;
-import clickandbuy.api.soap.cfx.PayRequestDetails;
-import clickandbuy.api.soap.cfx.PayRequestRequest;
-import clickandbuy.api.soap.cfx.PayRequestResponse;
-import clickandbuy.api.soap.cfx.RegistrationPortType;
+import com.clickandbuy.api.soap.cfx.AccountingPortType;
+import com.clickandbuy.api.soap.cfx.Authentication;
+import com.clickandbuy.api.soap.cfx.ErrorDetails_Exception;
+import com.clickandbuy.api.soap.cfx.Money;
+import com.clickandbuy.api.soap.cfx.OrderDetailItemList;
+import com.clickandbuy.api.soap.cfx.OrderDetails;
+import com.clickandbuy.api.soap.cfx.PayPortType;
+import com.clickandbuy.api.soap.cfx.PayRequestDetails;
+import com.clickandbuy.api.soap.cfx.PayRequestRequest;
+import com.clickandbuy.api.soap.cfx.PayRequestResponse;
+import com.clickandbuy.api.soap.cfx.RegistrationPortType;
 
 @Configuration
 @ActiveProfiles("SANDBOX") 
@@ -106,7 +106,7 @@ public class ClickandbuyApiSoapCfxClientTest {
         payRequestDetails.setOrderDetails(order);
         
         // Amount
-        clickandbuy.api.soap.cfx.Money amount = new Money();
+        Money amount = new Money();
         amount.setAmount(new BigDecimal("1.50"));
         amount.setCurrency("USD");
         payRequestDetails.setAmount(amount);

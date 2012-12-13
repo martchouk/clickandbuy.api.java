@@ -15,6 +15,8 @@
 	<context:annotation-config/>
 	<context:component-scan base-package="com.clickandbuy.api"/>
          
+	<bean id="axisStub" abstract="true" class="org.apache.axis2.client.Stub"/>
+         
 	<beans profile="PRODUCTION">          
 		<context:property-placeholder location="classpath*:clickandbuy.api.PRODUCTION.properties"/>
 		<bean id="clickandbuyApiClient" class="com.clickandbuy.api.soap.axis2.PayStub">
@@ -26,10 +28,10 @@
 	
 	<beans profile="SANDBOX">          
 		<context:property-placeholder location="classpath*:clickandbuy.api.SANDBOX.properties"/>
-		<bean id="clickandbuyApiClient" class="com.clickandbuy.api.soap.axis2.PayStub">
-			<constructor-arg type="String">
+		<bean id="clickandbuyApiClient" class="com.clickandbuy.api.soap.axis2.PayStub" parent="axisStub">
+			<!--constructor-arg type="String">
 			    <value>"${clickandbuy.api.endpoint.soap}"</value>
-			</constructor-arg>
+			</constructor-arg-->
 		</bean>
 	</beans>	
 	

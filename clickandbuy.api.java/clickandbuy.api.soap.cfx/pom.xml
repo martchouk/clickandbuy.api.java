@@ -38,10 +38,10 @@
 						<id>generate-wsdl-sources</id>
 						<phase>generate-sources</phase>
 						<configuration>
-							<sourceRoot>src/main/generated</sourceRoot>
+							<sourceRoot>${basedir}/src/main/generated</sourceRoot>
 							<wsdlOptions>
 								<wsdlOption>
-									<!--<wsdl>https://api.clickandbuy.com/webservices/pay_1_1_0.wsdl</wsdl> -->
+									<!--wsdl>https://api.clickandbuy.com/webservices/pay_1_1_0.wsdl</wsdl-->
 									<wsdl>src/main/resources/META-INF/_pay_1_1_0.wsdl</wsdl>
 									<extraargs>
 										<extraarg>-p</extraarg>

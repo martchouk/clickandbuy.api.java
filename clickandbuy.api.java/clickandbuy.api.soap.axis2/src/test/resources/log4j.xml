@@ -9,18 +9,15 @@
     	</layout>
   	</appender>
 
-	<logger name="clickandbuy">
+	<logger name="com.clickandbuy">
 		<level value="TRACE"/>
 	</logger>
 
-  	<logger name="org.hibernate">
-		<level value="WARN"/> 
-  	</logger>
   	<logger name="org.springframework">
 		<level value="WARN"/> 
   	</logger>
-	<logger name="org.apache.cxf">
-		<level value="WARN"/> 
+	<logger name="org.apache.axis2">
+		<level value="DEBUG"/> 
   	</logger>
 
   	<root>
