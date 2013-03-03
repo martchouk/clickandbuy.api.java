@@ -14,15 +14,15 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.clickandbuy.api.soap.axis2.Authentication;
-import com.clickandbuy.api.soap.axis2.ErrorDetailsException;
-import com.clickandbuy.api.soap.axis2.Money;
-import com.clickandbuy.api.soap.axis2.OrderDetailItemList;
-import com.clickandbuy.api.soap.axis2.OrderDetails;
-import com.clickandbuy.api.soap.axis2.PayRequestDetails;
-import com.clickandbuy.api.soap.axis2.PayRequestRequest;
-import com.clickandbuy.api.soap.axis2.PayRequestResponse;
-import com.clickandbuy.api.soap.axis2.PayStub;
+import com.clickandbuy.api.soap.axis2.stub.Authentication;
+import com.clickandbuy.api.soap.axis2.stub.payment.ErrorDetailsException;
+import com.clickandbuy.api.soap.axis2.stub.Money;
+import com.clickandbuy.api.soap.axis2.stub.OrderDetailItemList;
+import com.clickandbuy.api.soap.axis2.stub.OrderDetails;
+import com.clickandbuy.api.soap.axis2.stub.PayRequestDetails;
+import com.clickandbuy.api.soap.axis2.stub.PayRequestRequest;
+import com.clickandbuy.api.soap.axis2.stub.PayRequestResponse;
+import com.clickandbuy.api.soap.axis2.stub.payment.PayStub;
 import com.clickandbuy.api.util.auth.SignatureHandler;
 
 
