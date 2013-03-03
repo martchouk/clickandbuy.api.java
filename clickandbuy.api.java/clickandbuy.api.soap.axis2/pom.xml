@@ -39,7 +39,7 @@
 
 
 			<!-- AXIS maven plugin to generate java code from WSDL -->
-			<plugin>
+			<!-- plugin>
 				<groupId>org.apache.axis2</groupId>
 				<artifactId>axis2-wsdl2code-maven-plugin</artifactId>
 				<version>1.6.2</version>
@@ -88,7 +88,7 @@
 				<configuration>
 					<wsdlFile>src/main/resources/META-INF/pay_1_1_0.wsdl</wsdlFile>
 					<databindingName>jaxbri</databindingName>
-					<outputDirectory>src/main/java</outputDirectory>
+					<outputDirectory>${project.build.directory}/generated/java</outputDirectory>
 					<namespaceURIs>
 						<namespaceURI>
 							<uri>http://api.clickandbuy.com/webservices/pay_1_1_0/</uri>
@@ -103,7 +103,7 @@
 						<version>${axis2.version}</version>
 					</dependency>
 				</dependencies>
-			</plugin>
+			</plugin-->
 		</plugins>
 		<pluginManagement>
 			<plugins>
