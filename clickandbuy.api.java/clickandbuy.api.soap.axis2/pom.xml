@@ -2,14 +2,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>clickandbuy</groupId>
-		<artifactId>clickandbuy.api</artifactId>
+		<artifactId>api</artifactId>
+		<groupId>com.clickandbuy</groupId>
 		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
+		<relativePath>..</relativePath>
 	</parent>
 
-	<groupId>clickandbuy</groupId>
-	<artifactId>clickandbuy.api.soap.axis2</artifactId>
+	<artifactId>soap-axis2</artifactId>
+	<groupId>com.clickandbuy.api</groupId>
 	<packaging>jar</packaging>
 	<!--note version not declared as it is inherited -->
 	<name>ClickandBuy API Java Library - SOAP AXIS2 Client</name>
@@ -19,41 +19,80 @@
 		<axis2.version>1.6.2</axis2.version>
 	</properties>
 
+	<!--repositories> <repository> <id>apache</id> <url>https://repository.apache.org/content/groups/snapshots</url> 
+		</repository> </repositories -->
+
 	<build>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
+					<sources>
+						<source></source>
+						<source>${project.build.directory}/generated</source>
+					</sources>
 					<meminitial>128m</meminitial>
 					<source>${java-version}</source>
 					<target>${java-version}</target>
 				</configuration>
 			</plugin>
+
+
+			<!-- AXIS maven plugin to generate java code from WSDL -->
 			<plugin>
 				<groupId>org.apache.axis2</groupId>
 				<artifactId>axis2-wsdl2code-maven-plugin</artifactId>
-				<version>${axis2.version}</version>
+				<version>1.6.2</version>
 				<executions>
 					<execution>
+						<id>run1</id>
 						<goals>
 							<goal>wsdl2code</goal>
 						</goals>
+						<configuration>
+							<packageName>com.clickandbuy.api.soap.axis2.stub.registration</packageName>
+							<portName>RegistrationPortType</portName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>run2</id>
+						<goals>
+							<goal>wsdl2code</goal>
+						</goals>
+						<configuration>
+							<packageName>com.clickandbuy.api.soap.axis2.stub.payment</packageName>
+							<portName>PayPortType</portName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>run3</id>
+						<goals>
+							<goal>wsdl2code</goal>
+						</goals>
+						<configuration>
+							<packageName>com.clickandbuy.api.soap.axis2.stub.accounting</packageName>
+							<portName>AccountingPortType</portName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>run4</id>
+						<goals>
+							<goal>wsdl2code</goal>
+						</goals>
+						<configuration>
+							<packageName>com.clickandbuy.api.soap.axis2.stub.fee</packageName>
+							<portName>FeeCalculatorPortType</portName>
+						</configuration>
 					</execution>
 				</executions>
 				<configuration>
-					<packageName>com.clickandbuy.api.soap.axis2</packageName>
 					<wsdlFile>src/main/resources/META-INF/pay_1_1_0.wsdl</wsdlFile>
 					<databindingName>jaxbri</databindingName>
-					<outputDirectory>src/main/generated</outputDirectory>
-					<generateServerSide>false</generateServerSide>
-					<generateServerSideInterface>false</generateServerSideInterface>
-					<generateServicesXml>false</generateServicesXml>
-					<portName>PayPortType</portName>
-					<!--allPorts>true</allPorts-->
+					<outputDirectory>src/main/java</outputDirectory>
 					<namespaceURIs>
 						<namespaceURI>
 							<uri>http://api.clickandbuy.com/webservices/pay_1_1_0/</uri>
-							<packageName>com.clickandbuy.api.soap.axis2</packageName>
+							<packageName>com.clickandbuy.api.soap.axis2.stub</packageName>
 						</namespaceURI>
 					</namespaceURIs>
 				</configuration>
@@ -66,42 +105,96 @@
 				</dependencies>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.axis2
+										</groupId>
+										<artifactId>
+											axis2-wsdl2code-maven-plugin
+										</artifactId>
+										<versionRange>[1.5.5,)</versionRange>
+										<goals>
+											<goal>wsdl2code</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.mojo
+										</groupId>
+										<artifactId>
+											axistools-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.4,)
+										</versionRange>
+										<goals>
+											<goal>wsdl2java</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.axis2</groupId>
-			<artifactId>axis2</artifactId>
-			<version>${axis2.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.axis2</groupId>
 			<artifactId>axis2-kernel</artifactId>
 			<version>${axis2.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.axis2</groupId>
 			<artifactId>axis2-jaxbri</artifactId>
 			<version>${axis2.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.axis2</groupId>
 			<artifactId>axis2-transport-local</artifactId>
 			<version>${axis2.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.axis2</groupId>
 			<artifactId>axis2-transport-http</artifactId>
 			<version>${axis2.version}</version>
 		</dependency>
 
-
-		<!--dependency> <groupId>clickandbuy</groupId> <artifactId>clickandbuy.api.schema</artifactId> 
-			<version>1.0.0-SNAPSHOT</version> </dependency -->
 		<dependency>
-			<groupId>clickandbuy</groupId>
-			<artifactId>clickandbuy.api.util</artifactId>
+			<groupId>com.clickandbuy.api</groupId>
+			<artifactId>util</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ca.juliusdavies</groupId>
+			<artifactId>not-yet-commons-ssl</artifactId>
+			<version>0.3.11</version>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>
