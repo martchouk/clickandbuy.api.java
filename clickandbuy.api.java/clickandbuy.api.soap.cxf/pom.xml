@@ -45,7 +45,7 @@
 									<wsdl>src/main/resources/META-INF/pay_1_1_0.wsdl</wsdl>
 									<extraargs>
 										<extraarg>-p</extraarg>
-										<extraarg>com.clickandbuy.api.soap.CXF</extraarg>
+										<extraarg>com.clickandbuy.api.soap.cxf</extraarg>
 										<extraarg>-impl</extraarg>
 										<extraarg>-client</extraarg>
 									</extraargs>
