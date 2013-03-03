@@ -2293,8 +2293,8 @@
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
                                                     payRequest_Request14,
                                                     optimizeContent(new javax.xml.namespace.QName("http://api.clickandbuy.com/webservices/pay_1_1_0/",
-                                                    "payRequest")), new javax.xml.namespace.QName("http://api.clickandbuy.com/webservices/pay_1_1_0/",
-                                                    "payRequest"));
+                                                    "payRequest_Request")), new javax.xml.namespace.QName("http://api.clickandbuy.com/webservices/pay_1_1_0/",
+                                                    "payRequest_Request"));
                                                 
         //adding SOAP soap_headers
          _serviceClient.addHeadersToEnvelope(env);
