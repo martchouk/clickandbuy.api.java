@@ -5,9 +5,9 @@ import java.rmi.RemoteException;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 
+import org.apache.axis2.java.security.TrustAllTrustManager;
 import org.apache.axis2.transport.http.HTTPConstants;
 import org.apache.commons.httpclient.protocol.Protocol;
 import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
@@ -81,25 +81,9 @@ public class ClickandbuyApiSoapAxis2ClientTest {
 	public void setUp() throws Exception {
 		externalId = externalId + System.nanoTime() + "_";
 		logger.debug("***externalId:" + externalId);
-
-		// Create a trust manager that does not validate certificate chains
-		TrustManager[] trustAllCerts = new TrustManager[] { new TrustAllX509TrustManager() {
-
-			public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-				return null;
-			}
-
-			public void checkClientTrusted(
-					java.security.cert.X509Certificate[] certs, String authType) {
-			}
-
-			public void checkServerTrusted(
-					java.security.cert.X509Certificate[] certs, String authType) {
-			}
-		} };
-		SSLContext sc = SSLContext.getInstance("SSL");
-		sc.init(null, trustAllCerts, new java.security.SecureRandom());
-		HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+		SSLContext sslCtx = SSLContext.getInstance("SSL");
+		sslCtx.init(null,
+				new TrustManager[] { new TrustAllX509TrustManager() }, null);
 		clickandbuyApiClient
 				._getServiceClient()
 				.getOptions()
@@ -107,9 +91,8 @@ public class ClickandbuyApiSoapAxis2ClientTest {
 						HTTPConstants.CUSTOM_PROTOCOL_HANDLER,
 						new Protocol(
 								"https",
-								(ProtocolSocketFactory) new SSLProtocolSocketFactory(),
-								443));
-
+								(ProtocolSocketFactory) new org.apache.axis2.java.security.SSLProtocolSocketFactory(
+										sslCtx), 443));
 		clickandbuyApiClient._getServiceClient().getOptions()
 				.setProperty(HTTPConstants.CHUNKED, false);
 	}

@@ -11,9 +11,8 @@ import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 
 /**
- * 40 * Trust manager which trusts everything, allowing for self-signed SSL
- * certificates to be used. 41 * 42 * @author <a
- * href="mailto:jason@planet57.com">Jason Dillon</a> 43 * @since 2.1.0 44
+ * @author Nicolae.Petridean
+ * @author Ciprian.Ileana
  */
 public class TrustAllX509TrustManager implements X509TrustManager {
 
