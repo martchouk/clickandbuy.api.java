@@ -12,7 +12,7 @@
 	<groupId>com.clickandbuy.api</groupId>
 	<packaging>jar</packaging>
 	<!--note version not declared as it is inherited -->
-	<name>ClickandBuy API Java Library - SOAP CFX Client</name>
+	<name>ClickandBuy API Java Library - SOAP CXF Client</name>
 	<description>ClickandBuy API Java Library</description>
 
 	<properties>
@@ -45,7 +45,7 @@
 									<wsdl>src/main/resources/META-INF/pay_1_1_0.wsdl</wsdl>
 									<extraargs>
 										<extraarg>-p</extraarg>
-										<extraarg>com.clickandbuy.api.soap.cfx</extraarg>
+										<extraarg>com.clickandbuy.api.soap.CXF</extraarg>
 										<extraarg>-impl</extraarg>
 										<extraarg>-client</extraarg>
 									</extraargs>
