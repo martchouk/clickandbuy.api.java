@@ -2,14 +2,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>clickandbuy</groupId>
-		<artifactId>clickandbuy.api</artifactId>
+		<artifactId>api</artifactId>
+		<groupId>com.clickandbuy</groupId>
 		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
+		<relativePath>..</relativePath>
 	</parent>
 
-	<groupId>clickandbuy</groupId>
-	<artifactId>clickandbuy.api.soap.cfx</artifactId>
+	<artifactId>soap-cxf</artifactId>
+	<groupId>com.clickandbuy.api</groupId>
 	<packaging>jar</packaging>
 	<!--note version not declared as it is inherited -->
 	<name>ClickandBuy API Java Library - SOAP CFX Client</name>
@@ -38,11 +38,11 @@
 						<id>generate-wsdl-sources</id>
 						<phase>generate-sources</phase>
 						<configuration>
-							<sourceRoot>${basedir}/src/main/generated</sourceRoot>
+							<sourceRoot>${project.build.directory}/generated/src</sourceRoot>
 							<wsdlOptions>
 								<wsdlOption>
 									<!--wsdl>https://api.clickandbuy.com/webservices/pay_1_1_0.wsdl</wsdl-->
-									<wsdl>src/main/resources/META-INF/_pay_1_1_0.wsdl</wsdl>
+									<wsdl>src/main/resources/META-INF/pay_1_1_0.wsdl</wsdl>
 									<extraargs>
 										<extraarg>-p</extraarg>
 										<extraarg>com.clickandbuy.api.soap.cfx</extraarg>
@@ -100,8 +100,8 @@
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency-->
 		<dependency> 
-			<groupId>clickandbuy</groupId> 
-			<artifactId>clickandbuy.api.util</artifactId> 
+			<groupId>com.clickandbuy.api</groupId> 
+			<artifactId>util</artifactId> 
 			<version>1.0.0-SNAPSHOT</version> 
 		</dependency>
 	</dependencies>

@@ -5,14 +5,15 @@
 	
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>clickandbuy</groupId>
-		<artifactId>clickandbuy.api</artifactId>
+		<artifactId>api</artifactId>
+		<groupId>com.clickandbuy</groupId>
 		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
+		<relativePath>..</relativePath>
 	</parent>
 
-	<groupId>clickandbuy</groupId>
-	<artifactId>clickandbuy.api.util</artifactId>
+	<artifactId>util</artifactId>
+	<groupId>com.clickandbuy.api</groupId>
+	
 	<!--note version not declared as it is inherited-->
 	<packaging>jar</packaging>
 	<name>Clickandbuy API Java Library - Common Utils</name>
