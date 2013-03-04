@@ -48,13 +48,13 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 	private Integer intRangeUntil;
 
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.documentType}")
-	private AccountingDocumentType accountingDocumentType;
+	private String accountingDocumentType;
 	
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.fileName}")
 	private String fileName;
 	
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.fileType}")
-	private AccountingFileType accountingFileType;
+	private String accountingFileType;
 	
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.pagingSetting.maxResults}")
 	private Integer maxResults;
@@ -115,19 +115,19 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 		dateRange.setAfter(beginningDate);
 		dateRange.setBefore(endingDate);
 		
-		IntRange intRange = new IntRange();
+		final IntRange intRange = new IntRange();
 		intRange.setFrom(intRangeFrom);
 		intRange.setUntil(intRangeUntil);
 
 		PagingSetting pagingSetting = new PagingSetting();
 		pagingSetting.setMaxResults(maxResults);
-		pagingSetting.setSkip(skip);
+		//pagingSetting.setSkip(skip);
 
 		getAccountingDocumentDetails.setDate(dateRange);
 		getAccountingDocumentDetails.setDocumentNumber(intRange);
-		getAccountingDocumentDetails.setDocumentType(accountingDocumentType);
-		getAccountingDocumentDetails.setFileName(fileName);
-		getAccountingDocumentDetails.setFileType(accountingFileType);
+		//getAccountingDocumentDetails.setDocumentType(accountingDocumentType);
+		//getAccountingDocumentDetails.setFileName(fileName);
+		//getAccountingDocumentDetails.setFileType(accountingFileType);
 		getAccountingDocumentDetails.setPaging(pagingSetting);
 
 		return getAccountingDocumentDetails;
