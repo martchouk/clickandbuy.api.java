@@ -1,5 +1,11 @@
 package clickandbuy.api.soap.cxf.accountingport.tests;
 
+import java.text.ParseException;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.junit.Before;
@@ -17,67 +23,44 @@ import com.clickandbuy.api.soap.cxf.GetAccountingDocumentsRequest;
 import com.clickandbuy.api.soap.cxf.GetAccountingDocumentsResponse;
 import com.clickandbuy.api.soap.cxf.IntRange;
 import com.clickandbuy.api.soap.cxf.PagingSetting;
+import com.clickandbuy.api.util.auth.CabApiUniqueDateFormat;
 
 /**
  * Tests related to GetAccountingDocuments
  * 
- * @author Ciprian.Ileana
+ * @author Ciprian I. Ileana
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 
-	/** Test data */
-	@Value("${merchantId}")
-	private long	merchantId;
-
-	@Value("${projectId}")
-	private long	projectId;
-
-	@Value("${secretKey}")
-	private String	secretKey;
-	
-	// getAccountingDocuments.getAccountingDocumentsDetails.dateRange.after=
-	// getAccountingDocuments.getAccountingDocumentsDetails.dateRange.before=
-
-	// getAccountingDocuments.getAccountingDocumentsDetails.inteRange.fronm=
-	// getAccountingDocuments.getAccountingDocumentsDetails.intRange.until=
-
-	//accepted values INVOICE, SETTLEMENT, REVENUE, MANUAL_CREDIT_NOTE, MANUAL_DEBIT_NOTE, OTHER 
-	// getAccountingDocuments.getAccountingDocumentsDetails.documentType=
-
-	// getAccountingDocuments.getAccountingDocumentsDetails.fileName=
-
-	//accepted values PDF, CSV, OTHER 
-	// getAccountingDocuments.getAccountingDocumentsDetails.fileType=
-
-	// getAccountingDocuments.getAccountingDocumentsDetails.pagingSetting.maxResults=
-	// getAccountingDocuments.getAccountingDocumentsDetails.pagingSetting.skip=
-
+	/** Test data */	
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.dateRange.after}")
-	XMLGregorianCalendar dateRangeAfter;
-	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.dateRange.before}")
-	XMLGregorianCalendar dateRangeBefore;
+	private String dateRangeAfter;
 	
-	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.inteRange.fronm}")
-	Integer intRangeFrom;
+	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.dateRange.before}")
+	private String dateRangeBefore;
+	
+	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.inteRange.from}")
+	private Integer intRangeFrom;
+	
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.intRange.until}")
-	Integer intRangeUntil;
+	private Integer intRangeUntil;
 
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.documentType}")
-	AccountingDocumentType accountingDocumentType;
+	private AccountingDocumentType accountingDocumentType;
 	
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.fileName}")
-	String fileName;
+	private String fileName;
 	
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.fileType}")
-	AccountingFileType accountingFileType;
+	private AccountingFileType accountingFileType;
 	
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.pagingSetting.maxResults}")
-	Integer maxResults;
+	private Integer maxResults;
 
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.pagingSetting.skip}")
-	Integer skip;	
+	private Integer skip;	
 
 	@Before
 	public void setUp() throws Exception {
@@ -86,9 +69,11 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 
 	/**
 	 * Test the GetAccountingDocuments
+	 * @throws ParseException 
+	 * @throws DatatypeConfigurationException 
 	 */
 	@Test
-	public void testGetAccountingDocuments() {
+	public void testGetAccountingDocuments() throws DatatypeConfigurationException, ParseException {
 		GetAccountingDocumentsResponse getAccountingDocumentsResponse = null;
 
 		GetAccountingDocumentsRequest getAccountingDocumentsRequest = new GetAccountingDocumentsRequest();
@@ -108,17 +93,27 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 
 	/**
 	 * @return
+	 * @throws DatatypeConfigurationException 
+	 * @throws ParseException 
 	 */
-	public GetAccountingDocumentDetails prepareGetAccountingDocumentDetails() {
+	public GetAccountingDocumentDetails prepareGetAccountingDocumentDetails() throws DatatypeConfigurationException, ParseException {
 		GetAccountingDocumentDetails getAccountingDocumentDetails = new GetAccountingDocumentDetails();
 
 		// TODO fill in necessary test data
 
-
+		final DateRange dateRange = new DateRange();
+		final long dateRAfter = CabApiUniqueDateFormat.getDayDateFormatter().parse(dateRangeAfter.trim()).getTime();
+		final long dateRBefore = CabApiUniqueDateFormat.getDayDateFormatter().parse(dateRangeBefore.trim()).getTime();
 		
-		DateRange dateRange = new DateRange();
-		dateRange.setAfter(dateRangeAfter);
-		dateRange.setBefore(dateRangeBefore);
+		final GregorianCalendar gregory = new GregorianCalendar();
+		gregory.setTime(new Date(dateRAfter));
+		final XMLGregorianCalendar beginningDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(gregory);
+		
+		gregory.setTime(new Date(dateRBefore));
+		final XMLGregorianCalendar endingDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(gregory);
+		
+		dateRange.setAfter(beginningDate);
+		dateRange.setBefore(endingDate);
 		
 		IntRange intRange = new IntRange();
 		intRange.setFrom(intRangeFrom);

@@ -7,6 +7,7 @@ import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -29,6 +30,15 @@ public class ParentTest {
 
 	@Autowired
 	private SignatureHandler	signatureHandler;
+	
+	@Value("${merchantId}")
+	protected long	merchantId;
+
+	@Value("${projectId}")
+	protected long	projectId;
+
+	@Value("${secretKey}")
+	protected String	secretKey;
 
 	/**
 	 * 
@@ -54,6 +64,18 @@ public class ParentTest {
 		merchantAuth.setToken(signatureHandler.createToken(projectId, secretKey));
 		return merchantAuth;
 	}
+	
+	/**
+	 * Prepares the soap {@link Authentication} object from given parameters
+	 * 
+	 * @param authenticationBean
+	 * @return Authentication
+	 */
+	public String getAuthenticationToken(final long projectId, final String secretKey) {
+		return signatureHandler.createToken(projectId, secretKey);
+	}
+	
+	
 
 	/**
 	 * @param num

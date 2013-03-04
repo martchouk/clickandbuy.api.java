@@ -2,9 +2,7 @@ package com.clickandbuy.api.util.auth;
 
 import java.security.MessageDigest;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.TimeZone;
 
 import org.apache.log4j.Logger;
@@ -27,7 +25,7 @@ public class SignatureHandler {
      */
     public String createToken(final long projectID, final String sharedSecret) {
     	TimeZone utcTimeZone = TimeZone.getTimeZone("UTC");
-        DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        DateFormat dateFormat = CabApiUniqueDateFormat.getDateFormatForSignature();
         dateFormat.setTimeZone(utcTimeZone);
         Calendar calendar = Calendar.getInstance(utcTimeZone);
         final String timestamp = dateFormat.format(calendar.getTime());

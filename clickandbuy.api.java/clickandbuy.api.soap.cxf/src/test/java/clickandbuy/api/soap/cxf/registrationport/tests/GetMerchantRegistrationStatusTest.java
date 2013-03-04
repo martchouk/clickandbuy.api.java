@@ -24,6 +24,13 @@ public class GetMerchantRegistrationStatusTest extends RegistrationPortParentTes
 	/** Test data */
 	@Value("${merchantId}")
 	private long	merchantId;
+	
+	/** Test data */
+	@Value("${projectId}")
+	private long	businessOriginId;
+	
+	@Value("${secretKey}")
+	private String	secretKey;
 
 	@Before
 	public void setUp() throws Exception {
@@ -57,10 +64,10 @@ public class GetMerchantRegistrationStatusTest extends RegistrationPortParentTes
 		GetMerchantRegistrationStatusDetails getMerchantRegistrationStatusDetails = new GetMerchantRegistrationStatusDetails();
 
 		// TODO fill in necessary test data
-
-		// getMerchantRegistrationStatusDetails.setBusinessOriginID(value);
+		
+		getMerchantRegistrationStatusDetails.setBusinessOriginID(businessOriginId + "");
 		getMerchantRegistrationStatusDetails.setMerchantID(merchantId);
-		// getMerchantRegistrationStatusDetails.setToken(value)
+		getMerchantRegistrationStatusDetails.setToken(getAuthenticationToken(businessOriginId, secretKey));
 
 		return getMerchantRegistrationStatusDetails;
 	}

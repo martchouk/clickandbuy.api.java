@@ -13,7 +13,7 @@ import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 /**
  * Tests related to CreateMerchantRegistration
  * 
- * @author Ciprian.Ileana
+ * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
  */
