@@ -1,15 +1,22 @@
 package clickandbuy.api.soap.cxf.accountingport.tests;
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.clickandbuy.api.soap.cxf.AccountingDocumentType;
+import com.clickandbuy.api.soap.cxf.AccountingFileType;
+import com.clickandbuy.api.soap.cxf.DateRange;
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 import com.clickandbuy.api.soap.cxf.GetAccountingDocumentDetails;
 import com.clickandbuy.api.soap.cxf.GetAccountingDocumentsRequest;
 import com.clickandbuy.api.soap.cxf.GetAccountingDocumentsResponse;
+import com.clickandbuy.api.soap.cxf.IntRange;
+import com.clickandbuy.api.soap.cxf.PagingSetting;
 
 /**
  * Tests related to GetAccountingDocuments
@@ -29,6 +36,48 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 
 	@Value("${secretKey}")
 	private String	secretKey;
+	
+	// getAccountingDocuments.getAccountingDocumentsDetails.dateRange.after=
+	// getAccountingDocuments.getAccountingDocumentsDetails.dateRange.before=
+
+	// getAccountingDocuments.getAccountingDocumentsDetails.inteRange.fronm=
+	// getAccountingDocuments.getAccountingDocumentsDetails.intRange.until=
+
+	//accepted values INVOICE, SETTLEMENT, REVENUE, MANUAL_CREDIT_NOTE, MANUAL_DEBIT_NOTE, OTHER 
+	// getAccountingDocuments.getAccountingDocumentsDetails.documentType=
+
+	// getAccountingDocuments.getAccountingDocumentsDetails.fileName=
+
+	//accepted values PDF, CSV, OTHER 
+	// getAccountingDocuments.getAccountingDocumentsDetails.fileType=
+
+	// getAccountingDocuments.getAccountingDocumentsDetails.pagingSetting.maxResults=
+	// getAccountingDocuments.getAccountingDocumentsDetails.pagingSetting.skip=
+
+	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.dateRange.after}")
+	XMLGregorianCalendar dateRangeAfter;
+	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.dateRange.before}")
+	XMLGregorianCalendar dateRangeBefore;
+	
+	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.inteRange.fronm}")
+	Integer intRangeFrom;
+	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.intRange.until}")
+	Integer intRangeUntil;
+
+	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.documentType}")
+	AccountingDocumentType accountingDocumentType;
+	
+	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.fileName}")
+	String fileName;
+	
+	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.fileType}")
+	AccountingFileType accountingFileType;
+	
+	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.pagingSetting.maxResults}")
+	Integer maxResults;
+
+	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.pagingSetting.skip}")
+	Integer skip;	
 
 	@Before
 	public void setUp() throws Exception {
@@ -65,12 +114,26 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 
 		// TODO fill in necessary test data
 
-		// getAccountingDocumentDetails.setDate(value);
-		// getAccountingDocumentDetails.setDocumentNumber(value);
-		// getAccountingDocumentDetails.setDocumentType(value);
-		// getAccountingDocumentDetails.setFileName(value);
-		// getAccountingDocumentDetails.setFileType(value);
-		// getAccountingDocumentDetails.setPaging(value);
+
+		
+		DateRange dateRange = new DateRange();
+		dateRange.setAfter(dateRangeAfter);
+		dateRange.setBefore(dateRangeBefore);
+		
+		IntRange intRange = new IntRange();
+		intRange.setFrom(intRangeFrom);
+		intRange.setUntil(intRangeUntil);
+
+		PagingSetting pagingSetting = new PagingSetting();
+		pagingSetting.setMaxResults(maxResults);
+		pagingSetting.setSkip(skip);
+
+		getAccountingDocumentDetails.setDate(dateRange);
+		getAccountingDocumentDetails.setDocumentNumber(intRange);
+		getAccountingDocumentDetails.setDocumentType(accountingDocumentType);
+		getAccountingDocumentDetails.setFileName(fileName);
+		getAccountingDocumentDetails.setFileType(accountingFileType);
+		getAccountingDocumentDetails.setPaging(pagingSetting);
 
 		return getAccountingDocumentDetails;
 	}

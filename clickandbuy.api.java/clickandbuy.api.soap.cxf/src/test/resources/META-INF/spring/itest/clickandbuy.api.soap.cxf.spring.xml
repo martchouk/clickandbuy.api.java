@@ -19,7 +19,6 @@
 	<context:annotation-config/>
 	<context:component-scan base-package="com.clickandbuy.api"/>
 	
-	
 	<cxf:bus>
 	   <cxf:features>
 	       <cxf:logging/>
@@ -27,57 +26,82 @@
 	</cxf:bus> 
          
 	<beans profile="PRODUCTION">          
-		<context:property-placeholder location="classpath*:clickandbuy.api.profile.PRODUCTION.properties"/>
+		<context:property-placeholder location="classpath*:profiles/production/testdata/clickandbuy.api.profile.DEVELOPMENT2.testdata.accounting.properties" ignore-unresolvable="true"/>
+		<context:property-placeholder location="classpath*:profiles/production/testdata/clickandbuy.api.profile.DEVELOPMENT2.testdata.feecalculator.properties" ignore-unresolvable="true"/>
+		<context:property-placeholder location="classpath*:profiles/production/testdata/clickandbuy.api.profile.DEVELOPMENT2.testdata.payport.properties" ignore-unresolvable="true"/>
+		<context:property-placeholder location="classpath*:profiles/production/testdata/clickandbuy.api.profile.DEVELOPMENT2.testdata.registration.properties" ignore-unresolvable="true"/>
+		<context:property-placeholder location="classpath*:profiles/production/clickandbuy.api.profile.PRODUCTION.properties"/>
+		<jaxws:client id="clickandbuyApiClientAccounting"
+                  serviceClass="com.clickandbuy.api.soap.cxf.AccountingPortType"
+                  address="${clickandbuy.api.endpoint.soap}"/>
+		<jaxws:client id="clickandbuyApiClientFeeCalculator"
+                  serviceClass="com.clickandbuy.api.soap.cxf.FeeCalculatorPortType"
+                  address="${clickandbuy.api.endpoint.soap}"/>
 		<jaxws:client id="clickandbuyApiClientPay"
                   serviceClass="com.clickandbuy.api.soap.cxf.PayPortType"
                   address="${clickandbuy.api.endpoint.soap}"/>
 		<jaxws:client id="clickandbuyApiClientReg"
                   serviceClass="com.clickandbuy.api.soap.cxf.RegistrationPortType"
-                  address="${clickandbuy.api.endpoint.soap}"/>
-		<jaxws:client id="clickandbuyApiClientAccounting"
-                  serviceClass="com.clickandbuy.api.soap.cxf.AccountingPortType"
                   address="${clickandbuy.api.endpoint.soap}"/>
 	</beans>
 	
 	<beans profile="SANDBOX">          
-		<context:property-placeholder location="classpath*:clickandbuy.api.profile.SANDBOX.properties"/>
+		<context:property-placeholder location="classpath*:profiles/sandbox/testdata/clickandbuy.api.profile.DEVELOPMENT2.testdata.accounting.properties" ignore-unresolvable="true"/>
+		<context:property-placeholder location="classpath*:profiles/sandbox/testdata/clickandbuy.api.profile.DEVELOPMENT2.testdata.feecalculator.properties" ignore-unresolvable="true"/>
+		<context:property-placeholder location="classpath*:profiles/sandbox/testdata/clickandbuy.api.profile.DEVELOPMENT2.testdata.payport.properties" ignore-unresolvable="true"/>
+		<context:property-placeholder location="classpath*:profiles/sandbox/testdata/clickandbuy.api.profile.DEVELOPMENT2.testdata.registration.properties" ignore-unresolvable="true"/>
+		<context:property-placeholder location="classpath*:profiles/sandbox/clickandbuy.api.profile.SANDBOX.properties"/>
+		<jaxws:client id="clickandbuyApiClientAccounting"
+                  serviceClass="com.clickandbuy.api.soap.cxf.AccountingPortType"
+                  address="${clickandbuy.api.endpoint.soap}"/>
+		<jaxws:client id="clickandbuyApiClientFeeCalculator"
+                  serviceClass="com.clickandbuy.api.soap.cxf.FeeCalculatorPortType"
+                  address="${clickandbuy.api.endpoint.soap}"/>
 		<jaxws:client id="clickandbuyApiClientPay"
                   serviceClass="com.clickandbuy.api.soap.cxf.PayPortType"
                   address="${clickandbuy.api.endpoint.soap}"/>
 		<jaxws:client id="clickandbuyApiClientReg"
                   serviceClass="com.clickandbuy.api.soap.cxf.RegistrationPortType"
-                  address="${clickandbuy.api.endpoint.soap}"/>
-		<jaxws:client id="clickandbuyApiClientAccounting"
-                  serviceClass="com.clickandbuy.api.soap.cxf.AccountingPortType"
                   address="${clickandbuy.api.endpoint.soap}"/>
 	</beans>	
 	
 	<beans profile="DEVELOPMENT1">          
-		<context:property-placeholder location="classpath*:clickandbuy.api.profile.DEVELOPMENT1.properties"/>
+		<context:property-placeholder location="classpath*:profiles/development1/testdata/clickandbuy.api.profile.DEVELOPMENT2.testdata.accounting.properties" ignore-unresolvable="true"/>
+		<context:property-placeholder location="classpath*:profiles/development1/testdata/clickandbuy.api.profile.DEVELOPMENT2.testdata.feecalculator.properties" ignore-unresolvable="true"/>
+		<context:property-placeholder location="classpath*:profiles/development1/testdata/clickandbuy.api.profile.DEVELOPMENT2.testdata.payport.properties" ignore-unresolvable="true"/>
+		<context:property-placeholder location="classpath*:profiles/development1/testdata/clickandbuy.api.profile.DEVELOPMENT2.testdata.registration.properties" ignore-unresolvable="true"/>
+		<context:property-placeholder location="classpath*:profiles/development1/clickandbuy.api.profile.DEVELOPMENT1.properties"/>
+		<jaxws:client id="clickandbuyApiClientAccounting"
+                  serviceClass="com.clickandbuy.api.soap.cxf.AccountingPortType"
+                  address="${clickandbuy.api.endpoint.soap}"/>
+		<jaxws:client id="clickandbuyApiClientFeeCalculator"
+                  serviceClass="com.clickandbuy.api.soap.cxf.FeeCalculatorPortType"
+                  address="${clickandbuy.api.endpoint.soap}"/>
 		<jaxws:client id="clickandbuyApiClientPay"
                   serviceClass="com.clickandbuy.api.soap.cxf.PayPortType"
                   address="${clickandbuy.api.endpoint.soap}"/>
 		<jaxws:client id="clickandbuyApiClientReg"
                   serviceClass="com.clickandbuy.api.soap.cxf.RegistrationPortType"
-                  address="${clickandbuy.api.endpoint.soap}"/>
-		<jaxws:client id="clickandbuyApiClientAccounting"
-                  serviceClass="com.clickandbuy.api.soap.cxf.AccountingPortType"
                   address="${clickandbuy.api.endpoint.soap}"/>
 	</beans>	
 	
 	<beans profile="DEVELOPMENT2">          
-		<context:property-placeholder location="classpath*:clickandbuy.api.profile.DEVELOPMENT2.testdata.payport.properties" ignore-unresolvable="true"/>
-		<context:property-placeholder location="classpath*:clickandbuy.api.profile.DEVELOPMENT2.properties"/>
+		<context:property-placeholder location="classpath*:profiles/development2/testdata/clickandbuy.api.profile.DEVELOPMENT2.testdata.accounting.properties" ignore-unresolvable="true"/>
+		<context:property-placeholder location="classpath*:profiles/development2/testdata/clickandbuy.api.profile.DEVELOPMENT2.testdata.feecalculator.properties" ignore-unresolvable="true"/>
+		<context:property-placeholder location="classpath*:profiles/development2/testdata/clickandbuy.api.profile.DEVELOPMENT2.testdata.payport.properties" ignore-unresolvable="true"/>
+		<context:property-placeholder location="classpath*:profiles/development2/testdata/clickandbuy.api.profile.DEVELOPMENT2.testdata.registration.properties" ignore-unresolvable="true"/>
+		<context:property-placeholder location="classpath*:profiles/development2/clickandbuy.api.profile.DEVELOPMENT2.properties"/>
+		<jaxws:client id="clickandbuyApiClientAccounting"
+                  serviceClass="com.clickandbuy.api.soap.cxf.AccountingPortType"
+                  address="${clickandbuy.api.endpoint.soap}"/>
+		<jaxws:client id="clickandbuyApiClientFeeCalculator"
+                  serviceClass="com.clickandbuy.api.soap.cxf.FeeCalculatorPortType"
+                  address="${clickandbuy.api.endpoint.soap}"/>
 		<jaxws:client id="clickandbuyApiClientPay"
                   serviceClass="com.clickandbuy.api.soap.cxf.PayPortType"
                   address="${clickandbuy.api.endpoint.soap}"/>
 		<jaxws:client id="clickandbuyApiClientReg"
                   serviceClass="com.clickandbuy.api.soap.cxf.RegistrationPortType"
                   address="${clickandbuy.api.endpoint.soap}"/>
-		<jaxws:client id="clickandbuyApiClientAccounting"
-                  serviceClass="com.clickandbuy.api.soap.cxf.AccountingPortType"
-                  address="${clickandbuy.api.endpoint.soap}"/>
 	</beans>	
-	
 </beans>
-

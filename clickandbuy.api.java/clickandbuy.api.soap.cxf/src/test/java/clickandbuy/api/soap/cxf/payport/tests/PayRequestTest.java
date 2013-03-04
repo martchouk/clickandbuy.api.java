@@ -27,9 +27,6 @@ import com.clickandbuy.api.soap.cxf.PayRequestResponse;
 public class PayRequestTest extends PayPortParentTest {
 
 	/** Test data */
-	@Value("${externalId}")
-	private String	externalId;
-
 	@Value("${merchantId}")
 	private long	merchantId;
 
@@ -39,36 +36,39 @@ public class PayRequestTest extends PayPortParentTest {
 	@Value("${secretKey}")
 	private String	secretKey;
 
-	@Value("${basketRisk}")
+	@Value("${payPort.payRequest.externalId}")
+	private String	externalId;
+
+	@Value("${payPort.payRequest.basketRisk}")
 	private int		basketRisk;
 
-	@Value("${clientRisk}")
+	@Value("${payPort.payRequest.clientRisk}")
 	private int		clientRisk;
 
-	@Value("${authExpiration}")
+	@Value("${payPort.payRequest.authExpiration}")
 	private int		authExpiration;
 
-	@Value("${confirmExpiration}")
+	@Value("${payPort.payRequest.confirmExpiration}")
 	private int		confirmExpiration;
 
-	@Value("${successExpiration}")
+	@Value("${payPort.payRequest.successExpiration}")
 	private int		successExpiration;
 
-	@Value("${successURI}")
+	@Value("${payPort.payRequest.successURI}")
 	private String	successURI;
 
-	@Value("${failureURI}")
+	@Value("${payPort.payRequest.failureURI}")
 	private String	failureURI;
 
-	@Value("${consumerIPAddress}")
+	@Value("${payPort.payRequest.consumerIPAddress}")
 	private String	consumerIPAddress;
 
-	@Value("${consumerLanguage}")
+	@Value("${payPort.payRequest.consumerLanguage}")
 	private String	consumerLanguage;
 
-	@Value("${consumerNation}")
+	@Value("${payPort.payRequest.consumerNation}")
 	private String	consumerNation;
-
+			
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
@@ -94,8 +94,8 @@ public class PayRequestTest extends PayPortParentTest {
 		} catch (ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
-		
-		//TODO finish test logic
+
+		// TODO finish test logic
 	}
 
 	/**
@@ -110,44 +110,55 @@ public class PayRequestTest extends PayPortParentTest {
 
 		// TODO fill in necessary test data
 
-		payRequestDetails.setBasketRisk(basketRisk);
-		payRequestDetails.setClientRisk(clientRisk);
-		payRequestDetails.setAuthExpiration(authExpiration);
-		payRequestDetails.setConfirmExpiration(confirmExpiration);
-		payRequestDetails.setSuccessExpiration(successExpiration);
-		payRequestDetails.setSuccessURL(successURI);
-		payRequestDetails.setFailureURL(failureURI);
-		payRequestDetails.setConsumerIPAddress(consumerIPAddress);
-		payRequestDetails.setExternalID(externalId);
-		payRequestDetails.setConsumerLanguage(consumerLanguage);
-		payRequestDetails.setConsumerCountry(consumerNation);
-		// Order Details
-		OrderDetails order = new OrderDetails();
-		order.setItemList(new OrderDetailItemList());
-		order.setText("testPurchase");
-		payRequestDetails.setOrderDetails(order);
-
 		// Amount
 		Money amount = new Money();
 		amount.setAmount(new BigDecimal("1.50"));
 		amount.setCurrency("USD");
-		payRequestDetails.setAmount(amount);
-		// RecurringAuthorization
-		// clickandbuy.api.soap.cfx.RecurringPaymentAuthorization
-		// createRecurring =
-		// prepareRecurringAuthorization(payRequestFormBean.getCreateRecurring(),
-		// payRequestFormBean.isUseRecurringAuthorization());
-		// payRequestDetails.setCreateRecurring(createRecurring);
+
 		// Billing Address
-		// clickandbuy.api.soap.cfx.LegalEntity billing =
-		// prepareLegalEntity(payRequestFormBean.getBillingAddress(),
+		// LegalEntity billing = prepareLegalEntity(payRequestFormBean.getBillingAddress(),
 		// payRequestFormBean.isUseBillingAddress());
 		// payRequestDetails.setBilling(billing);
+
+		// RecurringAuthorization
+		// RecurringPaymentAuthorization createRecurring = prepareRecurringAuthorization(payRequestFormBean.getCreateRecurring(),
+		// payRequestFormBean.isUseRecurringAuthorization());
+		// payRequestDetails.setCreateRecurring(createRecurring);
+
 		// Shipping Address
-		// clickandbuy.api.soap.cfx.LegalEntity shipping =
-		// prepareLegalEntity(payRequestFormBean.getShippingAddress(),
+		// LegalEntity shipping = prepareLegalEntity(payRequestFormBean.getShippingAddress(),
 		// payRequestFormBean.isUseShippingAddress());
 		// payRequestDetails.setShipping(shipping);
+
+		// Order Details
+		OrderDetails order = new OrderDetails();
+		order.setItemList(new OrderDetailItemList());
+		order.setText("testPurchase");
+
+		// Request Details
+		payRequestDetails.setAmount(amount);
+		payRequestDetails.setAuthExpiration(authExpiration);
+		payRequestDetails.setBasketRisk(basketRisk);
+
+		// payRequestDetails.setBilling(value);
+
+		payRequestDetails.setClientRisk(clientRisk);
+		payRequestDetails.setConfirmExpiration(confirmExpiration);
+		payRequestDetails.setConsumerCountry(consumerNation);
+		payRequestDetails.setConsumerIPAddress(consumerIPAddress);
+		payRequestDetails.setConsumerLanguage(consumerLanguage);
+
+		// payRequestDetails.setCreateRecurring(value);
+
+		payRequestDetails.setExternalID(externalId);
+		payRequestDetails.setFailureURL(failureURI);
+		payRequestDetails.setOrderDetails(order);
+
+		// payRequestDetails.setShipping(value);
+
+		payRequestDetails.setSuccessExpiration(successExpiration);
+		payRequestDetails.setSuccessURL(successURI);
+
 		return payRequestDetails;
 	}
 }

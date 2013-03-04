@@ -1,5 +1,11 @@
 package clickandbuy.api.soap.cxf.payport.tests;
 
+import static clickandbuy.api.soap.cxf.util.TestUtil.prepareCreditRecipientIdentifier;
+import static clickandbuy.api.soap.cxf.util.TestUtil.prepareMoney;
+import static clickandbuy.api.soap.cxf.util.TestUtil.prepareOrderDetailItem;
+
+import java.math.BigDecimal;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +16,8 @@ import com.clickandbuy.api.soap.cxf.CreditRequestDetails;
 import com.clickandbuy.api.soap.cxf.CreditRequestRequest;
 import com.clickandbuy.api.soap.cxf.CreditRequestResponse;
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
+import com.clickandbuy.api.soap.cxf.OrderDetailItemList;
+import com.clickandbuy.api.soap.cxf.OrderDetailItemType;
 
 /**
  * Tests related to CreditRequest
@@ -23,13 +31,50 @@ public class CreditRequestTest extends PayPortParentTest {
 
 	/** Test data */
 	@Value("${merchantId}")
-	private long	merchantId;
+	private long		merchantId;
 
 	@Value("${projectId}")
-	private long	projectId;
+	private long		projectId;
 
 	@Value("${secretKey}")
-	private String	secretKey;
+	private String		secretKey;
+
+	/** Test data */
+	@Value("${payPort.creditRequest.money.amount}")
+	private BigDecimal	moneyAmount;
+
+	@Value("${payPort.creditRequest.money.currency}")
+	private String		moneyCurrency;
+
+	@Value("${payPort.creditRequest.consumerLanguage}")
+	private String		consumerLanguage;
+
+	@Value("${payPort.creditRequest.externalId}")
+	private String		externalId;
+
+	@Value("${payPort.creditRequest.orderDetails.text}")
+	private String		text;
+
+	@Value("${payPort.creditRequest.creditRecipientIdentifier.crn}")
+	private Long		crn;
+
+	@Value("${payPort.creditRequest.creditRecipientIdentifier.email}")
+	private String		email;
+
+	@Value("${payPort.creditRequest.odi.description}")
+	String				odiDescription;
+
+	@Value("${payPort.creditRequest.odi.itemType}")
+	OrderDetailItemType	odiItemType;
+
+	@Value("${payPort.creditRequest.odi.quantity}")
+	Integer				odiQuantity;
+
+	@Value("${payPort.creditRequest.odi.unitPrice.money.amount}")
+	private BigDecimal	odiMoneyUnitPriceAmount;
+
+	@Value("${payPort.creditRequest.odi.unitPrice.money.currency}")
+	private String		odiMoneyUnitPriceCurrency;
 
 	@Before
 	public void setUp() throws Exception {
@@ -60,17 +105,35 @@ public class CreditRequestTest extends PayPortParentTest {
 	/**
 	 * @return
 	 */
-	public CreditRequestDetails prepareCreditRequestDetails() {
+	private CreditRequestDetails prepareCreditRequestDetails() {
 		CreditRequestDetails creditRequestDetails = new CreditRequestDetails();
 
 		// TODO fill in necessary test data
 
-		// creditRequestDetails.setAmount(value);
-		// creditRequestDetails.setConsumerLanguage(value);
-		// creditRequestDetails.setExternalID(value);
-		// creditRequestDetails.setOrderDetails(value);
-		// creditRequestDetails.setRecipient(value);
+		creditRequestDetails.setAmount(prepareMoney(moneyAmount, moneyCurrency));
+		// creditRequestDetails.setConsumerLanguage(consumerLanguage);
+		creditRequestDetails.setExternalID(externalId);
+		// creditRequestDetails.setOrderDetails(prepareOrderDetails());
+		creditRequestDetails.setRecipient(prepareCreditRecipientIdentifier(crn, email));
 
 		return creditRequestDetails;
 	}
+
+	// private OrderDetails prepareOrderDetails(){
+	// OrderDetails orderDetails = new OrderDetails();
+	//
+	// orderDetails.setItemList(prepareOrderDetailItemList());
+	// orderDetails.setText(text);
+	//
+	// return orderDetails;
+	// }
+
+	private OrderDetailItemList aprepareOrderDetailItemList() {
+		OrderDetailItemList orderDetailItemList = new OrderDetailItemList();
+
+		orderDetailItemList.getItem().add(prepareOrderDetailItem(odiDescription, odiItemType, odiQuantity, prepareMoney(moneyAmount, moneyCurrency), prepareMoney(odiMoneyUnitPriceAmount, odiMoneyUnitPriceCurrency)));
+
+		return orderDetailItemList;
+	}
+
 }
