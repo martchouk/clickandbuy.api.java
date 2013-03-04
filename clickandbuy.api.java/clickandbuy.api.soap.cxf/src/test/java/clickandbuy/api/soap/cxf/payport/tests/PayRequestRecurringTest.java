@@ -25,15 +25,6 @@ public class PayRequestRecurringTest extends PayPortParentTest {
 	@Value("${externalId}")
 	private String	externalId;
 
-	@Value("${merchantId}")
-	private long	merchantId;
-
-	@Value("${projectId}")
-	private long	projectId;
-
-	@Value("${secretKey}")
-	private String	secretKey;
-
 	@Value("${basketRisk}")
 	private int		basketRisk;
 

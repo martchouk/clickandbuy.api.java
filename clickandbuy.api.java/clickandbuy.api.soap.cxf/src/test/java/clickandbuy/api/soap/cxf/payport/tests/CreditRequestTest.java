@@ -30,16 +30,6 @@ import com.clickandbuy.api.soap.cxf.OrderDetailItemType;
 public class CreditRequestTest extends PayPortParentTest {
 
 	/** Test data */
-	@Value("${merchantId}")
-	private long		merchantId;
-
-	@Value("${projectId}")
-	private long		projectId;
-
-	@Value("${secretKey}")
-	private String		secretKey;
-
-	/** Test data */
 	@Value("${payPort.creditRequest.money.amount}")
 	private BigDecimal	moneyAmount;
 

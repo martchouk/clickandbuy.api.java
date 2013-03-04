@@ -3,7 +3,6 @@ package clickandbuy.api.soap.cxf.payport.tests;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.clickandbuy.api.soap.cxf.CreateBatchDetails;
@@ -22,14 +21,6 @@ import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 public class CreateBatchTest extends PayPortParentTest {
 
 	/** Test data */
-	@Value("${merchantId}")
-	private long	merchantId;
-
-	@Value("${projectId}")
-	private long	projectId;
-
-	@Value("${secretKey}")
-	private String	secretKey;
 
 	@Before
 	public void setUp() throws Exception {

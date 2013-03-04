@@ -25,15 +25,6 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	@Value("${externalId}")
 	private String	externalId;
 
-	@Value("${merchantId}")
-	private long	merchantId;
-
-	@Value("${projectId}")
-	private long	projectId;
-
-	@Value("${secretKey}")
-	private String	secretKey;
-
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();

@@ -26,32 +26,24 @@ import com.clickandbuy.api.soap.cxf.TransactionIDStatus;
 public class CancelRequestTest extends PayPortParentTest {
 
 	/** Test data */
-	@Value("${merchantId}")
-	private long		merchantId;
-
-	@Value("${projectId}")
-	private long		projectId;
-
-	@Value("${secretKey}")
-	private String		secretKey;
 
 	@Value("${payPort.cancelRequest.cancelIdentifier.recurringPaymentAuthorizationID}")
-	private Long		recurringPaymentAuthorizationID;
+	private Long			recurringPaymentAuthorizationID;
 
 	@Value("${payPort.cancelRequest.cancelIdentifier.transactionID}")
-	//may not be required anymore as it is taken from payRequestTest
-	private Long		transactionID;
+	// may not be required anymore as it is taken from payRequestTest
+	private Long			transactionID;
 
 	@Value("${payPort.cancelRequest.cancelMode}")
-	private CancelMode	cancelMode;
-	
+	private CancelMode		cancelMode;
+
 	@Autowired
-	private PayRequestTest payRequestTest;
-	
+	private PayRequestTest	payRequestTest;
+
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
-		
+
 		transactionID = payRequestTest.testPayRequest();
 	}
 
@@ -76,8 +68,8 @@ public class CancelRequestTest extends PayPortParentTest {
 
 		// TODO finish test logic
 	}
-	
-	public void display(TransactionIDStatus transactionIDStatus){
+
+	public void display(TransactionIDStatus transactionIDStatus) {
 		logger.debug("TransactionIDStatus:");
 		logger.debug("TransactionIDStatus:" + transactionIDStatus.getExternalID());
 		logger.debug("TransactionIDStatus:" + transactionIDStatus.getRedirectURL());

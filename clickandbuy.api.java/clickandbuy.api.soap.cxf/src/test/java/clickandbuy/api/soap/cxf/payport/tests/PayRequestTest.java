@@ -28,14 +28,6 @@ import com.clickandbuy.api.soap.cxf.PayRequestResponse;
 public class PayRequestTest extends PayPortParentTest {
 
 	/** Test data */
-	@Value("${merchantId}")
-	private long		merchantId;
-
-	@Value("${projectId}")
-	private long		projectId;
-
-	@Value("${secretKey}")
-	private String		secretKey;
 
 	@Value("${payPort.payRequest.amount.amout}")
 	private BigDecimal	amount;
