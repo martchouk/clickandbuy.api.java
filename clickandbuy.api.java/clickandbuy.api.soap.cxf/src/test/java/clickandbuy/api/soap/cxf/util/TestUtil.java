@@ -5,6 +5,9 @@ package clickandbuy.api.soap.cxf.util;
 
 import java.math.BigDecimal;
 
+import com.clickandbuy.api.soap.cxf.CancelIdentifier;
+import com.clickandbuy.api.soap.cxf.CancelMode;
+import com.clickandbuy.api.soap.cxf.CancelRequestDetails;
 import com.clickandbuy.api.soap.cxf.CreditRecipientIdentifier;
 import com.clickandbuy.api.soap.cxf.CreditRequestDetails;
 import com.clickandbuy.api.soap.cxf.Money;
@@ -88,4 +91,33 @@ public class TestUtil {
 		return creditRecipientIdentifier;
 	}
 
+	public static CancelRequestDetails prepareCancelRequestDetails(CancelIdentifier cancelIdentifier, CancelMode cancelMode) {
+		CancelRequestDetails cancelRequestDetails = new CancelRequestDetails();
+
+		cancelRequestDetails.setCancelIdentifier(cancelIdentifier);
+		cancelRequestDetails.setCancelMode(cancelMode);
+
+		return cancelRequestDetails;
+	}
+
+	public static CancelRequestDetails prepareCancelRequestDetails(Long recurringPaymentAuthorizationID, Long transactionID, CancelMode cancelMode) {
+		CancelRequestDetails cancelRequestDetails = new CancelRequestDetails();
+
+		cancelRequestDetails.setCancelIdentifier(prepareCancelIdentifier(recurringPaymentAuthorizationID, transactionID));
+		cancelRequestDetails.setCancelMode(cancelMode);
+
+		return cancelRequestDetails;
+	}
+
+	public static CancelIdentifier prepareCancelIdentifier(Long recurringPaymentAuthorizationID, Long transactionID) {
+		CancelIdentifier cancelIdentifier = new CancelIdentifier();
+
+		if (recurringPaymentAuthorizationID != null) {
+			cancelIdentifier.setRecurringPaymentAuthorizationID(recurringPaymentAuthorizationID);
+		} else {
+			cancelIdentifier.setTransactionID(transactionID);
+		}
+
+		return cancelIdentifier;
+	}
 }

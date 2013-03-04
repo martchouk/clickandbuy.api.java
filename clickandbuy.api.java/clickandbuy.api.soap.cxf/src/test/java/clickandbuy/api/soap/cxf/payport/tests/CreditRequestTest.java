@@ -22,7 +22,7 @@ import com.clickandbuy.api.soap.cxf.OrderDetailItemType;
 /**
  * Tests related to CreditRequest
  * 
- * @author Ciprian.Ileana
+ * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
  */
@@ -61,19 +61,19 @@ public class CreditRequestTest extends PayPortParentTest {
 	@Value("${payPort.creditRequest.creditRecipientIdentifier.email}")
 	private String		email;
 
-	@Value("${payPort.creditRequest.odi.description}")
+	@Value("${payPort.creditRequest.orderDetailItem.description}")
 	String				odiDescription;
 
-	@Value("${payPort.creditRequest.odi.itemType}")
+	@Value("${payPort.creditRequest.orderDetailItem.itemType}")
 	OrderDetailItemType	odiItemType;
 
-	@Value("${payPort.creditRequest.odi.quantity}")
+	@Value("${payPort.creditRequest.orderDetailItem.quantity}")
 	Integer				odiQuantity;
 
-	@Value("${payPort.creditRequest.odi.unitPrice.money.amount}")
+	@Value("${payPort.creditRequest.orderDetailItem.unitPrice.money.amount}")
 	private BigDecimal	odiMoneyUnitPriceAmount;
 
-	@Value("${payPort.creditRequest.odi.unitPrice.money.currency}")
+	@Value("${payPort.creditRequest.orderDetailItem.unitPrice.money.currency}")
 	private String		odiMoneyUnitPriceCurrency;
 
 	@Before

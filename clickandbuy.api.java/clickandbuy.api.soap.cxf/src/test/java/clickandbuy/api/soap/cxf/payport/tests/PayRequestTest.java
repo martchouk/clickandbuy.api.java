@@ -1,5 +1,7 @@
 package clickandbuy.api.soap.cxf.payport.tests;
 
+import static clickandbuy.api.soap.cxf.util.TestUtil.prepareMoney;
+
 import java.math.BigDecimal;
 
 import org.junit.Before;
@@ -9,7 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
-import com.clickandbuy.api.soap.cxf.Money;
 import com.clickandbuy.api.soap.cxf.OrderDetailItemList;
 import com.clickandbuy.api.soap.cxf.OrderDetails;
 import com.clickandbuy.api.soap.cxf.PayRequestDetails;
@@ -19,7 +20,7 @@ import com.clickandbuy.api.soap.cxf.PayRequestResponse;
 /**
  * Tests related to PayRequest
  * 
- * @author Ciprian.Ileana
+ * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
  */
@@ -28,47 +29,56 @@ public class PayRequestTest extends PayPortParentTest {
 
 	/** Test data */
 	@Value("${merchantId}")
-	private long	merchantId;
+	private long		merchantId;
 
 	@Value("${projectId}")
-	private long	projectId;
+	private long		projectId;
 
 	@Value("${secretKey}")
-	private String	secretKey;
+	private String		secretKey;
+
+	@Value("${payPort.payRequest.amount.amout}")
+	private BigDecimal	amount;
+
+	@Value("${payPort.payRequest.amount.currency}")
+	private String		currency;
+
+	@Value("${payPort.payRequest.orderDetails.text}")
+	private String		text;
 
 	@Value("${payPort.payRequest.externalId}")
-	private String	externalId;
+	private String		externalId;
 
 	@Value("${payPort.payRequest.basketRisk}")
-	private int		basketRisk;
+	private int			basketRisk;
 
 	@Value("${payPort.payRequest.clientRisk}")
-	private int		clientRisk;
+	private int			clientRisk;
 
 	@Value("${payPort.payRequest.authExpiration}")
-	private int		authExpiration;
+	private int			authExpiration;
 
 	@Value("${payPort.payRequest.confirmExpiration}")
-	private int		confirmExpiration;
+	private int			confirmExpiration;
 
 	@Value("${payPort.payRequest.successExpiration}")
-	private int		successExpiration;
+	private int			successExpiration;
 
 	@Value("${payPort.payRequest.successURI}")
-	private String	successURI;
+	private String		successURI;
 
 	@Value("${payPort.payRequest.failureURI}")
-	private String	failureURI;
+	private String		failureURI;
 
 	@Value("${payPort.payRequest.consumerIPAddress}")
-	private String	consumerIPAddress;
+	private String		consumerIPAddress;
 
 	@Value("${payPort.payRequest.consumerLanguage}")
-	private String	consumerLanguage;
+	private String		consumerLanguage;
 
 	@Value("${payPort.payRequest.consumerNation}")
-	private String	consumerNation;
-			
+	private String		consumerNation;
+
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
@@ -79,9 +89,11 @@ public class PayRequestTest extends PayPortParentTest {
 
 	/**
 	 * Test the PayRequest
+	 * 
+	 * @return the transaction ID
 	 */
 	@Test
-	public void testPayRequest() {
+	public long testPayRequest() {
 		PayRequestResponse payRequestResponse = null;
 
 		PayRequestRequest payRequestRequest = new PayRequestRequest();
@@ -95,7 +107,7 @@ public class PayRequestTest extends PayPortParentTest {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
 
-		// TODO finish test logic
+		return payRequestResponse.getTransaction().getTransactionID();
 	}
 
 	/**
@@ -109,11 +121,6 @@ public class PayRequestTest extends PayPortParentTest {
 		PayRequestDetails payRequestDetails = new PayRequestDetails();
 
 		// TODO fill in necessary test data
-
-		// Amount
-		Money amount = new Money();
-		amount.setAmount(new BigDecimal("1.50"));
-		amount.setCurrency("USD");
 
 		// Billing Address
 		// LegalEntity billing = prepareLegalEntity(payRequestFormBean.getBillingAddress(),
@@ -133,31 +140,26 @@ public class PayRequestTest extends PayPortParentTest {
 		// Order Details
 		OrderDetails order = new OrderDetails();
 		order.setItemList(new OrderDetailItemList());
-		order.setText("testPurchase");
+		order.setText(text);
 
 		// Request Details
-		payRequestDetails.setAmount(amount);
+		payRequestDetails.setAmount(prepareMoney(amount, currency));
 		payRequestDetails.setAuthExpiration(authExpiration);
 		payRequestDetails.setBasketRisk(basketRisk);
-
-		// payRequestDetails.setBilling(value);
-
 		payRequestDetails.setClientRisk(clientRisk);
 		payRequestDetails.setConfirmExpiration(confirmExpiration);
 		payRequestDetails.setConsumerCountry(consumerNation);
 		payRequestDetails.setConsumerIPAddress(consumerIPAddress);
 		payRequestDetails.setConsumerLanguage(consumerLanguage);
-
-		// payRequestDetails.setCreateRecurring(value);
-
 		payRequestDetails.setExternalID(externalId);
 		payRequestDetails.setFailureURL(failureURI);
 		payRequestDetails.setOrderDetails(order);
-
-		// payRequestDetails.setShipping(value);
-
 		payRequestDetails.setSuccessExpiration(successExpiration);
 		payRequestDetails.setSuccessURL(successURI);
+
+		// payRequestDetails.setBilling(value);
+		// payRequestDetails.setCreateRecurring(value);
+		// payRequestDetails.setShipping(value);
 
 		return payRequestDetails;
 	}
