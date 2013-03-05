@@ -1,5 +1,6 @@
 package clickandbuy.api.soap.cxf.feecalculator.tests;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,9 +23,6 @@ import com.clickandbuy.api.soap.cxf.GetFeeCardSettlementDelaysResponse;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class GetFeeCardSettlementDelaysTest extends FeeCalculatorPortParentTest {
 
-	/** Test data */
-	// TODO inject necessary test data
-
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
@@ -37,28 +35,33 @@ public class GetFeeCardSettlementDelaysTest extends FeeCalculatorPortParentTest 
 	public void testGetFeeCardSettlementDelays() {
 		GetFeeCardSettlementDelaysResponse getFeeCardSettlementDelaysResponse = null;
 
-		GetFeeCardSettlementDelaysRequest getFeeCardSettlementDelaysRequest = new GetFeeCardSettlementDelaysRequest();
-		getFeeCardSettlementDelaysRequest.setDetails(prepareGetFeeCardSettlementDelaysDetails());
+		// prepare the request
+		final GetFeeCardSettlementDelaysRequest feeCardSettlementDelaysRequest = new GetFeeCardSettlementDelaysRequest();
+		feeCardSettlementDelaysRequest.setDetails(prepareGetFeeCardSettlementDelaysDetails());
 
+		// perform the request.
 		try {
-			getFeeCardSettlementDelaysResponse = feeCalculatorPortType.getFeeCardSettlementDelays(getFeeCardSettlementDelaysRequest);
+			getFeeCardSettlementDelaysResponse = feeCalculatorPortType.getFeeCardSettlementDelays(feeCardSettlementDelaysRequest);
 			logger.debug("Created transaction with Id: " + getFeeCardSettlementDelaysResponse.getSettlementDelayList());
-		} catch (ErrorDetails_Exception errorDetails_Exception) {
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
 
-		// TODO finish test logic
+		// assert everything ok.
+		Assert.assertNotNull(getFeeCardSettlementDelaysResponse);
+		Assert.assertNotNull(getFeeCardSettlementDelaysResponse.getSettlementDelayList());
+		Assert.assertNotNull(getFeeCardSettlementDelaysResponse.getSettlementDelayList().getSettlementDelay());
+		Assert.assertTrue(getFeeCardSettlementDelaysResponse.getSettlementDelayList().getSettlementDelay().size() > 0);
 	}
 
 	/**
 	 * @return
 	 */
 	public GetFeeCardSettlementDelaysDetails prepareGetFeeCardSettlementDelaysDetails() {
-		GetFeeCardSettlementDelaysDetails getFeeCardSettlementDelaysDetails = new GetFeeCardSettlementDelaysDetails();
+		final GetFeeCardSettlementDelaysDetails getFeeCardSettlementDelaysDetails = new GetFeeCardSettlementDelaysDetails();
 
-		// TODO fill in necessary test data
-
-		// getFeeCardSettlementDelaysDetails.setBusinessOriginID(value);
+		getFeeCardSettlementDelaysDetails.setBusinessOriginID(businessOriginID);
+		// TODO : fix this value.
 		// getFeeCardSettlementDelaysDetails.setCategoryID(value);
 
 		return getFeeCardSettlementDelaysDetails;

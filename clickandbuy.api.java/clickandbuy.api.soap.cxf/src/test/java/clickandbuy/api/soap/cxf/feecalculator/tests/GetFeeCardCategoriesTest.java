@@ -22,9 +22,6 @@ import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesResponse;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class GetFeeCardCategoriesTest extends FeeCalculatorPortParentTest {
 
-	/** Test data */
-	// TODO inject necessary test data
-
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
@@ -32,33 +29,34 @@ public class GetFeeCardCategoriesTest extends FeeCalculatorPortParentTest {
 
 	/**
 	 * Test the GetFeeCardCategories
+	 * 
+	 * @throws ErrorDetails_Exception
 	 */
 	@Test
-	public void testGetFeeCardCategories() {
+	public void testGetFeeCardCategories() throws ErrorDetails_Exception {
 		GetFeeCardCategoriesResponse getFeeCardCategoriesResponse = null;
 
-		GetFeeCardCategoriesRequest addBatchItemRequest = new GetFeeCardCategoriesRequest();
-		addBatchItemRequest.setDetails(prepareGetFeeCardCategoriesDetails());
+		final GetFeeCardCategoriesRequest feeCardCategories = new GetFeeCardCategoriesRequest();
+		feeCardCategories.setDetails(prepareGetFeeCardCategoriesDetails());
 
 		try {
-			getFeeCardCategoriesResponse = feeCalculatorPortType.getFeeCardCategories(addBatchItemRequest);
+			getFeeCardCategoriesResponse = feeCalculatorPortType.getFeeCardCategories(feeCardCategories);
 			logger.debug("Created transaction with Id: " + getFeeCardCategoriesResponse.getCategoryList());
-		} catch (ErrorDetails_Exception errorDetails_Exception) {
+			logger.debug("Found the following categories " + getFeeCardCategoriesResponse.getCategoryList().getCategory());
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
 		}
-
-		// TODO finish test logic
 	}
 
 	/**
+	 * request builder method for retrieving fee card categories.
+	 * 
 	 * @return
 	 */
 	public GetFeeCardCategoriesDetails prepareGetFeeCardCategoriesDetails() {
-		GetFeeCardCategoriesDetails getFeeCardCategoriesDetails = new GetFeeCardCategoriesDetails();
-
-		// TODO fill in necessary test data
-
-		// getFeeCardCategoriesDetails.setBusinessOriginID(value);
+		final GetFeeCardCategoriesDetails getFeeCardCategoriesDetails = new GetFeeCardCategoriesDetails();
+		getFeeCardCategoriesDetails.setBusinessOriginID(businessOriginID);
 
 		return getFeeCardCategoriesDetails;
 	}

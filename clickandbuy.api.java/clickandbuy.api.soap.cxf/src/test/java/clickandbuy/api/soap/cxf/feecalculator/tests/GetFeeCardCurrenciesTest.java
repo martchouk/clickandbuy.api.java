@@ -22,9 +22,6 @@ import com.clickandbuy.api.soap.cxf.GetFeeCardCurrenciesResponse;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class GetFeeCardCurrenciesTest extends FeeCalculatorPortParentTest {
 
-	/** Test data */
-	// TODO inject necessary test data
-
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
@@ -32,33 +29,33 @@ public class GetFeeCardCurrenciesTest extends FeeCalculatorPortParentTest {
 
 	/**
 	 * Test the GetFeeCardCurrencies
+	 * 
+	 * @throws ErrorDetails_Exception
 	 */
 	@Test
-	public void testGetFeeCardCurrencies() {
+	public void testGetFeeCardCurrencies() throws ErrorDetails_Exception {
 		GetFeeCardCurrenciesResponse getFeeCardCurrenciesResponse = null;
 
-		GetFeeCardCurrenciesRequest getFeeCardCurrenciesRequest = new GetFeeCardCurrenciesRequest();
+		final GetFeeCardCurrenciesRequest getFeeCardCurrenciesRequest = new GetFeeCardCurrenciesRequest();
 		getFeeCardCurrenciesRequest.setDetails(prepareGetFeeCardCurrenciesDetails());
 
 		try {
 			getFeeCardCurrenciesResponse = feeCalculatorPortType.getFeeCardCurrencies(getFeeCardCurrenciesRequest);
 			logger.debug("Created transaction with Id: " + getFeeCardCurrenciesResponse.getCurrencyList());
-		} catch (ErrorDetails_Exception errorDetails_Exception) {
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
 		}
-
-		// TODO finish test logic
 	}
 
 	/**
+	 * Builder method for retrieving card currencies.
+	 * 
 	 * @return
 	 */
 	public GetFeeCardCurrenciesDetails prepareGetFeeCardCurrenciesDetails() {
-		GetFeeCardCurrenciesDetails getFeeCardCurrenciesDetails = new GetFeeCardCurrenciesDetails();
-
-		// TODO fill in necessary test data
-
-		// getFeeCardCurrenciesDetails.setBusinessOriginID(value);
+		final GetFeeCardCurrenciesDetails getFeeCardCurrenciesDetails = new GetFeeCardCurrenciesDetails();
+		getFeeCardCurrenciesDetails.setBusinessOriginID(businessOriginID);
 
 		return getFeeCardCurrenciesDetails;
 	}
