@@ -11,7 +11,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.accountingport.parent.AccountingPortParentTest;
@@ -33,34 +32,6 @@ import com.clickandbuy.api.util.auth.CabApiUniqueDateFormat;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class GetAccountingDocumentsTest extends AccountingPortParentTest {
-
-	/** Test data */
-	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.dateRange.after}")
-	private String	dateRangeAfter;
-
-	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.dateRange.before}")
-	private String	dateRangeBefore;
-
-	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.inteRange.from}")
-	private Integer	intRangeFrom;
-
-	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.intRange.until}")
-	private Integer	intRangeUntil;
-
-	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.documentType}")
-	private String	accountingDocumentType;
-
-	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.fileName}")
-	private String	fileName;
-
-	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.fileType}")
-	private String	accountingFileType;
-
-	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.pagingSetting.maxResults}")
-	private Integer	maxResults;
-
-	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.pagingSetting.skip}")
-	private Integer	skip;
 
 	@Before
 	public void setUp() throws Exception {
@@ -84,7 +55,7 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 		try {
 			getAccountingDocumentsResponse = accountingPortType.getAccountingDocuments(getAccountingDocumentsRequest);
 			logger.debug("Created transaction with Id: " + getAccountingDocumentsResponse.getRequestTrackingID());
-			logger.debug("Created transaction with Id: " + getAccountingDocumentsResponse.getDocumentList());
+			logger.debug("Retrieved the following document list: " + getAccountingDocumentsResponse.getDocumentList());
 		} catch (ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
@@ -100,11 +71,9 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 	public GetAccountingDocumentDetails prepareGetAccountingDocumentDetails() throws DatatypeConfigurationException, ParseException {
 		GetAccountingDocumentDetails getAccountingDocumentDetails = new GetAccountingDocumentDetails();
 
-		// TODO fill in necessary test data
-
 		final DateRange dateRange = new DateRange();
-		final long dateRAfter = CabApiUniqueDateFormat.getDayDateFormatter().parse(dateRangeAfter.trim()).getTime();
-		final long dateRBefore = CabApiUniqueDateFormat.getDayDateFormatter().parse(dateRangeBefore.trim()).getTime();
+		final long dateRAfter = CabApiUniqueDateFormat.getDayDateFormatter().parse(testData.getDateRangeAfter().trim()).getTime();
+		final long dateRBefore = CabApiUniqueDateFormat.getDayDateFormatter().parse(testData.getDateRangeBefore().trim()).getTime();
 
 		final GregorianCalendar gregory = new GregorianCalendar();
 		gregory.setTime(new Date(dateRAfter));
@@ -117,12 +86,12 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 		dateRange.setBefore(endingDate);
 
 		final IntRange intRange = new IntRange();
-		intRange.setFrom(intRangeFrom);
-		intRange.setUntil(intRangeUntil);
+		intRange.setFrom(testData.getIntRangeFrom());
+		intRange.setUntil(testData.getIntRangeUntil());
 
 		PagingSetting pagingSetting = new PagingSetting();
-		pagingSetting.setMaxResults(maxResults);
-		// pagingSetting.setSkip(skip);
+		pagingSetting.setMaxResults(testData.getMaxResults());
+		pagingSetting.setSkip(testData.getSkip());
 
 		getAccountingDocumentDetails.setDate(dateRange);
 		getAccountingDocumentDetails.setDocumentNumber(intRange);

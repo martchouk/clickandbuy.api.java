@@ -27,7 +27,6 @@ public class TestUtil {
 	 * Prevent instantiation of utils class
 	 */
 	private TestUtil() {
-
 	}
 
 	public static CreditRequestDetails prepareCreditRequestDetails(Money amount, String consumerLanguage, String externalId, OrderDetails orderDetails, CreditRecipientIdentifier creditRecipientIdentifier) {

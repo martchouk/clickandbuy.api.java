@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
+import clickandbuy.api.soap.cxf.accountingport.data.AccountingPortTestDataSupplier;
 import clickandbuy.api.soap.cxf.parent.ParentTest;
 
 import com.clickandbuy.api.soap.cxf.AccountingPortType;
@@ -16,13 +17,17 @@ import com.clickandbuy.api.soap.cxf.AccountingPortType;
  * 
  */
 public class AccountingPortParentTest extends ParentTest {
-	public static final Logger	logger	= Logger.getLogger(AccountingPortParentTest.class);
+	public static final Logger logger = Logger
+			.getLogger(AccountingPortParentTest.class);
 
 	@Value("${acceptSelfSignedCertificates}")
-	boolean						acceptSelfSignedCertificates;
+	protected boolean acceptSelfSignedCertificates;
 
 	@Autowired
-	public AccountingPortType	accountingPortType;
+	protected AccountingPortType accountingPortType;
+
+	@Autowired
+	protected AccountingPortTestDataSupplier testData;
 
 	/**
 	 * 
