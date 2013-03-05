@@ -32,8 +32,6 @@ public class PayPortTestDataSupplier {
 	@Value("${payPort.cancelRequest.cancelMode}")
 	private CancelMode	cancelRequestCancelMode;
 
-	/** CreateBatch Test data */
-
 	/** CreditRequest Test data */
 
 	/** ExecuteBatch Test data */
@@ -52,9 +50,6 @@ public class PayPortTestDataSupplier {
 
 	@Value("${payPort.payRequest.orderDetails.text}")
 	private String		payRequestText;
-
-	@Value("${payPort.payRequest.externalId}")
-	private String		payRequestExternalId;
 
 	@Value("${payPort.payRequest.basketRisk}")
 	private int			payRequestBasketRisk;
@@ -133,21 +128,6 @@ public class PayPortTestDataSupplier {
 	 */
 	public void setPayRequestText(String payRequestText) {
 		this.payRequestText = payRequestText;
-	}
-
-	/**
-	 * @return the payRequestExternalId
-	 */
-	public String getPayRequestExternalId() {
-		return payRequestExternalId;
-	}
-
-	/**
-	 * @param payRequestExternalId
-	 *            the payRequestExternalId to set
-	 */
-	public void setPayRequestExternalId(String payRequestExternalId) {
-		this.payRequestExternalId = payRequestExternalId;
 	}
 
 	/**

@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.payport.data.PayPortTestDataSupplier;
@@ -35,18 +36,22 @@ import com.clickandbuy.api.soap.cxf.TransactionIDStatus;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CancelRequestTest extends PayPortParentTest {
 
-	/** Test data */
-
 	private Long			transactionID					= null;
 
 	private Long			recurringPaymentAuthorizationID	= null;
 
 	@Autowired
 	PayPortTestDataSupplier	payPortTestDataSupplier;
+	
+	@Value("${externalId}")
+	String externalId;
 
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
+
+		externalId = externalId + System.nanoTime() + "_";
+		logger.debug("***externalId:" + externalId);
 
 		transactionID = doPayRequest();
 	}
@@ -73,6 +78,11 @@ public class CancelRequestTest extends PayPortParentTest {
 		// TODO finish test logic
 	}
 
+	/**
+	 * Executes a PayRequest
+	 * 
+	 * @return the transaction ID received from the PayRequest
+	 */
 	public long doPayRequest() {
 		Long payRequestTransactionID = null;
 		PayRequestResponse payRequestResponse = null;
@@ -116,7 +126,7 @@ public class CancelRequestTest extends PayPortParentTest {
 		payRequestDetails.setConsumerCountry(payPortTestDataSupplier.getPayRequestConsumerNation());
 		payRequestDetails.setConsumerIPAddress(payPortTestDataSupplier.getPayRequestConsumerIPAddress());
 		payRequestDetails.setConsumerLanguage(payPortTestDataSupplier.getPayRequestConsumerLanguage());
-		payRequestDetails.setExternalID(payPortTestDataSupplier.getPayRequestExternalId());
+		payRequestDetails.setExternalID(externalId);
 		payRequestDetails.setFailureURL(payPortTestDataSupplier.getPayRequestFailureURI());
 		payRequestDetails.setOrderDetails(order);
 		payRequestDetails.setSuccessExpiration(payPortTestDataSupplier.getPayRequestSuccessExpiration());

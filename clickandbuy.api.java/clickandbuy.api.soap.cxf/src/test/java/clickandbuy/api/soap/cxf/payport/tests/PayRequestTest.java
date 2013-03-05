@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.payport.data.PayPortTestDataSupplier;
@@ -34,12 +35,15 @@ public class PayRequestTest extends PayPortParentTest {
 	@Autowired
 	PayPortTestDataSupplier payPortTestDataSupplier;
 	
+	@Value("${externalId}")
+	String externalId;
+	
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
 
-		payPortTestDataSupplier.setPayRequestExternalId(payPortTestDataSupplier.getPayRequestExternalId() + System.nanoTime() + "_");
-		logger.debug("***externalId:" + payPortTestDataSupplier.getPayRequestExternalId());
+		externalId = externalId + System.nanoTime() + "_";
+		logger.debug("***externalId:" + externalId);
 	}
 
 	/**
@@ -104,7 +108,7 @@ public class PayRequestTest extends PayPortParentTest {
 		payRequestDetails.setConsumerCountry(payPortTestDataSupplier.getPayRequestConsumerNation());
 		payRequestDetails.setConsumerIPAddress(payPortTestDataSupplier.getPayRequestConsumerIPAddress());
 		payRequestDetails.setConsumerLanguage(payPortTestDataSupplier.getPayRequestConsumerLanguage());
-		payRequestDetails.setExternalID(payPortTestDataSupplier.getPayRequestExternalId());
+		payRequestDetails.setExternalID(externalId);
 		payRequestDetails.setFailureURL(payPortTestDataSupplier.getPayRequestFailureURI());
 		payRequestDetails.setOrderDetails(order);
 		payRequestDetails.setSuccessExpiration(payPortTestDataSupplier.getPayRequestSuccessExpiration());
