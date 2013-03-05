@@ -35,30 +35,26 @@ public class GetMerchantRegistrationStatusTest extends RegistrationPortParentTes
 	public void testAddBatchItem() {
 		GetMerchantRegistrationStatusResponse getMerchantRegistrationStatusResponse = null;
 
-		GetMerchantRegistrationStatusRequest addBatchItemRequest = new GetMerchantRegistrationStatusRequest();
-		addBatchItemRequest.setDetails(prepareGetMerchantRegistrationStatusDetails());
+		GetMerchantRegistrationStatusRequest registrationStatusReq = new GetMerchantRegistrationStatusRequest();
+		registrationStatusReq.setDetails(prepareGetMerchantRegistrationStatusDetails());
 
 		try {
-			getMerchantRegistrationStatusResponse = registrationPortType.getMerchantRegistrationStatus(addBatchItemRequest);
+			getMerchantRegistrationStatusResponse = registrationPortType.getMerchantRegistrationStatus(registrationStatusReq);
 			logger.debug("Created transaction with Id: " + getMerchantRegistrationStatusResponse.getRequestTrackingID());
 		} catch (ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
-
-		// TODO finish test logic
 	}
 
 	/**
 	 * @return
 	 */
 	public GetMerchantRegistrationStatusDetails prepareGetMerchantRegistrationStatusDetails() {
-		GetMerchantRegistrationStatusDetails getMerchantRegistrationStatusDetails = new GetMerchantRegistrationStatusDetails();
-
-		// TODO fill in necessary test data
+		final GetMerchantRegistrationStatusDetails getMerchantRegistrationStatusDetails = new GetMerchantRegistrationStatusDetails();
 
 		getMerchantRegistrationStatusDetails.setBusinessOriginID(businessOriginID);
 		getMerchantRegistrationStatusDetails.setMerchantID(merchantId);
-		getMerchantRegistrationStatusDetails.setToken(signatureHandler.createMerchantRegistrationToken(businessOriginID, projectId, secretKey));
+		getMerchantRegistrationStatusDetails.setToken(signatureHandler.createMerchantRegistrationToken(businessOriginID, merchantId, secretKey));
 
 		return getMerchantRegistrationStatusDetails;
 	}
