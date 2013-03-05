@@ -39,7 +39,7 @@ public class SignatureHandler {
 	}
 
 	/**
-	 * HEX(SHA1($businessOriginID + "::" + $merchantID + "::" + $sharedSecret + "::" + $timestamp)) with $timestamp being dateTimeWithFormat('yyyyMMddHHmmss') in UTC
+	 * $timestamp + "::" + HEX(SHA1($businessOriginID + "::" + $merchantID + "::" + $sharedSecret + "::" + $timestamp)) with $timestamp being dateTimeWithFormat('yyyyMMddHHmmss') in UTC
 	 * 
 	 * Creates a valid token, for pay port authentication, based on the given input.
 	 * 
@@ -54,7 +54,7 @@ public class SignatureHandler {
 		Calendar calendar = Calendar.getInstance(utcTimeZone);
 		final String timestamp = dateFormat.format(calendar.getTime());
 		final String toBeHashed = businessOriginID + "::" + merchantID + "::" + sharedSecret + "::" + timestamp;
-		return hash(toBeHashed);
+		return timestamp + "::" + hash(toBeHashed);
 	}
 
 	/**
