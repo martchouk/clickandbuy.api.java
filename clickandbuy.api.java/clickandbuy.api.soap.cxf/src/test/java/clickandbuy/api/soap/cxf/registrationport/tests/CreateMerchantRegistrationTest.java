@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import clickandbuy.api.soap.cxf.registrationport.parent.RegistrationPortParentTest;
+
 import com.clickandbuy.api.soap.cxf.CreateMerchantRegistrationDetails;
 import com.clickandbuy.api.soap.cxf.CreateMerchantRegistrationRequest;
 import com.clickandbuy.api.soap.cxf.CreateMerchantRegistrationResponse;
@@ -43,8 +45,8 @@ public class CreateMerchantRegistrationTest extends RegistrationPortParentTest {
 		} catch (ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
-		
-		//TODO finish test logic
+
+		// TODO finish test logic
 	}
 
 	/**

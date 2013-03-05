@@ -14,8 +14,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.clickandbuy.api.soap.cxf.AccountingDocumentType;
-import com.clickandbuy.api.soap.cxf.AccountingFileType;
+import clickandbuy.api.soap.cxf.accountingport.parent.AccountingPortParentTest;
+
 import com.clickandbuy.api.soap.cxf.DateRange;
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 import com.clickandbuy.api.soap.cxf.GetAccountingDocumentDetails;
@@ -34,33 +34,33 @@ import com.clickandbuy.api.util.auth.CabApiUniqueDateFormat;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 
-	/** Test data */	
+	/** Test data */
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.dateRange.after}")
-	private String dateRangeAfter;
-	
+	private String	dateRangeAfter;
+
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.dateRange.before}")
-	private String dateRangeBefore;
-	
+	private String	dateRangeBefore;
+
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.inteRange.from}")
-	private Integer intRangeFrom;
-	
+	private Integer	intRangeFrom;
+
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.intRange.until}")
-	private Integer intRangeUntil;
+	private Integer	intRangeUntil;
 
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.documentType}")
-	private String accountingDocumentType;
-	
+	private String	accountingDocumentType;
+
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.fileName}")
-	private String fileName;
-	
+	private String	fileName;
+
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.fileType}")
-	private String accountingFileType;
-	
+	private String	accountingFileType;
+
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.pagingSetting.maxResults}")
-	private Integer maxResults;
+	private Integer	maxResults;
 
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.pagingSetting.skip}")
-	private Integer skip;	
+	private Integer	skip;
 
 	@Before
 	public void setUp() throws Exception {
@@ -69,8 +69,9 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 
 	/**
 	 * Test the GetAccountingDocuments
-	 * @throws ParseException 
-	 * @throws DatatypeConfigurationException 
+	 * 
+	 * @throws ParseException
+	 * @throws DatatypeConfigurationException
 	 */
 	@Test
 	public void testGetAccountingDocuments() throws DatatypeConfigurationException, ParseException {
@@ -93,8 +94,8 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 
 	/**
 	 * @return
-	 * @throws DatatypeConfigurationException 
-	 * @throws ParseException 
+	 * @throws DatatypeConfigurationException
+	 * @throws ParseException
 	 */
 	public GetAccountingDocumentDetails prepareGetAccountingDocumentDetails() throws DatatypeConfigurationException, ParseException {
 		GetAccountingDocumentDetails getAccountingDocumentDetails = new GetAccountingDocumentDetails();
@@ -104,30 +105,30 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 		final DateRange dateRange = new DateRange();
 		final long dateRAfter = CabApiUniqueDateFormat.getDayDateFormatter().parse(dateRangeAfter.trim()).getTime();
 		final long dateRBefore = CabApiUniqueDateFormat.getDayDateFormatter().parse(dateRangeBefore.trim()).getTime();
-		
+
 		final GregorianCalendar gregory = new GregorianCalendar();
 		gregory.setTime(new Date(dateRAfter));
 		final XMLGregorianCalendar beginningDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(gregory);
-		
+
 		gregory.setTime(new Date(dateRBefore));
 		final XMLGregorianCalendar endingDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(gregory);
-		
+
 		dateRange.setAfter(beginningDate);
 		dateRange.setBefore(endingDate);
-		
+
 		final IntRange intRange = new IntRange();
 		intRange.setFrom(intRangeFrom);
 		intRange.setUntil(intRangeUntil);
 
 		PagingSetting pagingSetting = new PagingSetting();
 		pagingSetting.setMaxResults(maxResults);
-		//pagingSetting.setSkip(skip);
+		// pagingSetting.setSkip(skip);
 
 		getAccountingDocumentDetails.setDate(dateRange);
 		getAccountingDocumentDetails.setDocumentNumber(intRange);
-		//getAccountingDocumentDetails.setDocumentType(accountingDocumentType);
-		//getAccountingDocumentDetails.setFileName(fileName);
-		//getAccountingDocumentDetails.setFileType(accountingFileType);
+		// getAccountingDocumentDetails.setDocumentType(accountingDocumentType);
+		// getAccountingDocumentDetails.setFileName(fileName);
+		// getAccountingDocumentDetails.setFileType(accountingFileType);
 		getAccountingDocumentDetails.setPaging(pagingSetting);
 
 		return getAccountingDocumentDetails;

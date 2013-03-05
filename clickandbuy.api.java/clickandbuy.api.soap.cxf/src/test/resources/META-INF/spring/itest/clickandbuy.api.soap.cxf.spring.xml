@@ -17,7 +17,7 @@
 			http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
 			
 	<context:annotation-config/>
-	<context:component-scan base-package="clickandbuy.api"/>
+	<context:component-scan base-package="com.clickandbuy.api"/>
 	
 	<cxf:bus>
 	   <cxf:features>
@@ -103,5 +103,9 @@
 		<jaxws:client id="clickandbuyApiClientReg"
                   serviceClass="com.clickandbuy.api.soap.cxf.RegistrationPortType"
                   address="${clickandbuy.api.endpoint.soap}"/>
+        <bean id="accountingPortDataSupplier" class="clickandbuy.api.soap.cxf.accountingport.data.AccountingPortTestDataSupplier"/>
+        <bean id="feeCalculatorPortDataSupplier" class="clickandbuy.api.soap.cxf.feecalculator.data.FeeCalculatorPortTestDataSupplier"/>
+        <bean id="payPortDataSupplier" class="clickandbuy.api.soap.cxf.payport.data.PayPortTestDataSupplier"/>
+        <bean id="registrationPortDataSupplier" class="clickandbuy.api.soap.cxf.registrationport.data.RegistrationPortTestDataSupplier"/>
 	</beans>	
 </beans>

@@ -6,6 +6,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import clickandbuy.api.soap.cxf.registrationport.parent.RegistrationPortParentTest;
+
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 import com.clickandbuy.api.soap.cxf.GetMerchantRegistrationStatusDetails;
 import com.clickandbuy.api.soap.cxf.GetMerchantRegistrationStatusRequest;
@@ -24,11 +26,11 @@ public class GetMerchantRegistrationStatusTest extends RegistrationPortParentTes
 	/** Test data */
 	@Value("${merchantId}")
 	private long	merchantId;
-	
+
 	/** Test data */
 	@Value("${projectId}")
 	private long	businessOriginId;
-	
+
 	@Value("${secretKey}")
 	private String	secretKey;
 
@@ -53,8 +55,8 @@ public class GetMerchantRegistrationStatusTest extends RegistrationPortParentTes
 		} catch (ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
-		
-		//TODO finish test logic
+
+		// TODO finish test logic
 	}
 
 	/**
@@ -64,7 +66,7 @@ public class GetMerchantRegistrationStatusTest extends RegistrationPortParentTes
 		GetMerchantRegistrationStatusDetails getMerchantRegistrationStatusDetails = new GetMerchantRegistrationStatusDetails();
 
 		// TODO fill in necessary test data
-		
+
 		getMerchantRegistrationStatusDetails.setBusinessOriginID(businessOriginId + "");
 		getMerchantRegistrationStatusDetails.setMerchantID(merchantId);
 		getMerchantRegistrationStatusDetails.setToken(getAuthenticationToken(businessOriginId, secretKey));

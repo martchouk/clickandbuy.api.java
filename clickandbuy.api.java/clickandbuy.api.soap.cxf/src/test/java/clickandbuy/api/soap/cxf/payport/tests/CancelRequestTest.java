@@ -1,18 +1,28 @@
+/**
+ * 
+ */
 package clickandbuy.api.soap.cxf.payport.tests;
 
 import static clickandbuy.api.soap.cxf.util.TestUtil.prepareCancelRequestDetails;
+import static clickandbuy.api.soap.cxf.util.TestUtil.prepareMoney;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.clickandbuy.api.soap.cxf.CancelMode;
+import clickandbuy.api.soap.cxf.payport.data.PayPortTestDataSupplier;
+import clickandbuy.api.soap.cxf.payport.parent.PayPortParentTest;
+
 import com.clickandbuy.api.soap.cxf.CancelRequestRequest;
 import com.clickandbuy.api.soap.cxf.CancelRequestResponse;
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
+import com.clickandbuy.api.soap.cxf.OrderDetailItemList;
+import com.clickandbuy.api.soap.cxf.OrderDetails;
+import com.clickandbuy.api.soap.cxf.PayRequestDetails;
+import com.clickandbuy.api.soap.cxf.PayRequestRequest;
+import com.clickandbuy.api.soap.cxf.PayRequestResponse;
 import com.clickandbuy.api.soap.cxf.TransactionIDStatus;
 
 /**
@@ -27,24 +37,18 @@ public class CancelRequestTest extends PayPortParentTest {
 
 	/** Test data */
 
-	@Value("${payPort.cancelRequest.cancelIdentifier.recurringPaymentAuthorizationID}")
-	private Long			recurringPaymentAuthorizationID;
+	private Long			transactionID					= null;
 
-	@Value("${payPort.cancelRequest.cancelIdentifier.transactionID}")
-	// may not be required anymore as it is taken from payRequestTest
-	private Long			transactionID;
-
-	@Value("${payPort.cancelRequest.cancelMode}")
-	private CancelMode		cancelMode;
+	private Long			recurringPaymentAuthorizationID	= null;
 
 	@Autowired
-	private PayRequestTest	payRequestTest;
+	PayPortTestDataSupplier	payPortTestDataSupplier;
 
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
 
-		transactionID = payRequestTest.testPayRequest();
+		transactionID = doPayRequest();
 	}
 
 	/**
@@ -56,7 +60,7 @@ public class CancelRequestTest extends PayPortParentTest {
 
 		CancelRequestRequest cancelRequestRequest = new CancelRequestRequest();
 		cancelRequestRequest.setAuthentication(prepareAuthentication(merchantId, projectId, secretKey));
-		cancelRequestRequest.setDetails(prepareCancelRequestDetails(recurringPaymentAuthorizationID, transactionID, cancelMode));
+		cancelRequestRequest.setDetails(prepareCancelRequestDetails(recurringPaymentAuthorizationID, transactionID, payPortTestDataSupplier.getCancelRequestCancelMode()));
 
 		try {
 			cancelRequestResponse = payPortType.cancelRequest(cancelRequestRequest);
@@ -67,6 +71,58 @@ public class CancelRequestTest extends PayPortParentTest {
 		}
 
 		// TODO finish test logic
+	}
+
+	public long doPayRequest() {
+		Long payRequestTransactionID = null;
+		PayRequestResponse payRequestResponse = null;
+
+		PayRequestRequest payRequestRequest = new PayRequestRequest();
+		payRequestRequest.setAuthentication(prepareAuthentication(merchantId, projectId, secretKey));
+		payRequestRequest.setDetails(preparePayRequestDetails());
+
+		try {
+			payRequestResponse = payPortType.payRequest(payRequestRequest);
+			payRequestTransactionID = payRequestResponse.getTransaction().getTransactionID();
+			logger.debug("Created transaction with Id: " + payRequestTransactionID);
+		} catch (ErrorDetails_Exception errorDetails_Exception) {
+			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+		}
+
+		return payRequestTransactionID;
+	}
+
+	/**
+	 * Prepares the soap {@link PayRequest_Request} object from given parameters
+	 * 
+	 * @param payRequestFormBean
+	 * @return T_PayRequest_Details
+	 * @throws PayServiceException
+	 */
+	private PayRequestDetails preparePayRequestDetails() {
+		PayRequestDetails payRequestDetails = new PayRequestDetails();
+
+		// Order Details
+		OrderDetails order = new OrderDetails();
+		order.setItemList(new OrderDetailItemList());
+		order.setText(payPortTestDataSupplier.getPayRequestText());
+
+		// Request Details
+		payRequestDetails.setAmount(prepareMoney(payPortTestDataSupplier.getPayRequestAmount(), payPortTestDataSupplier.getPayRequestCurrency()));
+		payRequestDetails.setAuthExpiration(payPortTestDataSupplier.getPayRequestAuthExpiration());
+		payRequestDetails.setBasketRisk(payPortTestDataSupplier.getPayRequestBasketRisk());
+		payRequestDetails.setClientRisk(payPortTestDataSupplier.getPayRequestClientRisk());
+		payRequestDetails.setConfirmExpiration(payPortTestDataSupplier.getPayRequestConfirmExpiration());
+		payRequestDetails.setConsumerCountry(payPortTestDataSupplier.getPayRequestConsumerNation());
+		payRequestDetails.setConsumerIPAddress(payPortTestDataSupplier.getPayRequestConsumerIPAddress());
+		payRequestDetails.setConsumerLanguage(payPortTestDataSupplier.getPayRequestConsumerLanguage());
+		payRequestDetails.setExternalID(payPortTestDataSupplier.getPayRequestExternalId());
+		payRequestDetails.setFailureURL(payPortTestDataSupplier.getPayRequestFailureURI());
+		payRequestDetails.setOrderDetails(order);
+		payRequestDetails.setSuccessExpiration(payPortTestDataSupplier.getPayRequestSuccessExpiration());
+		payRequestDetails.setSuccessURL(payPortTestDataSupplier.getPayRequestSuccessURI());
+
+		return payRequestDetails;
 	}
 
 	public void display(TransactionIDStatus transactionIDStatus) {

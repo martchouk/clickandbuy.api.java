@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import clickandbuy.api.soap.cxf.feecalculator.parent.FeeCalculatorPortParentTest;
+
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesDetails;
 import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesRequest;

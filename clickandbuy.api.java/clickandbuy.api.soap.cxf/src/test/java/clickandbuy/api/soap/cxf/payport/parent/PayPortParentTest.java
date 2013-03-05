@@ -1,4 +1,7 @@
-package clickandbuy.api.soap.cxf.feecalculator.tests;
+/**
+ * 
+ */
+package clickandbuy.api.soap.cxf.payport.parent;
 
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
@@ -8,28 +11,28 @@ import org.springframework.beans.factory.annotation.Value;
 
 import clickandbuy.api.soap.cxf.parent.ParentTest;
 
-import com.clickandbuy.api.soap.cxf.FeeCalculatorPortType;
+import com.clickandbuy.api.soap.cxf.PayPortType;
 
 /**
  * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
  */
-public class FeeCalculatorPortParentTest extends ParentTest {
-	public static final Logger		logger	= Logger.getLogger(FeeCalculatorPortParentTest.class);
+public class PayPortParentTest extends ParentTest {
+	public static final Logger	logger	= Logger.getLogger(PayPortParentTest.class);
 
 	@Value("${acceptSelfSignedCertificates}")
-	boolean							acceptSelfSignedCertificates;
+	boolean						acceptSelfSignedCertificates;
 
 	@Autowired
-	public FeeCalculatorPortType	feeCalculatorPortType;
+	public PayPortType			payPortType;
 
 	/**
 	 * 
 	 */
 	public void configureCertificatesPolicy() {
 		if (acceptSelfSignedCertificates) {
-			Client proxy = ClientProxy.getClient(feeCalculatorPortType);
+			Client proxy = ClientProxy.getClient(payPortType);
 			configureCertificatesPolicy(proxy);
 		}
 	}

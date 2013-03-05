@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package clickandbuy.api.soap.cxf.payport.tests;
 
 import static clickandbuy.api.soap.cxf.util.TestUtil.prepareCreditRecipientIdentifier;
@@ -11,6 +14,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import clickandbuy.api.soap.cxf.payport.parent.PayPortParentTest;
 
 import com.clickandbuy.api.soap.cxf.CreditRequestDetails;
 import com.clickandbuy.api.soap.cxf.CreditRequestRequest;

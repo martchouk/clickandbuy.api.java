@@ -1,9 +1,14 @@
+/**
+ * 
+ */
 package clickandbuy.api.soap.cxf.payport.tests;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import clickandbuy.api.soap.cxf.payport.parent.PayPortParentTest;
 
 import com.clickandbuy.api.soap.cxf.CreateBatchDetails;
 import com.clickandbuy.api.soap.cxf.CreateBatchRequest;

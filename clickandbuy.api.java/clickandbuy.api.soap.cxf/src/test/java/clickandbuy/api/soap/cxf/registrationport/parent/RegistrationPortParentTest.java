@@ -1,4 +1,4 @@
-package clickandbuy.api.soap.cxf.registrationport.tests;
+package clickandbuy.api.soap.cxf.registrationport.parent;
 
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;

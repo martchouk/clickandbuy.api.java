@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package clickandbuy.api.soap.cxf.payport.suite;
 
 import org.junit.runner.RunWith;

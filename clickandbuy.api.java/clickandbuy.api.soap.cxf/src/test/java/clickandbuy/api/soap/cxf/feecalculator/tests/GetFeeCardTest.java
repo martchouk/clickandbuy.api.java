@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import clickandbuy.api.soap.cxf.feecalculator.parent.FeeCalculatorPortParentTest;
+
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 import com.clickandbuy.api.soap.cxf.GetFeeCardDetails;
 import com.clickandbuy.api.soap.cxf.GetFeeCardRequest;
@@ -44,8 +46,8 @@ public class GetFeeCardTest extends FeeCalculatorPortParentTest {
 		} catch (ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
-		
-		//TODO finish test logic
+
+		// TODO finish test logic
 	}
 
 	/**
@@ -54,8 +56,8 @@ public class GetFeeCardTest extends FeeCalculatorPortParentTest {
 	public GetFeeCardDetails prepareGetFeeCardDetails() {
 		GetFeeCardDetails getFeeCardDetails = new GetFeeCardDetails();
 
-		//TODO fill in necessary test data
-		
+		// TODO fill in necessary test data
+
 		// getFeeCardDetails.setAverageTicketSize(value);
 		// getFeeCardDetails.setBusinessOriginID(value);
 		// getFeeCardDetails.setCategoryID(value);

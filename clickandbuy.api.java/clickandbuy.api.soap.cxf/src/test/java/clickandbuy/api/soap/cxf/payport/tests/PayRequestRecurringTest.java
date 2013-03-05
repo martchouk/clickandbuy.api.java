@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package clickandbuy.api.soap.cxf.payport.tests;
 
 import org.junit.Before;
@@ -5,6 +8,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import clickandbuy.api.soap.cxf.payport.parent.PayPortParentTest;
 
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 import com.clickandbuy.api.soap.cxf.PayRequestRecurringDetails;
@@ -37,9 +42,6 @@ public class PayRequestRecurringTest extends PayPortParentTest {
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
-
-		externalId = externalId + System.nanoTime() + "_";
-		logger.debug("***externalId:" + externalId);
 	}
 
 	/**
