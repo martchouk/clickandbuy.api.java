@@ -50,7 +50,7 @@ public class CreateBatchTest extends PayPortParentTest {
 		CreateBatchResponse createBatchResponse = null;
 
 		CreateBatchRequest createBatchRequest = new CreateBatchRequest();
-		createBatchRequest.setAuthentication(prepareAuthentication(merchantId, projectId, secretKey));
+		createBatchRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		createBatchRequest.setDetails(prepareCreateBatchDetails());
 
 		try {

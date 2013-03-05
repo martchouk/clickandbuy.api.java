@@ -56,7 +56,7 @@ public class PayRequestTest extends PayPortParentTest {
 		PayRequestResponse payRequestResponse = null;
 
 		PayRequestRequest payRequestRequest = new PayRequestRequest();
-		payRequestRequest.setAuthentication(prepareAuthentication(merchantId, projectId, secretKey));
+		payRequestRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		payRequestRequest.setDetails(preparePayRequestDetails());
 
 		try {

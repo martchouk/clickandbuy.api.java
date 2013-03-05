@@ -55,7 +55,7 @@ public class CancelBatchTest extends PayPortParentTest {
 		CancelBatchResponse cancelBatchResponse = new CancelBatchResponse();
 
 		CancelBatchRequest cancelBatchRequest = new CancelBatchRequest();
-		cancelBatchRequest.setAuthentication(prepareAuthentication(merchantId, projectId, secretKey));
+		cancelBatchRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		cancelBatchRequest.setDetails(prepareCancelBatchDetails());
 
 		try {
@@ -72,7 +72,7 @@ public class CancelBatchTest extends PayPortParentTest {
 		CreateBatchResponse createBatchResponse = null;
 
 		CreateBatchRequest createBatchRequest = new CreateBatchRequest();
-		createBatchRequest.setAuthentication(prepareAuthentication(merchantId, projectId, secretKey));
+		createBatchRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		createBatchRequest.setDetails(prepareCreateBatchDetails());
 
 		try {

@@ -64,7 +64,7 @@ public class CancelRequestTest extends PayPortParentTest {
 		CancelRequestResponse cancelRequestResponse = null;
 
 		CancelRequestRequest cancelRequestRequest = new CancelRequestRequest();
-		cancelRequestRequest.setAuthentication(prepareAuthentication(merchantId, projectId, secretKey));
+		cancelRequestRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		cancelRequestRequest.setDetails(prepareCancelRequestDetails(recurringPaymentAuthorizationID, transactionID, payPortTestDataSupplier.getCancelRequestCancelMode()));
 
 		try {
@@ -88,7 +88,7 @@ public class CancelRequestTest extends PayPortParentTest {
 		PayRequestResponse payRequestResponse = null;
 
 		PayRequestRequest payRequestRequest = new PayRequestRequest();
-		payRequestRequest.setAuthentication(prepareAuthentication(merchantId, projectId, secretKey));
+		payRequestRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		payRequestRequest.setDetails(preparePayRequestDetails());
 
 		try {

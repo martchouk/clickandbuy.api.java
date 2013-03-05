@@ -29,7 +29,7 @@ public class ParentTest {
 	public static final Logger	logger	= Logger.getLogger(ParentTest.class);
 
 	@Autowired
-	private SignatureHandler	signatureHandler;
+	protected SignatureHandler	signatureHandler;
 	
 	@Value("${merchantId}")
 	protected long	merchantId;
@@ -39,6 +39,9 @@ public class ParentTest {
 
 	@Value("${secretKey}")
 	protected String	secretKey;
+	
+	@Value("${businessOriginID}")
+	protected String	businessOriginID;
 
 	/**
 	 * 
@@ -57,26 +60,14 @@ public class ParentTest {
 	 * @param authenticationBean
 	 * @return Authentication
 	 */
-	public Authentication prepareAuthentication(final long merchantId, final long projectId, final String secretKey) {
+	public Authentication prepareAuthenticationBasedOnProjectID() {
 		Authentication merchantAuth = new Authentication();
 		merchantAuth.setProjectID(nullToZero(projectId));
 		merchantAuth.setMerchantID(nullToZero(merchantId));
-		merchantAuth.setToken(signatureHandler.createToken(projectId, secretKey));
+		merchantAuth.setToken(signatureHandler.createTokenForPayPort(projectId, secretKey));
 		return merchantAuth;
 	}
 	
-	/**
-	 * Prepares the soap {@link Authentication} object from given parameters
-	 * 
-	 * @param authenticationBean
-	 * @return Authentication
-	 */
-	public String getAuthenticationToken(final long projectId, final String secretKey) {
-		return signatureHandler.createToken(projectId, secretKey);
-	}
-	
-	
-
 	/**
 	 * @param num
 	 * @return

@@ -52,7 +52,7 @@ public class PayRequestRecurringTest extends PayPortParentTest {
 		PayRequestRecurringResponse payRequestRecurringResponse = null;
 
 		PayRequestRecurringRequest payRequestRecurringRequest = new PayRequestRecurringRequest();
-		payRequestRecurringRequest.setAuthentication(prepareAuthentication(merchantId, projectId, secretKey));
+		payRequestRecurringRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		payRequestRecurringRequest.setDetails(preparePayRequestRecurringDetails());
 
 		try {

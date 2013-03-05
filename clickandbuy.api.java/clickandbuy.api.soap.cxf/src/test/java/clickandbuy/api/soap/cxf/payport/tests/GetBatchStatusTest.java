@@ -40,7 +40,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 		GetBatchStatusResponse getBatchStatusResponse = null;
 
 		GetBatchStatusRequest getBatchStatusRequest = new GetBatchStatusRequest();
-		getBatchStatusRequest.setAuthentication(prepareAuthentication(merchantId, projectId, secretKey));
+		getBatchStatusRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		getBatchStatusRequest.setDetails(prepareGetBatchStatusDetails());
 
 		try {

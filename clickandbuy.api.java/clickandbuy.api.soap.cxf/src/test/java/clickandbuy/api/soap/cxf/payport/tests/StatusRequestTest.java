@@ -40,7 +40,7 @@ public class StatusRequestTest extends PayPortParentTest {
 		StatusRequestResponse statusRequestResponse = null;
 
 		StatusRequestRequest statusRequestRequest = new StatusRequestRequest();
-		statusRequestRequest.setAuthentication(prepareAuthentication(merchantId, projectId, secretKey));
+		statusRequestRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		statusRequestRequest.setDetails(prepareStatusRequestDetails());
 
 		try {

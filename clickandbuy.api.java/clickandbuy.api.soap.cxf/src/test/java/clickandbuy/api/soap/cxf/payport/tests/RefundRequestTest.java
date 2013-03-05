@@ -40,7 +40,7 @@ public class RefundRequestTest extends PayPortParentTest {
 		RefundRequestResponse refundRequestResponse = null;
 
 		RefundRequestRequest refundRequestRequest = new RefundRequestRequest();
-		refundRequestRequest.setAuthentication(prepareAuthentication(merchantId, projectId, secretKey));
+		refundRequestRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		refundRequestRequest.setDetails(prepareRefundRequestDetails());
 
 		try {

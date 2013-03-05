@@ -23,17 +23,6 @@ import com.clickandbuy.api.soap.cxf.GetMerchantRegistrationStatusResponse;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class GetMerchantRegistrationStatusTest extends RegistrationPortParentTest {
 
-	/** Test data */
-	@Value("${merchantId}")
-	private long	merchantId;
-
-	/** Test data */
-	@Value("${projectId}")
-	private long	businessOriginId;
-
-	@Value("${secretKey}")
-	private String	secretKey;
-
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
@@ -67,9 +56,9 @@ public class GetMerchantRegistrationStatusTest extends RegistrationPortParentTes
 
 		// TODO fill in necessary test data
 
-		getMerchantRegistrationStatusDetails.setBusinessOriginID(businessOriginId + "");
+		getMerchantRegistrationStatusDetails.setBusinessOriginID(businessOriginID);
 		getMerchantRegistrationStatusDetails.setMerchantID(merchantId);
-		getMerchantRegistrationStatusDetails.setToken(getAuthenticationToken(businessOriginId, secretKey));
+		getMerchantRegistrationStatusDetails.setToken(signatureHandler.createMerchantRegistrationToken(businessOriginID, projectId, secretKey));
 
 		return getMerchantRegistrationStatusDetails;
 	}

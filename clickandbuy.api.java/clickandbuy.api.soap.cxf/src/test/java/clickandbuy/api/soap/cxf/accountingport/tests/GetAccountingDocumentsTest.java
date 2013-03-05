@@ -49,7 +49,7 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 		GetAccountingDocumentsResponse getAccountingDocumentsResponse = null;
 
 		GetAccountingDocumentsRequest getAccountingDocumentsRequest = new GetAccountingDocumentsRequest();
-		getAccountingDocumentsRequest.setAuthentication(prepareAuthentication(merchantId, projectId, secretKey));
+		getAccountingDocumentsRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		getAccountingDocumentsRequest.setDetails(prepareGetAccountingDocumentDetails());
 
 		try {

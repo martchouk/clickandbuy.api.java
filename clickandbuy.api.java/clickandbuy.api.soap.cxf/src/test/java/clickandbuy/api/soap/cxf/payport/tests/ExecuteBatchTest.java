@@ -40,7 +40,7 @@ public class ExecuteBatchTest extends PayPortParentTest {
 		ExecuteBatchResponse executeBatchResponse = null;
 
 		ExecuteBatchRequest executeBatchRequest = new ExecuteBatchRequest();
-		executeBatchRequest.setAuthentication(prepareAuthentication(merchantId, projectId, secretKey));
+		executeBatchRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		executeBatchRequest.setDetails(prepareExecuteBatchDetails());
 
 		try {

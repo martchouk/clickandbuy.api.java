@@ -84,7 +84,7 @@ public class CreditRequestTest extends PayPortParentTest {
 		CreditRequestResponse creditRequestResponse = null;
 
 		CreditRequestRequest creditRequestRequest = new CreditRequestRequest();
-		creditRequestRequest.setAuthentication(prepareAuthentication(merchantId, projectId, secretKey));
+		creditRequestRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		creditRequestRequest.setDetails(prepareCreditRequestDetails());
 
 		try {

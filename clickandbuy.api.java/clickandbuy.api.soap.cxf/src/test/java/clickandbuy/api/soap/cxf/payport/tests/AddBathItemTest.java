@@ -40,7 +40,7 @@ public class AddBathItemTest extends PayPortParentTest {
 		AddBatchItemResponse addBatchItemResponse = null;
 
 		AddBatchItemRequest addBatchItemRequest = new AddBatchItemRequest();
-		addBatchItemRequest.setAuthentication(prepareAuthentication(merchantId, projectId, secretKey));
+		addBatchItemRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		addBatchItemRequest.setDetails(prepareAddBatchItemDetails());
 
 		try {
