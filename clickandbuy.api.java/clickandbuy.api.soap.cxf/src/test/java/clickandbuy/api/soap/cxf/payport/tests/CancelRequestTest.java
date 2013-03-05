@@ -74,8 +74,6 @@ public class CancelRequestTest extends PayPortParentTest {
 		} catch (ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
-
-		// TODO finish test logic
 	}
 
 	/**
