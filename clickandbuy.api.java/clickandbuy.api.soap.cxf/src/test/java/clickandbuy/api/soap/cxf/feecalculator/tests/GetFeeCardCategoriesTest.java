@@ -57,7 +57,6 @@ public class GetFeeCardCategoriesTest extends FeeCalculatorPortParentTest {
 	public GetFeeCardCategoriesDetails prepareGetFeeCardCategoriesDetails() {
 		final GetFeeCardCategoriesDetails getFeeCardCategoriesDetails = new GetFeeCardCategoriesDetails();
 		getFeeCardCategoriesDetails.setBusinessOriginID(businessOriginID);
-
 		return getFeeCardCategoriesDetails;
 	}
 }

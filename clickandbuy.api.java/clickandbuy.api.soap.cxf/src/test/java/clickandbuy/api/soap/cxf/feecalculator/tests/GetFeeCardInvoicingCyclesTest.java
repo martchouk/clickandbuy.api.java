@@ -1,5 +1,7 @@
 package clickandbuy.api.soap.cxf.feecalculator.tests;
 
+import junit.framework.Assert;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +10,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import clickandbuy.api.soap.cxf.feecalculator.parent.FeeCalculatorPortParentTest;
 
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
+import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesDetails;
+import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesRequest;
+import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesResponse;
 import com.clickandbuy.api.soap.cxf.GetFeeCardInvoicingCyclesDetails;
 import com.clickandbuy.api.soap.cxf.GetFeeCardInvoicingCyclesRequest;
 import com.clickandbuy.api.soap.cxf.GetFeeCardInvoicingCyclesResponse;
@@ -22,9 +27,6 @@ import com.clickandbuy.api.soap.cxf.GetFeeCardInvoicingCyclesResponse;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class GetFeeCardInvoicingCyclesTest extends FeeCalculatorPortParentTest {
 
-	/** Test data */
-	// TODO inject necessary test data
-
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
@@ -32,35 +34,72 @@ public class GetFeeCardInvoicingCyclesTest extends FeeCalculatorPortParentTest {
 
 	/**
 	 * Test the GetFeeCardInvoicingCycles
+	 * 
+	 * @throws ErrorDetails_Exception
 	 */
 	@Test
-	public void testGetFeeCardInvoicingCycles() {
-		GetFeeCardInvoicingCyclesResponse getFeeCardInvoicingCyclesResponse = null;
+	public void testGetFeeCardInvoicingCycles() throws ErrorDetails_Exception {
+		// prepare fee card categories request.
+		GetFeeCardCategoriesResponse getFeeCardCategoriesResponse = null;
+		final GetFeeCardCategoriesRequest feeCardCategories = new GetFeeCardCategoriesRequest();
+		feeCardCategories.setDetails(prepareGetFeeCardCategoriesDetails());
 
-		GetFeeCardInvoicingCyclesRequest getFeeCardInvoicingCyclesRequest = new GetFeeCardInvoicingCyclesRequest();
-		getFeeCardInvoicingCyclesRequest.setDetails(prepareGetFeeCardInvoicingCyclesDetails());
+		// get the fee card categories, to be used further for fee card request.
+		try {
+			getFeeCardCategoriesResponse = feeCalculatorPortType.getFeeCardCategories(feeCardCategories);
+			logger.debug("Created transaction with Id: " + getFeeCardCategoriesResponse.getCategoryList());
+			logger.debug("Found the following categories " + getFeeCardCategoriesResponse.getCategoryList().getCategory());
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
+			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
+		}
+
+		// we need to be sure we have some categories.
+		Assert.assertNotNull(getFeeCardCategoriesResponse);
+		Assert.assertNotNull(getFeeCardCategoriesResponse.getCategoryList());
+		Assert.assertNotNull(getFeeCardCategoriesResponse.getCategoryList().getCategory());
+		Assert.assertTrue(getFeeCardCategoriesResponse.getCategoryList().getCategory().size() > 0);
+
+		GetFeeCardInvoicingCyclesResponse getFeeCardInvoicingCyclesResponse = null;
+		final GetFeeCardInvoicingCyclesRequest getFeeCardInvoicingCyclesRequest = new GetFeeCardInvoicingCyclesRequest();
+		getFeeCardInvoicingCyclesRequest.setDetails(prepareGetFeeCardInvoicingCyclesDetails(getFeeCardCategoriesResponse));
 
 		try {
 			getFeeCardInvoicingCyclesResponse = feeCalculatorPortType.getFeeCardInvoicingCycles(getFeeCardInvoicingCyclesRequest);
 			logger.debug("Created transaction with Id: " + getFeeCardInvoicingCyclesResponse.getInvoicingCycleList());
-		} catch (ErrorDetails_Exception errorDetails_Exception) {
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
 		}
 
-		// TODO finish test logic
+		// we need to be sure we have some categories.
+		Assert.assertNotNull(getFeeCardInvoicingCyclesResponse);
+		Assert.assertNotNull(getFeeCardInvoicingCyclesResponse.getInvoicingCycleList());
+		Assert.assertNotNull(getFeeCardInvoicingCyclesResponse.getInvoicingCycleList().getInvoicingCycle());
+		Assert.assertTrue(getFeeCardInvoicingCyclesResponse.getInvoicingCycleList().getInvoicingCycle().size() > 0);
+
 	}
 
 	/**
+	 * @param getFeeCardCategoriesResponse
 	 * @return
 	 */
-	public GetFeeCardInvoicingCyclesDetails prepareGetFeeCardInvoicingCyclesDetails() {
-		GetFeeCardInvoicingCyclesDetails getFeeCardInvoicingCyclesDetails = new GetFeeCardInvoicingCyclesDetails();
-
-		// TODO fill in necessary test data
-
-		// getFeeCardInvoicingCyclesDetails.setBusinessOriginID(value);
-		// getFeeCardInvoicingCyclesDetails.setCategoryID(value);
-
+	public GetFeeCardInvoicingCyclesDetails prepareGetFeeCardInvoicingCyclesDetails(final GetFeeCardCategoriesResponse getFeeCardCategoriesResponse) {
+		final GetFeeCardInvoicingCyclesDetails getFeeCardInvoicingCyclesDetails = new GetFeeCardInvoicingCyclesDetails();
+		getFeeCardInvoicingCyclesDetails.setBusinessOriginID(businessOriginID);
+		// TODO : make this more nice, get category name from test data setup.
+		getFeeCardInvoicingCyclesDetails.setCategoryID(getFeeCardCategoriesResponse.getCategoryList().getCategory().get(0).getCategoryID());
 		return getFeeCardInvoicingCyclesDetails;
+	}
+
+	/**
+	 * request builder method for retrieving fee card categories.
+	 * 
+	 * @return
+	 */
+	public GetFeeCardCategoriesDetails prepareGetFeeCardCategoriesDetails() {
+		final GetFeeCardCategoriesDetails getFeeCardCategoriesDetails = new GetFeeCardCategoriesDetails();
+		getFeeCardCategoriesDetails.setBusinessOriginID(businessOriginID);
+		return getFeeCardCategoriesDetails;
 	}
 }

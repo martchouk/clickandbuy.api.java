@@ -73,6 +73,7 @@ public class GetFeeCardTest extends FeeCalculatorPortParentTest {
 			logger.debug("Created transaction with Id: " + getFeeCardResponse.getCommissionList());
 		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
 		}
 
 		// we need to be sure we have some categories.

@@ -56,7 +56,6 @@ public class GetFeeCardCurrenciesTest extends FeeCalculatorPortParentTest {
 	public GetFeeCardCurrenciesDetails prepareGetFeeCardCurrenciesDetails() {
 		final GetFeeCardCurrenciesDetails getFeeCardCurrenciesDetails = new GetFeeCardCurrenciesDetails();
 		getFeeCardCurrenciesDetails.setBusinessOriginID(businessOriginID);
-
 		return getFeeCardCurrenciesDetails;
 	}
 }
