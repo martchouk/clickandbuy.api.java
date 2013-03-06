@@ -30,18 +30,21 @@ public class ParentTest {
 
 	@Autowired
 	protected SignatureHandler	signatureHandler;
-	
+
 	@Value("${merchantId}")
-	protected long	merchantId;
+	protected long				merchantId;
 
 	@Value("${projectId}")
-	protected long	projectId;
+	protected long				projectId;
 
 	@Value("${secretKey}")
-	protected String	secretKey;
-	
+	protected String			secretKey;
+
 	@Value("${businessOriginID}")
-	protected String	businessOriginID;
+	protected String			businessOriginID;
+
+	@Value("${externalId}")
+	protected String			externalId;
 
 	/**
 	 * 
@@ -67,7 +70,7 @@ public class ParentTest {
 		merchantAuth.setToken(signatureHandler.createTokenForPayPort(projectId, secretKey));
 		return merchantAuth;
 	}
-	
+
 	/**
 	 * @param num
 	 * @return

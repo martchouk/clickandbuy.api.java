@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.payport.data.PayPortTestDataSupplier;
@@ -51,11 +50,6 @@ public class GetBatchStatusTest extends PayPortParentTest {
 
 	private Long			batchItemID	= null;
 
-	/** Test data */
-
-	@Value("${externalId}")
-	String					externalId;
-
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
@@ -80,11 +74,9 @@ public class GetBatchStatusTest extends PayPortParentTest {
 
 		try {
 			getBatchStatusResponse = payPortType.getBatchStatus(getBatchStatusRequest);
-			
-			
-			
+
 			logger.debug("Batch with Batch ID: " + getBatchStatusResponse.getBatch().getBatchID() + " have status: " + getBatchStatusResponse.getBatch().getBatchStatus());
-			for (BatchItemIDStatus batchItemIDStatus : getBatchStatusResponse.getBatchItemList().getBatchItem()){
+			for (BatchItemIDStatus batchItemIDStatus : getBatchStatusResponse.getBatchItemList().getBatchItem()) {
 				logger.debug("Batch Item with Batch Item ID: " + batchItemIDStatus.getBatchItemID() + " have status: " + batchItemIDStatus.getBatchItemStatus());
 			}
 		} catch (ErrorDetails_Exception errorDetails_Exception) {

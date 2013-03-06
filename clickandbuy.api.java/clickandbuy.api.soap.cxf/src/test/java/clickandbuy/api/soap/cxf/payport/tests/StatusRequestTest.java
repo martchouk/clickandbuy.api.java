@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.payport.data.PayPortTestDataSupplier;
@@ -42,11 +41,6 @@ public class StatusRequestTest extends PayPortParentTest {
 	@Autowired
 	PayPortTestDataSupplier	payPortTestDataSupplier;
 
-	@Value("${externalId}")
-	String					externalId;
-
-	/** Test data */
-
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
@@ -70,11 +64,11 @@ public class StatusRequestTest extends PayPortParentTest {
 
 		try {
 			statusRequestResponse = payPortType.statusRequest(statusRequestRequest);
-			
-			for (TransactionIDStatus transactionIDStatus : statusRequestResponse.getTransactionList().getTransaction()){
+
+			for (TransactionIDStatus transactionIDStatus : statusRequestResponse.getTransactionList().getTransaction()) {
 				logger.debug("The transaction with ID: " + transactionID + " have the status: " + transactionIDStatus.getTransactionStatus());
 			}
-			
+
 		} catch (ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}

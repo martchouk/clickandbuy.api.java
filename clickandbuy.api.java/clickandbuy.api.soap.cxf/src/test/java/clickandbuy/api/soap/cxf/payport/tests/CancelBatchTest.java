@@ -6,7 +6,6 @@ package clickandbuy.api.soap.cxf.payport.tests;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.payport.parent.PayPortParentTest;
@@ -29,13 +28,7 @@ import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CancelBatchTest extends PayPortParentTest {
 
-	private Long					batchID	= null;
-
-	// @Autowired
-	// private PayPortTestDataSupplier payPortTestDataSupplier;
-
-	@Value("${externalId}")
-	String							externalId;
+	private Long	batchID	= null;
 
 	@Before
 	public void setUp() throws Exception {

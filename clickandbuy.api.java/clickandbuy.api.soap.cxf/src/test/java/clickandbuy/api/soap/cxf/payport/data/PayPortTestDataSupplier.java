@@ -40,6 +40,12 @@ public class PayPortTestDataSupplier {
 
 	/** PayRequestRecurring Test data */
 
+	@Value("${payPort.PayRequestRecurring.amount.amount}")
+	private BigDecimal	payRequestRecurringAmount;
+
+	@Value("${payPort.PayRequestRecurring.amount.currency}")
+	private String		payRequestRecurringCurrency;
+
 	/** PayRequest Test data */
 
 	@Value("${payPort.payRequest.amount.amout}")
@@ -80,6 +86,12 @@ public class PayPortTestDataSupplier {
 
 	@Value("${payPort.payRequest.consumerNation}")
 	private String		payRequestConsumerNation;
+
+	@Value("${payPort.payRequest.createRecurring.description}")
+	private String		payRequestCreateRecurringDescription;
+
+	@Value("${payPort.payRequest.createRecurring.expireDate}")
+	private String		payRequestCreateRecurringExpireDate;
 
 	/** RefundRequest Test data */
 
@@ -294,4 +306,65 @@ public class PayPortTestDataSupplier {
 	public void setCancelRequestCancelMode(CancelMode cancelRequestCancelMode) {
 		this.cancelRequestCancelMode = cancelRequestCancelMode;
 	}
+
+	/**
+	 * @return the payRequestRecurringAmount
+	 */
+	public BigDecimal getPayRequestRecurringAmount() {
+		return payRequestRecurringAmount;
+	}
+
+	/**
+	 * @param payRequestRecurringAmount
+	 *            the payRequestRecurringAmount to set
+	 */
+	public void setPayRequestRecurringAmount(BigDecimal payRequestRecurringAmount) {
+		this.payRequestRecurringAmount = payRequestRecurringAmount;
+	}
+
+	/**
+	 * @return the payRequestRecurringCurrency
+	 */
+	public String getPayRequestRecurringCurrency() {
+		return payRequestRecurringCurrency;
+	}
+
+	/**
+	 * @param payRequestRecurringCurrency
+	 *            the payRequestRecurringCurrency to set
+	 */
+	public void setPayRequestRecurringCurrency(String payRequestRecurringCurrency) {
+		this.payRequestRecurringCurrency = payRequestRecurringCurrency;
+	}
+
+	/**
+	 * @return the payRequestCreateRecurringDescription
+	 */
+	public String getPayRequestCreateRecurringDescription() {
+		return payRequestCreateRecurringDescription;
+	}
+
+	/**
+	 * @param payRequestCreateRecurringDescription
+	 *            the payRequestCreateRecurringDescription to set
+	 */
+	public void setPayRequestCreateRecurringDescription(String payRequestCreateRecurringDescription) {
+		this.payRequestCreateRecurringDescription = payRequestCreateRecurringDescription;
+	}
+
+	/**
+	 * @return the payRequestCreateRecurringExpireDate
+	 */
+	public String getPayRequestCreateRecurringExpireDate() {
+		return payRequestCreateRecurringExpireDate;
+	}
+
+	/**
+	 * @param payRequestCreateRecurringExpireDate
+	 *            the payRequestCreateRecurringExpireDate to set
+	 */
+	public void setPayRequestCreateRecurringExpireDate(String payRequestCreateRecurringExpireDate) {
+		this.payRequestCreateRecurringExpireDate = payRequestCreateRecurringExpireDate;
+	}
+
 }

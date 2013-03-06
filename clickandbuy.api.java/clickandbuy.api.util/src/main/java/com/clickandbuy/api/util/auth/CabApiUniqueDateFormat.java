@@ -10,14 +10,20 @@ import java.text.SimpleDateFormat;
  * @author Ciprian I. Ileana
  */
 public class CabApiUniqueDateFormat {
-	
+
+	/**
+	 * Prevent utils class instantiation
+	 */
+	public CabApiUniqueDateFormat() {
+	}
+
 	/**
 	 * date formatter for signature generation.
 	 */
 	public static final DateFormat getDateFormatForSignature() {
 		return new SimpleDateFormat("yyyyMMddHHmmss");
 	}
-	
+
 	/**
 	 * day specific date formatter.
 	 */

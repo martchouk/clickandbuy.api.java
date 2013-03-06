@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.payport.data.PayPortTestDataSupplier;
@@ -31,13 +30,10 @@ import com.clickandbuy.api.soap.cxf.PayRequestResponse;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class PayRequestTest extends PayPortParentTest {
-	
+
 	@Autowired
-	PayPortTestDataSupplier payPortTestDataSupplier;
-	
-	@Value("${externalId}")
-	String externalId;
-	
+	PayPortTestDataSupplier	payPortTestDataSupplier;
+
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();

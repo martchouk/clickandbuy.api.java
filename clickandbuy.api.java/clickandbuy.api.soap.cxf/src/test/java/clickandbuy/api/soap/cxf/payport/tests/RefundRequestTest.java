@@ -25,8 +25,6 @@ import com.clickandbuy.api.soap.cxf.RefundRequestResponse;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class RefundRequestTest extends PayPortParentTest {
 
-	/** Test data */
-
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();

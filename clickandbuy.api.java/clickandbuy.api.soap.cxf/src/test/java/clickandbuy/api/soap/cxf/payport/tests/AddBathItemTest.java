@@ -3,17 +3,16 @@
  */
 package clickandbuy.api.soap.cxf.payport.tests;
 
+import static clickandbuy.api.soap.cxf.util.TestUtil.prepareMoney;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.payport.data.PayPortTestDataSupplier;
 import clickandbuy.api.soap.cxf.payport.parent.PayPortParentTest;
-
-import static clickandbuy.api.soap.cxf.util.TestUtil.*;
 
 import com.clickandbuy.api.soap.cxf.AddBatchItemDetails;
 import com.clickandbuy.api.soap.cxf.AddBatchItemProcessingDetails;
@@ -38,17 +37,13 @@ import com.clickandbuy.api.soap.cxf.PayRequestDetails;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class AddBathItemTest extends PayPortParentTest {
-	
-	@Autowired
-	PayPortTestDataSupplier payPortTestDataSupplier;
 
-	private Long	batchID	= null;
+	@Autowired
+	PayPortTestDataSupplier	payPortTestDataSupplier;
+
+	private Long			batchID	= null;
 
 	/** Test data */
-
-	@Value("${externalId}")
-	String			externalId;
-
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
@@ -121,28 +116,28 @@ public class AddBathItemTest extends PayPortParentTest {
 
 		return addBatchItemDetails;
 	}
-	
-	private BatchItemDetailsList prepareBatchItemDetailsList(){
+
+	private BatchItemDetailsList prepareBatchItemDetailsList() {
 		BatchItemDetailsList batchItemDetailsList = new BatchItemDetailsList();
-		
+
 		batchItemDetailsList.getBatchItemDetails().add(prepareBatchItemDetails());
-		
+
 		return batchItemDetailsList;
 	}
-	
+
 	/**
 	 * Prepares and BatchItemDetails
 	 * 
 	 * @return
 	 */
-	private BatchItemDetails prepareBatchItemDetails(){
+	private BatchItemDetails prepareBatchItemDetails() {
 		BatchItemDetails batchItemDetails = new BatchItemDetails();
-		
+
 		batchItemDetails.setDetails(prepareAddBatchItemProcessingDetails());
 		batchItemDetails.setExternalID(externalId);
 
 		return batchItemDetails;
-		
+
 	}
 
 	/**
@@ -162,16 +157,16 @@ public class AddBathItemTest extends PayPortParentTest {
 	private AddBatchItemProcessingDetails prepareAddBatchItemProcessingDetails() {
 		AddBatchItemProcessingDetails addBatchItemProcessingDetails = new AddBatchItemProcessingDetails();
 
-//		addBatchItemProcessingDetails.setCancelRequestDetails(value);
-//		addBatchItemProcessingDetails.setCreditRequestDetails(value);
+		// addBatchItemProcessingDetails.setCancelRequestDetails(value);
+		// addBatchItemProcessingDetails.setCreditRequestDetails(value);
 		addBatchItemProcessingDetails.setPayRequestDetails(preparePayRequestDetails());
-//		addBatchItemProcessingDetails.setPayRequestRecurringDetails(value);
-//		addBatchItemProcessingDetails.setRefundRequestDetails(value);
+		// addBatchItemProcessingDetails.setPayRequestRecurringDetails(value);
+		// addBatchItemProcessingDetails.setRefundRequestDetails(value);
 
 		return addBatchItemProcessingDetails;
 
 	}
-	
+
 	/**
 	 * Prepares the soap {@link PayRequest_Request} object from given parameters
 	 */
