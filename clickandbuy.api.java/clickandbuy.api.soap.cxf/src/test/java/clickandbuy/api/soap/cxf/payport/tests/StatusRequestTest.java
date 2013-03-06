@@ -4,6 +4,7 @@
 package clickandbuy.api.soap.cxf.payport.tests;
 
 import static clickandbuy.api.soap.cxf.util.TestUtil.prepareMoney;
+import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +25,6 @@ import com.clickandbuy.api.soap.cxf.StatusRequestDetails;
 import com.clickandbuy.api.soap.cxf.StatusRequestRequest;
 import com.clickandbuy.api.soap.cxf.StatusRequestResponse;
 import com.clickandbuy.api.soap.cxf.TransactionIDList;
-import com.clickandbuy.api.soap.cxf.TransactionIDStatus;
 
 /**
  * Tests related to StatusRequest
@@ -41,18 +41,21 @@ public class StatusRequestTest extends PayPortParentTest {
 	@Autowired
 	PayPortTestDataSupplier	payPortTestDataSupplier;
 
+	/**
+	 * 
+	 */
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		configureCertificatesPolicy();
 
 		externalId = externalId + System.nanoTime() + "_";
-		logger.debug("***externalId:" + externalId);
+		logger.debug("externalId: [" + externalId + "]");
 
 		transactionID = doPayRequest();
 	}
 
 	/**
-	 * Test the StatusRequest
+	 * Tests the StatusRequest
 	 */
 	@Test
 	public void testStatusRequest() {
@@ -65,10 +68,14 @@ public class StatusRequestTest extends PayPortParentTest {
 		try {
 			statusRequestResponse = payPortType.statusRequest(statusRequestRequest);
 
-			for (TransactionIDStatus transactionIDStatus : statusRequestResponse.getTransactionList().getTransaction()) {
-				logger.debug("The transaction with ID: " + transactionID + " have the status: " + transactionIDStatus.getTransactionStatus());
-			}
+			Assert.assertNotNull("statusRequestResponse should not be null!", statusRequestResponse);
+			Assert.assertNotNull("statusRequestResponse.getTransactionList() should not be null!", statusRequestResponse.getTransactionList());
+			Assert.assertNotNull("statusRequestResponse.getTransactionList().getTransaction() should not be null!", statusRequestResponse.getTransactionList().getTransaction());
+			Assert.assertEquals("statusRequestResponse.getTransactionList().getTransaction() list should contain only 1 element!", 1, statusRequestResponse.getTransactionList().getTransaction());
+			Assert.assertNotNull("statusRequestResponse.getTransactionList().getTransaction().get(0) should not be null!", statusRequestResponse.getTransactionList().getTransaction().get(0));
+			Assert.assertNotNull("statusRequestResponse.getTransactionList().getTransaction().get(0).getTransactionStatus() should not be null!", statusRequestResponse.getTransactionList().getTransaction().get(0).getTransactionStatus());
 
+			logger.debug("The transaction with ID: [" + transactionID + "] have the status: [" + statusRequestResponse.getTransactionList().getTransaction().get(0).getTransactionStatus() + "]");
 		} catch (ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
@@ -89,8 +96,13 @@ public class StatusRequestTest extends PayPortParentTest {
 
 		try {
 			payRequestResponse = payPortType.payRequest(payRequestRequest);
+
+			Assert.assertNotNull("payRequestResponse should not be null!", payRequestResponse);
+			Assert.assertNotNull("payRequestResponse.getTransaction() should not be null!", payRequestResponse.getTransaction());
+			Assert.assertNotNull("payRequestResponse.getTransaction().getTransactionID() should not be null!", payRequestResponse.getTransaction().getTransactionID());
+
 			payRequestTransactionID = payRequestResponse.getTransaction().getTransactionID();
-			logger.debug("Created transaction with Id: " + payRequestTransactionID);
+			logger.debug("Created transaction with ID: [" + payRequestTransactionID + "]");
 		} catch (ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
@@ -99,21 +111,13 @@ public class StatusRequestTest extends PayPortParentTest {
 	}
 
 	/**
-	 * Prepares the soap {@link PayRequest_Request} object from given parameters
+	 * Prepares an {@link PayRequestDetails} based on the test data provided by {@link PayPortTestDataSupplier}
 	 * 
-	 * @param payRequestFormBean
-	 * @return T_PayRequest_Details
-	 * @throws PayServiceException
+	 * @return the ${@link PayRequestDetails}
 	 */
 	private PayRequestDetails preparePayRequestDetails() {
 		PayRequestDetails payRequestDetails = new PayRequestDetails();
 
-		// Order Details
-		OrderDetails order = new OrderDetails();
-		order.setItemList(new OrderDetailItemList());
-		order.setText(payPortTestDataSupplier.getPayRequestText());
-
-		// Request Details
 		payRequestDetails.setAmount(prepareMoney(payPortTestDataSupplier.getPayRequestAmount(), payPortTestDataSupplier.getPayRequestCurrency()));
 		payRequestDetails.setAuthExpiration(payPortTestDataSupplier.getPayRequestAuthExpiration());
 		payRequestDetails.setBasketRisk(payPortTestDataSupplier.getPayRequestBasketRisk());
@@ -124,7 +128,7 @@ public class StatusRequestTest extends PayPortParentTest {
 		payRequestDetails.setConsumerLanguage(payPortTestDataSupplier.getPayRequestConsumerLanguage());
 		payRequestDetails.setExternalID(externalId);
 		payRequestDetails.setFailureURL(payPortTestDataSupplier.getPayRequestFailureURI());
-		payRequestDetails.setOrderDetails(order);
+		payRequestDetails.setOrderDetails(prepareOrderDetails());
 		payRequestDetails.setSuccessExpiration(payPortTestDataSupplier.getPayRequestSuccessExpiration());
 		payRequestDetails.setSuccessURL(payPortTestDataSupplier.getPayRequestSuccessURI());
 
@@ -132,15 +136,23 @@ public class StatusRequestTest extends PayPortParentTest {
 	}
 
 	/**
-	 * Prepares an StatusRequestDetails. As stated in the WSDL, at this point we can add one of the following:
-	 * <ul>
-	 * <li>ExternalIDList</li>
-	 * <li>TransactionIDList</li>
-	 * </ul>
+	 * Prepares an {@link OrderDetails} based on the test data provided by {@link PayPortTestDataSupplier}
 	 * 
-	 * For this test we chosen the TransactionIDList
+	 * @return the ${@link OrderDetails}
+	 */
+	private OrderDetails prepareOrderDetails() {
+		OrderDetails orderDetails = new OrderDetails();
+
+		orderDetails.setItemList(new OrderDetailItemList());
+		orderDetails.setText(payPortTestDataSupplier.getPayRequestText());
+
+		return orderDetails;
+	}
+
+	/**
+	 * Prepares an {@link StatusRequestDetails} based on the test data provided by {@link PayPortTestDataSupplier}
 	 * 
-	 * @return
+	 * @return the ${@link StatusRequestDetails}
 	 */
 	public StatusRequestDetails prepareStatusRequestDetails() {
 		StatusRequestDetails statusRequestDetails = new StatusRequestDetails();
@@ -150,6 +162,11 @@ public class StatusRequestTest extends PayPortParentTest {
 		return statusRequestDetails;
 	}
 
+	/**
+	 * Prepares an {@link TransactionIDList} based on the test data provided by {@link PayPortTestDataSupplier}
+	 * 
+	 * @return the ${@link TransactionIDList}
+	 */
 	private TransactionIDList prepareTransactionIDList() {
 		TransactionIDList transactionIDList = new TransactionIDList();
 

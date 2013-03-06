@@ -4,6 +4,7 @@
 package clickandbuy.api.soap.cxf.payport.tests;
 
 import static clickandbuy.api.soap.cxf.util.TestUtil.prepareMoney;
+import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,16 +35,19 @@ public class PayRequestTest extends PayPortParentTest {
 	@Autowired
 	PayPortTestDataSupplier	payPortTestDataSupplier;
 
+	/**
+	 * 
+	 */
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		configureCertificatesPolicy();
 
 		externalId = externalId + System.nanoTime() + "_";
-		logger.debug("***externalId:" + externalId);
+		logger.debug("externalId: [" + externalId + "]");
 	}
 
 	/**
-	 * Test the PayRequest
+	 * Test the PayRequest operation
 	 * 
 	 * @return the transaction ID
 	 */
@@ -57,45 +61,25 @@ public class PayRequestTest extends PayPortParentTest {
 
 		try {
 			payRequestResponse = payPortType.payRequest(payRequestRequest);
-			logger.debug("Created transaction with Id: " + payRequestResponse.getTransaction().getTransactionID());
+
+			Assert.assertNotNull("payRequestResponse should not be null!", payRequestResponse);
+			Assert.assertNotNull("payRequestResponse.getTransaction() should not be null!", payRequestResponse.getTransaction());
+			Assert.assertNotNull("payRequestResponse.getTransaction().getTransactionID() should not be null!", payRequestResponse.getTransaction().getTransactionID());
+
+			logger.debug("Created transaction with ID: [" + payRequestResponse.getTransaction().getTransactionID() + "]");
 		} catch (ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
 	}
 
 	/**
-	 * Prepares the soap {@link PayRequest_Request} object from given parameters
+	 * Prepares an {@link PayRequestDetails} based on the test data provided by {@link PayPortTestDataSupplier}
 	 * 
-	 * @param payRequestFormBean
-	 * @return T_PayRequest_Details
-	 * @throws PayServiceException
+	 * @return the ${@link PayRequestDetails}
 	 */
 	private PayRequestDetails preparePayRequestDetails() {
 		PayRequestDetails payRequestDetails = new PayRequestDetails();
 
-		// TODO fill in necessary test data
-
-		// Billing Address
-		// LegalEntity billing = prepareLegalEntity(payRequestFormBean.getBillingAddress(),
-		// payRequestFormBean.isUseBillingAddress());
-		// payRequestDetails.setBilling(billing);
-
-		// RecurringAuthorization
-		// RecurringPaymentAuthorization createRecurring = prepareRecurringAuthorization(payRequestFormBean.getCreateRecurring(),
-		// payRequestFormBean.isUseRecurringAuthorization());
-		// payRequestDetails.setCreateRecurring(createRecurring);
-
-		// Shipping Address
-		// LegalEntity shipping = prepareLegalEntity(payRequestFormBean.getShippingAddress(),
-		// payRequestFormBean.isUseShippingAddress());
-		// payRequestDetails.setShipping(shipping);
-
-		// Order Details
-		OrderDetails order = new OrderDetails();
-		order.setItemList(new OrderDetailItemList());
-		order.setText(payPortTestDataSupplier.getPayRequestText());
-
-		// Request Details
 		payRequestDetails.setAmount(prepareMoney(payPortTestDataSupplier.getPayRequestAmount(), payPortTestDataSupplier.getPayRequestCurrency()));
 		payRequestDetails.setAuthExpiration(payPortTestDataSupplier.getPayRequestAuthExpiration());
 		payRequestDetails.setBasketRisk(payPortTestDataSupplier.getPayRequestBasketRisk());
@@ -106,14 +90,24 @@ public class PayRequestTest extends PayPortParentTest {
 		payRequestDetails.setConsumerLanguage(payPortTestDataSupplier.getPayRequestConsumerLanguage());
 		payRequestDetails.setExternalID(externalId);
 		payRequestDetails.setFailureURL(payPortTestDataSupplier.getPayRequestFailureURI());
-		payRequestDetails.setOrderDetails(order);
+		payRequestDetails.setOrderDetails(prepareOrderDetails());
 		payRequestDetails.setSuccessExpiration(payPortTestDataSupplier.getPayRequestSuccessExpiration());
 		payRequestDetails.setSuccessURL(payPortTestDataSupplier.getPayRequestSuccessURI());
 
-		// payRequestDetails.setBilling(value);
-		// payRequestDetails.setCreateRecurring(value);
-		// payRequestDetails.setShipping(value);
-
 		return payRequestDetails;
+	}
+
+	/**
+	 * Prepares an {@link OrderDetails} based on the test data provided by {@link PayPortTestDataSupplier}
+	 * 
+	 * @return the ${@link OrderDetails}
+	 */
+	private OrderDetails prepareOrderDetails() {
+		OrderDetails orderDetails = new OrderDetails();
+
+		orderDetails.setItemList(new OrderDetailItemList());
+		orderDetails.setText(payPortTestDataSupplier.getPayRequestText());
+
+		return orderDetails;
 	}
 }

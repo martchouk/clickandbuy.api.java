@@ -3,10 +3,11 @@
  */
 package clickandbuy.api.soap.cxf.payport.tests;
 
+import junit.framework.Assert;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.payport.data.PayPortTestDataSupplier;
@@ -18,28 +19,28 @@ import com.clickandbuy.api.soap.cxf.CreateBatchResponse;
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 
 /**
- * Tests related to CreateBatch
+ * Test(s) related to CreateBatch
  * 
- * @author Ciprian.Ileana
+ * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CreateBatchTest extends PayPortParentTest {
 
-	@Autowired
-	PayPortTestDataSupplier	payPortTestDataSupplier;
-
+	/**
+	 * 
+	 */
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		configureCertificatesPolicy();
 
 		externalId = externalId + System.nanoTime() + "_";
-		logger.debug("***externalId:" + externalId);
+		logger.debug("externalId: [" + externalId + "]");
 	}
 
 	/**
-	 * Test the CreateBatch
+	 * Tests the CreateBatch operation
 	 */
 	@Test
 	public void testCreateBatch() {
@@ -51,17 +52,21 @@ public class CreateBatchTest extends PayPortParentTest {
 
 		try {
 			createBatchResponse = payPortType.createBatch(createBatchRequest);
-			logger.debug("Request tracking ID: " + createBatchResponse.getRequestTrackingID());
-			logger.debug("Created batch with ID: " + createBatchResponse.getBatch().getBatchID());
+
+			Assert.assertNotNull("createBatchResponse should not be null!", createBatchResponse);
+			Assert.assertNotNull("createBatchResponse.getBatch() should not be null!", createBatchResponse.getBatch());
+			Assert.assertNotNull("createBatchResponse.getBatch().getBatchID() should not be null!", createBatchResponse.getBatch().getBatchID());
+
+			logger.debug("Created batch with ID: [" + createBatchResponse.getBatch().getBatchID() + "]");
 		} catch (ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
-
-		// TODO finish test logic
 	}
 
 	/**
-	 * @return
+	 * Prepares an {@link CreateBatchDetails} based on the parameters provided by {@link PayPortTestDataSupplier}
+	 * 
+	 * @return the {@link CreateBatchDetails}
 	 */
 	public CreateBatchDetails prepareCreateBatchDetails() {
 		CreateBatchDetails createBatchDetails = new CreateBatchDetails();
