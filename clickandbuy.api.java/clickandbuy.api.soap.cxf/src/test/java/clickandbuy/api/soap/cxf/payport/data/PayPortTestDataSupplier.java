@@ -34,6 +34,18 @@ public class PayPortTestDataSupplier {
 
 	/** CreditRequest Test data */
 
+	@Value("${payPort.creditRequest.money.amount}")
+	private BigDecimal	creditRequestMoneyAmount;
+
+	@Value("${payPort.creditRequest.money.currency}")
+	private String		creditRequestMoneyCurrency;
+
+	@Value("${payPort.creditRequest.creditRecipientIdentifier.crn}")
+	private Long		creditRequestCrn;
+
+	@Value("${payPort.creditRequest.creditRecipientIdentifier.email}")
+	private String		creditRequestEmail;
+
 	/** ExecuteBatch Test data */
 
 	/** GetBatchStatus Test data */
@@ -365,6 +377,66 @@ public class PayPortTestDataSupplier {
 	 */
 	public void setPayRequestCreateRecurringExpireDate(String payRequestCreateRecurringExpireDate) {
 		this.payRequestCreateRecurringExpireDate = payRequestCreateRecurringExpireDate;
+	}
+
+	/**
+	 * @return the creditRequestMoneyAmount
+	 */
+	public BigDecimal getCreditRequestMoneyAmount() {
+		return creditRequestMoneyAmount;
+	}
+
+	/**
+	 * @param creditRequestMoneyAmount
+	 *            the creditRequestMoneyAmount to set
+	 */
+	public void setCreditRequestMoneyAmount(BigDecimal creditRequestMoneyAmount) {
+		this.creditRequestMoneyAmount = creditRequestMoneyAmount;
+	}
+
+	/**
+	 * @return the creditRequestMoneyCurrency
+	 */
+	public String getCreditRequestMoneyCurrency() {
+		return creditRequestMoneyCurrency;
+	}
+
+	/**
+	 * @param creditRequestMoneyCurrency
+	 *            the creditRequestMoneyCurrency to set
+	 */
+	public void setCreditRequestMoneyCurrency(String creditRequestMoneyCurrency) {
+		this.creditRequestMoneyCurrency = creditRequestMoneyCurrency;
+	}
+
+	/**
+	 * @return the creditRequestCrn
+	 */
+	public Long getCreditRequestCrn() {
+		return creditRequestCrn;
+	}
+
+	/**
+	 * @param creditRequestCrn
+	 *            the creditRequestCrn to set
+	 */
+	public void setCreditRequestCrn(Long creditRequestCrn) {
+		this.creditRequestCrn = creditRequestCrn;
+	}
+
+	/**
+	 * @return the creditRequestEmail
+	 */
+	public String getCreditRequestEmail() {
+		return creditRequestEmail;
+	}
+
+	/**
+	 * @param creditRequestEmail
+	 *            the creditRequestEmail to set
+	 */
+	public void setCreditRequestEmail(String creditRequestEmail) {
+		this.creditRequestEmail = creditRequestEmail;
 	}
 
 }

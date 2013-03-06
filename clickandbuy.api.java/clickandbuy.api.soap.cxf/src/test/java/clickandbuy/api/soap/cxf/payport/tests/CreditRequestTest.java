@@ -3,26 +3,23 @@
  */
 package clickandbuy.api.soap.cxf.payport.tests;
 
-import static clickandbuy.api.soap.cxf.util.TestUtil.prepareCreditRecipientIdentifier;
-import static clickandbuy.api.soap.cxf.util.TestUtil.prepareMoney;
-import static clickandbuy.api.soap.cxf.util.TestUtil.prepareOrderDetailItem;
-
-import java.math.BigDecimal;
+import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import clickandbuy.api.soap.cxf.payport.data.PayPortTestDataSupplier;
 import clickandbuy.api.soap.cxf.payport.parent.PayPortParentTest;
 
+import com.clickandbuy.api.soap.cxf.CreditRecipientIdentifier;
 import com.clickandbuy.api.soap.cxf.CreditRequestDetails;
 import com.clickandbuy.api.soap.cxf.CreditRequestRequest;
 import com.clickandbuy.api.soap.cxf.CreditRequestResponse;
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
-import com.clickandbuy.api.soap.cxf.OrderDetailItemList;
-import com.clickandbuy.api.soap.cxf.OrderDetailItemType;
+import com.clickandbuy.api.soap.cxf.Money;
 
 /**
  * Tests related to CreditRequest
@@ -34,50 +31,22 @@ import com.clickandbuy.api.soap.cxf.OrderDetailItemType;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CreditRequestTest extends PayPortParentTest {
 
-	/** Test data */
-	@Value("${payPort.creditRequest.money.amount}")
-	private BigDecimal	moneyAmount;
+	@Autowired
+	PayPortTestDataSupplier	payPortTestDataSupplier;
 
-	@Value("${payPort.creditRequest.money.currency}")
-	private String		moneyCurrency;
-
-	@Value("${payPort.creditRequest.consumerLanguage}")
-	private String		consumerLanguage;
-
-	@Value("${payPort.creditRequest.externalId}")
-	private String		externalId;
-
-	@Value("${payPort.creditRequest.orderDetails.text}")
-	private String		text;
-
-	@Value("${payPort.creditRequest.creditRecipientIdentifier.crn}")
-	private Long		crn;
-
-	@Value("${payPort.creditRequest.creditRecipientIdentifier.email}")
-	private String		email;
-
-	@Value("${payPort.creditRequest.orderDetailItem.description}")
-	String				odiDescription;
-
-	@Value("${payPort.creditRequest.orderDetailItem.itemType}")
-	OrderDetailItemType	odiItemType;
-
-	@Value("${payPort.creditRequest.orderDetailItem.quantity}")
-	Integer				odiQuantity;
-
-	@Value("${payPort.creditRequest.orderDetailItem.unitPrice.money.amount}")
-	private BigDecimal	odiMoneyUnitPriceAmount;
-
-	@Value("${payPort.creditRequest.orderDetailItem.unitPrice.money.currency}")
-	private String		odiMoneyUnitPriceCurrency;
-
+	/**
+	 * 
+	 */
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		configureCertificatesPolicy();
+
+		externalId = externalId + System.nanoTime() + "_";
+		logger.debug("externalId: [" + externalId + "]");
 	}
 
 	/**
-	 * Test the CreditRequest
+	 * Tests the CreditRequest operation
 	 */
 	@Test
 	public void testCreditRequest() {
@@ -89,46 +58,61 @@ public class CreditRequestTest extends PayPortParentTest {
 
 		try {
 			creditRequestResponse = payPortType.creditRequest(creditRequestRequest);
-			logger.debug("Created transaction with Id: " + creditRequestResponse.getTransaction().getTransactionID());
+
+			Assert.assertNotNull("creditRequestResponse should not be null!", creditRequestResponse);
+			Assert.assertNotNull("creditRequestResponse.getTransaction() should not be null!", creditRequestResponse.getTransaction());
+			Assert.assertNotNull("creditRequestResponse.getTransaction().getTransactionID() should not be null!", creditRequestResponse.getTransaction().getTransactionID());
+			Assert.assertNotNull("creditRequestResponse.getTransaction().getTransactionStatus() should not be null!", creditRequestResponse.getTransaction().getTransactionStatus());
+			Assert.assertNotNull("creditRequestResponse.getTransaction().getTransactionType() should not be null!", creditRequestResponse.getTransaction().getTransactionType());
+
+			logger.debug("Created transaction with ID: [" + creditRequestResponse.getTransaction().getTransactionID() + "]");
+			logger.debug("Having transaction status: [" + creditRequestResponse.getTransaction().getTransactionStatus() + "]");
+			logger.debug("And transaction type: [" + creditRequestResponse.getTransaction().getTransactionType() + "]");
 		} catch (ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
-
-		// TODO finish test logic
 	}
 
 	/**
-	 * @return
+	 * Prepares an {@link CreditRequestDetails} based on the test data provided by {@link PayPortTestDataSupplier}
+	 * 
+	 * @return the ${@link CreditRequestDetails}
 	 */
 	private CreditRequestDetails prepareCreditRequestDetails() {
 		CreditRequestDetails creditRequestDetails = new CreditRequestDetails();
 
-		// TODO fill in necessary test data
-
-		creditRequestDetails.setAmount(prepareMoney(moneyAmount, moneyCurrency));
-		// creditRequestDetails.setConsumerLanguage(consumerLanguage);
+		creditRequestDetails.setAmount(prepareMoney());
 		creditRequestDetails.setExternalID(externalId);
-		// creditRequestDetails.setOrderDetails(prepareOrderDetails());
-		creditRequestDetails.setRecipient(prepareCreditRecipientIdentifier(crn, email));
+		creditRequestDetails.setRecipient(prepareCreditRecipientIdentifier());
 
 		return creditRequestDetails;
 	}
 
-	// private OrderDetails prepareOrderDetails(){
-	// OrderDetails orderDetails = new OrderDetails();
-	//
-	// orderDetails.setItemList(prepareOrderDetailItemList());
-	// orderDetails.setText(text);
-	//
-	// return orderDetails;
-	// }
+	/**
+	 * Prepares an {@link Money} based on the test data provided by {@link PayPortTestDataSupplier}
+	 * 
+	 * @return the ${@link Money}
+	 */
+	private Money prepareMoney() {
+		Money money = new Money();
 
-	private OrderDetailItemList aprepareOrderDetailItemList() {
-		OrderDetailItemList orderDetailItemList = new OrderDetailItemList();
+		money.setAmount(payPortTestDataSupplier.getCreditRequestMoneyAmount());
+		money.setCurrency(payPortTestDataSupplier.getCreditRequestMoneyCurrency());
 
-		orderDetailItemList.getItem().add(prepareOrderDetailItem(odiDescription, odiItemType, odiQuantity, prepareMoney(moneyAmount, moneyCurrency), prepareMoney(odiMoneyUnitPriceAmount, odiMoneyUnitPriceCurrency)));
-
-		return orderDetailItemList;
+		return money;
 	}
 
+	/**
+	 * Prepares an {@link CreditRecipientIdentifier} based on the test data provided by {@link PayPortTestDataSupplier}
+	 * 
+	 * @return the ${@link CreditRecipientIdentifier}
+	 */
+	private CreditRecipientIdentifier prepareCreditRecipientIdentifier() {
+		CreditRecipientIdentifier creditRecipientIdentifier = new CreditRecipientIdentifier();
+
+		// creditRecipientIdentifier.setCrn(payPortTestDataSupplier.getCreditRequestCrn());
+		creditRecipientIdentifier.setEmailAddress(payPortTestDataSupplier.getCreditRequestEmail());
+
+		return creditRecipientIdentifier;
+	}
 }
