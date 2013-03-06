@@ -1,7 +1,5 @@
 package clickandbuy.api.soap.cxf.registrationport.tests;
 
-import java.util.Random;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -61,19 +59,18 @@ public class CreateMerchantRegistrationTest extends RegistrationPortParentTest {
 	public CreateMerchantRegistrationDetails prepareCreateMerchantRegistrationDetails() {
 		final CreateMerchantRegistrationDetails createMerchantRegistrationDetails = new CreateMerchantRegistrationDetails();
 
-		// optional values
-		// createMerchantRegistrationDetails.setIntegrationData(merchantIntegration);
 		final MerchantRegistrationData registrationData = new MerchantRegistrationData();
-		registrationData.setCompanyName("testMerchant");
-		final Random randomEmailAddressSuffixGenerator = new Random();
-		final String suffix = "" + randomEmailAddressSuffixGenerator.nextInt();
-		registrationData.setEmailAddress("test" + suffix + "@merchant.com");
+		registrationData.setCompanyName(testData.getMerchantCompanyName());
+		/*
+		 * final Random randomEmailAddressSuffixGenerator = new Random(); final String suffix = "" + randomEmailAddressSuffixGenerator.nextInt(); registrationData.setEmailAddress("test" + suffix + "@merchant.com");
+		 */
+		registrationData.setEmailAddress(testData.getMerchantEmailAddress());
 		final Address companyAddress = new Address();
-		companyAddress.setCity("Cologne");
-		companyAddress.setCountry("DE");
-		companyAddress.setStreet("Im Mediapark");
-		companyAddress.setHouseNumber("5");
-		companyAddress.setZip("50670");
+		companyAddress.setCity(testData.getMerchantCity());
+		companyAddress.setCountry(testData.getMerchantCountry());
+		companyAddress.setStreet(testData.getMerchantStreet());
+		companyAddress.setHouseNumber(testData.getMerchantHouseNumber());
+		companyAddress.setZip(testData.getMerchantZipCode());
 		registrationData.setCompanyAddress(companyAddress);
 		createMerchantRegistrationDetails.setMerchantData(registrationData);
 

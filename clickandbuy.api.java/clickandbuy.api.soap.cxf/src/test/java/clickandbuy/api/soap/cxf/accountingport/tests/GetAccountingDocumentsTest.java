@@ -48,7 +48,7 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 	public void testGetAccountingDocuments() throws DatatypeConfigurationException, ParseException {
 		GetAccountingDocumentsResponse getAccountingDocumentsResponse = null;
 
-		GetAccountingDocumentsRequest getAccountingDocumentsRequest = new GetAccountingDocumentsRequest();
+		final GetAccountingDocumentsRequest getAccountingDocumentsRequest = new GetAccountingDocumentsRequest();
 		getAccountingDocumentsRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		getAccountingDocumentsRequest.setDetails(prepareGetAccountingDocumentDetails());
 
@@ -56,11 +56,9 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 			getAccountingDocumentsResponse = accountingPortType.getAccountingDocuments(getAccountingDocumentsRequest);
 			logger.debug("Created transaction with Id: " + getAccountingDocumentsResponse.getRequestTrackingID());
 			logger.debug("Retrieved the following document list: " + getAccountingDocumentsResponse.getDocumentList());
-		} catch (ErrorDetails_Exception errorDetails_Exception) {
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
-
-		// TODO finish test logic
 	}
 
 	/**
@@ -69,7 +67,7 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 	 * @throws ParseException
 	 */
 	public GetAccountingDocumentDetails prepareGetAccountingDocumentDetails() throws DatatypeConfigurationException, ParseException {
-		GetAccountingDocumentDetails getAccountingDocumentDetails = new GetAccountingDocumentDetails();
+		final GetAccountingDocumentDetails getAccountingDocumentDetails = new GetAccountingDocumentDetails();
 
 		final DateRange dateRange = new DateRange();
 		final long dateRAfter = CabApiUniqueDateFormat.getDayDateFormatter().parse(testData.getDateRangeAfter().trim()).getTime();
@@ -89,7 +87,7 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 		intRange.setFrom(testData.getIntRangeFrom());
 		intRange.setUntil(testData.getIntRangeUntil());
 
-		PagingSetting pagingSetting = new PagingSetting();
+		final PagingSetting pagingSetting = new PagingSetting();
 		pagingSetting.setMaxResults(testData.getMaxResults());
 		pagingSetting.setSkip(testData.getSkip());
 

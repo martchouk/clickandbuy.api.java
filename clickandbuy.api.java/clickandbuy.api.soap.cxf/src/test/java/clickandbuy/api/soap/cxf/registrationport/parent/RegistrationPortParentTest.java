@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import clickandbuy.api.soap.cxf.parent.ParentTest;
+import clickandbuy.api.soap.cxf.registrationport.data.RegistrationPortTestDataSupplier;
 
 import com.clickandbuy.api.soap.cxf.RegistrationPortType;
 
@@ -16,20 +17,23 @@ import com.clickandbuy.api.soap.cxf.RegistrationPortType;
  * 
  */
 public class RegistrationPortParentTest extends ParentTest {
-	public static final Logger	logger	= Logger.getLogger(RegistrationPortParentTest.class);
+	public static final Logger					logger	= Logger.getLogger(RegistrationPortParentTest.class);
 
 	@Value("${acceptSelfSignedCertificates}")
-	boolean						acceptSelfSignedCertificates;
+	private boolean								acceptSelfSignedCertificates;
 
 	@Autowired
-	public RegistrationPortType	registrationPortType;
+	protected RegistrationPortType				registrationPortType;
+
+	@Autowired
+	protected RegistrationPortTestDataSupplier	testData;
 
 	/**
 	 * 
 	 */
 	public void configureCertificatesPolicy() {
 		if (acceptSelfSignedCertificates) {
-			Client proxy = ClientProxy.getClient(registrationPortType);
+			final Client proxy = ClientProxy.getClient(registrationPortType);
 			configureCertificatesPolicy(proxy);
 		}
 	}

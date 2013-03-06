@@ -61,9 +61,10 @@ public class PayRequestRecurringTest extends PayPortParentTest {
 	 * Test the PayRequestRecurring
 	 * 
 	 * @throws InterruptedException
+	 * @throws ErrorDetails_Exception
 	 */
 	@Test
-	public void testPayRequestRecurring() throws InterruptedException {
+	public void testPayRequestRecurring() throws InterruptedException, ErrorDetails_Exception {
 
 		logger.debug("Preparing to make a PayRequestRecurring");
 
@@ -78,10 +79,11 @@ public class PayRequestRecurringTest extends PayPortParentTest {
 			logger.debug("Created recurring payment with Id: " + payRequestRecurringResponse.getTransaction().getTransactionID());
 		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
 		}
 	}
 
-	private Long doPayRequest() throws ParseException, DatatypeConfigurationException {
+	private Long doPayRequest() throws ParseException, DatatypeConfigurationException, ErrorDetails_Exception {
 		Long recurringAuthorizationID = null;
 		PayRequestResponse payRequestResponse = null;
 
@@ -101,6 +103,7 @@ public class PayRequestRecurringTest extends PayPortParentTest {
 			logger.debug("Created transaction with Id: " + payRequestResponse.getTransaction().getTransactionID());
 		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
 		}
 
 		return recurringAuthorizationID;
@@ -119,17 +122,13 @@ public class PayRequestRecurringTest extends PayPortParentTest {
 	 */
 	public StatusRequestDetails prepareStatusRequestDetails() {
 		final StatusRequestDetails statusRequestDetails = new StatusRequestDetails();
-
 		statusRequestDetails.setTransactionIDList(prepareTransactionIDList());
-
 		return statusRequestDetails;
 	}
 
 	private TransactionIDList prepareTransactionIDList() {
 		final TransactionIDList transactionIDList = new TransactionIDList();
-
 		transactionIDList.getTransactionID().add(transactionID);
-
 		return transactionIDList;
 
 	}
