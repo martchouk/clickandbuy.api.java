@@ -89,8 +89,7 @@ public class GetFeeCardAverageTicketSizesTest extends FeeCalculatorPortParentTes
 		getFeeCardAverageTicketSizesDetails.setBusinessOriginID(businessOriginID);
 		// TODO make this more nice, setup the category name in test data.
 		getFeeCardAverageTicketSizesDetails.setCategoryID(getFeeCardCategoriesResponse.getCategoryList().getCategory().get(0).getCategoryID());
-		// TODO : fix this get it from test data.
-		getFeeCardAverageTicketSizesDetails.setCurrency("EUR");
+		getFeeCardAverageTicketSizesDetails.setCurrency(testData.getGetFeeCardAverageTicketSizesRequestCurrency());
 
 		return getFeeCardAverageTicketSizesDetails;
 	}

@@ -30,6 +30,9 @@ import com.clickandbuy.api.soap.cxf.Money;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class GetFeeCardTest extends FeeCalculatorPortParentTest {
 
+	/**
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
@@ -91,14 +94,12 @@ public class GetFeeCardTest extends FeeCalculatorPortParentTest {
 		final GetFeeCardDetails getFeeCardDetails = new GetFeeCardDetails();
 
 		final Money money = new Money();
-		// TODO move this in the test data.
-		money.setAmount(new BigDecimal(1));
-		money.setCurrency("EUR");
+		money.setAmount(new BigDecimal(testData.getGetFeeCardRequestAmount()));
+		money.setCurrency(testData.getGetFeeCardRequestCurrency());
 
 		getFeeCardDetails.setBusinessOriginID(businessOriginID);
-		// TODO ; move this setting to test data
-		getFeeCardDetails.setInvoicingCycle(1);
-		getFeeCardDetails.setSettlementDelay(1);
+		getFeeCardDetails.setInvoicingCycle(testData.getGetFeeCardRequestInvoicingCycle());
+		getFeeCardDetails.setSettlementDelay(testData.getGetFeeCardRequestSettlementDelay());
 		getFeeCardDetails.setAverageTicketSize(money);
 		getFeeCardDetails.setCategoryID(getFeeCardCategoriesResponse.getCategoryList().getCategory().get(0).getCategoryID());
 

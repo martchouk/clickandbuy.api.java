@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
+import clickandbuy.api.soap.cxf.feecalculator.data.FeeCalculatorPortTestDataSupplier;
 import clickandbuy.api.soap.cxf.parent.ParentTest;
 
 import com.clickandbuy.api.soap.cxf.FeeCalculatorPortType;
@@ -16,20 +17,23 @@ import com.clickandbuy.api.soap.cxf.FeeCalculatorPortType;
  * 
  */
 public class FeeCalculatorPortParentTest extends ParentTest {
-	public static final Logger		logger	= Logger.getLogger(FeeCalculatorPortParentTest.class);
+	public static final Logger					logger	= Logger.getLogger(FeeCalculatorPortParentTest.class);
 
 	@Value("${acceptSelfSignedCertificates}")
-	boolean							acceptSelfSignedCertificates;
+	boolean										acceptSelfSignedCertificates;
 
 	@Autowired
-	public FeeCalculatorPortType	feeCalculatorPortType;
+	public FeeCalculatorPortType				feeCalculatorPortType;
+
+	@Autowired
+	public FeeCalculatorPortTestDataSupplier	testData;
 
 	/**
 	 * 
 	 */
 	public void configureCertificatesPolicy() {
 		if (acceptSelfSignedCertificates) {
-			Client proxy = ClientProxy.getClient(feeCalculatorPortType);
+			final Client proxy = ClientProxy.getClient(feeCalculatorPortType);
 			configureCertificatesPolicy(proxy);
 		}
 	}
