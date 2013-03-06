@@ -1,10 +1,7 @@
 package clickandbuy.api.soap.cxf.registrationport.tests;
 
-import java.util.Date;
 import java.util.Random;
-import java.util.UUID;
 
-import org.apache.xerces.impl.xs.identity.UniqueOrKey;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +16,6 @@ import com.clickandbuy.api.soap.cxf.CreateMerchantRegistrationResponse;
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 import com.clickandbuy.api.soap.cxf.MerchantRegistrationData;
 import com.clickandbuy.api.soap.cxf.MerchantRegistrationSettings;
-import com.clickandbuy.api.util.auth.CabApiUniqueDateFormat;
 
 /**
  * Tests related to CreateMerchantRegistration
@@ -31,8 +27,6 @@ import com.clickandbuy.api.util.auth.CabApiUniqueDateFormat;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CreateMerchantRegistrationTest extends RegistrationPortParentTest {
 
-	/** Test data */
-
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
@@ -40,38 +34,39 @@ public class CreateMerchantRegistrationTest extends RegistrationPortParentTest {
 
 	/**
 	 * Test the CreateMerchantRegistration
-	 * @throws ErrorDetails_Exception : thrown in case the merchant registration is not successfull.
+	 * 
+	 * @throws ErrorDetails_Exception
+	 *             : thrown in case the merchant registration is not successfull.
 	 */
 	@Test
 	public void testCreateMerchantRegistration() throws ErrorDetails_Exception {
 		CreateMerchantRegistrationResponse createMerchantRegistrationResponse = null;
 
-		CreateMerchantRegistrationRequest createMerchantRegistrationRequest = new CreateMerchantRegistrationRequest();
+		final CreateMerchantRegistrationRequest createMerchantRegistrationRequest = new CreateMerchantRegistrationRequest();
 		createMerchantRegistrationRequest.setDetails(prepareCreateMerchantRegistrationDetails());
 
 		try {
 			createMerchantRegistrationResponse = registrationPortType.createMerchantRegistration(createMerchantRegistrationRequest);
 			logger.debug("Created transaction with Id: " + createMerchantRegistrationResponse.getRequestTrackingID());
-		} catch (ErrorDetails_Exception errorDetails_Exception) {
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 			throw errorDetails_Exception;
 		}
 
-		// TODO finish test logic
 	}
 
 	/**
 	 * @return
 	 */
 	public CreateMerchantRegistrationDetails prepareCreateMerchantRegistrationDetails() {
-		CreateMerchantRegistrationDetails createMerchantRegistrationDetails = new CreateMerchantRegistrationDetails();
+		final CreateMerchantRegistrationDetails createMerchantRegistrationDetails = new CreateMerchantRegistrationDetails();
 
-		//optional values
-		//createMerchantRegistrationDetails.setIntegrationData(merchantIntegration);
+		// optional values
+		// createMerchantRegistrationDetails.setIntegrationData(merchantIntegration);
 		final MerchantRegistrationData registrationData = new MerchantRegistrationData();
 		registrationData.setCompanyName("testMerchant");
 		final Random randomEmailAddressSuffixGenerator = new Random();
-		String suffix = "" + randomEmailAddressSuffixGenerator.nextInt();
+		final String suffix = "" + randomEmailAddressSuffixGenerator.nextInt();
 		registrationData.setEmailAddress("test" + suffix + "@merchant.com");
 		final Address companyAddress = new Address();
 		companyAddress.setCity("Cologne");
@@ -81,7 +76,7 @@ public class CreateMerchantRegistrationTest extends RegistrationPortParentTest {
 		companyAddress.setZip("50670");
 		registrationData.setCompanyAddress(companyAddress);
 		createMerchantRegistrationDetails.setMerchantData(registrationData);
-		
+
 		final MerchantRegistrationSettings registrationSettings = new MerchantRegistrationSettings();
 		registrationSettings.setBusinessOriginID(businessOriginID);
 		createMerchantRegistrationDetails.setRegistrationData(registrationSettings);

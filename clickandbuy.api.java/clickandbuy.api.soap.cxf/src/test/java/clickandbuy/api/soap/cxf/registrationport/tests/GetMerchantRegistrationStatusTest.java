@@ -1,5 +1,7 @@
 package clickandbuy.api.soap.cxf.registrationport.tests;
 
+import java.util.Random;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,10 +9,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.registrationport.parent.RegistrationPortParentTest;
 
+import com.clickandbuy.api.soap.cxf.Address;
+import com.clickandbuy.api.soap.cxf.CreateMerchantRegistrationDetails;
+import com.clickandbuy.api.soap.cxf.CreateMerchantRegistrationRequest;
+import com.clickandbuy.api.soap.cxf.CreateMerchantRegistrationResponse;
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 import com.clickandbuy.api.soap.cxf.GetMerchantRegistrationStatusDetails;
 import com.clickandbuy.api.soap.cxf.GetMerchantRegistrationStatusRequest;
 import com.clickandbuy.api.soap.cxf.GetMerchantRegistrationStatusResponse;
+import com.clickandbuy.api.soap.cxf.MerchantRegistrationData;
+import com.clickandbuy.api.soap.cxf.MerchantRegistrationSettings;
 
 /**
  * Tests related to GetMerchantRegistrationStatus
@@ -29,32 +37,81 @@ public class GetMerchantRegistrationStatusTest extends RegistrationPortParentTes
 
 	/**
 	 * Test the AddBathItem
+	 * 
+	 * @throws ErrorDetails_Exception
 	 */
 	@Test
-	public void testAddBatchItem() {
+	public void testGetMerchantRegistrationStatus() throws ErrorDetails_Exception {
+
+		CreateMerchantRegistrationResponse createMerchantRegistrationResponse = null;
+
+		final CreateMerchantRegistrationRequest createMerchantRegistrationRequest = new CreateMerchantRegistrationRequest();
+		createMerchantRegistrationRequest.setDetails(prepareCreateMerchantRegistrationDetails());
+
+		try {
+			createMerchantRegistrationResponse = registrationPortType.createMerchantRegistration(createMerchantRegistrationRequest);
+			logger.debug("Created transaction with Id: " + createMerchantRegistrationResponse.getRequestTrackingID());
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
+			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
+		}
+
 		GetMerchantRegistrationStatusResponse getMerchantRegistrationStatusResponse = null;
 
-		GetMerchantRegistrationStatusRequest registrationStatusReq = new GetMerchantRegistrationStatusRequest();
-		registrationStatusReq.setDetails(prepareGetMerchantRegistrationStatusDetails());
+		final GetMerchantRegistrationStatusRequest registrationStatusReq = new GetMerchantRegistrationStatusRequest();
+		registrationStatusReq.setDetails(prepareGetMerchantRegistrationStatusDetails(createMerchantRegistrationResponse));
 
 		try {
 			getMerchantRegistrationStatusResponse = registrationPortType.getMerchantRegistrationStatus(registrationStatusReq);
 			logger.debug("Created transaction with Id: " + getMerchantRegistrationStatusResponse.getRequestTrackingID());
-		} catch (ErrorDetails_Exception errorDetails_Exception) {
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
 		}
+	}
+
+	/**
+	 * @param createMerchantRegistrationResponse
+	 * @return
+	 */
+	public GetMerchantRegistrationStatusDetails prepareGetMerchantRegistrationStatusDetails(final CreateMerchantRegistrationResponse createMerchantRegistrationResponse) {
+		final GetMerchantRegistrationStatusDetails getMerchantRegistrationStatusDetails = new GetMerchantRegistrationStatusDetails();
+
+		getMerchantRegistrationStatusDetails.setBusinessOriginID(businessOriginID);
+		final long createdMerchantId = createMerchantRegistrationResponse.getRegistrationInfo().getMerchantID();
+		final String createdMerchantSharedSecret = createMerchantRegistrationResponse.getRegistrationInfo().getRegistrationSharedSecret();
+		getMerchantRegistrationStatusDetails.setMerchantID(createdMerchantId);
+		getMerchantRegistrationStatusDetails.setToken(signatureHandler.createMerchantRegistrationToken(businessOriginID, createdMerchantId, createdMerchantSharedSecret));
+
+		return getMerchantRegistrationStatusDetails;
 	}
 
 	/**
 	 * @return
 	 */
-	public GetMerchantRegistrationStatusDetails prepareGetMerchantRegistrationStatusDetails() {
-		final GetMerchantRegistrationStatusDetails getMerchantRegistrationStatusDetails = new GetMerchantRegistrationStatusDetails();
+	public CreateMerchantRegistrationDetails prepareCreateMerchantRegistrationDetails() {
+		final CreateMerchantRegistrationDetails createMerchantRegistrationDetails = new CreateMerchantRegistrationDetails();
 
-		getMerchantRegistrationStatusDetails.setBusinessOriginID(businessOriginID);
-		getMerchantRegistrationStatusDetails.setMerchantID(merchantId);
-		getMerchantRegistrationStatusDetails.setToken(signatureHandler.createMerchantRegistrationToken(businessOriginID, merchantId, secretKey));
+		// optional values
+		// createMerchantRegistrationDetails.setIntegrationData(merchantIntegration);
+		final MerchantRegistrationData registrationData = new MerchantRegistrationData();
+		registrationData.setCompanyName("testMerchant");
+		final Random randomEmailAddressSuffixGenerator = new Random();
+		final String suffix = "" + randomEmailAddressSuffixGenerator.nextInt();
+		registrationData.setEmailAddress("test" + suffix + "@merchant.com");
+		final Address companyAddress = new Address();
+		companyAddress.setCity("Cologne");
+		companyAddress.setCountry("DE");
+		companyAddress.setStreet("Im Mediapark");
+		companyAddress.setHouseNumber("5");
+		companyAddress.setZip("50670");
+		registrationData.setCompanyAddress(companyAddress);
+		createMerchantRegistrationDetails.setMerchantData(registrationData);
 
-		return getMerchantRegistrationStatusDetails;
+		final MerchantRegistrationSettings registrationSettings = new MerchantRegistrationSettings();
+		registrationSettings.setBusinessOriginID(businessOriginID);
+		createMerchantRegistrationDetails.setRegistrationData(registrationSettings);
+
+		return createMerchantRegistrationDetails;
 	}
 }
