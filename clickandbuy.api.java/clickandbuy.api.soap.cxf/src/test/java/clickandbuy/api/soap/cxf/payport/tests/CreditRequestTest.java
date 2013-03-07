@@ -110,7 +110,6 @@ public class CreditRequestTest extends PayPortParentTest {
 	private CreditRecipientIdentifier prepareCreditRecipientIdentifier() {
 		CreditRecipientIdentifier creditRecipientIdentifier = new CreditRecipientIdentifier();
 
-		// creditRecipientIdentifier.setCrn(payPortTestDataSupplier.getCreditRequestCrn());
 		creditRecipientIdentifier.setEmailAddress(payPortTestDataSupplier.getCreditRequestEmail());
 
 		return creditRecipientIdentifier;

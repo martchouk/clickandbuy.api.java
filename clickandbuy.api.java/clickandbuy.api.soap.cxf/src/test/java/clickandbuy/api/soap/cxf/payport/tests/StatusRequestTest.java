@@ -29,7 +29,7 @@ import com.clickandbuy.api.soap.cxf.TransactionIDList;
 /**
  * Tests related to StatusRequest
  * 
- * @author Ciprian.Ileana
+ * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
  */
@@ -55,7 +55,7 @@ public class StatusRequestTest extends PayPortParentTest {
 	}
 
 	/**
-	 * Tests the StatusRequest
+	 * Tests the StatusRequest operation
 	 */
 	@Test
 	public void testStatusRequest() {
