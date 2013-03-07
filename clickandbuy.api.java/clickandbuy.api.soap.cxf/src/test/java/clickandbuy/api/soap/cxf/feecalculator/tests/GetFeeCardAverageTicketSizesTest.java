@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.feecalculator.parent.FeeCalculatorPortParentTest;
+import clickandbuy.api.soap.cxf.util.TestUtil;
 
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 import com.clickandbuy.api.soap.cxf.GetFeeCardAverageTicketSizesDetails;
@@ -87,7 +88,8 @@ public class GetFeeCardAverageTicketSizesTest extends FeeCalculatorPortParentTes
 		final GetFeeCardAverageTicketSizesDetails getFeeCardAverageTicketSizesDetails = new GetFeeCardAverageTicketSizesDetails();
 
 		getFeeCardAverageTicketSizesDetails.setBusinessOriginID(businessOriginID);
-		getFeeCardAverageTicketSizesDetails.setCategoryID(getFeeCardCategoriesResponse.getCategoryList().getCategory().get(0).getCategoryID());
+		final long categoryId = TestUtil.getCategoryFromList(getFeeCardCategoriesResponse.getCategoryList().getCategory(), testData.getGetFeeCardAverageTicketSizesRequestCategory().trim());
+		getFeeCardAverageTicketSizesDetails.setCategoryID(categoryId);
 		getFeeCardAverageTicketSizesDetails.setCurrency(testData.getGetFeeCardAverageTicketSizesRequestCurrency());
 
 		return getFeeCardAverageTicketSizesDetails;

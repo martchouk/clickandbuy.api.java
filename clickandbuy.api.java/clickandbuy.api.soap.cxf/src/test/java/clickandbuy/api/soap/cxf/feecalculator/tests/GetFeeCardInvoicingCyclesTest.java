@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.feecalculator.parent.FeeCalculatorPortParentTest;
+import clickandbuy.api.soap.cxf.util.TestUtil;
 
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesDetails;
@@ -87,8 +88,8 @@ public class GetFeeCardInvoicingCyclesTest extends FeeCalculatorPortParentTest {
 	public GetFeeCardInvoicingCyclesDetails prepareGetFeeCardInvoicingCyclesDetails(final GetFeeCardCategoriesResponse getFeeCardCategoriesResponse) {
 		final GetFeeCardInvoicingCyclesDetails getFeeCardInvoicingCyclesDetails = new GetFeeCardInvoicingCyclesDetails();
 		getFeeCardInvoicingCyclesDetails.setBusinessOriginID(businessOriginID);
-		// TODO : make this more nice, get category name from test data setup.
-		getFeeCardInvoicingCyclesDetails.setCategoryID(getFeeCardCategoriesResponse.getCategoryList().getCategory().get(0).getCategoryID());
+		final long categoryId = TestUtil.getCategoryFromList(getFeeCardCategoriesResponse.getCategoryList().getCategory(), testData.getGetFeeCardAverageTicketSizesRequestCategory().trim());
+		getFeeCardInvoicingCyclesDetails.setCategoryID(categoryId);
 		return getFeeCardInvoicingCyclesDetails;
 	}
 

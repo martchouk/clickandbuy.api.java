@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.feecalculator.parent.FeeCalculatorPortParentTest;
+import clickandbuy.api.soap.cxf.util.TestUtil;
 
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesDetails;
@@ -87,8 +88,8 @@ public class GetFeeCardSettlementDelaysTest extends FeeCalculatorPortParentTest 
 	public GetFeeCardSettlementDelaysDetails prepareGetFeeCardSettlementDelaysDetails(final GetFeeCardCategoriesResponse getFeeCardCategoriesResponse) {
 		final GetFeeCardSettlementDelaysDetails getFeeCardSettlementDelaysDetails = new GetFeeCardSettlementDelaysDetails();
 		getFeeCardSettlementDelaysDetails.setBusinessOriginID(businessOriginID);
-		// TODO: FIX this , make it more nice (e.g. : configure category name in test data and search for it in the retrieved categories list)
-		getFeeCardSettlementDelaysDetails.setCategoryID(getFeeCardCategoriesResponse.getCategoryList().getCategory().get(0).getCategoryID());
+		final long categoryId = TestUtil.getCategoryFromList(getFeeCardCategoriesResponse.getCategoryList().getCategory(), testData.getGetFeeCardSettlementDelaysRequestCategory().trim());
+		getFeeCardSettlementDelaysDetails.setCategoryID(categoryId);
 
 		return getFeeCardSettlementDelaysDetails;
 	}
