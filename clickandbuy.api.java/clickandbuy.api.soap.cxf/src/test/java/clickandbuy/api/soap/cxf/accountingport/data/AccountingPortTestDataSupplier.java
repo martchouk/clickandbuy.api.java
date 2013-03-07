@@ -48,24 +48,10 @@ public class AccountingPortTestDataSupplier {
 	}
 
 	/**
-	 * @param dateRangeAfter the dateRangeAfter to set
-	 */
-	public void setDateRangeAfter(String dateRangeAfter) {
-		this.dateRangeAfter = dateRangeAfter;
-	}
-
-	/**
 	 * @return the dateRangeBefore
 	 */
 	public String getDateRangeBefore() {
 		return dateRangeBefore;
-	}
-
-	/**
-	 * @param dateRangeBefore the dateRangeBefore to set
-	 */
-	public void setDateRangeBefore(String dateRangeBefore) {
-		this.dateRangeBefore = dateRangeBefore;
 	}
 
 	/**
@@ -76,24 +62,10 @@ public class AccountingPortTestDataSupplier {
 	}
 
 	/**
-	 * @param intRangeFrom the intRangeFrom to set
-	 */
-	public void setIntRangeFrom(Integer intRangeFrom) {
-		this.intRangeFrom = intRangeFrom;
-	}
-
-	/**
 	 * @return the intRangeUntil
 	 */
 	public Integer getIntRangeUntil() {
 		return intRangeUntil;
-	}
-
-	/**
-	 * @param intRangeUntil the intRangeUntil to set
-	 */
-	public void setIntRangeUntil(Integer intRangeUntil) {
-		this.intRangeUntil = intRangeUntil;
 	}
 
 	/**
@@ -104,24 +76,10 @@ public class AccountingPortTestDataSupplier {
 	}
 
 	/**
-	 * @param accountingDocumentType the accountingDocumentType to set
-	 */
-	public void setAccountingDocumentType(String accountingDocumentType) {
-		this.accountingDocumentType = accountingDocumentType;
-	}
-
-	/**
 	 * @return the fileName
 	 */
 	public String getFileName() {
 		return fileName;
-	}
-
-	/**
-	 * @param fileName the fileName to set
-	 */
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
 	}
 
 	/**
@@ -132,24 +90,10 @@ public class AccountingPortTestDataSupplier {
 	}
 
 	/**
-	 * @param accountingFileType the accountingFileType to set
-	 */
-	public void setAccountingFileType(String accountingFileType) {
-		this.accountingFileType = accountingFileType;
-	}
-
-	/**
 	 * @return the maxResults
 	 */
 	public Integer getMaxResults() {
 		return maxResults;
-	}
-
-	/**
-	 * @param maxResults the maxResults to set
-	 */
-	public void setMaxResults(Integer maxResults) {
-		this.maxResults = maxResults;
 	}
 
 	/**
@@ -159,63 +103,45 @@ public class AccountingPortTestDataSupplier {
 		return skip;
 	}
 
-	/**
-	 * @param skip the skip to set
-	 */
-	public void setSkip(Integer skip) {
-		this.skip = skip;
-	}
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "AccountingPortTestDataSupplier [dateRangeAfter="
-				+ dateRangeAfter + ", dateRangeBefore=" + dateRangeBefore
-				+ ", intRangeFrom=" + intRangeFrom + ", intRangeUntil="
-				+ intRangeUntil + ", accountingDocumentType="
-				+ accountingDocumentType + ", fileName=" + fileName
-				+ ", accountingFileType=" + accountingFileType
-				+ ", maxResults=" + maxResults + ", skip=" + skip + "]";
+		return "AccountingPortTestDataSupplier [dateRangeAfter=" + dateRangeAfter + ", dateRangeBefore=" + dateRangeBefore + ", intRangeFrom=" + intRangeFrom + ", intRangeUntil=" + intRangeUntil + ", accountingDocumentType="
+				+ accountingDocumentType + ", fileName=" + fileName + ", accountingFileType=" + accountingFileType + ", maxResults=" + maxResults + ", skip=" + skip + "]";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime
-				* result
-				+ ((accountingDocumentType == null) ? 0
-						: accountingDocumentType.hashCode());
-		result = prime
-				* result
-				+ ((accountingFileType == null) ? 0 : accountingFileType
-						.hashCode());
-		result = prime * result
-				+ ((dateRangeAfter == null) ? 0 : dateRangeAfter.hashCode());
-		result = prime * result
-				+ ((dateRangeBefore == null) ? 0 : dateRangeBefore.hashCode());
-		result = prime * result
-				+ ((fileName == null) ? 0 : fileName.hashCode());
-		result = prime * result
-				+ ((intRangeFrom == null) ? 0 : intRangeFrom.hashCode());
-		result = prime * result
-				+ ((intRangeUntil == null) ? 0 : intRangeUntil.hashCode());
-		result = prime * result
-				+ ((maxResults == null) ? 0 : maxResults.hashCode());
+		result = prime * result + ((accountingDocumentType == null) ? 0 : accountingDocumentType.hashCode());
+		result = prime * result + ((accountingFileType == null) ? 0 : accountingFileType.hashCode());
+		result = prime * result + ((dateRangeAfter == null) ? 0 : dateRangeAfter.hashCode());
+		result = prime * result + ((dateRangeBefore == null) ? 0 : dateRangeBefore.hashCode());
+		result = prime * result + ((fileName == null) ? 0 : fileName.hashCode());
+		result = prime * result + ((intRangeFrom == null) ? 0 : intRangeFrom.hashCode());
+		result = prime * result + ((intRangeUntil == null) ? 0 : intRangeUntil.hashCode());
+		result = prime * result + ((maxResults == null) ? 0 : maxResults.hashCode());
 		result = prime * result + ((skip == null) ? 0 : skip.hashCode());
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj) {
 			return true;
 		}
@@ -225,7 +151,7 @@ public class AccountingPortTestDataSupplier {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		AccountingPortTestDataSupplier other = (AccountingPortTestDataSupplier) obj;
+		final AccountingPortTestDataSupplier other = (AccountingPortTestDataSupplier) obj;
 		if (accountingDocumentType == null) {
 			if (other.accountingDocumentType != null) {
 				return false;

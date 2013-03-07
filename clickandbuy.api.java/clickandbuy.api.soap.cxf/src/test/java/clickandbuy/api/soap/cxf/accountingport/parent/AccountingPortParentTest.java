@@ -17,24 +17,36 @@ import com.clickandbuy.api.soap.cxf.AccountingPortType;
  * 
  */
 public class AccountingPortParentTest extends ParentTest {
-	public static final Logger logger = Logger
-			.getLogger(AccountingPortParentTest.class);
-
-	@Value("${acceptSelfSignedCertificates}")
-	protected boolean acceptSelfSignedCertificates;
-
-	@Autowired
-	protected AccountingPortType accountingPortType;
-
-	@Autowired
-	protected AccountingPortTestDataSupplier testData;
 
 	/**
-	 * 
+	 * class logger.
+	 */
+	private static final Logger					logger	= Logger.getLogger(AccountingPortParentTest.class);
+
+	/**
+	 * accept self signed certificates flag.
+	 */
+	@Value("${acceptSelfSignedCertificates}")
+	protected boolean							acceptSelfSignedCertificates;
+
+	/**
+	 * web service accounting port type.
+	 */
+	@Autowired
+	protected AccountingPortType				accountingPortType;
+
+	/**
+	 * test data supplier.
+	 */
+	@Autowired
+	protected AccountingPortTestDataSupplier	testData;
+
+	/**
+	 * Config utility method for certificates policy.
 	 */
 	public void configureCertificatesPolicy() {
 		if (acceptSelfSignedCertificates) {
-			Client proxy = ClientProxy.getClient(accountingPortType);
+			final Client proxy = ClientProxy.getClient(accountingPortType);
 			configureCertificatesPolicy(proxy);
 		}
 	}

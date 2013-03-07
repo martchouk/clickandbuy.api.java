@@ -1,5 +1,6 @@
 package clickandbuy.api.soap.cxf.registrationport.tests;
 
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +26,16 @@ import com.clickandbuy.api.soap.cxf.MerchantRegistrationSettings;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CreateMerchantRegistrationTest extends RegistrationPortParentTest {
 
+	/**
+	 * class logger.
+	 */
+	private static final Logger	logger	= Logger.getLogger(CreateMerchantRegistrationTest.class);
+
+	/**
+	 * test setup.
+	 * 
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
@@ -54,9 +65,11 @@ public class CreateMerchantRegistrationTest extends RegistrationPortParentTest {
 	}
 
 	/**
+	 * Prepare create merchant registration request.
+	 * 
 	 * @return
 	 */
-	public CreateMerchantRegistrationDetails prepareCreateMerchantRegistrationDetails() {
+	private CreateMerchantRegistrationDetails prepareCreateMerchantRegistrationDetails() {
 		final CreateMerchantRegistrationDetails createMerchantRegistrationDetails = new CreateMerchantRegistrationDetails();
 
 		final MerchantRegistrationData registrationData = new MerchantRegistrationData();

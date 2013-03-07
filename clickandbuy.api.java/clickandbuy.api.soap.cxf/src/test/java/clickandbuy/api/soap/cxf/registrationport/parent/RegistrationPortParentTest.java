@@ -17,19 +17,31 @@ import com.clickandbuy.api.soap.cxf.RegistrationPortType;
  * 
  */
 public class RegistrationPortParentTest extends ParentTest {
-	public static final Logger					logger	= Logger.getLogger(RegistrationPortParentTest.class);
+	/**
+	 * class logger.
+	 */
+	private static final Logger					logger	= Logger.getLogger(RegistrationPortParentTest.class);
 
+	/**
+	 * accept self signed certificates flag. (Specific for test systems).
+	 */
 	@Value("${acceptSelfSignedCertificates}")
 	private boolean								acceptSelfSignedCertificates;
 
+	/**
+	 * web service registration port type.
+	 */
 	@Autowired
 	protected RegistrationPortType				registrationPortType;
 
+	/**
+	 * test data supplier.
+	 */
 	@Autowired
 	protected RegistrationPortTestDataSupplier	testData;
 
 	/**
-	 * 
+	 * Config helper method for certificates policy.
 	 */
 	public void configureCertificatesPolicy() {
 		if (acceptSelfSignedCertificates) {

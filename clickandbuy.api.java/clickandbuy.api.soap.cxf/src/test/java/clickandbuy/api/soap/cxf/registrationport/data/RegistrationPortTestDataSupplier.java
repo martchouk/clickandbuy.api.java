@@ -62,26 +62,10 @@ public class RegistrationPortTestDataSupplier {
 	}
 
 	/**
-	 * @param merchantCompanyName
-	 *            the merchantCompanyName to set
-	 */
-	public void setMerchantCompanyName(final String merchantCompanyName) {
-		this.merchantCompanyName = merchantCompanyName;
-	}
-
-	/**
 	 * @return the merchantCity
 	 */
 	public String getMerchantCity() {
 		return merchantCity;
-	}
-
-	/**
-	 * @param merchantCity
-	 *            the merchantCity to set
-	 */
-	public void setMerchantCity(final String merchantCity) {
-		this.merchantCity = merchantCity;
 	}
 
 	/**
@@ -92,26 +76,10 @@ public class RegistrationPortTestDataSupplier {
 	}
 
 	/**
-	 * @param merchantCountry
-	 *            the merchantCountry to set
-	 */
-	public void setMerchantCountry(final String merchantCountry) {
-		this.merchantCountry = merchantCountry;
-	}
-
-	/**
 	 * @return the merchantStreet
 	 */
 	public String getMerchantStreet() {
 		return merchantStreet;
-	}
-
-	/**
-	 * @param merchantStreet
-	 *            the merchantStreet to set
-	 */
-	public void setMerchantStreet(final String merchantStreet) {
-		this.merchantStreet = merchantStreet;
 	}
 
 	/**
@@ -122,14 +90,6 @@ public class RegistrationPortTestDataSupplier {
 	}
 
 	/**
-	 * @param merchantHouseNumber
-	 *            the merchantHouseNumber to set
-	 */
-	public void setMerchantHouseNumber(final String merchantHouseNumber) {
-		this.merchantHouseNumber = merchantHouseNumber;
-	}
-
-	/**
 	 * @return the merchantZipCode
 	 */
 	public String getMerchantZipCode() {
@@ -137,25 +97,10 @@ public class RegistrationPortTestDataSupplier {
 	}
 
 	/**
-	 * @param merchantZipCode
-	 *            the merchantZipCode to set
-	 */
-	public void setMerchantZipCode(final String merchantZipCode) {
-		this.merchantZipCode = merchantZipCode;
-	}
-
-	/**
 	 * @return the merchantEmailAddress
 	 */
 	public String getMerchantEmailAddress() {
 		return merchantEmailAddress;
-	}
-
-	/**
-	 * @param merchantEmailAddress the merchantEmailAddress to set
-	 */
-	public void setMerchantEmailAddress(String merchantEmailAddress) {
-		this.merchantEmailAddress = merchantEmailAddress;
 	}
 
 }

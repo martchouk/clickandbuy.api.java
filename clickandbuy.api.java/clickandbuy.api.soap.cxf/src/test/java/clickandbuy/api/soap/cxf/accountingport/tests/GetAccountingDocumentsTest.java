@@ -8,6 +8,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,6 +34,16 @@ import com.clickandbuy.api.util.auth.CabApiUniqueDateFormat;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 
+	/**
+	 * class logger.
+	 */
+	private static final Logger	logger	= Logger.getLogger(GetAccountingDocumentsTest.class);
+
+	/**
+	 * test setup.
+	 * 
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
@@ -66,7 +77,7 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 	 * @throws DatatypeConfigurationException
 	 * @throws ParseException
 	 */
-	public GetAccountingDocumentDetails prepareGetAccountingDocumentDetails() throws DatatypeConfigurationException, ParseException {
+	private GetAccountingDocumentDetails prepareGetAccountingDocumentDetails() throws DatatypeConfigurationException, ParseException {
 		final GetAccountingDocumentDetails getAccountingDocumentDetails = new GetAccountingDocumentDetails();
 
 		final DateRange dateRange = new DateRange();
@@ -93,9 +104,6 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 
 		getAccountingDocumentDetails.setDate(dateRange);
 		getAccountingDocumentDetails.setDocumentNumber(intRange);
-		// getAccountingDocumentDetails.setDocumentType(accountingDocumentType);
-		// getAccountingDocumentDetails.setFileName(fileName);
-		// getAccountingDocumentDetails.setFileType(accountingFileType);
 		getAccountingDocumentDetails.setPaging(pagingSetting);
 
 		return getAccountingDocumentDetails;

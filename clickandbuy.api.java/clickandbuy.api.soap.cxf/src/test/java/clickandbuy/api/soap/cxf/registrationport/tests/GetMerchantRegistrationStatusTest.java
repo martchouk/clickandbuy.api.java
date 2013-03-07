@@ -1,5 +1,6 @@
 package clickandbuy.api.soap.cxf.registrationport.tests;
 
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +29,16 @@ import com.clickandbuy.api.soap.cxf.MerchantRegistrationSettings;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class GetMerchantRegistrationStatusTest extends RegistrationPortParentTest {
 
+	/**
+	 * class logger.
+	 */
+	private static final Logger	logger	= Logger.getLogger(GetMerchantRegistrationStatusTest.class);
+
+	/**
+	 * test setup.
+	 * 
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
@@ -69,10 +80,12 @@ public class GetMerchantRegistrationStatusTest extends RegistrationPortParentTes
 	}
 
 	/**
+	 * Prepare get merchant registration status request.
+	 * 
 	 * @param createMerchantRegistrationResponse
 	 * @return
 	 */
-	public GetMerchantRegistrationStatusDetails prepareGetMerchantRegistrationStatusDetails(final CreateMerchantRegistrationResponse createMerchantRegistrationResponse) {
+	private GetMerchantRegistrationStatusDetails prepareGetMerchantRegistrationStatusDetails(final CreateMerchantRegistrationResponse createMerchantRegistrationResponse) {
 		final GetMerchantRegistrationStatusDetails getMerchantRegistrationStatusDetails = new GetMerchantRegistrationStatusDetails();
 
 		getMerchantRegistrationStatusDetails.setBusinessOriginID(businessOriginID);
@@ -85,9 +98,11 @@ public class GetMerchantRegistrationStatusTest extends RegistrationPortParentTes
 	}
 
 	/**
+	 * Prepare create merchant registration request.
+	 * 
 	 * @return
 	 */
-	public CreateMerchantRegistrationDetails prepareCreateMerchantRegistrationDetails() {
+	private CreateMerchantRegistrationDetails prepareCreateMerchantRegistrationDetails() {
 		final CreateMerchantRegistrationDetails createMerchantRegistrationDetails = new CreateMerchantRegistrationDetails();
 
 		// optional values
