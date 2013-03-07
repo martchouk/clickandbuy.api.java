@@ -10,15 +10,13 @@ import org.springframework.beans.factory.annotation.Value;
 import com.clickandbuy.api.soap.cxf.CancelMode;
 
 /**
- * @author Ciprian.Ileana
+ * Holds all necessary test data for PayPort related tests.
+ * 
+ * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
  */
 public class PayPortTestDataSupplier {
-
-	/** AddBatchItem Test data */
-
-	/** CancelBatch Test data */
 
 	/** CancelRequest Test data */
 
@@ -33,15 +31,8 @@ public class PayPortTestDataSupplier {
 	@Value("${payPort.creditRequest.money.currency}")
 	private String		creditRequestMoneyCurrency;
 
-	@Value("${payPort.creditRequest.creditRecipientIdentifier.crn}")
-	private Long		creditRequestCrn;
-
 	@Value("${payPort.creditRequest.creditRecipientIdentifier.email}")
 	private String		creditRequestEmail;
-
-	/** ExecuteBatch Test data */
-
-	/** GetBatchStatus Test data */
 
 	/** PayRequestRecurring Test data */
 
@@ -102,10 +93,58 @@ public class PayPortTestDataSupplier {
 	private String		payRequestCreateRecurringExpireDate;
 
 	/** RefundRequest Test data */
+
 	@Value("${payPort.refundRequest.transactionID}")
 	private Long		refundRequestTransactionID;
 
-	/** Status Request Test data */
+	/**
+	 * @return the cancelRequestCancelMode
+	 */
+	public CancelMode getCancelRequestCancelMode() {
+		return cancelRequestCancelMode;
+	}
+
+	/**
+	 * @return the creditRequestMoneyAmount
+	 */
+	public BigDecimal getCreditRequestMoneyAmount() {
+		return creditRequestMoneyAmount;
+	}
+
+	/**
+	 * @return the creditRequestMoneyCurrency
+	 */
+	public String getCreditRequestMoneyCurrency() {
+		return creditRequestMoneyCurrency;
+	}
+
+	/**
+	 * @return the creditRequestEmail
+	 */
+	public String getCreditRequestEmail() {
+		return creditRequestEmail;
+	}
+
+	/**
+	 * @return the payRequestRecurringAmount
+	 */
+	public BigDecimal getPayRequestRecurringAmount() {
+		return payRequestRecurringAmount;
+	}
+
+	/**
+	 * @return the payRequestRecurringCurrency
+	 */
+	public String getPayRequestRecurringCurrency() {
+		return payRequestRecurringCurrency;
+	}
+
+	/**
+	 * @return the payRequestRecurringPaymentAuthorizationID
+	 */
+	public Long getPayRequestRecurringPaymentAuthorizationID() {
+		return payRequestRecurringPaymentAuthorizationID;
+	}
 
 	/**
 	 * @return the payRequestAmount
@@ -199,27 +238,6 @@ public class PayPortTestDataSupplier {
 	}
 
 	/**
-	 * @return the cancelRequestCancelMode
-	 */
-	public CancelMode getCancelRequestCancelMode() {
-		return cancelRequestCancelMode;
-	}
-
-	/**
-	 * @return the payRequestRecurringAmount
-	 */
-	public BigDecimal getPayRequestRecurringAmount() {
-		return payRequestRecurringAmount;
-	}
-
-	/**
-	 * @return the payRequestRecurringCurrency
-	 */
-	public String getPayRequestRecurringCurrency() {
-		return payRequestRecurringCurrency;
-	}
-
-	/**
 	 * @return the payRequestCreateRecurringDescription
 	 */
 	public String getPayRequestCreateRecurringDescription() {
@@ -234,45 +252,10 @@ public class PayPortTestDataSupplier {
 	}
 
 	/**
-	 * @return the creditRequestMoneyAmount
-	 */
-	public BigDecimal getCreditRequestMoneyAmount() {
-		return creditRequestMoneyAmount;
-	}
-
-	/**
-	 * @return the creditRequestMoneyCurrency
-	 */
-	public String getCreditRequestMoneyCurrency() {
-		return creditRequestMoneyCurrency;
-	}
-
-	/**
-	 * @return the creditRequestCrn
-	 */
-	public Long getCreditRequestCrn() {
-		return creditRequestCrn;
-	}
-
-	/**
-	 * @return the creditRequestEmail
-	 */
-	public String getCreditRequestEmail() {
-		return creditRequestEmail;
-	}
-
-	/**
 	 * @return the refundRequestTransactionID
 	 */
 	public Long getRefundRequestTransactionID() {
 		return refundRequestTransactionID;
-	}
-
-	/**
-	 * @return the payRequestRecurringPaymentAuthorizationID
-	 */
-	public Long getPayRequestRecurringPaymentAuthorizationID() {
-		return payRequestRecurringPaymentAuthorizationID;
 	}
 
 }
