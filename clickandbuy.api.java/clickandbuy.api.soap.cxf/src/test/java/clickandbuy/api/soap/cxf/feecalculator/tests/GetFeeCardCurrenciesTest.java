@@ -15,7 +15,7 @@ import com.clickandbuy.api.soap.cxf.GetFeeCardCurrenciesResponse;
 /**
  * Tests related to GetFeeCardCurrenciesTest
  * 
- * @author Ciprian.Ileana
+ * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
  */

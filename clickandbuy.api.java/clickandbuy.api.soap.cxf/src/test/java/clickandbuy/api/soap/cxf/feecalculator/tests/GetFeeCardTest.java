@@ -24,7 +24,7 @@ import com.clickandbuy.api.soap.cxf.Money;
 /**
  * Tests related to GetFeeCard
  * 
- * @author Ciprian.Ileana
+ * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
  */

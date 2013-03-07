@@ -21,7 +21,8 @@ import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesResponse;
 /**
  * Tests related to GetFeeCardAverageTicketSizes
  * 
- * @author Ciprian.Ileana
+ * @author Ciprian I. Ileana
+ * @author Nicolae Petridean
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)

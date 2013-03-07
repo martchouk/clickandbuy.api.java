@@ -20,7 +20,7 @@ import com.clickandbuy.api.soap.cxf.GetFeeCardSettlementDelaysResponse;
 /**
  * Tests related to GetFeeCardSettlementDelays
  * 
- * @author Ciprian.Ileana
+ * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
  */

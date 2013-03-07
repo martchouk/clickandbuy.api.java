@@ -29,6 +29,8 @@ import com.clickandbuy.api.soap.cxf.OrderDetails;
 import com.clickandbuy.api.util.auth.CabApiUniqueDateFormat;
 
 /**
+ * Collection of various utils methods used across tests
+ * 
  * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
@@ -42,6 +44,8 @@ public class TestUtil {
 	}
 
 	/**
+	 * Creates an instance of {@link XMLGregorianCalendar} based on the received date representation as string. The date as string in first parsed using {@link CabApiUniqueDateFormat}.
+	 * 
 	 * @param dateAsString
 	 * @return
 	 * @throws ParseException
@@ -54,6 +58,8 @@ public class TestUtil {
 	}
 
 	/**
+	 * Creates an instance of {@link XMLGregorianCalendar} based on the received data representation in milliseconds. The date as string in first parsed using {@link CabApiUniqueDateFormat}.
+	 * 
 	 * @param dateAsMillis
 	 * @return
 	 * @throws DatatypeConfigurationException
@@ -76,15 +82,6 @@ public class TestUtil {
 		creditRequestDetails.setRecipient(creditRecipientIdentifier);
 
 		return creditRequestDetails;
-	}
-
-	public static Money prepareMoney(final BigDecimal amount, final String currency) {
-		final Money money = new Money();
-
-		money.setAmount(amount);
-		money.setCurrency(currency);
-
-		return money;
 	}
 
 	public static OrderDetails prepareOrderDetails(final OrderDetailItemList orderDetailItemList, final String text) {
@@ -153,6 +150,29 @@ public class TestUtil {
 		}
 
 		return cancelIdentifier;
+	}
+
+	/**
+	 * Prepares an {@link Money} based on the received parameters.
+	 * 
+	 * @return the ${@link Money}
+	 * @throws IllegalArgumentException
+	 *             : in case any of the 2 parameters are null or currency is empty
+	 */
+	public static Money prepareMoney(final BigDecimal amount, final String currency) {
+		// amount cannot be null
+		Assert.notNull(amount);
+
+		// currency cannot be null nor empty
+		Assert.notNull(currency);
+		Assert.isTrue(!currency.trim().isEmpty());
+
+		final Money money = new Money();
+
+		money.setAmount(amount);
+		money.setCurrency(currency);
+
+		return money;
 	}
 
 	/**

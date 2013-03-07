@@ -16,7 +16,7 @@ import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesResponse;
 /**
  * Tests related to GetFeeCardCategpories
  * 
- * @author Ciprian.Ileana
+ * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
  */

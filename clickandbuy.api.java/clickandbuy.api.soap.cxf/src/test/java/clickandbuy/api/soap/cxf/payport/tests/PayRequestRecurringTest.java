@@ -3,6 +3,8 @@
  */
 package clickandbuy.api.soap.cxf.payport.tests;
 
+import static clickandbuy.api.soap.cxf.util.TestUtil.prepareMoney;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +15,6 @@ import clickandbuy.api.soap.cxf.payport.data.PayPortTestDataSupplier;
 import clickandbuy.api.soap.cxf.payport.parent.PayPortParentTest;
 
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
-import com.clickandbuy.api.soap.cxf.Money;
 import com.clickandbuy.api.soap.cxf.PayRequestRecurringDetails;
 import com.clickandbuy.api.soap.cxf.PayRequestRecurringRequest;
 import com.clickandbuy.api.soap.cxf.PayRequestRecurringResponse;
@@ -73,24 +74,11 @@ public class PayRequestRecurringTest extends PayPortParentTest {
 	private PayRequestRecurringDetails preparePayRequestRecurringDetails() {
 		final PayRequestRecurringDetails payRequestRecurringDetails = new PayRequestRecurringDetails();
 
-		payRequestRecurringDetails.setAmount(prepareAmount());
+		payRequestRecurringDetails.setAmount(prepareMoney(payPortTestDataSupplier.getPayRequestRecurringAmount(), payPortTestDataSupplier.getPayRequestRecurringCurrency()));
 		payRequestRecurringDetails.setExternalID(externalId);
 		payRequestRecurringDetails.setRecurringPaymentAuthorizationID(payPortTestDataSupplier.getPayRequestRecurringPaymentAuthorizationID());
 
 		return payRequestRecurringDetails;
 	}
 
-	/**
-	 * Prepares an {@link Money} based on the test data provided by {@link PayPortTestDataSupplier}
-	 * 
-	 * @return the ${@link Money}
-	 */
-	private Money prepareAmount() {
-		final Money money = new Money();
-
-		money.setAmount(payPortTestDataSupplier.getPayRequestRecurringAmount());
-		money.setCurrency(payPortTestDataSupplier.getPayRequestRecurringCurrency());
-
-		return money;
-	}
 }

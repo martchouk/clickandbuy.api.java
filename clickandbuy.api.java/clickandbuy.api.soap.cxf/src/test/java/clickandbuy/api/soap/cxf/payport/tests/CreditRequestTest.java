@@ -3,6 +3,7 @@
  */
 package clickandbuy.api.soap.cxf.payport.tests;
 
+import static clickandbuy.api.soap.cxf.util.TestUtil.prepareMoney;
 import junit.framework.Assert;
 
 import org.junit.Before;
@@ -19,7 +20,6 @@ import com.clickandbuy.api.soap.cxf.CreditRequestDetails;
 import com.clickandbuy.api.soap.cxf.CreditRequestRequest;
 import com.clickandbuy.api.soap.cxf.CreditRequestResponse;
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
-import com.clickandbuy.api.soap.cxf.Money;
 
 /**
  * Tests related to CreditRequest
@@ -81,25 +81,11 @@ public class CreditRequestTest extends PayPortParentTest {
 	private CreditRequestDetails prepareCreditRequestDetails() {
 		CreditRequestDetails creditRequestDetails = new CreditRequestDetails();
 
-		creditRequestDetails.setAmount(prepareMoney());
+		creditRequestDetails.setAmount(prepareMoney(payPortTestDataSupplier.getCreditRequestMoneyAmount(), payPortTestDataSupplier.getCreditRequestMoneyCurrency()));
 		creditRequestDetails.setExternalID(externalId);
 		creditRequestDetails.setRecipient(prepareCreditRecipientIdentifier());
 
 		return creditRequestDetails;
-	}
-
-	/**
-	 * Prepares an {@link Money} based on the test data provided by {@link PayPortTestDataSupplier}
-	 * 
-	 * @return the ${@link Money}
-	 */
-	private Money prepareMoney() {
-		Money money = new Money();
-
-		money.setAmount(payPortTestDataSupplier.getCreditRequestMoneyAmount());
-		money.setCurrency(payPortTestDataSupplier.getCreditRequestMoneyCurrency());
-
-		return money;
 	}
 
 	/**
