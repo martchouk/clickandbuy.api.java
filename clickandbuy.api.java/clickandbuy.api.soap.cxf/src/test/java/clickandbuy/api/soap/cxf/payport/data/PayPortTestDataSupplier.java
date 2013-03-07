@@ -10,24 +10,15 @@ import org.springframework.beans.factory.annotation.Value;
 import com.clickandbuy.api.soap.cxf.CancelMode;
 
 /**
- * @author Ciprian.Ileana
+ * Holds all necessary test data for PayPort related tests.
+ * 
+ * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
  */
 public class PayPortTestDataSupplier {
 
-	/** AddBatchItem Test data */
-
-	/** CancelBatch Test data */
-
 	/** CancelRequest Test data */
-	// @Value("${payPort.cancelRequest.cancelIdentifier.recurringPaymentAuthorizationID}")
-	// normally will be determined at runtime by running a PayRequestRecurring
-	// private Long cancelRequestRecurringPaymentAuthorizationID;
-
-	// @Value("${payPort.cancelRequest.cancelIdentifier.transactionID}")
-	// normally will be determined at runtime by running a PayRequest
-	// private Long cancelRequestTransactionID;
 
 	@Value("${payPort.cancelRequest.cancelMode}")
 	private CancelMode	cancelRequestCancelMode;
@@ -40,15 +31,8 @@ public class PayPortTestDataSupplier {
 	@Value("${payPort.creditRequest.money.currency}")
 	private String		creditRequestMoneyCurrency;
 
-	@Value("${payPort.creditRequest.creditRecipientIdentifier.crn}")
-	private Long		creditRequestCrn;
-
 	@Value("${payPort.creditRequest.creditRecipientIdentifier.email}")
 	private String		creditRequestEmail;
-
-	/** ExecuteBatch Test data */
-
-	/** GetBatchStatus Test data */
 
 	/** PayRequestRecurring Test data */
 
@@ -109,10 +93,114 @@ public class PayPortTestDataSupplier {
 	private String		payRequestCreateRecurringExpireDate;
 
 	/** RefundRequest Test data */
+
 	@Value("${payPort.refundRequest.transactionID}")
 	private Long		refundRequestTransactionID;
 
-	/** Status Request Test data */
+	/**
+	 * @return the cancelRequestCancelMode
+	 */
+	public CancelMode getCancelRequestCancelMode() {
+		return cancelRequestCancelMode;
+	}
+
+	/**
+	 * @param cancelRequestCancelMode
+	 *            the cancelRequestCancelMode to set
+	 */
+	public void setCancelRequestCancelMode(CancelMode cancelRequestCancelMode) {
+		this.cancelRequestCancelMode = cancelRequestCancelMode;
+	}
+
+	/**
+	 * @return the creditRequestMoneyAmount
+	 */
+	public BigDecimal getCreditRequestMoneyAmount() {
+		return creditRequestMoneyAmount;
+	}
+
+	/**
+	 * @param creditRequestMoneyAmount
+	 *            the creditRequestMoneyAmount to set
+	 */
+	public void setCreditRequestMoneyAmount(BigDecimal creditRequestMoneyAmount) {
+		this.creditRequestMoneyAmount = creditRequestMoneyAmount;
+	}
+
+	/**
+	 * @return the creditRequestMoneyCurrency
+	 */
+	public String getCreditRequestMoneyCurrency() {
+		return creditRequestMoneyCurrency;
+	}
+
+	/**
+	 * @param creditRequestMoneyCurrency
+	 *            the creditRequestMoneyCurrency to set
+	 */
+	public void setCreditRequestMoneyCurrency(String creditRequestMoneyCurrency) {
+		this.creditRequestMoneyCurrency = creditRequestMoneyCurrency;
+	}
+
+	/**
+	 * @return the creditRequestEmail
+	 */
+	public String getCreditRequestEmail() {
+		return creditRequestEmail;
+	}
+
+	/**
+	 * @param creditRequestEmail
+	 *            the creditRequestEmail to set
+	 */
+	public void setCreditRequestEmail(String creditRequestEmail) {
+		this.creditRequestEmail = creditRequestEmail;
+	}
+
+	/**
+	 * @return the payRequestRecurringAmount
+	 */
+	public BigDecimal getPayRequestRecurringAmount() {
+		return payRequestRecurringAmount;
+	}
+
+	/**
+	 * @param payRequestRecurringAmount
+	 *            the payRequestRecurringAmount to set
+	 */
+	public void setPayRequestRecurringAmount(BigDecimal payRequestRecurringAmount) {
+		this.payRequestRecurringAmount = payRequestRecurringAmount;
+	}
+
+	/**
+	 * @return the payRequestRecurringCurrency
+	 */
+	public String getPayRequestRecurringCurrency() {
+		return payRequestRecurringCurrency;
+	}
+
+	/**
+	 * @param payRequestRecurringCurrency
+	 *            the payRequestRecurringCurrency to set
+	 */
+	public void setPayRequestRecurringCurrency(String payRequestRecurringCurrency) {
+		this.payRequestRecurringCurrency = payRequestRecurringCurrency;
+	}
+
+	/**
+	 * @return the payRequestRecurringPaymentAuthorizationID
+	 */
+	public Long getPayRequestRecurringPaymentAuthorizationID() {
+		return payRequestRecurringPaymentAuthorizationID;
+	}
+
+	/**
+	 * @param payRequestRecurringPaymentAuthorizationID
+	 *            the payRequestRecurringPaymentAuthorizationID to set
+	 */
+	public void setPayRequestRecurringPaymentAuthorizationID(Long payRequestRecurringPaymentAuthorizationID) {
+		this.payRequestRecurringPaymentAuthorizationID = payRequestRecurringPaymentAuthorizationID;
+	}
 
 	/**
 	 * @return the payRequestAmount
@@ -310,51 +398,6 @@ public class PayPortTestDataSupplier {
 	}
 
 	/**
-	 * @return the cancelRequestCancelMode
-	 */
-	public CancelMode getCancelRequestCancelMode() {
-		return cancelRequestCancelMode;
-	}
-
-	/**
-	 * @param cancelRequestCancelMode
-	 *            the cancelRequestCancelMode to set
-	 */
-	public void setCancelRequestCancelMode(CancelMode cancelRequestCancelMode) {
-		this.cancelRequestCancelMode = cancelRequestCancelMode;
-	}
-
-	/**
-	 * @return the payRequestRecurringAmount
-	 */
-	public BigDecimal getPayRequestRecurringAmount() {
-		return payRequestRecurringAmount;
-	}
-
-	/**
-	 * @param payRequestRecurringAmount
-	 *            the payRequestRecurringAmount to set
-	 */
-	public void setPayRequestRecurringAmount(BigDecimal payRequestRecurringAmount) {
-		this.payRequestRecurringAmount = payRequestRecurringAmount;
-	}
-
-	/**
-	 * @return the payRequestRecurringCurrency
-	 */
-	public String getPayRequestRecurringCurrency() {
-		return payRequestRecurringCurrency;
-	}
-
-	/**
-	 * @param payRequestRecurringCurrency
-	 *            the payRequestRecurringCurrency to set
-	 */
-	public void setPayRequestRecurringCurrency(String payRequestRecurringCurrency) {
-		this.payRequestRecurringCurrency = payRequestRecurringCurrency;
-	}
-
-	/**
 	 * @return the payRequestCreateRecurringDescription
 	 */
 	public String getPayRequestCreateRecurringDescription() {
@@ -385,66 +428,6 @@ public class PayPortTestDataSupplier {
 	}
 
 	/**
-	 * @return the creditRequestMoneyAmount
-	 */
-	public BigDecimal getCreditRequestMoneyAmount() {
-		return creditRequestMoneyAmount;
-	}
-
-	/**
-	 * @param creditRequestMoneyAmount
-	 *            the creditRequestMoneyAmount to set
-	 */
-	public void setCreditRequestMoneyAmount(BigDecimal creditRequestMoneyAmount) {
-		this.creditRequestMoneyAmount = creditRequestMoneyAmount;
-	}
-
-	/**
-	 * @return the creditRequestMoneyCurrency
-	 */
-	public String getCreditRequestMoneyCurrency() {
-		return creditRequestMoneyCurrency;
-	}
-
-	/**
-	 * @param creditRequestMoneyCurrency
-	 *            the creditRequestMoneyCurrency to set
-	 */
-	public void setCreditRequestMoneyCurrency(String creditRequestMoneyCurrency) {
-		this.creditRequestMoneyCurrency = creditRequestMoneyCurrency;
-	}
-
-	/**
-	 * @return the creditRequestCrn
-	 */
-	public Long getCreditRequestCrn() {
-		return creditRequestCrn;
-	}
-
-	/**
-	 * @param creditRequestCrn
-	 *            the creditRequestCrn to set
-	 */
-	public void setCreditRequestCrn(Long creditRequestCrn) {
-		this.creditRequestCrn = creditRequestCrn;
-	}
-
-	/**
-	 * @return the creditRequestEmail
-	 */
-	public String getCreditRequestEmail() {
-		return creditRequestEmail;
-	}
-
-	/**
-	 * @param creditRequestEmail
-	 *            the creditRequestEmail to set
-	 */
-	public void setCreditRequestEmail(String creditRequestEmail) {
-		this.creditRequestEmail = creditRequestEmail;
-	}
-
-	/**
 	 * @return the refundRequestTransactionID
 	 */
 	public Long getRefundRequestTransactionID() {
@@ -457,21 +440,6 @@ public class PayPortTestDataSupplier {
 	 */
 	public void setRefundRequestTransactionID(Long refundRequestTransactionID) {
 		this.refundRequestTransactionID = refundRequestTransactionID;
-	}
-
-	/**
-	 * @return the payRequestRecurringPaymentAuthorizationID
-	 */
-	public Long getPayRequestRecurringPaymentAuthorizationID() {
-		return payRequestRecurringPaymentAuthorizationID;
-	}
-
-	/**
-	 * @param payRequestRecurringPaymentAuthorizationID
-	 *            the payRequestRecurringPaymentAuthorizationID to set
-	 */
-	public void setPayRequestRecurringPaymentAuthorizationID(Long payRequestRecurringPaymentAuthorizationID) {
-		this.payRequestRecurringPaymentAuthorizationID = payRequestRecurringPaymentAuthorizationID;
 	}
 
 }
