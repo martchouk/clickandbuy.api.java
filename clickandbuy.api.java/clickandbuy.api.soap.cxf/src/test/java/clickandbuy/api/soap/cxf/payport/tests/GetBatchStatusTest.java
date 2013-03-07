@@ -37,7 +37,7 @@ import com.clickandbuy.api.soap.cxf.PayRequestDetails;
 /**
  * Tests related to GetBatchStatus
  * 
- * @author Ciprian.Ileana
+ * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
  */

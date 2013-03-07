@@ -41,7 +41,7 @@
 							<sourceRoot>${project.build.directory}/generated/src</sourceRoot>
 							<wsdlOptions>
 								<wsdlOption>
-									<!--wsdl>https://api.clickandbuy.com/webservices/pay_1_1_0.wsdl</wsdl-->
+									<!--wsdl>https://api.clickandbuy.com/webservices/pay_1_1_0.wsdl</wsdl -->
 									<wsdl>src/main/resources/META-INF/pay_1_1_0.wsdl</wsdl>
 									<extraargs>
 										<extraarg>-p</extraarg>
@@ -94,15 +94,12 @@
 			<artifactId>cxf-rt-transports-http</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
-		<!--dependency>
-			<groupId>clickandbuy</groupId>
-			<artifactId>clickandbuy.api.schema</artifactId>
+		<!--dependency> <groupId>clickandbuy</groupId> <artifactId>clickandbuy.api.schema</artifactId> 
+			<version>1.0.0-SNAPSHOT</version> </dependency -->
+		<dependency>
+			<groupId>com.clickandbuy.api</groupId>
+			<artifactId>util</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
-		</dependency-->
-		<dependency> 
-			<groupId>com.clickandbuy.api</groupId> 
-			<artifactId>util</artifactId> 
-			<version>1.0.0-SNAPSHOT</version> 
 		</dependency>
 	</dependencies>
 	<dependencyManagement>

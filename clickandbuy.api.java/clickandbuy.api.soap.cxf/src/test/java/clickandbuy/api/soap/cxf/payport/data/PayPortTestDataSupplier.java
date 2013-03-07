@@ -52,11 +52,14 @@ public class PayPortTestDataSupplier {
 
 	/** PayRequestRecurring Test data */
 
-	@Value("${payPort.PayRequestRecurring.amount.amount}")
+	@Value("${payPort.payRequestRecurring.amount.amount}")
 	private BigDecimal	payRequestRecurringAmount;
 
-	@Value("${payPort.PayRequestRecurring.amount.currency}")
+	@Value("${payPort.payRequestRecurring.amount.currency}")
 	private String		payRequestRecurringCurrency;
+
+	@Value("${payPort.payRequestRecurring.paymentAuthorizationID}")
+	private Long		payRequestRecurringPaymentAuthorizationID;
 
 	/** PayRequest Test data */
 
@@ -106,6 +109,8 @@ public class PayPortTestDataSupplier {
 	private String		payRequestCreateRecurringExpireDate;
 
 	/** RefundRequest Test data */
+	@Value("${payPort.refundRequest.transactionID}")
+	private Long		refundRequestTransactionID;
 
 	/** Status Request Test data */
 
@@ -437,6 +442,36 @@ public class PayPortTestDataSupplier {
 	 */
 	public void setCreditRequestEmail(String creditRequestEmail) {
 		this.creditRequestEmail = creditRequestEmail;
+	}
+
+	/**
+	 * @return the refundRequestTransactionID
+	 */
+	public Long getRefundRequestTransactionID() {
+		return refundRequestTransactionID;
+	}
+
+	/**
+	 * @param refundRequestTransactionID
+	 *            the refundRequestTransactionID to set
+	 */
+	public void setRefundRequestTransactionID(Long refundRequestTransactionID) {
+		this.refundRequestTransactionID = refundRequestTransactionID;
+	}
+
+	/**
+	 * @return the payRequestRecurringPaymentAuthorizationID
+	 */
+	public Long getPayRequestRecurringPaymentAuthorizationID() {
+		return payRequestRecurringPaymentAuthorizationID;
+	}
+
+	/**
+	 * @param payRequestRecurringPaymentAuthorizationID
+	 *            the payRequestRecurringPaymentAuthorizationID to set
+	 */
+	public void setPayRequestRecurringPaymentAuthorizationID(Long payRequestRecurringPaymentAuthorizationID) {
+		this.payRequestRecurringPaymentAuthorizationID = payRequestRecurringPaymentAuthorizationID;
 	}
 
 }
