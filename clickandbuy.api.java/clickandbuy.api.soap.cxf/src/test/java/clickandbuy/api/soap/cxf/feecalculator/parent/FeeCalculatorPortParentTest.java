@@ -17,19 +17,31 @@ import com.clickandbuy.api.soap.cxf.FeeCalculatorPortType;
  * 
  */
 public class FeeCalculatorPortParentTest extends ParentTest {
-	public static final Logger					logger	= Logger.getLogger(FeeCalculatorPortParentTest.class);
-
-	@Value("${acceptSelfSignedCertificates}")
-	boolean										acceptSelfSignedCertificates;
-
-	@Autowired
-	public FeeCalculatorPortType				feeCalculatorPortType;
-
-	@Autowired
-	public FeeCalculatorPortTestDataSupplier	testData;
+	/**
+	 * class logger.
+	 */
+	private static final Logger					logger	= Logger.getLogger(FeeCalculatorPortParentTest.class);
 
 	/**
-	 * 
+	 * flag to setup acceptance for self signet certificates (specific for test systems).
+	 */
+	@Value("${acceptSelfSignedCertificates}")
+	private boolean								acceptSelfSignedCertificates;
+
+	/**
+	 * web service facade, containing fee related methods.
+	 */
+	@Autowired
+	protected FeeCalculatorPortType				feeCalculatorPortType;
+
+	/**
+	 * test data supplier.
+	 */
+	@Autowired
+	protected FeeCalculatorPortTestDataSupplier	testData;
+
+	/**
+	 * Config helper method for certificates policy.
 	 */
 	public void configureCertificatesPolicy() {
 		if (acceptSelfSignedCertificates) {

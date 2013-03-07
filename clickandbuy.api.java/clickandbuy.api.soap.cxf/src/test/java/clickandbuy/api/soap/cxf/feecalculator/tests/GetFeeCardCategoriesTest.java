@@ -1,5 +1,6 @@
 package clickandbuy.api.soap.cxf.feecalculator.tests;
 
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +23,11 @@ import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesResponse;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class GetFeeCardCategoriesTest extends FeeCalculatorPortParentTest {
+
+	/**
+	 * class logger.
+	 */
+	private static final Logger	logger	= Logger.getLogger(GetFeeCardCategoriesTest.class);
 
 	/**
 	 * test setup.

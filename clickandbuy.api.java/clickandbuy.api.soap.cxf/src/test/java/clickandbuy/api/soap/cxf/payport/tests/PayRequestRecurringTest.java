@@ -5,6 +5,7 @@ package clickandbuy.api.soap.cxf.payport.tests;
 
 import static clickandbuy.api.soap.cxf.util.TestUtil.prepareMoney;
 
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,9 +30,22 @@ import com.clickandbuy.api.soap.cxf.PayRequestRecurringResponse;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class PayRequestRecurringTest extends PayPortParentTest {
 
-	@Autowired
-	PayPortTestDataSupplier	payPortTestDataSupplier;
+	/**
+	 * class logger.
+	 */
+	private static final Logger		logger	= Logger.getLogger(PayRequestRecurringTest.class);
 
+	/**
+	 * test data supplier.
+	 */
+	@Autowired
+	private PayPortTestDataSupplier	payPortTestDataSupplier;
+
+	/**
+	 * test setup.
+	 * 
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();

@@ -6,6 +6,7 @@ package clickandbuy.api.soap.cxf.payport.tests;
 import static clickandbuy.api.soap.cxf.util.TestUtil.prepareMoney;
 import junit.framework.Assert;
 
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,13 +40,24 @@ import com.clickandbuy.api.soap.cxf.PayRequestDetails;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class AddBathItemTest extends PayPortParentTest {
 
-	@Autowired
-	PayPortTestDataSupplier	payPortTestDataSupplier;
-
-	private Long			batchID	= null;
+	/**
+	 * class logger.
+	 */
+	private static final Logger		logger	= Logger.getLogger(AddBathItemTest.class);
 
 	/**
-	 * 
+	 * test data supplier.
+	 */
+	@Autowired
+	private PayPortTestDataSupplier	payPortTestDataSupplier;
+
+	/**
+	 * batch id.
+	 */
+	private Long					batchID	= null;
+
+	/**
+	 * test setup.
 	 */
 	@Before
 	public void setUp() {
@@ -64,7 +76,7 @@ public class AddBathItemTest extends PayPortParentTest {
 	public void testAddBatchItem() {
 		AddBatchItemResponse addBatchItemResponse = null;
 
-		AddBatchItemRequest addBatchItemRequest = new AddBatchItemRequest();
+		final AddBatchItemRequest addBatchItemRequest = new AddBatchItemRequest();
 		addBatchItemRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		addBatchItemRequest.setDetails(prepareAddBatchItemDetails());
 
@@ -80,7 +92,7 @@ public class AddBathItemTest extends PayPortParentTest {
 
 			logger.debug("RequestTrackingId: [" + addBatchItemResponse.getRequestTrackingID() + "]");
 			logger.debug("Successfully added BatchItem with ID: [" + addBatchItemResponse.getBatchItemList().getBatchItem().get(0).getBatchItemID() + "] to Batch with BatchID: [" + addBatchItemResponse.getBatch().getBatchID() + "]");
-		} catch (ErrorDetails_Exception errorDetails_Exception) {
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
 	}
@@ -95,7 +107,7 @@ public class AddBathItemTest extends PayPortParentTest {
 
 		CreateBatchResponse createBatchResponse = null;
 
-		CreateBatchRequest createBatchRequest = new CreateBatchRequest();
+		final CreateBatchRequest createBatchRequest = new CreateBatchRequest();
 		createBatchRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		createBatchRequest.setDetails(prepareCreateBatchDetails());
 
@@ -108,7 +120,7 @@ public class AddBathItemTest extends PayPortParentTest {
 
 			tempBatchID = createBatchResponse.getBatch().getBatchID();
 			logger.debug("Created batch with ID: [" + tempBatchID + "]");
-		} catch (ErrorDetails_Exception errorDetails_Exception) {
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
 
@@ -121,7 +133,7 @@ public class AddBathItemTest extends PayPortParentTest {
 	 * @return the {@link CreateBatchDetails}
 	 */
 	private CreateBatchDetails prepareCreateBatchDetails() {
-		CreateBatchDetails createBatchDetails = new CreateBatchDetails();
+		final CreateBatchDetails createBatchDetails = new CreateBatchDetails();
 
 		createBatchDetails.setExternalBatchID(externalId);
 
@@ -134,7 +146,7 @@ public class AddBathItemTest extends PayPortParentTest {
 	 * @return the {@link AddBatchItemDetails}
 	 */
 	private AddBatchItemDetails prepareAddBatchItemDetails() {
-		AddBatchItemDetails addBatchItemDetails = new AddBatchItemDetails();
+		final AddBatchItemDetails addBatchItemDetails = new AddBatchItemDetails();
 
 		addBatchItemDetails.setBatchID(batchID);
 		addBatchItemDetails.setBatchItemDetailsList(prepareBatchItemDetailsList());
@@ -148,7 +160,7 @@ public class AddBathItemTest extends PayPortParentTest {
 	 * @return the {@link BatchItemDetailsList}
 	 */
 	private BatchItemDetailsList prepareBatchItemDetailsList() {
-		BatchItemDetailsList batchItemDetailsList = new BatchItemDetailsList();
+		final BatchItemDetailsList batchItemDetailsList = new BatchItemDetailsList();
 
 		batchItemDetailsList.getBatchItemDetails().add(prepareBatchItemDetails());
 
@@ -161,7 +173,7 @@ public class AddBathItemTest extends PayPortParentTest {
 	 * @return the {@link BatchItemDetails}
 	 */
 	private BatchItemDetails prepareBatchItemDetails() {
-		BatchItemDetails batchItemDetails = new BatchItemDetails();
+		final BatchItemDetails batchItemDetails = new BatchItemDetails();
 
 		batchItemDetails.setDetails(prepareAddBatchItemProcessingDetails());
 		batchItemDetails.setExternalID(externalId);
@@ -176,7 +188,7 @@ public class AddBathItemTest extends PayPortParentTest {
 	 * @return the ${@link AddBatchItemProcessingDetails}
 	 */
 	private AddBatchItemProcessingDetails prepareAddBatchItemProcessingDetails() {
-		AddBatchItemProcessingDetails addBatchItemProcessingDetails = new AddBatchItemProcessingDetails();
+		final AddBatchItemProcessingDetails addBatchItemProcessingDetails = new AddBatchItemProcessingDetails();
 
 		addBatchItemProcessingDetails.setPayRequestDetails(preparePayRequestDetails());
 
@@ -190,7 +202,7 @@ public class AddBathItemTest extends PayPortParentTest {
 	 * @return the {@link PayRequestDetails}
 	 */
 	private PayRequestDetails preparePayRequestDetails() {
-		PayRequestDetails payRequestDetails = new PayRequestDetails();
+		final PayRequestDetails payRequestDetails = new PayRequestDetails();
 
 		payRequestDetails.setAmount(prepareMoney(payPortTestDataSupplier.getPayRequestAmount(), payPortTestDataSupplier.getPayRequestCurrency()));
 		payRequestDetails.setOrderDetails(prepareOrderDetails());
@@ -204,7 +216,7 @@ public class AddBathItemTest extends PayPortParentTest {
 	 * @return the {@link OrderDetails}
 	 */
 	private OrderDetails prepareOrderDetails() {
-		OrderDetails orderDetails = new OrderDetails();
+		final OrderDetails orderDetails = new OrderDetails();
 
 		orderDetails.setItemList(new OrderDetailItemList());
 		orderDetails.setText(payPortTestDataSupplier.getPayRequestText());

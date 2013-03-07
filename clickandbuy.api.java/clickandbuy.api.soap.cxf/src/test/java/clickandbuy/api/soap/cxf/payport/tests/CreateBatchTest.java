@@ -5,6 +5,7 @@ package clickandbuy.api.soap.cxf.payport.tests;
 
 import junit.framework.Assert;
 
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +30,12 @@ import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 public class CreateBatchTest extends PayPortParentTest {
 
 	/**
-	 * 
+	 * class logger.
+	 */
+	private static final Logger	logger	= Logger.getLogger(CreateBatchTest.class);
+
+	/**
+	 * test setup.
 	 */
 	@Before
 	public void setUp() {
@@ -46,7 +52,7 @@ public class CreateBatchTest extends PayPortParentTest {
 	public void testCreateBatch() {
 		CreateBatchResponse createBatchResponse = null;
 
-		CreateBatchRequest createBatchRequest = new CreateBatchRequest();
+		final CreateBatchRequest createBatchRequest = new CreateBatchRequest();
 		createBatchRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		createBatchRequest.setDetails(prepareCreateBatchDetails());
 
@@ -58,7 +64,7 @@ public class CreateBatchTest extends PayPortParentTest {
 			Assert.assertNotNull("createBatchResponse.getBatch().getBatchID() should not be null!", createBatchResponse.getBatch().getBatchID());
 
 			logger.debug("Created batch with ID: [" + createBatchResponse.getBatch().getBatchID() + "]");
-		} catch (ErrorDetails_Exception errorDetails_Exception) {
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
 	}
@@ -68,8 +74,8 @@ public class CreateBatchTest extends PayPortParentTest {
 	 * 
 	 * @return the {@link CreateBatchDetails}
 	 */
-	public CreateBatchDetails prepareCreateBatchDetails() {
-		CreateBatchDetails createBatchDetails = new CreateBatchDetails();
+	private CreateBatchDetails prepareCreateBatchDetails() {
+		final CreateBatchDetails createBatchDetails = new CreateBatchDetails();
 
 		createBatchDetails.setExternalBatchID(externalId);
 

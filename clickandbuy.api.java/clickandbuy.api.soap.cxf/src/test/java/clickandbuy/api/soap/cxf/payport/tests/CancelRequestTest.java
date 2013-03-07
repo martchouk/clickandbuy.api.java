@@ -7,6 +7,7 @@ import static clickandbuy.api.soap.cxf.util.TestUtil.prepareCancelRequestDetails
 import static clickandbuy.api.soap.cxf.util.TestUtil.prepareMoney;
 import junit.framework.Assert;
 
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,15 +36,29 @@ import com.clickandbuy.api.soap.cxf.PayRequestResponse;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CancelRequestTest extends PayPortParentTest {
 
-	private Long			transactionID					= null;
-
-	private Long			recurringPaymentAuthorizationID	= null;
-
-	@Autowired
-	PayPortTestDataSupplier	payPortTestDataSupplier;
+	/**
+	 * class logger.
+	 */
+	private static final Logger		logger							= Logger.getLogger(CancelRequestTest.class);
 
 	/**
-	 * 
+	 * transaction id.
+	 */
+	private Long					transactionID					= null;
+
+	/**
+	 * recurring payment authorization id.
+	 */
+	private final Long				recurringPaymentAuthorizationID	= null;
+
+	/**
+	 * Test data supplier.
+	 */
+	@Autowired
+	private PayPortTestDataSupplier	payPortTestDataSupplier;
+
+	/**
+	 * test setup.
 	 */
 	@Before
 	public void setUp() {
@@ -62,7 +77,7 @@ public class CancelRequestTest extends PayPortParentTest {
 	public void testCancelRequest() {
 		CancelRequestResponse cancelRequestResponse = null;
 
-		CancelRequestRequest cancelRequestRequest = new CancelRequestRequest();
+		final CancelRequestRequest cancelRequestRequest = new CancelRequestRequest();
 		cancelRequestRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		cancelRequestRequest.setDetails(prepareCancelRequestDetails(recurringPaymentAuthorizationID, transactionID, payPortTestDataSupplier.getCancelRequestCancelMode()));
 
@@ -76,7 +91,7 @@ public class CancelRequestTest extends PayPortParentTest {
 
 			logger.debug("Pay request with transaction ID: [" + cancelRequestResponse.getTransaction().getTransactionID() + "] was canceled");
 			logger.debug("Its current transaction status is: [" + cancelRequestResponse.getTransaction().getTransactionStatus() + "]");
-		} catch (ErrorDetails_Exception errorDetails_Exception) {
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
 	}
@@ -86,11 +101,11 @@ public class CancelRequestTest extends PayPortParentTest {
 	 * 
 	 * @return the transaction ID received from the PayRequest
 	 */
-	public long doPayRequest() {
+	private long doPayRequest() {
 		Long payRequestTransactionID = null;
 		PayRequestResponse payRequestResponse = null;
 
-		PayRequestRequest payRequestRequest = new PayRequestRequest();
+		final PayRequestRequest payRequestRequest = new PayRequestRequest();
 		payRequestRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		payRequestRequest.setDetails(preparePayRequestDetails());
 
@@ -103,7 +118,7 @@ public class CancelRequestTest extends PayPortParentTest {
 
 			payRequestTransactionID = payRequestResponse.getTransaction().getTransactionID();
 			logger.debug("Created transaction with ID: [" + payRequestTransactionID + "]");
-		} catch (ErrorDetails_Exception errorDetails_Exception) {
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
 
@@ -116,7 +131,7 @@ public class CancelRequestTest extends PayPortParentTest {
 	 * @return the ${@link PayRequestDetails}
 	 */
 	private PayRequestDetails preparePayRequestDetails() {
-		PayRequestDetails payRequestDetails = new PayRequestDetails();
+		final PayRequestDetails payRequestDetails = new PayRequestDetails();
 
 		payRequestDetails.setAmount(prepareMoney(payPortTestDataSupplier.getPayRequestAmount(), payPortTestDataSupplier.getPayRequestCurrency()));
 		payRequestDetails.setAuthExpiration(payPortTestDataSupplier.getPayRequestAuthExpiration());
@@ -141,7 +156,7 @@ public class CancelRequestTest extends PayPortParentTest {
 	 * @return the ${@link OrderDetails}
 	 */
 	private OrderDetails prepareOrderDetails() {
-		OrderDetails orderDetails = new OrderDetails();
+		final OrderDetails orderDetails = new OrderDetails();
 
 		orderDetails.setItemList(new OrderDetailItemList());
 		orderDetails.setText(payPortTestDataSupplier.getPayRequestText());

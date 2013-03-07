@@ -5,6 +5,7 @@ package clickandbuy.api.soap.cxf.payport.tests;
 
 import junit.framework.Assert;
 
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +32,15 @@ import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CancelBatchTest extends PayPortParentTest {
 
-	private Long	batchID	= null;
+	/**
+	 * class logger.
+	 */
+	private static final Logger	logger	= Logger.getLogger(CancelBatchTest.class);
+
+	/**
+	 * batch id.
+	 */
+	private Long				batchID	= null;
 
 	/**
 	 * 
@@ -53,7 +62,7 @@ public class CancelBatchTest extends PayPortParentTest {
 	public void testCancelBatch() {
 		CancelBatchResponse cancelBatchResponse = new CancelBatchResponse();
 
-		CancelBatchRequest cancelBatchRequest = new CancelBatchRequest();
+		final CancelBatchRequest cancelBatchRequest = new CancelBatchRequest();
 		cancelBatchRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		cancelBatchRequest.setDetails(prepareCancelBatchDetails());
 
@@ -64,7 +73,7 @@ public class CancelBatchTest extends PayPortParentTest {
 			Assert.assertNotNull("cancelBatchResponse.getBatch() should not be null!", cancelBatchResponse);
 
 			logger.debug("Canceled batch with Id: [" + cancelBatchResponse.getBatch().getBatchID() + "]");
-		} catch (ErrorDetails_Exception errorDetails_Exception) {
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
 	}
@@ -74,12 +83,12 @@ public class CancelBatchTest extends PayPortParentTest {
 	 * 
 	 * @return the ID of the created batch
 	 */
-	public Long doCreateBatch() {
+	private Long doCreateBatch() {
 		Long tempBatchID = null;
 
 		CreateBatchResponse createBatchResponse = null;
 
-		CreateBatchRequest createBatchRequest = new CreateBatchRequest();
+		final CreateBatchRequest createBatchRequest = new CreateBatchRequest();
 		createBatchRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		createBatchRequest.setDetails(prepareCreateBatchDetails());
 
@@ -92,7 +101,7 @@ public class CancelBatchTest extends PayPortParentTest {
 
 			tempBatchID = createBatchResponse.getBatch().getBatchID();
 			logger.debug("Created batch with ID: [" + tempBatchID + "]");
-		} catch (ErrorDetails_Exception errorDetails_Exception) {
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
 
@@ -104,8 +113,8 @@ public class CancelBatchTest extends PayPortParentTest {
 	 * 
 	 * @return the {@link CancelBatchDetails}
 	 */
-	public CancelBatchDetails prepareCancelBatchDetails() {
-		CancelBatchDetails cancelBatchDetails = new CancelBatchDetails();
+	private CancelBatchDetails prepareCancelBatchDetails() {
+		final CancelBatchDetails cancelBatchDetails = new CancelBatchDetails();
 
 		cancelBatchDetails.setBatchID(batchID);
 
@@ -117,8 +126,8 @@ public class CancelBatchTest extends PayPortParentTest {
 	 * 
 	 * @return the {@link CreateBatchDetails}
 	 */
-	public CreateBatchDetails prepareCreateBatchDetails() {
-		CreateBatchDetails createBatchDetails = new CreateBatchDetails();
+	private CreateBatchDetails prepareCreateBatchDetails() {
+		final CreateBatchDetails createBatchDetails = new CreateBatchDetails();
 
 		createBatchDetails.setExternalBatchID(externalId);
 

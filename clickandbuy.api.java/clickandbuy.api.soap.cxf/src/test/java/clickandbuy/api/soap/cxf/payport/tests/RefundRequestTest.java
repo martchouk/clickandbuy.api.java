@@ -6,6 +6,7 @@ package clickandbuy.api.soap.cxf.payport.tests;
 import static clickandbuy.api.soap.cxf.util.TestUtil.prepareMoney;
 import junit.framework.Assert;
 
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,11 +31,19 @@ import com.clickandbuy.api.soap.cxf.RefundRequestResponse;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class RefundRequestTest extends PayPortParentTest {
 
-	@Autowired
-	PayPortTestDataSupplier	payPortTestDataSupplier;
+	/**
+	 * class logger.
+	 */
+	private static final Logger		logger	= Logger.getLogger(RefundRequestTest.class);
 
 	/**
-	 * 
+	 * test data supplier.
+	 */
+	@Autowired
+	private PayPortTestDataSupplier	payPortTestDataSupplier;
+
+	/**
+	 * test setup.
 	 */
 	@Before
 	public void setUp() {
@@ -51,7 +60,7 @@ public class RefundRequestTest extends PayPortParentTest {
 	public void testRefundRequest() {
 		RefundRequestResponse refundRequestResponse = null;
 
-		RefundRequestRequest refundRequestRequest = new RefundRequestRequest();
+		final RefundRequestRequest refundRequestRequest = new RefundRequestRequest();
 		refundRequestRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		refundRequestRequest.setDetails(prepareRefundRequestDetails());
 
@@ -67,7 +76,7 @@ public class RefundRequestTest extends PayPortParentTest {
 			logger.debug("Requested refund for transaction with ID: [" + refundRequestResponse.getTransaction().getTransactionID() + "]");
 			logger.debug("Having transaction status: [" + refundRequestResponse.getTransaction().getTransactionStatus() + "]");
 			logger.debug("And transaction type: [" + refundRequestResponse.getTransaction().getTransactionType() + "]");
-		} catch (ErrorDetails_Exception errorDetails_Exception) {
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
 	}
@@ -77,8 +86,8 @@ public class RefundRequestTest extends PayPortParentTest {
 	 * 
 	 * @return the ${@link RefundRequestDetails}
 	 */
-	public RefundRequestDetails prepareRefundRequestDetails() {
-		RefundRequestDetails refundRequestDetails = new RefundRequestDetails();
+	private RefundRequestDetails prepareRefundRequestDetails() {
+		final RefundRequestDetails refundRequestDetails = new RefundRequestDetails();
 
 		refundRequestDetails.setAmount(prepareMoney(payPortTestDataSupplier.getPayRequestAmount(), payPortTestDataSupplier.getPayRequestCurrency()));
 		refundRequestDetails.setTransactionID(payPortTestDataSupplier.getRefundRequestTransactionID());

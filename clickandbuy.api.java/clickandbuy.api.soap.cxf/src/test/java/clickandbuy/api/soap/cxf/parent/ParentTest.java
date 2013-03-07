@@ -26,32 +26,54 @@ import com.clickandbuy.api.util.auth.SignatureHandler;
 @ActiveProfiles("DEVELOPMENT2")
 @ContextConfiguration(locations = { "classpath:/META-INF/spring/itest/clickandbuy.api.soap.cxf.spring.xml" })
 public class ParentTest {
-	public static final Logger	logger	= Logger.getLogger(ParentTest.class);
 
+	/**
+	 * class logger.
+	 */
+	private static final Logger	logger	= Logger.getLogger(ParentTest.class);
+
+	/**
+	 * signature handler service.
+	 */
 	@Autowired
 	protected SignatureHandler	signatureHandler;
 
+	/**
+	 * current merchant id.
+	 */
 	@Value("${merchantId}")
 	protected long				merchantId;
 
+	/**
+	 * project id.
+	 */
 	@Value("${projectId}")
 	protected long				projectId;
 
+	/**
+	 * secret key.
+	 */
 	@Value("${secretKey}")
 	protected String			secretKey;
 
+	/**
+	 * business origin id. (Specific for web shop systems).
+	 */
 	@Value("${businessOriginID}")
 	protected String			businessOriginID;
 
+	/**
+	 * external id.
+	 */
 	@Value("${externalId}")
 	protected String			externalId;
 
 	/**
 	 * 
 	 */
-	public void configureCertificatesPolicy(Client proxy) {
-		HTTPConduit conduit = (HTTPConduit) proxy.getConduit();
-		TLSClientParameters tlsClientParameters = new TLSClientParameters();
+	public void configureCertificatesPolicy(final Client proxy) {
+		final HTTPConduit conduit = (HTTPConduit) proxy.getConduit();
+		final TLSClientParameters tlsClientParameters = new TLSClientParameters();
 		tlsClientParameters.setTrustManagers(new TrustManager[] { new TrustAllX509TrustManager() });
 		tlsClientParameters.setDisableCNCheck(true);// end authentication server
 		conduit.setTlsClientParameters(tlsClientParameters);
@@ -64,7 +86,7 @@ public class ParentTest {
 	 * @return Authentication
 	 */
 	public Authentication prepareAuthenticationBasedOnProjectID() {
-		Authentication merchantAuth = new Authentication();
+		final Authentication merchantAuth = new Authentication();
 		merchantAuth.setProjectID(nullToZero(projectId));
 		merchantAuth.setMerchantID(nullToZero(merchantId));
 		merchantAuth.setToken(signatureHandler.createTokenForPayPort(projectId, secretKey));
@@ -75,7 +97,7 @@ public class ParentTest {
 	 * @param num
 	 * @return
 	 */
-	public long nullToZero(Long num) {
+	public long nullToZero(final Long num) {
 		return num == null ? 0 : num.longValue();
 	}
 }

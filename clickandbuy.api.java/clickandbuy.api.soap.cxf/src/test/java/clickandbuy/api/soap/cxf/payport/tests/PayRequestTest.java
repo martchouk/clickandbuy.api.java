@@ -12,6 +12,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 
 import junit.framework.Assert;
 
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,11 +41,19 @@ import com.clickandbuy.api.soap.cxf.RecurringPaymentAuthorization;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class PayRequestTest extends PayPortParentTest {
 
-	@Autowired
-	PayPortTestDataSupplier	payPortTestDataSupplier;
+	/**
+	 * class logger.
+	 */
+	private static final Logger		logger	= Logger.getLogger(PayRequestTest.class);
 
 	/**
-	 * 
+	 * test data supplier.
+	 */
+	@Autowired
+	private PayPortTestDataSupplier	payPortTestDataSupplier;
+
+	/**
+	 * test setup.
 	 */
 	@Before
 	public void setUp() {
@@ -64,7 +73,7 @@ public class PayRequestTest extends PayPortParentTest {
 	public void testPayRequest() throws ErrorDetails_Exception {
 		PayRequestResponse payRequestResponse = null;
 
-		PayRequestRequest payRequestRequest = new PayRequestRequest();
+		final PayRequestRequest payRequestRequest = new PayRequestRequest();
 		payRequestRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		payRequestRequest.setDetails(preparePayRequestDetails());
 
@@ -79,7 +88,7 @@ public class PayRequestTest extends PayPortParentTest {
 			logger.debug("Created transaction with ID: [" + payRequestResponse.getTransaction().getTransactionID() + "]");
 			logger.info("You can use the Transaction ID: [" + payRequestResponse.getTransaction().getTransactionID() + "] to make a Refund Request, after you complete the flow you'll find here ["
 					+ payRequestResponse.getTransaction().getRedirectURL() + "]");
-		} catch (ErrorDetails_Exception errorDetails_Exception) {
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 			throw errorDetails_Exception;
 		}
@@ -129,7 +138,7 @@ public class PayRequestTest extends PayPortParentTest {
 	 * @return the ${@link PayRequestDetails}
 	 */
 	private PayRequestDetails preparePayRequestDetails() {
-		PayRequestDetails payRequestDetails = new PayRequestDetails();
+		final PayRequestDetails payRequestDetails = new PayRequestDetails();
 
 		payRequestDetails.setAmount(prepareMoney(payPortTestDataSupplier.getPayRequestAmount(), payPortTestDataSupplier.getPayRequestCurrency()));
 		payRequestDetails.setAuthExpiration(payPortTestDataSupplier.getPayRequestAuthExpiration());
@@ -156,7 +165,7 @@ public class PayRequestTest extends PayPortParentTest {
 	 * @throws ParseException
 	 */
 	private PayRequestDetails preparePayRequestDetailsForRecurringAuthorization() throws ParseException, DatatypeConfigurationException {
-		PayRequestDetails payRequestDetails = preparePayRequestDetails();
+		final PayRequestDetails payRequestDetails = preparePayRequestDetails();
 
 		payRequestDetails.setCreateRecurring(prepareRecurringPaymentAuthorization());
 
@@ -169,7 +178,7 @@ public class PayRequestTest extends PayPortParentTest {
 	 * @return the ${@link OrderDetails}
 	 */
 	private OrderDetails prepareOrderDetails() {
-		OrderDetails orderDetails = new OrderDetails();
+		final OrderDetails orderDetails = new OrderDetails();
 
 		orderDetails.setItemList(new OrderDetailItemList());
 		orderDetails.setText(payPortTestDataSupplier.getPayRequestText());

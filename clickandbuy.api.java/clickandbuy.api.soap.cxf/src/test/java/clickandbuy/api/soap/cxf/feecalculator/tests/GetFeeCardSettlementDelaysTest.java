@@ -1,5 +1,6 @@
 package clickandbuy.api.soap.cxf.feecalculator.tests;
 
+import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,6 +27,11 @@ import com.clickandbuy.api.soap.cxf.GetFeeCardSettlementDelaysResponse;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class GetFeeCardSettlementDelaysTest extends FeeCalculatorPortParentTest {
+
+	/**
+	 * class logger.
+	 */
+	private static final Logger				logger							= Logger.getLogger(GetFeeCardSettlementDelaysTest.class);
 
 	/**
 	 * fee card categories response.

@@ -21,13 +21,6 @@ public class PayPortTestDataSupplier {
 	/** CancelBatch Test data */
 
 	/** CancelRequest Test data */
-	// @Value("${payPort.cancelRequest.cancelIdentifier.recurringPaymentAuthorizationID}")
-	// normally will be determined at runtime by running a PayRequestRecurring
-	// private Long cancelRequestRecurringPaymentAuthorizationID;
-
-	// @Value("${payPort.cancelRequest.cancelIdentifier.transactionID}")
-	// normally will be determined at runtime by running a PayRequest
-	// private Long cancelRequestTransactionID;
 
 	@Value("${payPort.cancelRequest.cancelMode}")
 	private CancelMode	cancelRequestCancelMode;
@@ -122,26 +115,10 @@ public class PayPortTestDataSupplier {
 	}
 
 	/**
-	 * @param payRequestAmount
-	 *            the payRequestAmount to set
-	 */
-	public void setPayRequestAmount(BigDecimal payRequestAmount) {
-		this.payRequestAmount = payRequestAmount;
-	}
-
-	/**
 	 * @return the payRequestCurrency
 	 */
 	public String getPayRequestCurrency() {
 		return payRequestCurrency;
-	}
-
-	/**
-	 * @param payRequestCurrency
-	 *            the payRequestCurrency to set
-	 */
-	public void setPayRequestCurrency(String payRequestCurrency) {
-		this.payRequestCurrency = payRequestCurrency;
 	}
 
 	/**
@@ -152,26 +129,10 @@ public class PayPortTestDataSupplier {
 	}
 
 	/**
-	 * @param payRequestText
-	 *            the payRequestText to set
-	 */
-	public void setPayRequestText(String payRequestText) {
-		this.payRequestText = payRequestText;
-	}
-
-	/**
 	 * @return the payRequestBasketRisk
 	 */
 	public int getPayRequestBasketRisk() {
 		return payRequestBasketRisk;
-	}
-
-	/**
-	 * @param payRequestBasketRisk
-	 *            the payRequestBasketRisk to set
-	 */
-	public void setPayRequestBasketRisk(int payRequestBasketRisk) {
-		this.payRequestBasketRisk = payRequestBasketRisk;
 	}
 
 	/**
@@ -182,26 +143,10 @@ public class PayPortTestDataSupplier {
 	}
 
 	/**
-	 * @param payRequestClientRisk
-	 *            the payRequestClientRisk to set
-	 */
-	public void setPayRequestClientRisk(int payRequestClientRisk) {
-		this.payRequestClientRisk = payRequestClientRisk;
-	}
-
-	/**
 	 * @return the payRequestAuthExpiration
 	 */
 	public int getPayRequestAuthExpiration() {
 		return payRequestAuthExpiration;
-	}
-
-	/**
-	 * @param payRequestAuthExpiration
-	 *            the payRequestAuthExpiration to set
-	 */
-	public void setPayRequestAuthExpiration(int payRequestAuthExpiration) {
-		this.payRequestAuthExpiration = payRequestAuthExpiration;
 	}
 
 	/**
@@ -212,26 +157,10 @@ public class PayPortTestDataSupplier {
 	}
 
 	/**
-	 * @param payRequestConfirmExpiration
-	 *            the payRequestConfirmExpiration to set
-	 */
-	public void setPayRequestConfirmExpiration(int payRequestConfirmExpiration) {
-		this.payRequestConfirmExpiration = payRequestConfirmExpiration;
-	}
-
-	/**
 	 * @return the payRequestSuccessExpiration
 	 */
 	public int getPayRequestSuccessExpiration() {
 		return payRequestSuccessExpiration;
-	}
-
-	/**
-	 * @param payRequestSuccessExpiration
-	 *            the payRequestSuccessExpiration to set
-	 */
-	public void setPayRequestSuccessExpiration(int payRequestSuccessExpiration) {
-		this.payRequestSuccessExpiration = payRequestSuccessExpiration;
 	}
 
 	/**
@@ -242,26 +171,10 @@ public class PayPortTestDataSupplier {
 	}
 
 	/**
-	 * @param payRequestSuccessURI
-	 *            the payRequestSuccessURI to set
-	 */
-	public void setPayRequestSuccessURI(String payRequestSuccessURI) {
-		this.payRequestSuccessURI = payRequestSuccessURI;
-	}
-
-	/**
 	 * @return the payRequestFailureURI
 	 */
 	public String getPayRequestFailureURI() {
 		return payRequestFailureURI;
-	}
-
-	/**
-	 * @param payRequestFailureURI
-	 *            the payRequestFailureURI to set
-	 */
-	public void setPayRequestFailureURI(String payRequestFailureURI) {
-		this.payRequestFailureURI = payRequestFailureURI;
 	}
 
 	/**
@@ -272,26 +185,10 @@ public class PayPortTestDataSupplier {
 	}
 
 	/**
-	 * @param payRequestConsumerIPAddress
-	 *            the payRequestConsumerIPAddress to set
-	 */
-	public void setPayRequestConsumerIPAddress(String payRequestConsumerIPAddress) {
-		this.payRequestConsumerIPAddress = payRequestConsumerIPAddress;
-	}
-
-	/**
 	 * @return the payRequestConsumerLanguage
 	 */
 	public String getPayRequestConsumerLanguage() {
 		return payRequestConsumerLanguage;
-	}
-
-	/**
-	 * @param payRequestConsumerLanguage
-	 *            the payRequestConsumerLanguage to set
-	 */
-	public void setPayRequestConsumerLanguage(String payRequestConsumerLanguage) {
-		this.payRequestConsumerLanguage = payRequestConsumerLanguage;
 	}
 
 	/**
@@ -302,26 +199,10 @@ public class PayPortTestDataSupplier {
 	}
 
 	/**
-	 * @param payRequestConsumerNation
-	 *            the payRequestConsumerNation to set
-	 */
-	public void setPayRequestConsumerNation(String payRequestConsumerNation) {
-		this.payRequestConsumerNation = payRequestConsumerNation;
-	}
-
-	/**
 	 * @return the cancelRequestCancelMode
 	 */
 	public CancelMode getCancelRequestCancelMode() {
 		return cancelRequestCancelMode;
-	}
-
-	/**
-	 * @param cancelRequestCancelMode
-	 *            the cancelRequestCancelMode to set
-	 */
-	public void setCancelRequestCancelMode(CancelMode cancelRequestCancelMode) {
-		this.cancelRequestCancelMode = cancelRequestCancelMode;
 	}
 
 	/**
@@ -332,26 +213,10 @@ public class PayPortTestDataSupplier {
 	}
 
 	/**
-	 * @param payRequestRecurringAmount
-	 *            the payRequestRecurringAmount to set
-	 */
-	public void setPayRequestRecurringAmount(BigDecimal payRequestRecurringAmount) {
-		this.payRequestRecurringAmount = payRequestRecurringAmount;
-	}
-
-	/**
 	 * @return the payRequestRecurringCurrency
 	 */
 	public String getPayRequestRecurringCurrency() {
 		return payRequestRecurringCurrency;
-	}
-
-	/**
-	 * @param payRequestRecurringCurrency
-	 *            the payRequestRecurringCurrency to set
-	 */
-	public void setPayRequestRecurringCurrency(String payRequestRecurringCurrency) {
-		this.payRequestRecurringCurrency = payRequestRecurringCurrency;
 	}
 
 	/**
@@ -362,26 +227,10 @@ public class PayPortTestDataSupplier {
 	}
 
 	/**
-	 * @param payRequestCreateRecurringDescription
-	 *            the payRequestCreateRecurringDescription to set
-	 */
-	public void setPayRequestCreateRecurringDescription(String payRequestCreateRecurringDescription) {
-		this.payRequestCreateRecurringDescription = payRequestCreateRecurringDescription;
-	}
-
-	/**
 	 * @return the payRequestCreateRecurringExpireDate
 	 */
 	public String getPayRequestCreateRecurringExpireDate() {
 		return payRequestCreateRecurringExpireDate;
-	}
-
-	/**
-	 * @param payRequestCreateRecurringExpireDate
-	 *            the payRequestCreateRecurringExpireDate to set
-	 */
-	public void setPayRequestCreateRecurringExpireDate(String payRequestCreateRecurringExpireDate) {
-		this.payRequestCreateRecurringExpireDate = payRequestCreateRecurringExpireDate;
 	}
 
 	/**
@@ -392,26 +241,10 @@ public class PayPortTestDataSupplier {
 	}
 
 	/**
-	 * @param creditRequestMoneyAmount
-	 *            the creditRequestMoneyAmount to set
-	 */
-	public void setCreditRequestMoneyAmount(BigDecimal creditRequestMoneyAmount) {
-		this.creditRequestMoneyAmount = creditRequestMoneyAmount;
-	}
-
-	/**
 	 * @return the creditRequestMoneyCurrency
 	 */
 	public String getCreditRequestMoneyCurrency() {
 		return creditRequestMoneyCurrency;
-	}
-
-	/**
-	 * @param creditRequestMoneyCurrency
-	 *            the creditRequestMoneyCurrency to set
-	 */
-	public void setCreditRequestMoneyCurrency(String creditRequestMoneyCurrency) {
-		this.creditRequestMoneyCurrency = creditRequestMoneyCurrency;
 	}
 
 	/**
@@ -422,26 +255,10 @@ public class PayPortTestDataSupplier {
 	}
 
 	/**
-	 * @param creditRequestCrn
-	 *            the creditRequestCrn to set
-	 */
-	public void setCreditRequestCrn(Long creditRequestCrn) {
-		this.creditRequestCrn = creditRequestCrn;
-	}
-
-	/**
 	 * @return the creditRequestEmail
 	 */
 	public String getCreditRequestEmail() {
 		return creditRequestEmail;
-	}
-
-	/**
-	 * @param creditRequestEmail
-	 *            the creditRequestEmail to set
-	 */
-	public void setCreditRequestEmail(String creditRequestEmail) {
-		this.creditRequestEmail = creditRequestEmail;
 	}
 
 	/**
@@ -452,26 +269,10 @@ public class PayPortTestDataSupplier {
 	}
 
 	/**
-	 * @param refundRequestTransactionID
-	 *            the refundRequestTransactionID to set
-	 */
-	public void setRefundRequestTransactionID(Long refundRequestTransactionID) {
-		this.refundRequestTransactionID = refundRequestTransactionID;
-	}
-
-	/**
 	 * @return the payRequestRecurringPaymentAuthorizationID
 	 */
 	public Long getPayRequestRecurringPaymentAuthorizationID() {
 		return payRequestRecurringPaymentAuthorizationID;
-	}
-
-	/**
-	 * @param payRequestRecurringPaymentAuthorizationID
-	 *            the payRequestRecurringPaymentAuthorizationID to set
-	 */
-	public void setPayRequestRecurringPaymentAuthorizationID(Long payRequestRecurringPaymentAuthorizationID) {
-		this.payRequestRecurringPaymentAuthorizationID = payRequestRecurringPaymentAuthorizationID;
 	}
 
 }

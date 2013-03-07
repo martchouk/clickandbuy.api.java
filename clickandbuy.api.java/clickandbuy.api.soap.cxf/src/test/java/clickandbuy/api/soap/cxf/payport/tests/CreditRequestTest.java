@@ -6,6 +6,7 @@ package clickandbuy.api.soap.cxf.payport.tests;
 import static clickandbuy.api.soap.cxf.util.TestUtil.prepareMoney;
 import junit.framework.Assert;
 
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,11 +32,19 @@ import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CreditRequestTest extends PayPortParentTest {
 
-	@Autowired
-	PayPortTestDataSupplier	payPortTestDataSupplier;
+	/**
+	 * class logger.
+	 */
+	private static final Logger		logger	= Logger.getLogger(CreditRequestTest.class);
 
 	/**
-	 * 
+	 * test data supplier.
+	 */
+	@Autowired
+	private PayPortTestDataSupplier	payPortTestDataSupplier;
+
+	/**
+	 * test setup.
 	 */
 	@Before
 	public void setUp() {
@@ -52,7 +61,7 @@ public class CreditRequestTest extends PayPortParentTest {
 	public void testCreditRequest() {
 		CreditRequestResponse creditRequestResponse = null;
 
-		CreditRequestRequest creditRequestRequest = new CreditRequestRequest();
+		final CreditRequestRequest creditRequestRequest = new CreditRequestRequest();
 		creditRequestRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		creditRequestRequest.setDetails(prepareCreditRequestDetails());
 
@@ -68,7 +77,7 @@ public class CreditRequestTest extends PayPortParentTest {
 			logger.debug("Created transaction with ID: [" + creditRequestResponse.getTransaction().getTransactionID() + "]");
 			logger.debug("Having transaction status: [" + creditRequestResponse.getTransaction().getTransactionStatus() + "]");
 			logger.debug("And transaction type: [" + creditRequestResponse.getTransaction().getTransactionType() + "]");
-		} catch (ErrorDetails_Exception errorDetails_Exception) {
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
 	}
@@ -79,7 +88,7 @@ public class CreditRequestTest extends PayPortParentTest {
 	 * @return the ${@link CreditRequestDetails}
 	 */
 	private CreditRequestDetails prepareCreditRequestDetails() {
-		CreditRequestDetails creditRequestDetails = new CreditRequestDetails();
+		final CreditRequestDetails creditRequestDetails = new CreditRequestDetails();
 
 		creditRequestDetails.setAmount(prepareMoney(payPortTestDataSupplier.getCreditRequestMoneyAmount(), payPortTestDataSupplier.getCreditRequestMoneyCurrency()));
 		creditRequestDetails.setExternalID(externalId);
@@ -94,7 +103,7 @@ public class CreditRequestTest extends PayPortParentTest {
 	 * @return the ${@link CreditRecipientIdentifier}
 	 */
 	private CreditRecipientIdentifier prepareCreditRecipientIdentifier() {
-		CreditRecipientIdentifier creditRecipientIdentifier = new CreditRecipientIdentifier();
+		final CreditRecipientIdentifier creditRecipientIdentifier = new CreditRecipientIdentifier();
 
 		creditRecipientIdentifier.setEmailAddress(payPortTestDataSupplier.getCreditRequestEmail());
 

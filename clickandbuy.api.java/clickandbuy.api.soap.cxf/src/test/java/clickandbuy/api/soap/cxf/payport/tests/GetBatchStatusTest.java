@@ -6,6 +6,7 @@ package clickandbuy.api.soap.cxf.payport.tests;
 import static clickandbuy.api.soap.cxf.util.TestUtil.prepareMoney;
 import junit.framework.Assert;
 
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,15 +45,29 @@ import com.clickandbuy.api.soap.cxf.PayRequestDetails;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class GetBatchStatusTest extends PayPortParentTest {
 
-	@Autowired
-	PayPortTestDataSupplier	payPortTestDataSupplier;
-
-	private Long			batchID		= null;
-
-	private Long			batchItemID	= null;
+	/**
+	 * class logger.
+	 */
+	private static final Logger		logger		= Logger.getLogger(GetBatchStatusTest.class);
 
 	/**
-	 * 
+	 * test data supplier.
+	 */
+	@Autowired
+	private PayPortTestDataSupplier	payPortTestDataSupplier;
+
+	/**
+	 * batch ID.
+	 */
+	private Long					batchID		= null;
+
+	/**
+	 * batch item ID.
+	 */
+	private Long					batchItemID	= null;
+
+	/**
+	 * test setup.
 	 */
 	@Before
 	public void setUp() {
@@ -72,7 +87,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	public void testGetBatchStatus() {
 		GetBatchStatusResponse getBatchStatusResponse = null;
 
-		GetBatchStatusRequest getBatchStatusRequest = new GetBatchStatusRequest();
+		final GetBatchStatusRequest getBatchStatusRequest = new GetBatchStatusRequest();
 		getBatchStatusRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		getBatchStatusRequest.setDetails(prepareGetBatchStatusDetails());
 
@@ -80,10 +95,10 @@ public class GetBatchStatusTest extends PayPortParentTest {
 			getBatchStatusResponse = payPortType.getBatchStatus(getBatchStatusRequest);
 
 			logger.debug("Batch with Batch ID: [" + getBatchStatusResponse.getBatch().getBatchID() + "] have status: [" + getBatchStatusResponse.getBatch().getBatchStatus() + "]");
-			for (BatchItemIDStatus batchItemIDStatus : getBatchStatusResponse.getBatchItemList().getBatchItem()) {
+			for (final BatchItemIDStatus batchItemIDStatus : getBatchStatusResponse.getBatchItemList().getBatchItem()) {
 				logger.debug("Batch Item with Batch Item ID: [" + batchItemIDStatus.getBatchItemID() + "] have status: [" + batchItemIDStatus.getBatchItemStatus() + "]");
 			}
-		} catch (ErrorDetails_Exception errorDetails_Exception) {
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
 	}
@@ -96,7 +111,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	private Long doAddBatchItem() {
 		AddBatchItemResponse addBatchItemResponse = null;
 
-		AddBatchItemRequest addBatchItemRequest = new AddBatchItemRequest();
+		final AddBatchItemRequest addBatchItemRequest = new AddBatchItemRequest();
 		addBatchItemRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		addBatchItemRequest.setDetails(prepareAddBatchItemDetails());
 
@@ -112,7 +127,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 
 			logger.debug("RequestTrackingId: [" + addBatchItemResponse.getRequestTrackingID() + "]");
 			logger.debug("Successfully added BatchItem with ID: [" + batchItemID + "] to Batch with BatchID: [" + addBatchItemResponse.getBatch().getBatchID() + "]");
-		} catch (ErrorDetails_Exception errorDetails_Exception) {
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
 
@@ -129,7 +144,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 
 		CreateBatchResponse createBatchResponse = null;
 
-		CreateBatchRequest createBatchRequest = new CreateBatchRequest();
+		final CreateBatchRequest createBatchRequest = new CreateBatchRequest();
 		createBatchRequest.setAuthentication(prepareAuthenticationBasedOnProjectID());
 		createBatchRequest.setDetails(prepareCreateBatchDetails());
 
@@ -142,7 +157,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 
 			tempBatchID = createBatchResponse.getBatch().getBatchID();
 			logger.debug("Created batch with ID: [" + tempBatchID + "]");
-		} catch (ErrorDetails_Exception errorDetails_Exception) {
+		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
 
@@ -155,7 +170,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	 * @return the {@link CreateBatchDetails}
 	 */
 	private CreateBatchDetails prepareCreateBatchDetails() {
-		CreateBatchDetails createBatchDetails = new CreateBatchDetails();
+		final CreateBatchDetails createBatchDetails = new CreateBatchDetails();
 
 		createBatchDetails.setExternalBatchID(externalId);
 
@@ -168,7 +183,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	 * @return the {@link AddBatchItemDetails}
 	 */
 	private AddBatchItemDetails prepareAddBatchItemDetails() {
-		AddBatchItemDetails addBatchItemDetails = new AddBatchItemDetails();
+		final AddBatchItemDetails addBatchItemDetails = new AddBatchItemDetails();
 
 		addBatchItemDetails.setBatchID(batchID);
 		addBatchItemDetails.setBatchItemDetailsList(prepareBatchItemDetailsList());
@@ -182,7 +197,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	 * @return the {@link BatchItemDetailsList}
 	 */
 	private BatchItemDetailsList prepareBatchItemDetailsList() {
-		BatchItemDetailsList batchItemDetailsList = new BatchItemDetailsList();
+		final BatchItemDetailsList batchItemDetailsList = new BatchItemDetailsList();
 
 		batchItemDetailsList.getBatchItemDetails().add(prepareBatchItemDetails());
 
@@ -195,7 +210,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	 * @return the {@link BatchItemDetails}
 	 */
 	private BatchItemDetails prepareBatchItemDetails() {
-		BatchItemDetails batchItemDetails = new BatchItemDetails();
+		final BatchItemDetails batchItemDetails = new BatchItemDetails();
 
 		batchItemDetails.setDetails(prepareAddBatchItemProcessingDetails());
 		batchItemDetails.setExternalID(externalId);
@@ -210,7 +225,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	 * @return the ${@link AddBatchItemProcessingDetails}
 	 */
 	private AddBatchItemProcessingDetails prepareAddBatchItemProcessingDetails() {
-		AddBatchItemProcessingDetails addBatchItemProcessingDetails = new AddBatchItemProcessingDetails();
+		final AddBatchItemProcessingDetails addBatchItemProcessingDetails = new AddBatchItemProcessingDetails();
 
 		addBatchItemProcessingDetails.setPayRequestDetails(preparePayRequestDetails());
 
@@ -224,7 +239,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	 * @return the {@link PayRequestDetails}
 	 */
 	private PayRequestDetails preparePayRequestDetails() {
-		PayRequestDetails payRequestDetails = new PayRequestDetails();
+		final PayRequestDetails payRequestDetails = new PayRequestDetails();
 
 		payRequestDetails.setAmount(prepareMoney(payPortTestDataSupplier.getPayRequestAmount(), payPortTestDataSupplier.getPayRequestCurrency()));
 		payRequestDetails.setOrderDetails(prepareOrderDetails());
@@ -238,7 +253,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	 * @return the {@link OrderDetails}
 	 */
 	private OrderDetails prepareOrderDetails() {
-		OrderDetails orderDetails = new OrderDetails();
+		final OrderDetails orderDetails = new OrderDetails();
 
 		orderDetails.setItemList(new OrderDetailItemList());
 		orderDetails.setText(payPortTestDataSupplier.getPayRequestText());
@@ -253,7 +268,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	 * @return the {@link GetBatchStatusDetails}
 	 */
 	private GetBatchStatusDetails prepareGetBatchStatusDetails() {
-		GetBatchStatusDetails getBatchStatusDetails = new GetBatchStatusDetails();
+		final GetBatchStatusDetails getBatchStatusDetails = new GetBatchStatusDetails();
 
 		getBatchStatusDetails.setBatchID(batchID);
 		getBatchStatusDetails.setBatchItemIDList(prepareBatchItemIDList());
@@ -267,7 +282,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	 * @return the {@link BatchItemIDList}
 	 */
 	private BatchItemIDList prepareBatchItemIDList() {
-		BatchItemIDList batchItemIDList = new BatchItemIDList();
+		final BatchItemIDList batchItemIDList = new BatchItemIDList();
 
 		batchItemIDList.getBatchItemID().add(batchItemID);
 

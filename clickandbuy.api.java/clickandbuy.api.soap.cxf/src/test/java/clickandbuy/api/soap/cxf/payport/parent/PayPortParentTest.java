@@ -19,20 +19,30 @@ import com.clickandbuy.api.soap.cxf.PayPortType;
  * 
  */
 public class PayPortParentTest extends ParentTest {
-	public static final Logger	logger	= Logger.getLogger(PayPortParentTest.class);
 
+	/**
+	 * class logger.
+	 */
+	private static final Logger	logger	= Logger.getLogger(PayPortParentTest.class);
+
+	/**
+	 * flag to bypass self signed certificates.
+	 */
 	@Value("${acceptSelfSignedCertificates}")
-	boolean						acceptSelfSignedCertificates;
+	protected boolean			acceptSelfSignedCertificates;
 
+	/**
+	 * web service port (facade).
+	 */
 	@Autowired
-	public PayPortType			payPortType;
+	protected PayPortType		payPortType;
 
 	/**
 	 * 
 	 */
 	public void configureCertificatesPolicy() {
 		if (acceptSelfSignedCertificates) {
-			Client proxy = ClientProxy.getClient(payPortType);
+			final Client proxy = ClientProxy.getClient(payPortType);
 			configureCertificatesPolicy(proxy);
 		}
 	}

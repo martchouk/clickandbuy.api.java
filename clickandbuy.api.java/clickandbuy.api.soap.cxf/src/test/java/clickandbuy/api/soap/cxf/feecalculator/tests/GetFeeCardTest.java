@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import junit.framework.Assert;
 
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,12 +25,17 @@ import com.clickandbuy.api.soap.cxf.Money;
 /**
  * Tests related to GetFeeCard
  * 
- * @author Ciprian I. Ileana
+ * @author Ciprian.Ileana
  * @author Nicolae Petridean
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class GetFeeCardTest extends FeeCalculatorPortParentTest {
+
+	/**
+	 * class logger.
+	 */
+	private static final Logger				logger							= Logger.getLogger(GetFeeCardTest.class);
 
 	/**
 	 * fee card categories list response.
