@@ -23,6 +23,11 @@ import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesResponse;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class GetFeeCardCategoriesTest extends FeeCalculatorPortParentTest {
 
+	/**
+	 * test setup.
+	 * 
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
@@ -47,7 +52,6 @@ public class GetFeeCardCategoriesTest extends FeeCalculatorPortParentTest {
 			for (final FeeCardCategory category : getFeeCardCategoriesResponse.getCategoryList().getCategory()) {
 				logger.debug("Category : name " + category.getCategoryName() + " , categoryID : " + category.getCategoryID());
 			}
-
 		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 			throw errorDetails_Exception;
@@ -59,7 +63,7 @@ public class GetFeeCardCategoriesTest extends FeeCalculatorPortParentTest {
 	 * 
 	 * @return
 	 */
-	public GetFeeCardCategoriesDetails prepareGetFeeCardCategoriesDetails() {
+	private GetFeeCardCategoriesDetails prepareGetFeeCardCategoriesDetails() {
 		final GetFeeCardCategoriesDetails getFeeCardCategoriesDetails = new GetFeeCardCategoriesDetails();
 		getFeeCardCategoriesDetails.setBusinessOriginID(businessOriginID);
 		return getFeeCardCategoriesDetails;

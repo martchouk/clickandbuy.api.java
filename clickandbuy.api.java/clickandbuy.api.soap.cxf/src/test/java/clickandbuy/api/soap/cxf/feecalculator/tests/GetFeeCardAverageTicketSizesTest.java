@@ -27,20 +27,20 @@ import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesResponse;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class GetFeeCardAverageTicketSizesTest extends FeeCalculatorPortParentTest {
 
+	/**
+	 * fee card categories list response.
+	 */
+	private GetFeeCardCategoriesResponse	getFeeCardCategoriesResponse	= null;
+
+	/**
+	 * test setup
+	 * 
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
-	}
-
-	/**
-	 * Test the GetFeeCardAverageTicketSizes
-	 * 
-	 * @throws ErrorDetails_Exception
-	 */
-	@Test
-	public void testGetFeeCardAverageTicketSizes() throws ErrorDetails_Exception {
 		// prepare fee card categories request.
-		GetFeeCardCategoriesResponse getFeeCardCategoriesResponse = null;
 		final GetFeeCardCategoriesRequest feeCardCategories = new GetFeeCardCategoriesRequest();
 		feeCardCategories.setDetails(prepareGetFeeCardCategoriesDetails());
 
@@ -59,7 +59,15 @@ public class GetFeeCardAverageTicketSizesTest extends FeeCalculatorPortParentTes
 		Assert.assertNotNull(getFeeCardCategoriesResponse.getCategoryList());
 		Assert.assertNotNull(getFeeCardCategoriesResponse.getCategoryList().getCategory());
 		Assert.assertTrue(getFeeCardCategoriesResponse.getCategoryList().getCategory().size() > 0);
+	}
 
+	/**
+	 * Test the GetFeeCardAverageTicketSizes
+	 * 
+	 * @throws ErrorDetails_Exception
+	 */
+	@Test
+	public void testGetFeeCardAverageTicketSizes() throws ErrorDetails_Exception {
 		GetFeeCardAverageTicketSizesResponse getFeeCardAverageTicketSizesResponse = null;
 
 		final GetFeeCardAverageTicketSizesRequest getFeeCardAverageTicketSizesRequest = new GetFeeCardAverageTicketSizesRequest();
@@ -84,7 +92,7 @@ public class GetFeeCardAverageTicketSizesTest extends FeeCalculatorPortParentTes
 	 * @param getFeeCardCategoriesResponse
 	 * @return
 	 */
-	public GetFeeCardAverageTicketSizesDetails prepareAddBatchItemDetails(final GetFeeCardCategoriesResponse getFeeCardCategoriesResponse) {
+	private GetFeeCardAverageTicketSizesDetails prepareAddBatchItemDetails(final GetFeeCardCategoriesResponse getFeeCardCategoriesResponse) {
 		final GetFeeCardAverageTicketSizesDetails getFeeCardAverageTicketSizesDetails = new GetFeeCardAverageTicketSizesDetails();
 
 		getFeeCardAverageTicketSizesDetails.setBusinessOriginID(businessOriginID);
@@ -100,7 +108,7 @@ public class GetFeeCardAverageTicketSizesTest extends FeeCalculatorPortParentTes
 	 * 
 	 * @return
 	 */
-	public GetFeeCardCategoriesDetails prepareGetFeeCardCategoriesDetails() {
+	private GetFeeCardCategoriesDetails prepareGetFeeCardCategoriesDetails() {
 		final GetFeeCardCategoriesDetails getFeeCardCategoriesDetails = new GetFeeCardCategoriesDetails();
 		getFeeCardCategoriesDetails.setBusinessOriginID(businessOriginID);
 

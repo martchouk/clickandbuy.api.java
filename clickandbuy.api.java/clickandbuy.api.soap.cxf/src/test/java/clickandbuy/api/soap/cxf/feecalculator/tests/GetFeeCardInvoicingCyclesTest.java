@@ -28,20 +28,21 @@ import com.clickandbuy.api.soap.cxf.GetFeeCardInvoicingCyclesResponse;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class GetFeeCardInvoicingCyclesTest extends FeeCalculatorPortParentTest {
 
+	/**
+	 * fee card categories list response.
+	 */
+	private GetFeeCardCategoriesResponse	getFeeCardCategoriesResponse	= null;
+
+	/**
+	 * test setup.
+	 * 
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
-	}
 
-	/**
-	 * Test the GetFeeCardInvoicingCycles
-	 * 
-	 * @throws ErrorDetails_Exception
-	 */
-	@Test
-	public void testGetFeeCardInvoicingCycles() throws ErrorDetails_Exception {
 		// prepare fee card categories request.
-		GetFeeCardCategoriesResponse getFeeCardCategoriesResponse = null;
 		final GetFeeCardCategoriesRequest feeCardCategories = new GetFeeCardCategoriesRequest();
 		feeCardCategories.setDetails(prepareGetFeeCardCategoriesDetails());
 
@@ -61,6 +62,15 @@ public class GetFeeCardInvoicingCyclesTest extends FeeCalculatorPortParentTest {
 		Assert.assertNotNull(getFeeCardCategoriesResponse.getCategoryList().getCategory());
 		Assert.assertTrue(getFeeCardCategoriesResponse.getCategoryList().getCategory().size() > 0);
 
+	}
+
+	/**
+	 * Test the GetFeeCardInvoicingCycles
+	 * 
+	 * @throws ErrorDetails_Exception
+	 */
+	@Test
+	public void testGetFeeCardInvoicingCycles() throws ErrorDetails_Exception {
 		GetFeeCardInvoicingCyclesResponse getFeeCardInvoicingCyclesResponse = null;
 		final GetFeeCardInvoicingCyclesRequest getFeeCardInvoicingCyclesRequest = new GetFeeCardInvoicingCyclesRequest();
 		getFeeCardInvoicingCyclesRequest.setDetails(prepareGetFeeCardInvoicingCyclesDetails(getFeeCardCategoriesResponse));
@@ -85,7 +95,7 @@ public class GetFeeCardInvoicingCyclesTest extends FeeCalculatorPortParentTest {
 	 * @param getFeeCardCategoriesResponse
 	 * @return
 	 */
-	public GetFeeCardInvoicingCyclesDetails prepareGetFeeCardInvoicingCyclesDetails(final GetFeeCardCategoriesResponse getFeeCardCategoriesResponse) {
+	private GetFeeCardInvoicingCyclesDetails prepareGetFeeCardInvoicingCyclesDetails(final GetFeeCardCategoriesResponse getFeeCardCategoriesResponse) {
 		final GetFeeCardInvoicingCyclesDetails getFeeCardInvoicingCyclesDetails = new GetFeeCardInvoicingCyclesDetails();
 		getFeeCardInvoicingCyclesDetails.setBusinessOriginID(businessOriginID);
 		final long categoryId = TestUtil.getCategoryFromList(getFeeCardCategoriesResponse.getCategoryList().getCategory(), testData.getGetFeeCardAverageTicketSizesRequestCategory().trim());
@@ -98,7 +108,7 @@ public class GetFeeCardInvoicingCyclesTest extends FeeCalculatorPortParentTest {
 	 * 
 	 * @return
 	 */
-	public GetFeeCardCategoriesDetails prepareGetFeeCardCategoriesDetails() {
+	private GetFeeCardCategoriesDetails prepareGetFeeCardCategoriesDetails() {
 		final GetFeeCardCategoriesDetails getFeeCardCategoriesDetails = new GetFeeCardCategoriesDetails();
 		getFeeCardCategoriesDetails.setBusinessOriginID(businessOriginID);
 		return getFeeCardCategoriesDetails;

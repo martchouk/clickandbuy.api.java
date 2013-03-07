@@ -27,20 +27,20 @@ import com.clickandbuy.api.soap.cxf.GetFeeCardSettlementDelaysResponse;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class GetFeeCardSettlementDelaysTest extends FeeCalculatorPortParentTest {
 
+	/**
+	 * fee card categories response.
+	 */
+	private GetFeeCardCategoriesResponse	getFeeCardCategoriesResponse	= null;
+
+	/**
+	 * 
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
-	}
 
-	/**
-	 * Test the GetFeeCardSettlementDelays
-	 * 
-	 * @throws ErrorDetails_Exception
-	 */
-	@Test
-	public void testGetFeeCardSettlementDelays() throws ErrorDetails_Exception {
 		// prepare fee card categories request.
-		GetFeeCardCategoriesResponse getFeeCardCategoriesResponse = null;
 		final GetFeeCardCategoriesRequest feeCardCategories = new GetFeeCardCategoriesRequest();
 		feeCardCategories.setDetails(prepareGetFeeCardCategoriesDetails());
 
@@ -59,7 +59,15 @@ public class GetFeeCardSettlementDelaysTest extends FeeCalculatorPortParentTest 
 		Assert.assertNotNull(getFeeCardCategoriesResponse.getCategoryList());
 		Assert.assertNotNull(getFeeCardCategoriesResponse.getCategoryList().getCategory());
 		Assert.assertTrue(getFeeCardCategoriesResponse.getCategoryList().getCategory().size() > 0);
+	}
 
+	/**
+	 * Test the GetFeeCardSettlementDelays
+	 * 
+	 * @throws ErrorDetails_Exception
+	 */
+	@Test
+	public void testGetFeeCardSettlementDelays() throws ErrorDetails_Exception {
 		GetFeeCardSettlementDelaysResponse getFeeCardSettlementDelaysResponse = null;
 		// prepare the request
 		final GetFeeCardSettlementDelaysRequest feeCardSettlementDelaysRequest = new GetFeeCardSettlementDelaysRequest();
@@ -85,12 +93,11 @@ public class GetFeeCardSettlementDelaysTest extends FeeCalculatorPortParentTest 
 	 * @param getFeeCardCategoriesResponse
 	 * @return
 	 */
-	public GetFeeCardSettlementDelaysDetails prepareGetFeeCardSettlementDelaysDetails(final GetFeeCardCategoriesResponse getFeeCardCategoriesResponse) {
+	private GetFeeCardSettlementDelaysDetails prepareGetFeeCardSettlementDelaysDetails(final GetFeeCardCategoriesResponse getFeeCardCategoriesResponse) {
 		final GetFeeCardSettlementDelaysDetails getFeeCardSettlementDelaysDetails = new GetFeeCardSettlementDelaysDetails();
 		getFeeCardSettlementDelaysDetails.setBusinessOriginID(businessOriginID);
 		final long categoryId = TestUtil.getCategoryFromList(getFeeCardCategoriesResponse.getCategoryList().getCategory(), testData.getGetFeeCardSettlementDelaysRequestCategory().trim());
 		getFeeCardSettlementDelaysDetails.setCategoryID(categoryId);
-
 		return getFeeCardSettlementDelaysDetails;
 	}
 
@@ -99,10 +106,9 @@ public class GetFeeCardSettlementDelaysTest extends FeeCalculatorPortParentTest 
 	 * 
 	 * @return
 	 */
-	public GetFeeCardCategoriesDetails prepareGetFeeCardCategoriesDetails() {
+	private GetFeeCardCategoriesDetails prepareGetFeeCardCategoriesDetails() {
 		final GetFeeCardCategoriesDetails getFeeCardCategoriesDetails = new GetFeeCardCategoriesDetails();
 		getFeeCardCategoriesDetails.setBusinessOriginID(businessOriginID);
-
 		return getFeeCardCategoriesDetails;
 	}
 }

@@ -32,22 +32,20 @@ import com.clickandbuy.api.soap.cxf.Money;
 public class GetFeeCardTest extends FeeCalculatorPortParentTest {
 
 	/**
+	 * fee card categories list response.
+	 */
+	private GetFeeCardCategoriesResponse	getFeeCardCategoriesResponse	= null;
+
+	/**
+	 * test setup.
+	 * 
 	 * @throws Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
-	}
 
-	/**
-	 * Test the GetFeeCard
-	 * 
-	 * @throws ErrorDetails_Exception
-	 */
-	@Test
-	public void testGetFeeCard() throws ErrorDetails_Exception {
 		// prepare fee card categories request.
-		GetFeeCardCategoriesResponse getFeeCardCategoriesResponse = null;
 		final GetFeeCardCategoriesRequest feeCardCategories = new GetFeeCardCategoriesRequest();
 		feeCardCategories.setDetails(prepareGetFeeCardCategoriesDetails());
 
@@ -66,7 +64,15 @@ public class GetFeeCardTest extends FeeCalculatorPortParentTest {
 		Assert.assertNotNull(getFeeCardCategoriesResponse.getCategoryList());
 		Assert.assertNotNull(getFeeCardCategoriesResponse.getCategoryList().getCategory());
 		Assert.assertTrue(getFeeCardCategoriesResponse.getCategoryList().getCategory().size() > 0);
+	}
 
+	/**
+	 * Test the GetFeeCard
+	 * 
+	 * @throws ErrorDetails_Exception
+	 */
+	@Test
+	public void testGetFeeCard() throws ErrorDetails_Exception {
 		// prepare getFeeCard request.
 		GetFeeCardResponse getFeeCardResponse = null;
 		final GetFeeCardRequest getFeeCardRequest = new GetFeeCardRequest();
@@ -91,7 +97,7 @@ public class GetFeeCardTest extends FeeCalculatorPortParentTest {
 	 * @param getFeeCardCategoriesResponse
 	 * @return
 	 */
-	public GetFeeCardDetails prepareGetFeeCardDetails(final GetFeeCardCategoriesResponse getFeeCardCategoriesResponse) {
+	private GetFeeCardDetails prepareGetFeeCardDetails(final GetFeeCardCategoriesResponse getFeeCardCategoriesResponse) {
 		final GetFeeCardDetails getFeeCardDetails = new GetFeeCardDetails();
 
 		final Money money = new Money();
@@ -113,10 +119,9 @@ public class GetFeeCardTest extends FeeCalculatorPortParentTest {
 	 * 
 	 * @return
 	 */
-	public GetFeeCardCategoriesDetails prepareGetFeeCardCategoriesDetails() {
+	private GetFeeCardCategoriesDetails prepareGetFeeCardCategoriesDetails() {
 		final GetFeeCardCategoriesDetails getFeeCardCategoriesDetails = new GetFeeCardCategoriesDetails();
 		getFeeCardCategoriesDetails.setBusinessOriginID(businessOriginID);
-
 		return getFeeCardCategoriesDetails;
 	}
 }

@@ -22,6 +22,11 @@ import com.clickandbuy.api.soap.cxf.GetFeeCardCurrenciesResponse;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class GetFeeCardCurrenciesTest extends FeeCalculatorPortParentTest {
 
+	/**
+	 * test setup.
+	 * 
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		configureCertificatesPolicy();
@@ -53,7 +58,7 @@ public class GetFeeCardCurrenciesTest extends FeeCalculatorPortParentTest {
 	 * 
 	 * @return
 	 */
-	public GetFeeCardCurrenciesDetails prepareGetFeeCardCurrenciesDetails() {
+	private GetFeeCardCurrenciesDetails prepareGetFeeCardCurrenciesDetails() {
 		final GetFeeCardCurrenciesDetails getFeeCardCurrenciesDetails = new GetFeeCardCurrenciesDetails();
 		getFeeCardCurrenciesDetails.setBusinessOriginID(businessOriginID);
 		return getFeeCardCurrenciesDetails;
