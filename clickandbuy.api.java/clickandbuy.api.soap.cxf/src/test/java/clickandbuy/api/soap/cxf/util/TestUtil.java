@@ -69,8 +69,6 @@ public class TestUtil {
 	public static CreditRequestDetails prepareCreditRequestDetails(final Money amount, final String consumerLanguage, final String externalId, final OrderDetails orderDetails, final CreditRecipientIdentifier creditRecipientIdentifier) {
 		final CreditRequestDetails creditRequestDetails = new CreditRequestDetails();
 
-		// TODO fill in necessary test data
-
 		creditRequestDetails.setAmount(amount);
 		creditRequestDetails.setConsumerLanguage(consumerLanguage);
 		creditRequestDetails.setExternalID(externalId);
@@ -166,7 +164,7 @@ public class TestUtil {
 	 * @throws IllegalArgumentException
 	 *             : in case any of the 2 parameters are null or empty.
 	 */
-	public long getCategoryFromList(final List<FeeCardCategory> categoryList, final String categoryName) {
+	public static long getCategoryFromList(final List<FeeCardCategory> categoryList, final String categoryName) {
 		// category name cannot be either null or empty
 		Assert.notNull(categoryName);
 		Assert.isTrue(!categoryName.trim().isEmpty());
