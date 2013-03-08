@@ -71,11 +71,13 @@ public class ParentTest {
 	/**
 	 * 
 	 */
-	public void configureCertificatesPolicy(final Client proxy) {
+	protected void configureCertificatesPolicy(final Client proxy) {
+		logger.debug("Configuring certificates policy for [" + proxy + "]");
+		
 		final HTTPConduit conduit = (HTTPConduit) proxy.getConduit();
 		final TLSClientParameters tlsClientParameters = new TLSClientParameters();
 		tlsClientParameters.setTrustManagers(new TrustManager[] { new TrustAllX509TrustManager() });
-		tlsClientParameters.setDisableCNCheck(true);// end authentication server
+		tlsClientParameters.setDisableCNCheck(true);
 		conduit.setTlsClientParameters(tlsClientParameters);
 	}
 
@@ -85,7 +87,7 @@ public class ParentTest {
 	 * @param authenticationBean
 	 * @return Authentication
 	 */
-	public Authentication prepareAuthenticationBasedOnProjectID() {
+	protected Authentication prepareAuthenticationBasedOnProjectID() {
 		final Authentication merchantAuth = new Authentication();
 		merchantAuth.setProjectID(nullToZero(projectId));
 		merchantAuth.setMerchantID(nullToZero(merchantId));
@@ -97,7 +99,7 @@ public class ParentTest {
 	 * @param num
 	 * @return
 	 */
-	public long nullToZero(final Long num) {
+	protected long nullToZero(final Long num) {
 		return num == null ? 0 : num.longValue();
 	}
 }

@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.payport.data.PayPortTestDataSupplier;
@@ -35,13 +34,7 @@ public class CreditRequestTest extends PayPortParentTest {
 	/**
 	 * class logger.
 	 */
-	private static final Logger		logger	= Logger.getLogger(CreditRequestTest.class);
-
-	/**
-	 * test data supplier.
-	 */
-	@Autowired
-	private PayPortTestDataSupplier	payPortTestDataSupplier;
+	private static final Logger	logger	= Logger.getLogger(CreditRequestTest.class);
 
 	/**
 	 * test setup.
@@ -90,7 +83,7 @@ public class CreditRequestTest extends PayPortParentTest {
 	private CreditRequestDetails prepareCreditRequestDetails() {
 		final CreditRequestDetails creditRequestDetails = new CreditRequestDetails();
 
-		creditRequestDetails.setAmount(prepareMoney(payPortTestDataSupplier.getCreditRequestMoneyAmount(), payPortTestDataSupplier.getCreditRequestMoneyCurrency()));
+		creditRequestDetails.setAmount(prepareMoney(testData.getCreditRequestMoneyAmount(), testData.getCreditRequestMoneyCurrency()));
 		creditRequestDetails.setExternalID(externalId);
 		creditRequestDetails.setRecipient(prepareCreditRecipientIdentifier());
 
@@ -105,7 +98,7 @@ public class CreditRequestTest extends PayPortParentTest {
 	private CreditRecipientIdentifier prepareCreditRecipientIdentifier() {
 		final CreditRecipientIdentifier creditRecipientIdentifier = new CreditRecipientIdentifier();
 
-		creditRecipientIdentifier.setEmailAddress(payPortTestDataSupplier.getCreditRequestEmail());
+		creditRecipientIdentifier.setEmailAddress(testData.getCreditRequestEmail());
 
 		return creditRecipientIdentifier;
 	}

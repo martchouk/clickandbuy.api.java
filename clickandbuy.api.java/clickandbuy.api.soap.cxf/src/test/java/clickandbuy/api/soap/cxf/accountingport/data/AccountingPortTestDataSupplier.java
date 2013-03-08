@@ -5,38 +5,54 @@ package clickandbuy.api.soap.cxf.accountingport.data;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import com.clickandbuy.api.soap.cxf.AccountingPortType;
+
 /**
+ * Holds all necessary test data for {@link AccountingPortType} related tests.
+ * 
  * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
  */
 public class AccountingPortTestDataSupplier {
 
-	/** Test data */
+	/**
+	 * GetAccountingDocumentsDetails Test data
+	 */
+
+	/** The upper limit of the date range for the get accounting documentation details request */
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.dateRange.after}")
 	private String	dateRangeAfter;
 
+	/** The lower limit of the date range for the get accounting documentation details request */
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.dateRange.before}")
 	private String	dateRangeBefore;
 
-	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.inteRange.from}")
+	/** The lower limit of the int range for the get accounting documentation details request */
+	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.intRange.from}")
 	private Integer	intRangeFrom;
 
+	/** The upper limit of the int range for the get accounting documentation details request */
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.intRange.until}")
 	private Integer	intRangeUntil;
 
+	/** The document type for the get accounting documentation details request */
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.documentType}")
 	private String	accountingDocumentType;
 
+	/** The file name for the get accounting documentation details request */
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.fileName}")
 	private String	fileName;
 
+	/** The file type for the get accounting documentation details request */
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.fileType}")
 	private String	accountingFileType;
 
+	/** The max results of paging setting for the get accounting documentation details request */
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.pagingSetting.maxResults}")
 	private Integer	maxResults;
 
+	/** The skip option of paging setting for the get accounting documentation details request */
 	@Value("${getAccountingDocuments.getAccountingDocumentsDetails.pagingSetting.skip}")
 	private Integer	skip;
 

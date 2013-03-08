@@ -9,7 +9,6 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.payport.data.PayPortTestDataSupplier;
@@ -33,13 +32,7 @@ public class PayRequestRecurringTest extends PayPortParentTest {
 	/**
 	 * class logger.
 	 */
-	private static final Logger		logger	= Logger.getLogger(PayRequestRecurringTest.class);
-
-	/**
-	 * test data supplier.
-	 */
-	@Autowired
-	private PayPortTestDataSupplier	payPortTestDataSupplier;
+	private static final Logger	logger	= Logger.getLogger(PayRequestRecurringTest.class);
 
 	/**
 	 * test setup.
@@ -88,9 +81,9 @@ public class PayRequestRecurringTest extends PayPortParentTest {
 	private PayRequestRecurringDetails preparePayRequestRecurringDetails() {
 		final PayRequestRecurringDetails payRequestRecurringDetails = new PayRequestRecurringDetails();
 
-		payRequestRecurringDetails.setAmount(prepareMoney(payPortTestDataSupplier.getPayRequestRecurringAmount(), payPortTestDataSupplier.getPayRequestRecurringCurrency()));
+		payRequestRecurringDetails.setAmount(prepareMoney(testData.getPayRequestRecurringAmount(), testData.getPayRequestRecurringCurrency()));
 		payRequestRecurringDetails.setExternalID(externalId);
-		payRequestRecurringDetails.setRecurringPaymentAuthorizationID(payPortTestDataSupplier.getPayRequestRecurringPaymentAuthorizationID());
+		payRequestRecurringDetails.setRecurringPaymentAuthorizationID(testData.getPayRequestRecurringPaymentAuthorizationID());
 
 		return payRequestRecurringDetails;
 	}

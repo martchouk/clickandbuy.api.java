@@ -41,7 +41,6 @@
 							<sourceRoot>${project.build.directory}/generated/src</sourceRoot>
 							<wsdlOptions>
 								<wsdlOption>
-									<!--wsdl>https://api.clickandbuy.com/webservices/pay_1_1_0.wsdl</wsdl -->
 									<wsdl>src/main/resources/META-INF/pay_1_1_0.wsdl</wsdl>
 									<extraargs>
 										<extraarg>-p</extraarg>
@@ -55,6 +54,25 @@
 						<goals>
 							<goal>wsdl2java</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<aggregate>true</aggregate>
+
+							<stylesheetfile>${basedir}/src/javadoc/xref/stylesheet.css</stylesheetfile>
+							<javadocDirectory>${basedir}/src/javadoc</javadocDirectory>
+							<docfilessubdirs>true</docfilessubdirs>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

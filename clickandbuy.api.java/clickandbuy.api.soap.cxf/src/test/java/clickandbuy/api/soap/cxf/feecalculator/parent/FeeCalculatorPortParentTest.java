@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package clickandbuy.api.soap.cxf.feecalculator.parent;
 
 import org.apache.cxf.endpoint.Client;
@@ -17,36 +20,41 @@ import com.clickandbuy.api.soap.cxf.FeeCalculatorPortType;
  * 
  */
 public class FeeCalculatorPortParentTest extends ParentTest {
+
 	/**
-	 * class logger.
+	 * Class logger.
 	 */
 	private static final Logger					logger	= Logger.getLogger(FeeCalculatorPortParentTest.class);
 
 	/**
-	 * flag to setup acceptance for self signet certificates (specific for test systems).
+	 * Flag to accept (bypass) self signed certificates.
 	 */
-	@Value("${acceptSelfSignedCertificates}")
+	@Value("${clickandbuy.api.endpoint.feecalculatorport.acceptSelfSignedCertificates}")
 	private boolean								acceptSelfSignedCertificates;
 
 	/**
-	 * web service facade, containing fee related methods.
+	 * Web service facade, containing fee related methods.
 	 */
 	@Autowired
 	protected FeeCalculatorPortType				feeCalculatorPortType;
 
 	/**
-	 * test data supplier.
+	 * Test data supplier.
 	 */
 	@Autowired
 	protected FeeCalculatorPortTestDataSupplier	testData;
 
 	/**
-	 * Config helper method for certificates policy.
+	 * Configuration utility method for certificates policy.
 	 */
 	public void configureCertificatesPolicy() {
 		if (acceptSelfSignedCertificates) {
+			logger.debug("Acceptance of self signed certificates is enabled for Fee Calculator Port.");
 			final Client proxy = ClientProxy.getClient(feeCalculatorPortType);
 			configureCertificatesPolicy(proxy);
+		} else {
+			logger.debug("Acceptance of self signed certificates is disabled for Fee Calculator Port!");
+			logger.debug("If you are on a testing/development environment, you may encounter probles due to self signed certificates being (by default) rejected.");
 		}
 	}
 }

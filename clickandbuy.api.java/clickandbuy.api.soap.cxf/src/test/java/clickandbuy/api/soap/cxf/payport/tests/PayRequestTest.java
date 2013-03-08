@@ -16,7 +16,6 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.payport.data.PayPortTestDataSupplier;
@@ -42,21 +41,22 @@ import com.clickandbuy.api.soap.cxf.RecurringPaymentAuthorization;
 public class PayRequestTest extends PayPortParentTest {
 
 	/**
-	 * class logger.
+	 * Class logger.
 	 */
-	private static final Logger		logger	= Logger.getLogger(PayRequestTest.class);
+	private static final Logger	logger	= Logger.getLogger(PayRequestTest.class);
 
 	/**
-	 * test data supplier.
+	 * 
 	 */
-	@Autowired
-	private PayPortTestDataSupplier	payPortTestDataSupplier;
+	public PayRequestTest() {
+		super();
+	}
 
 	/**
-	 * test setup.
+	 * Test setup.
 	 */
 	@Before
-	public void setUp() {
+	public void setup() {
 		configureCertificatesPolicy();
 
 		externalId = externalId + System.nanoTime() + "_";
@@ -140,19 +140,19 @@ public class PayRequestTest extends PayPortParentTest {
 	private PayRequestDetails preparePayRequestDetails() {
 		final PayRequestDetails payRequestDetails = new PayRequestDetails();
 
-		payRequestDetails.setAmount(prepareMoney(payPortTestDataSupplier.getPayRequestAmount(), payPortTestDataSupplier.getPayRequestCurrency()));
-		payRequestDetails.setAuthExpiration(payPortTestDataSupplier.getPayRequestAuthExpiration());
-		payRequestDetails.setBasketRisk(payPortTestDataSupplier.getPayRequestBasketRisk());
-		payRequestDetails.setClientRisk(payPortTestDataSupplier.getPayRequestClientRisk());
-		payRequestDetails.setConfirmExpiration(payPortTestDataSupplier.getPayRequestConfirmExpiration());
-		payRequestDetails.setConsumerCountry(payPortTestDataSupplier.getPayRequestConsumerNation());
-		payRequestDetails.setConsumerIPAddress(payPortTestDataSupplier.getPayRequestConsumerIPAddress());
-		payRequestDetails.setConsumerLanguage(payPortTestDataSupplier.getPayRequestConsumerLanguage());
+		payRequestDetails.setAmount(prepareMoney(testData.getPayRequestAmount(), testData.getPayRequestCurrency()));
+		payRequestDetails.setAuthExpiration(testData.getPayRequestAuthExpiration());
+		payRequestDetails.setBasketRisk(testData.getPayRequestBasketRisk());
+		payRequestDetails.setClientRisk(testData.getPayRequestClientRisk());
+		payRequestDetails.setConfirmExpiration(testData.getPayRequestConfirmExpiration());
+		payRequestDetails.setConsumerCountry(testData.getPayRequestConsumerNation());
+		payRequestDetails.setConsumerIPAddress(testData.getPayRequestConsumerIPAddress());
+		payRequestDetails.setConsumerLanguage(testData.getPayRequestConsumerLanguage());
 		payRequestDetails.setExternalID(externalId);
-		payRequestDetails.setFailureURL(payPortTestDataSupplier.getPayRequestFailureURI());
+		payRequestDetails.setFailureURL(testData.getPayRequestFailureURI());
 		payRequestDetails.setOrderDetails(prepareOrderDetails());
-		payRequestDetails.setSuccessExpiration(payPortTestDataSupplier.getPayRequestSuccessExpiration());
-		payRequestDetails.setSuccessURL(payPortTestDataSupplier.getPayRequestSuccessURI());
+		payRequestDetails.setSuccessExpiration(testData.getPayRequestSuccessExpiration());
+		payRequestDetails.setSuccessURL(testData.getPayRequestSuccessURI());
 
 		return payRequestDetails;
 	}
@@ -181,7 +181,7 @@ public class PayRequestTest extends PayPortParentTest {
 		final OrderDetails orderDetails = new OrderDetails();
 
 		orderDetails.setItemList(new OrderDetailItemList());
-		orderDetails.setText(payPortTestDataSupplier.getPayRequestText());
+		orderDetails.setText(testData.getPayRequestText());
 
 		return orderDetails;
 	}
@@ -194,8 +194,8 @@ public class PayRequestTest extends PayPortParentTest {
 	private RecurringPaymentAuthorization prepareRecurringPaymentAuthorization() throws ParseException, DatatypeConfigurationException {
 		final RecurringPaymentAuthorization recurringPaymentAuthorization = new RecurringPaymentAuthorization();
 
-		recurringPaymentAuthorization.setDescription(payPortTestDataSupplier.getPayRequestCreateRecurringDescription());
-		recurringPaymentAuthorization.setExpireDate(TestUtil.toXMLGregorianCalendar(payPortTestDataSupplier.getPayRequestCreateRecurringExpireDate()));
+		recurringPaymentAuthorization.setDescription(testData.getPayRequestCreateRecurringDescription());
+		recurringPaymentAuthorization.setExpireDate(TestUtil.toXMLGregorianCalendar(testData.getPayRequestCreateRecurringExpireDate()));
 		recurringPaymentAuthorization.setAmountLimit(prepareMoney(BigDecimal.valueOf(100), "EUR"));
 		recurringPaymentAuthorization.setNumberLimit(100);
 

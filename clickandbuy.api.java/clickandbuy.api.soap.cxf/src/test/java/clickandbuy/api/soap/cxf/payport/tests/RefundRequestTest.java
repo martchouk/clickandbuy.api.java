@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.payport.data.PayPortTestDataSupplier;
@@ -32,18 +31,12 @@ import com.clickandbuy.api.soap.cxf.RefundRequestResponse;
 public class RefundRequestTest extends PayPortParentTest {
 
 	/**
-	 * class logger.
+	 * Class logger.
 	 */
-	private static final Logger		logger	= Logger.getLogger(RefundRequestTest.class);
+	private static final Logger	logger	= Logger.getLogger(RefundRequestTest.class);
 
 	/**
-	 * test data supplier.
-	 */
-	@Autowired
-	private PayPortTestDataSupplier	payPortTestDataSupplier;
-
-	/**
-	 * test setup.
+	 * Test setup.
 	 */
 	@Before
 	public void setUp() {
@@ -89,8 +82,8 @@ public class RefundRequestTest extends PayPortParentTest {
 	private RefundRequestDetails prepareRefundRequestDetails() {
 		final RefundRequestDetails refundRequestDetails = new RefundRequestDetails();
 
-		refundRequestDetails.setAmount(prepareMoney(payPortTestDataSupplier.getPayRequestAmount(), payPortTestDataSupplier.getPayRequestCurrency()));
-		refundRequestDetails.setTransactionID(payPortTestDataSupplier.getRefundRequestTransactionID());
+		refundRequestDetails.setAmount(prepareMoney(testData.getPayRequestAmount(), testData.getPayRequestCurrency()));
+		refundRequestDetails.setTransactionID(testData.getRefundRequestTransactionID());
 
 		return refundRequestDetails;
 	}

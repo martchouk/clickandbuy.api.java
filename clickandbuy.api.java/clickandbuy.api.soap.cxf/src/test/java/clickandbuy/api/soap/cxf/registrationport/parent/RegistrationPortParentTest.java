@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package clickandbuy.api.soap.cxf.registrationport.parent;
 
 import org.apache.cxf.endpoint.Client;
@@ -17,36 +20,41 @@ import com.clickandbuy.api.soap.cxf.RegistrationPortType;
  * 
  */
 public class RegistrationPortParentTest extends ParentTest {
+
 	/**
-	 * class logger.
+	 * Class logger.
 	 */
 	private static final Logger					logger	= Logger.getLogger(RegistrationPortParentTest.class);
 
 	/**
-	 * accept self signed certificates flag. (Specific for test systems).
+	 * Flag to accept (bypass) self signed certificates.
 	 */
-	@Value("${acceptSelfSignedCertificates}")
+	@Value("${clickandbuy.api.endpoint.registrationport.acceptSelfSignedCertificates}")
 	private boolean								acceptSelfSignedCertificates;
 
 	/**
-	 * web service registration port type.
+	 * Web service facade, containing registration related methods.
 	 */
 	@Autowired
 	protected RegistrationPortType				registrationPortType;
 
 	/**
-	 * test data supplier.
+	 * Test data supplier.
 	 */
 	@Autowired
 	protected RegistrationPortTestDataSupplier	testData;
 
 	/**
-	 * Config helper method for certificates policy.
+	 * Configuration utility method for certificates policy.
 	 */
 	public void configureCertificatesPolicy() {
 		if (acceptSelfSignedCertificates) {
+			logger.debug("Acceptance of self signed certificates is enabled for Registration Port.");
 			final Client proxy = ClientProxy.getClient(registrationPortType);
 			configureCertificatesPolicy(proxy);
+		} else {
+			logger.debug("Acceptance of self signed certificates is disabled for Registration Port!");
+			logger.debug("If you are on a testing/development environment, you may encounter probles due to self signed certificates being (by default) rejected.");
 		}
 	}
 }

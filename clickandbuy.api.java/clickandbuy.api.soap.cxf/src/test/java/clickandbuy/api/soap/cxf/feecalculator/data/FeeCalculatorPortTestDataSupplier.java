@@ -5,7 +5,11 @@ package clickandbuy.api.soap.cxf.feecalculator.data;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import com.clickandbuy.api.soap.cxf.FeeCalculatorPortType;
+
 /**
+ * Holds all necessary test data for {@link FeeCalculatorPortType} related tests.
+ * 
  * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
@@ -13,60 +17,61 @@ import org.springframework.beans.factory.annotation.Value;
 public class FeeCalculatorPortTestDataSupplier {
 
 	/**
-	 * 
 	 * GetFeeCardAverageTicketSizes Test data
-	 * 
 	 */
+	/** The currency for get fee card average ticket size request */
 	@Value("${feePort.getFeeCardAverageTicketSizesRequest.currency}")
 	private String	getFeeCardAverageTicketSizesRequestCurrency;
 
+	/** The category for get fee card average ticket size request */
 	@Value("${feePort.getFeeCardAverageTicketSizesRequest.category}")
 	private String	getFeeCardAverageTicketSizesRequestCategory;
 
 	/**
-	 * 
 	 * GetFeeCardInvoicingCycles Test data
-	 * 
 	 */
 
-	/** GetFeeCardAverageTicketSizes Test data */
+	/** The money currency for get fee card invoicing cycles request */
 	@Value("${feePort.getFeeCardInvoicingCyclesRequest.currency}")
 	private String	getFeeCardInvoicingCyclesRequestCurrency;
 
+	/** The category for get fee card invoicing cycles request */
 	@Value("${feePort.getFeeCardInvoicingCyclesRequest.category}")
 	private String	getFeeCardInvoicingCyclesRequestCategory;
 
 	/**
-	 * 
 	 * GetFeeCardSettlement Test data
-	 * 
 	 */
 
-	/** GetFeeCardAverageTicketSizes Test data */
+	/** The money currency for get fee card settlement delays request */
 	@Value("${feePort.getFeeCardSettlementDelaysRequest.currency}")
 	private String	getFeeCardSettlementDelaysRequestCurrency;
 
+	/** The category for get fee card settlement delays request */
 	@Value("${feePort.getFeeCardSettlementDelaysRequest.category}")
 	private String	getFeeCardSettlementDelaysRequestCategory;
 
 	/**
-	 * 
 	 * GetFeeCard Test data
-	 * 
 	 */
 
+	/** Invoicing cycle for get fee card request */
 	@Value("${feePort.getFeeCardRequest.invoicingCycle}")
 	private int		getFeeCardRequestInvoicingCycle;
 
+	/** The money amount for get fee card request */
 	@Value("${feePort.getFeeCardRequest.amount}")
 	private long	getFeeCardRequestAmount;
 
+	/** The settlement delay for get fee card request */
 	@Value("${feePort.getFeeCardRequest.settlementDelay}")
 	private int		getFeeCardRequestSettlementDelay;
 
+	/** The money currency for get fee card request */
 	@Value("${feePort.getFeeCardRequest.currency}")
 	private String	getFeeCardRequestCurrency;
 
+	/** The category for fee get card request */
 	@Value("${feePort.getFeeCardRequest.category}")
 	private String	getFeeCardRequestCategory;
 

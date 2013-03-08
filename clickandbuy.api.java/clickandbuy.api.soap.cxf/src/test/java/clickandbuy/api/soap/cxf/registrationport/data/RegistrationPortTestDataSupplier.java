@@ -5,7 +5,11 @@ package clickandbuy.api.soap.cxf.registrationport.data;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import com.clickandbuy.api.soap.cxf.RegistrationPortType;
+
 /**
+ * Holds all necessary test data for {@link RegistrationPortType} related tests.
+ * 
  * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
@@ -13,44 +17,34 @@ import org.springframework.beans.factory.annotation.Value;
 public class RegistrationPortTestDataSupplier {
 
 	/**
-	 * merchant company name.
+	 * CreateMerchantRegistrationDetails Test data
 	 */
+
+	/** The company name of the merchant for the create merchant registration request */
 	@Value("${createMerchantRegistration.createMerchantRegistrationDetails.merchant.companyName}")
 	private String	merchantCompanyName;
 
-	/**
-	 * merchant city.
-	 */
+	/** The city of the merchant for the create merchant registration request */
 	@Value("${createMerchantRegistration.createMerchantRegistrationDetails.merchant.city}")
 	private String	merchantCity;
 
-	/**
-	 * merchant country.
-	 */
+	/** The country of the merchant for the create merchant registration request */
 	@Value("${createMerchantRegistration.createMerchantRegistrationDetails.merchant.country}")
 	private String	merchantCountry;
 
-	/**
-	 * merchant street address.
-	 */
+	/** The street of the merchant for the create merchant registration request */
 	@Value("${createMerchantRegistration.createMerchantRegistrationDetails.merchant.street}")
 	private String	merchantStreet;
 
-	/**
-	 * merchant House number.
-	 */
+	/** The house number of the merchant for the create merchant registration request */
 	@Value("${createMerchantRegistration.createMerchantRegistrationDetails.merchant.houseNumber}")
 	private String	merchantHouseNumber;
 
-	/**
-	 * merchant Zip Code.
-	 */
+	/** The zip code of the merchant for the create merchant registration request */
 	@Value("${createMerchantRegistration.createMerchantRegistrationDetails.merchant.zipCode}")
 	private String	merchantZipCode;
 
-	/**
-	 * merchant Zip Code.
-	 */
+	/** The email address of the merchant for the create merchant registration request */
 	@Value("${createMerchantRegistration.createMerchantRegistrationDetails.merchant.emailAddress}")
 	private String	merchantEmailAddress;
 

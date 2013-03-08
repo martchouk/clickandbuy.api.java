@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.payport.data.PayPortTestDataSupplier;
@@ -43,18 +42,12 @@ public class AddBathItemTest extends PayPortParentTest {
 	/**
 	 * class logger.
 	 */
-	private static final Logger		logger	= Logger.getLogger(AddBathItemTest.class);
-
-	/**
-	 * test data supplier.
-	 */
-	@Autowired
-	private PayPortTestDataSupplier	payPortTestDataSupplier;
+	private static final Logger	logger	= Logger.getLogger(AddBathItemTest.class);
 
 	/**
 	 * batch id.
 	 */
-	private Long					batchID	= null;
+	private Long				batchID	= null;
 
 	/**
 	 * test setup.
@@ -204,7 +197,7 @@ public class AddBathItemTest extends PayPortParentTest {
 	private PayRequestDetails preparePayRequestDetails() {
 		final PayRequestDetails payRequestDetails = new PayRequestDetails();
 
-		payRequestDetails.setAmount(prepareMoney(payPortTestDataSupplier.getPayRequestAmount(), payPortTestDataSupplier.getPayRequestCurrency()));
+		payRequestDetails.setAmount(prepareMoney(testData.getPayRequestAmount(), testData.getPayRequestCurrency()));
 		payRequestDetails.setOrderDetails(prepareOrderDetails());
 
 		return payRequestDetails;
@@ -219,7 +212,7 @@ public class AddBathItemTest extends PayPortParentTest {
 		final OrderDetails orderDetails = new OrderDetails();
 
 		orderDetails.setItemList(new OrderDetailItemList());
-		orderDetails.setText(payPortTestDataSupplier.getPayRequestText());
+		orderDetails.setText(testData.getPayRequestText());
 
 		return orderDetails;
 

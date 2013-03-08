@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.payport.data.PayPortTestDataSupplier;
@@ -48,23 +47,17 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	/**
 	 * class logger.
 	 */
-	private static final Logger		logger		= Logger.getLogger(GetBatchStatusTest.class);
-
-	/**
-	 * test data supplier.
-	 */
-	@Autowired
-	private PayPortTestDataSupplier	payPortTestDataSupplier;
+	private static final Logger	logger		= Logger.getLogger(GetBatchStatusTest.class);
 
 	/**
 	 * batch ID.
 	 */
-	private Long					batchID		= null;
+	private Long				batchID		= null;
 
 	/**
 	 * batch item ID.
 	 */
-	private Long					batchItemID	= null;
+	private Long				batchItemID	= null;
 
 	/**
 	 * test setup.
@@ -241,7 +234,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	private PayRequestDetails preparePayRequestDetails() {
 		final PayRequestDetails payRequestDetails = new PayRequestDetails();
 
-		payRequestDetails.setAmount(prepareMoney(payPortTestDataSupplier.getPayRequestAmount(), payPortTestDataSupplier.getPayRequestCurrency()));
+		payRequestDetails.setAmount(prepareMoney(testData.getPayRequestAmount(), testData.getPayRequestCurrency()));
 		payRequestDetails.setOrderDetails(prepareOrderDetails());
 
 		return payRequestDetails;
@@ -256,7 +249,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 		final OrderDetails orderDetails = new OrderDetails();
 
 		orderDetails.setItemList(new OrderDetailItemList());
-		orderDetails.setText(payPortTestDataSupplier.getPayRequestText());
+		orderDetails.setText(testData.getPayRequestText());
 
 		return orderDetails;
 

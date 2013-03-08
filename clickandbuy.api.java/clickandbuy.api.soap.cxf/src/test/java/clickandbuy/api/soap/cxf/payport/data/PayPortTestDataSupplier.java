@@ -8,9 +8,10 @@ import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.clickandbuy.api.soap.cxf.CancelMode;
+import com.clickandbuy.api.soap.cxf.PayPortType;
 
 /**
- * Holds all necessary test data for PayPort related tests.
+ * Holds all necessary test data for {@link PayPortType} related tests.
  * 
  * @author Ciprian I. Ileana
  * @author Nicolae Petridean
@@ -18,81 +19,112 @@ import com.clickandbuy.api.soap.cxf.CancelMode;
  */
 public class PayPortTestDataSupplier {
 
-	/** CancelRequest Test data */
+	/**
+	 * CancelRequest Test data
+	 */
 
 	@Value("${payPort.cancelRequest.cancelMode}")
 	private CancelMode	cancelRequestCancelMode;
 
-	/** CreditRequest Test data */
+	/**
+	 * CreditRequest Test data
+	 */
 
+	/** The money amount for the credit request */
 	@Value("${payPort.creditRequest.money.amount}")
 	private BigDecimal	creditRequestMoneyAmount;
 
+	/** The currency for the credit request */
 	@Value("${payPort.creditRequest.money.currency}")
 	private String		creditRequestMoneyCurrency;
 
+	/** The email of the credit recipient (the one requesting the credit) */
 	@Value("${payPort.creditRequest.creditRecipientIdentifier.email}")
 	private String		creditRequestEmail;
 
-	/** PayRequestRecurring Test data */
+	/**
+	 * PayRequestRecurring Test data
+	 */
 
+	/** The money amount for the recurring payment */
 	@Value("${payPort.payRequestRecurring.amount.amount}")
 	private BigDecimal	payRequestRecurringAmount;
 
+	/** The currency for the recurring payment */
 	@Value("${payPort.payRequestRecurring.amount.currency}")
 	private String		payRequestRecurringCurrency;
 
+	/** The ID of the recurring payment authorization */
 	@Value("${payPort.payRequestRecurring.paymentAuthorizationID}")
 	private Long		payRequestRecurringPaymentAuthorizationID;
 
-	/** PayRequest Test data */
+	/**
+	 * PayRequest Test data
+	 */
 
+	/** The amount for the payment request */
 	@Value("${payPort.payRequest.amount.amout}")
 	private BigDecimal	payRequestAmount;
 
+	/** The currency for the payment request */
 	@Value("${payPort.payRequest.amount.currency}")
 	private String		payRequestCurrency;
 
+	/** The text assigned to the order details of the payment request */
 	@Value("${payPort.payRequest.orderDetails.text}")
 	private String		payRequestText;
 
+	/** The basket risk for the payment request */
 	@Value("${payPort.payRequest.basketRisk}")
 	private int			payRequestBasketRisk;
 
+	/** The client risk for the payment request */
 	@Value("${payPort.payRequest.clientRisk}")
 	private int			payRequestClientRisk;
 
+	/** The authentication expiration time for the payment request */
 	@Value("${payPort.payRequest.authExpiration}")
 	private int			payRequestAuthExpiration;
 
+	/** The confirmation expiration time for the payment request */
 	@Value("${payPort.payRequest.confirmExpiration}")
 	private int			payRequestConfirmExpiration;
 
+	/** The success expiration time for the payment request */
 	@Value("${payPort.payRequest.successExpiration}")
 	private int			payRequestSuccessExpiration;
 
+	/** The URI where to be redirected when the payment request flow is successful */
 	@Value("${payPort.payRequest.successURI}")
 	private String		payRequestSuccessURI;
 
+	/** The URI where to be redirected when the payment request flow is not successful */
 	@Value("${payPort.payRequest.failureURI}")
 	private String		payRequestFailureURI;
 
+	/** The IP address of the consumer involved in the payment request */
 	@Value("${payPort.payRequest.consumerIPAddress}")
 	private String		payRequestConsumerIPAddress;
 
+	/** The language code of the consumer involved in the payment request */
 	@Value("${payPort.payRequest.consumerLanguage}")
 	private String		payRequestConsumerLanguage;
 
+	/** The nation code of the consumer involved in the paymenr request */
 	@Value("${payPort.payRequest.consumerNation}")
 	private String		payRequestConsumerNation;
 
+	/** The description assigned to the recurring payment */
 	@Value("${payPort.payRequest.createRecurring.description}")
 	private String		payRequestCreateRecurringDescription;
 
+	/** The expiration date of the recurring payment */
 	@Value("${payPort.payRequest.createRecurring.expireDate}")
 	private String		payRequestCreateRecurringExpireDate;
 
-	/** RefundRequest Test data */
+	/**
+	 * RefundRequest Test data
+	 */
 
 	@Value("${payPort.refundRequest.transactionID}")
 	private Long		refundRequestTransactionID;

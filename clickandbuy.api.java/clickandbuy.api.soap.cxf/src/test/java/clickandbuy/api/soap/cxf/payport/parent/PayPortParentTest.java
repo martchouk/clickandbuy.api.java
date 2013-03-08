@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import clickandbuy.api.soap.cxf.parent.ParentTest;
+import clickandbuy.api.soap.cxf.payport.data.PayPortTestDataSupplier;
 
 import com.clickandbuy.api.soap.cxf.PayPortType;
 
@@ -21,29 +22,39 @@ import com.clickandbuy.api.soap.cxf.PayPortType;
 public class PayPortParentTest extends ParentTest {
 
 	/**
-	 * class logger.
+	 * Class logger.
 	 */
-	private static final Logger	logger	= Logger.getLogger(PayPortParentTest.class);
+	private static final Logger			logger	= Logger.getLogger(PayPortParentTest.class);
 
 	/**
-	 * flag to bypass self signed certificates.
+	 * Flag to accept (bypass) self signed certificates.
 	 */
-	@Value("${acceptSelfSignedCertificates}")
-	protected boolean			acceptSelfSignedCertificates;
+	@Value("${clickandbuy.api.endpoint.payport.acceptSelfSignedCertificates}")
+	protected boolean					acceptSelfSignedCertificates;
 
 	/**
-	 * web service port (facade).
+	 * Web service facade, containing pay related methods.
 	 */
 	@Autowired
-	protected PayPortType		payPortType;
+	protected PayPortType				payPortType;
 
 	/**
-	 * 
+	 * Test data supplier.
 	 */
-	public void configureCertificatesPolicy() {
+	@Autowired
+	protected PayPortTestDataSupplier	testData;
+	
+	/**
+	 * Configuration utility method for certificates policy.
+	 */
+	protected void configureCertificatesPolicy() {
 		if (acceptSelfSignedCertificates) {
+			logger.debug("Acceptance of self signed certificates is enabled for Pay Port.");
 			final Client proxy = ClientProxy.getClient(payPortType);
 			configureCertificatesPolicy(proxy);
+		} else {
+			logger.debug("Acceptance of self signed certificates is disabled for Pay Port!");
+			logger.debug("If you are on a testing/development environment, you may encounter probles due to self signed certificates being (by default) rejected.");
 		}
 	}
 }
