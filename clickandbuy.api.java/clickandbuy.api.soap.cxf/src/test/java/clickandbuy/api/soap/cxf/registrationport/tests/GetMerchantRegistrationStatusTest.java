@@ -22,7 +22,7 @@ import com.clickandbuy.api.soap.cxf.MerchantRegistrationSettings;
 /**
  * Tests related to GetMerchantRegistrationStatus
  * 
- * @author Ciprian.Ileana
+ * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
  */

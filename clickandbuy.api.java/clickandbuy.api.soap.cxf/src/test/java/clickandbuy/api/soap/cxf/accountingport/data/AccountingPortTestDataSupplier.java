@@ -6,7 +6,7 @@ package clickandbuy.api.soap.cxf.accountingport.data;
 import org.springframework.beans.factory.annotation.Value;
 
 /**
- * @author Ciprian.Ileana
+ * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
  */

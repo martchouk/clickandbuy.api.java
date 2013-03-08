@@ -13,7 +13,7 @@ import clickandbuy.api.soap.cxf.feecalculator.tests.GetFeeCardTest;
 /**
  * Test Suite for FeeCalculatorPort related tests
  * 
- * @author Ciprian.Ileana
+ * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
  */
