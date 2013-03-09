@@ -36,6 +36,7 @@
 	</developers>
 
 	<properties>
+		<!-- dependencies versions-->
 		<test.skip>false</test.skip>
 		<spring.version>3.1.2.RELEASE</spring.version>
 		<springWs.version>1.5.10</springWs.version>
@@ -47,6 +48,9 @@
 		<junit.version>4.10</junit.version>
 		<cglib.version>2.2.2</cglib.version>
 		<commons.logging.version>1.1.1</commons.logging.version>
+		<cxf.version>2.6.2</cxf.version>
+		<xerces-xercesimpl.version>2.8.1</xerces-xercesimpl.version>
+		<!-- plugins versions-->
 		<maven-source.version>2.2</maven-source.version>
 		<maven-compiler.version>2.5.1</maven-compiler.version>
 		<maven-release.version>2.1</maven-release.version>
