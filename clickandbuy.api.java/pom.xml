@@ -44,6 +44,12 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<wsdl4j.version>1.6.2</wsdl4j.version>
 		<log4j.version>1.2.17</log4j.version>
+		
+		<maven-source.version>2.2</maven-source.version>
+		<maven-compiler.version>2.5.1</maven-compiler.version>
+		<maven-release.version>2.1</maven-release.version>
+		<maven-surefire.version>2.12.4</maven-surefire.version>
+		<maven-javadoc.version>2.9</maven-javadoc.version>
 	</properties>
 
 	<modules>
@@ -117,7 +123,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.2</version>
+				<version>${maven-source.version}</version>
 				<executions>
 					<execution>
 						<goals>
@@ -129,7 +135,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.5.1</version>
+				<version>${maven-compiler.version}</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
@@ -137,7 +143,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.1</version>
+				<version>${maven-release.version}</version>
 				<configuration>
 					<tagBase>https://TODO.googlecode.com/svn/tags/</tagBase>
 				</configuration>
@@ -145,7 +151,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.12.4</version>
+				<version>${maven-surefire.version}</version>
 				<configuration>
 					<skip>${test.skip}</skip>
 				</configuration>
@@ -153,7 +159,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9</version>
+				<version>${maven-javadoc.version}</version>
 				<configuration>
 					<doctitle>API for ${project.name} ${project.version}</doctitle> <!-- Used by javadoc:javadoc goal -->
 					<windowtitle>API for ${project.name} ${project.version}</windowtitle> <!-- Used by javadoc:javadoc goal -->
@@ -164,16 +170,18 @@
 			</plugin>
 		</plugins>
 	</build>
+	
 	<reporting>
 		<outputDirectory>${project.build.directory}/site</outputDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9</version>
+				<version>${maven-javadoc.version}</version>
 			</plugin>
 		</plugins>
 	</reporting>
+	
 	<profiles>
 		<profile>
 			<id>sign-release-artifacts</id>
@@ -205,18 +213,21 @@
 			</build>
 		</profile>
 	</profiles>
+	
 	<dependencies>
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>1.1.1</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.10</version>
 			<scope>test</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -236,6 +247,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>org.springframework.context</artifactId>
@@ -248,6 +260,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>org.springframework.beans</artifactId>
@@ -260,6 +273,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>org.springframework.context.support</artifactId>
@@ -272,6 +286,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
