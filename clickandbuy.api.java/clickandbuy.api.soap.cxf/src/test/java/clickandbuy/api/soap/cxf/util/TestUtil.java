@@ -52,7 +52,7 @@ public class TestUtil {
 	 * @throws DatatypeConfigurationException
 	 */
 	public static XMLGregorianCalendar toXMLGregorianCalendar(final String dateAsString) throws ParseException, DatatypeConfigurationException {
-		final long date = CabApiUniqueDateFormat.getDayDateFormatter().parse(dateAsString.trim()).getTime();
+		final long date = CabApiUniqueDateFormat.getDayYYYYMMdd().parse(dateAsString.trim()).getTime();
 
 		return toXMLGregorianCalendar(date);
 	}

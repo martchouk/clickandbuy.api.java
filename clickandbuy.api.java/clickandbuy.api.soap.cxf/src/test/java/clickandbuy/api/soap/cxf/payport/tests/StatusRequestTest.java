@@ -76,7 +76,7 @@ public class StatusRequestTest extends PayPortParentTest {
 			Assert.assertNotNull("statusRequestResponse should not be null!", statusRequestResponse);
 			Assert.assertNotNull("statusRequestResponse.getTransactionList() should not be null!", statusRequestResponse.getTransactionList());
 			Assert.assertNotNull("statusRequestResponse.getTransactionList().getTransaction() should not be null!", statusRequestResponse.getTransactionList().getTransaction());
-			Assert.assertEquals("statusRequestResponse.getTransactionList().getTransaction() list should contain only 1 element!", 1, statusRequestResponse.getTransactionList().getTransaction());
+			Assert.assertEquals("statusRequestResponse.getTransactionList().getTransaction() list should contain only 1 element!", 1, statusRequestResponse.getTransactionList().getTransaction().size());
 			Assert.assertNotNull("statusRequestResponse.getTransactionList().getTransaction().get(0) should not be null!", statusRequestResponse.getTransactionList().getTransaction().get(0));
 			Assert.assertNotNull("statusRequestResponse.getTransactionList().getTransaction().get(0).getTransactionStatus() should not be null!", statusRequestResponse.getTransactionList().getTransaction().get(0).getTransactionStatus());
 

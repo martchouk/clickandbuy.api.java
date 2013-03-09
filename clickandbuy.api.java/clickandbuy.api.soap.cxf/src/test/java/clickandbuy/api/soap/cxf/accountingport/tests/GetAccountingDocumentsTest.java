@@ -81,8 +81,8 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 		final GetAccountingDocumentDetails getAccountingDocumentDetails = new GetAccountingDocumentDetails();
 
 		final DateRange dateRange = new DateRange();
-		final long dateRAfter = CabApiUniqueDateFormat.getDayDateFormatter().parse(testData.getDateRangeAfter().trim()).getTime();
-		final long dateRBefore = CabApiUniqueDateFormat.getDayDateFormatter().parse(testData.getDateRangeBefore().trim()).getTime();
+		final long dateRAfter = CabApiUniqueDateFormat.getDayYYYYMMdd().parse(testData.getDateRangeAfter().trim()).getTime();
+		final long dateRBefore = CabApiUniqueDateFormat.getDayYYYYMMdd().parse(testData.getDateRangeBefore().trim()).getTime();
 
 		final GregorianCalendar gregory = new GregorianCalendar();
 		gregory.setTime(new Date(dateRAfter));

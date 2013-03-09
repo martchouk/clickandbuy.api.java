@@ -1,5 +1,7 @@
 package clickandbuy.api.soap.cxf.registrationport.tests;
 
+import java.util.Random;
+
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
@@ -74,10 +76,13 @@ public class CreateMerchantRegistrationTest extends RegistrationPortParentTest {
 
 		final MerchantRegistrationData registrationData = new MerchantRegistrationData();
 		registrationData.setCompanyName(testData.getMerchantCompanyName());
-		/*
-		 * final Random randomEmailAddressSuffixGenerator = new Random(); final String suffix = "" + randomEmailAddressSuffixGenerator.nextInt(); registrationData.setEmailAddress("test" + suffix + "@merchant.com");
-		 */
-		registrationData.setEmailAddress(testData.getMerchantEmailAddress());
+
+		// FIX for not registering the same merchant email address too many times.
+		final Random randomEmailAddressSuffixGenerator = new Random();
+		final String suffix = "" + randomEmailAddressSuffixGenerator.nextInt();
+		registrationData.setEmailAddress("merchant" + suffix + "@merchant.com");
+		// REMOVE the FIX above when performing the merchant registration for each email at a time.
+		// registrationData.setEmailAddress(testData.getMerchantEmailAddress());
 		final Address companyAddress = new Address();
 		companyAddress.setCity(testData.getMerchantCity());
 		companyAddress.setCountry(testData.getMerchantCountry());

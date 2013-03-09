@@ -1,5 +1,7 @@
 package clickandbuy.api.soap.cxf.registrationport.tests;
 
+import java.util.Random;
+
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
@@ -92,7 +94,7 @@ public class GetMerchantRegistrationStatusTest extends RegistrationPortParentTes
 		final long createdMerchantId = createMerchantRegistrationResponse.getRegistrationInfo().getMerchantID();
 		final String createdMerchantSharedSecret = createMerchantRegistrationResponse.getRegistrationInfo().getRegistrationSharedSecret();
 		getMerchantRegistrationStatusDetails.setMerchantID(createdMerchantId);
-		getMerchantRegistrationStatusDetails.setToken(signatureHandler.createMerchantRegistrationToken(businessOriginID, createdMerchantId, createdMerchantSharedSecret));
+		getMerchantRegistrationStatusDetails.setToken(signatureHandler.createRegistrationToken(businessOriginID, createdMerchantId, createdMerchantSharedSecret));
 
 		return getMerchantRegistrationStatusDetails;
 	}
@@ -108,11 +110,12 @@ public class GetMerchantRegistrationStatusTest extends RegistrationPortParentTes
 		// optional values
 		// createMerchantRegistrationDetails.setIntegrationData(merchantIntegration);
 		final MerchantRegistrationData registrationData = new MerchantRegistrationData();
-		registrationData.setCompanyName(testData.getMerchantCompanyName());
-		/*
-		 * final Random randomEmailAddressSuffixGenerator = new Random(); final String suffix = "" + randomEmailAddressSuffixGenerator.nextInt(); registrationData.setEmailAddress("test" + suffix + "@merchant.com");
-		 */
-		registrationData.setEmailAddress(testData.getMerchantEmailAddress());
+		// FIX for not registering the same merchant email address too many times.
+		final Random randomEmailAddressSuffixGenerator = new Random();
+		final String suffix = "" + randomEmailAddressSuffixGenerator.nextInt();
+		registrationData.setEmailAddress("merchant" + suffix + "@merchant.com");
+		// REMOVE the FIX above when performing the merchant registration for each email at a time.
+		// registrationData.setEmailAddress(testData.getMerchantEmailAddress());
 		final Address companyAddress = new Address();
 		companyAddress.setCity(testData.getMerchantCity());
 		companyAddress.setCountry(testData.getMerchantCountry());
@@ -120,6 +123,7 @@ public class GetMerchantRegistrationStatusTest extends RegistrationPortParentTes
 		companyAddress.setHouseNumber(testData.getMerchantHouseNumber());
 		companyAddress.setZip(testData.getMerchantZipCode());
 		registrationData.setCompanyAddress(companyAddress);
+		registrationData.setCompanyName(testData.getMerchantCompanyName());
 		createMerchantRegistrationDetails.setMerchantData(registrationData);
 
 		final MerchantRegistrationSettings registrationSettings = new MerchantRegistrationSettings();

@@ -18,16 +18,16 @@ public class CabApiUniqueDateFormat {
 	}
 
 	/**
-	 * date formatter for signature generation.
+	 * date formatter for client signature generation.
 	 */
-	public static final DateFormat getDateFormatForSignature() {
+	public static final DateFormat getDateFormatForWsClientSignature() {
 		return new SimpleDateFormat("yyyyMMddHHmmss");
 	}
 
 	/**
 	 * day specific date formatter.
 	 */
-	public static final DateFormat getDayDateFormatter() {
+	public static final DateFormat getDayYYYYMMdd() {
 		return new SimpleDateFormat("yyyyMMdd");
 	}
 

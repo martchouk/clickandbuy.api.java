@@ -7,6 +7,7 @@ import static clickandbuy.api.soap.cxf.util.TestUtil.prepareMoney;
 
 import org.apache.log4j.Logger;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -20,13 +21,15 @@ import com.clickandbuy.api.soap.cxf.PayRequestRecurringRequest;
 import com.clickandbuy.api.soap.cxf.PayRequestRecurringResponse;
 
 /**
- * Tests related to PayRequestRecurring
+ * Tests related to PayRequestRecurring. This test is ignored as it requires the authorization transaction to be in authorized state before running a recurring payment.
  * 
  * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
+ * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
+@Ignore
 public class PayRequestRecurringTest extends PayPortParentTest {
 
 	/**

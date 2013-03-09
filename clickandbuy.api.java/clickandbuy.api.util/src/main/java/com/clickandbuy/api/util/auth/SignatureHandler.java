@@ -10,17 +10,31 @@ import org.apache.xerces.impl.dv.util.HexBin;
 import org.springframework.stereotype.Component;
 
 /**
- *  TODO: check naming for methods
- *  Add Class Description.
- *  
- *
+ * @author Ciprian I.Ileana
+ * @author Nicolae.Petridean
+ * 
+ *         Signature handler class. Used as Spring bean. Can be used to generate authentication tokens for Cab web service and as merchant registration token util.
+ * 
  */
 @Component
 public class SignatureHandler {
-	private static final Logger	logger	= Logger.getLogger(SignatureHandler.class);
+	/**
+	 * class logger.
+	 */
+	private static final Logger	logger				= Logger.getLogger(SignatureHandler.class);
 
 	/**
-	 * Creates a valid token, for pay port authentication, based on the given input.
+	 * sha1 alghoritm.
+	 */
+	private static final String	SHA1_ALGORITHM		= "SHA1";
+
+	/**
+	 * signature timezone.
+	 */
+	private static final String	SIGNATURE_TIMEZONE	= "UTC";
+
+	/**
+	 * Creates a valid token, for Cab ws client authentication, based on projectId and sharedSecret.
 	 * 
 	 * @param projectID
 	 * @param sharedSecret
@@ -28,9 +42,9 @@ public class SignatureHandler {
 	 * 
 	 *         <timestamp>::<hex(sha1) hash of the string “[projectID]::[secretKey]::[timestamp]”>
 	 */
-	public String createTokenForPayPort(final long projectID, final String sharedSecret) {
-		final TimeZone utcTimeZone = TimeZone.getTimeZone("UTC");
-		final DateFormat dateFormat = CabApiUniqueDateFormat.getDateFormatForSignature();
+	public String createAuthenticationToken(final long projectID, final String sharedSecret) {
+		final TimeZone utcTimeZone = TimeZone.getTimeZone(SIGNATURE_TIMEZONE);
+		final DateFormat dateFormat = CabApiUniqueDateFormat.getDateFormatForWsClientSignature();
 		dateFormat.setTimeZone(utcTimeZone);
 		final Calendar calendar = Calendar.getInstance(utcTimeZone);
 		final String timestamp = dateFormat.format(calendar.getTime());
@@ -39,19 +53,19 @@ public class SignatureHandler {
 	}
 
 	/**
-	 * $timestamp + "::" + HEX(SHA1($businessOriginID + "::" + $merchantID + "::" + $sharedSecret + "::" + $timestamp)) with $timestamp being dateTimeWithFormat('yyyyMMddHHmmss') in UTC
+	 * Creates a merchant registration token, based on businessOrigin id, merchant Id and shared secret. BusinessOriginId is a parameter specific for web shops.
 	 * 
-	 * Creates a valid token, for pay port authentication, based on the given input.
+	 * $timestamp + "::" + HEX(SHA1($businessOriginID + "::" + $merchantID + "::" + $sharedSecret + "::" + $timestamp)) with $timestamp being dateTimeWithFormat('yyyyMMddHHmmss') in UTC
 	 * 
 	 * @param projectID
 	 * @param sharedSecret
 	 * @return String
 	 */
-	public String createMerchantRegistrationToken(final String businessOriginID, final long merchantID, final String sharedSecret) {
-		TimeZone utcTimeZone = TimeZone.getTimeZone("UTC");
-		DateFormat dateFormat = CabApiUniqueDateFormat.getDateFormatForSignature();
+	public String createRegistrationToken(final String businessOriginID, final long merchantID, final String sharedSecret) {
+		final TimeZone utcTimeZone = TimeZone.getTimeZone(SIGNATURE_TIMEZONE);
+		final DateFormat dateFormat = CabApiUniqueDateFormat.getDateFormatForWsClientSignature();
 		dateFormat.setTimeZone(utcTimeZone);
-		Calendar calendar = Calendar.getInstance(utcTimeZone);
+		final Calendar calendar = Calendar.getInstance(utcTimeZone);
 		final String timestamp = dateFormat.format(calendar.getTime());
 		final String toBeHashed = businessOriginID + "::" + merchantID + "::" + sharedSecret + "::" + timestamp;
 		return timestamp + "::" + hash(toBeHashed);
@@ -65,12 +79,12 @@ public class SignatureHandler {
 	 */
 	private String hash(final String input) {
 		try {
-			final MessageDigest md = MessageDigest.getInstance("SHA1");
+			final MessageDigest md = MessageDigest.getInstance(SHA1_ALGORITHM);
 			md.update(input.getBytes());
 			return HexBin.encode(md.digest());
-		} catch (Throwable t) {
-			logger.error("Could not SHA1: " + t);
-			return "";
+		} catch (final Throwable t) {
+			logger.error("Could not encode : " + input, t);
+			throw new RuntimeException("Could not encode: " + input + ". Please be sure you use an offical Java Runtime Environment release.", t);
 		}
 	}
 }

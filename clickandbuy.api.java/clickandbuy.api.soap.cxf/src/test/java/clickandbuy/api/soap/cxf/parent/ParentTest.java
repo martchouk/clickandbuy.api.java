@@ -91,7 +91,7 @@ public class ParentTest {
 		final Authentication merchantAuth = new Authentication();
 		merchantAuth.setProjectID(nullToZero(projectId));
 		merchantAuth.setMerchantID(nullToZero(merchantId));
-		merchantAuth.setToken(signatureHandler.createTokenForPayPort(projectId, secretKey));
+		merchantAuth.setToken(signatureHandler.createAuthenticationToken(projectId, secretKey));
 		return merchantAuth;
 	}
 
