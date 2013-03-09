@@ -10,7 +10,7 @@
 
 	<name>ClickandBuy API Java Library - Parent</name>
 	<description>Clickandbuy API Java Library</description>
-	<!-- url>http://code.google.com/p/facebook-java-api</url -->
+	<url>https://github.com/martchouk/clickandbuy.api.java</url>
 	<licenses>
 		<license>
 			<name>The BSD License</name>
@@ -22,10 +22,7 @@
 		<system>code.google.com</system>
 		<url>http://code.google.com/p/buxter-api/issues/list</url>
 	</issueManagement>
-	<!--<scm> <url>https://buxter-api.googlecode.com/svn/trunk</url> <connection>scm:svn:https://buxter-api.googlecode.com/svn/trunk</connection> 
-		<developerConnection>scm:svn:https://buxter-api.googlecode.com/svn/trunk</developerConnection> 
-		</scm> -->
-		
+
 	<developers>
 		<developer>
 			<name>Andrei Martchouk</name>
@@ -37,7 +34,7 @@
 			<name>Nicolae Petridean</name>
 		</developer>
 	</developers>
-	
+
 	<properties>
 		<test.skip>false</test.skip>
 		<spring.version>3.1.2.RELEASE</spring.version>
@@ -45,14 +42,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
-	
+
 	<modules>
 		<module>clickandbuy.api.util</module>
-		<!--module>clickandbuy.api.schema</module -->
 		<module>clickandbuy.api.soap.cxf</module>
-		<module>clickandbuy.api.soap.axis2</module>
 	</modules>
-	
+
 	<pluginRepositories>
 		<pluginRepository>
 			<id>Codehaus Snapshots</id>
@@ -150,6 +145,18 @@
 				<version>2.12.4</version>
 				<configuration>
 					<skip>${test.skip}</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<doctitle>API for ${project.name} ${project.version}</doctitle> <!-- Used by javadoc:javadoc goal -->
+					<windowtitle>API for ${project.name} ${project.version}</windowtitle> <!-- Used by javadoc:javadoc goal -->
+
+					<testDoctitle>Test API for ${project.name} ${project.version}</testDoctitle> <!-- Used by javadoc:test-javadoc goal -->
+					<testWindowtitle>Test API for ${project.name} ${project.version}</testWindowtitle> <!-- Used by javadoc:test-javadoc goal -->
 				</configuration>
 			</plugin>
 		</plugins>

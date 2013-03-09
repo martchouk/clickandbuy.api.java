@@ -152,4 +152,126 @@ public class FeeCalculatorPortTestDataSupplier {
 		return getFeeCardRequestCategory;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "FeeCalculatorPortTestDataSupplier [getFeeCardAverageTicketSizesRequestCurrency=" + getFeeCardAverageTicketSizesRequestCurrency + ", getFeeCardAverageTicketSizesRequestCategory=" + getFeeCardAverageTicketSizesRequestCategory
+				+ ", getFeeCardInvoicingCyclesRequestCurrency=" + getFeeCardInvoicingCyclesRequestCurrency + ", getFeeCardInvoicingCyclesRequestCategory=" + getFeeCardInvoicingCyclesRequestCategory
+				+ ", getFeeCardSettlementDelaysRequestCurrency=" + getFeeCardSettlementDelaysRequestCurrency + ", getFeeCardSettlementDelaysRequestCategory=" + getFeeCardSettlementDelaysRequestCategory
+				+ ", getFeeCardRequestInvoicingCycle=" + getFeeCardRequestInvoicingCycle + ", getFeeCardRequestAmount=" + getFeeCardRequestAmount + ", getFeeCardRequestSettlementDelay=" + getFeeCardRequestSettlementDelay
+				+ ", getFeeCardRequestCurrency=" + getFeeCardRequestCurrency + ", getFeeCardRequestCategory=" + getFeeCardRequestCategory + "]";
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((getFeeCardAverageTicketSizesRequestCategory == null) ? 0 : getFeeCardAverageTicketSizesRequestCategory.hashCode());
+		result = prime * result + ((getFeeCardAverageTicketSizesRequestCurrency == null) ? 0 : getFeeCardAverageTicketSizesRequestCurrency.hashCode());
+		result = prime * result + ((getFeeCardInvoicingCyclesRequestCategory == null) ? 0 : getFeeCardInvoicingCyclesRequestCategory.hashCode());
+		result = prime * result + ((getFeeCardInvoicingCyclesRequestCurrency == null) ? 0 : getFeeCardInvoicingCyclesRequestCurrency.hashCode());
+		result = prime * result + (int) (getFeeCardRequestAmount ^ (getFeeCardRequestAmount >>> 32));
+		result = prime * result + ((getFeeCardRequestCategory == null) ? 0 : getFeeCardRequestCategory.hashCode());
+		result = prime * result + ((getFeeCardRequestCurrency == null) ? 0 : getFeeCardRequestCurrency.hashCode());
+		result = prime * result + getFeeCardRequestInvoicingCycle;
+		result = prime * result + getFeeCardRequestSettlementDelay;
+		result = prime * result + ((getFeeCardSettlementDelaysRequestCategory == null) ? 0 : getFeeCardSettlementDelaysRequestCategory.hashCode());
+		result = prime * result + ((getFeeCardSettlementDelaysRequestCurrency == null) ? 0 : getFeeCardSettlementDelaysRequestCurrency.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		FeeCalculatorPortTestDataSupplier other = (FeeCalculatorPortTestDataSupplier) obj;
+		if (getFeeCardAverageTicketSizesRequestCategory == null) {
+			if (other.getFeeCardAverageTicketSizesRequestCategory != null) {
+				return false;
+			}
+		} else if (!getFeeCardAverageTicketSizesRequestCategory.equals(other.getFeeCardAverageTicketSizesRequestCategory)) {
+			return false;
+		}
+		if (getFeeCardAverageTicketSizesRequestCurrency == null) {
+			if (other.getFeeCardAverageTicketSizesRequestCurrency != null) {
+				return false;
+			}
+		} else if (!getFeeCardAverageTicketSizesRequestCurrency.equals(other.getFeeCardAverageTicketSizesRequestCurrency)) {
+			return false;
+		}
+		if (getFeeCardInvoicingCyclesRequestCategory == null) {
+			if (other.getFeeCardInvoicingCyclesRequestCategory != null) {
+				return false;
+			}
+		} else if (!getFeeCardInvoicingCyclesRequestCategory.equals(other.getFeeCardInvoicingCyclesRequestCategory)) {
+			return false;
+		}
+		if (getFeeCardInvoicingCyclesRequestCurrency == null) {
+			if (other.getFeeCardInvoicingCyclesRequestCurrency != null) {
+				return false;
+			}
+		} else if (!getFeeCardInvoicingCyclesRequestCurrency.equals(other.getFeeCardInvoicingCyclesRequestCurrency)) {
+			return false;
+		}
+		if (getFeeCardRequestAmount != other.getFeeCardRequestAmount) {
+			return false;
+		}
+		if (getFeeCardRequestCategory == null) {
+			if (other.getFeeCardRequestCategory != null) {
+				return false;
+			}
+		} else if (!getFeeCardRequestCategory.equals(other.getFeeCardRequestCategory)) {
+			return false;
+		}
+		if (getFeeCardRequestCurrency == null) {
+			if (other.getFeeCardRequestCurrency != null) {
+				return false;
+			}
+		} else if (!getFeeCardRequestCurrency.equals(other.getFeeCardRequestCurrency)) {
+			return false;
+		}
+		if (getFeeCardRequestInvoicingCycle != other.getFeeCardRequestInvoicingCycle) {
+			return false;
+		}
+		if (getFeeCardRequestSettlementDelay != other.getFeeCardRequestSettlementDelay) {
+			return false;
+		}
+		if (getFeeCardSettlementDelaysRequestCategory == null) {
+			if (other.getFeeCardSettlementDelaysRequestCategory != null) {
+				return false;
+			}
+		} else if (!getFeeCardSettlementDelaysRequestCategory.equals(other.getFeeCardSettlementDelaysRequestCategory)) {
+			return false;
+		}
+		if (getFeeCardSettlementDelaysRequestCurrency == null) {
+			if (other.getFeeCardSettlementDelaysRequestCurrency != null) {
+				return false;
+			}
+		} else if (!getFeeCardSettlementDelaysRequestCurrency.equals(other.getFeeCardSettlementDelaysRequestCurrency)) {
+			return false;
+		}
+		return true;
+	}
+
 }
