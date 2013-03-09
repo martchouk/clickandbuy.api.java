@@ -34,6 +34,11 @@ public class SignatureHandler {
 	private static final String	SIGNATURE_TIMEZONE	= "UTC";
 
 	/**
+	 * signature timezone.
+	 */
+	private static final String	TOKEN_SEPARATOR		= "::";
+
+	/**
 	 * Creates a valid token, for Cab ws client authentication, based on projectId and sharedSecret.
 	 * 
 	 * @param projectID
@@ -48,8 +53,8 @@ public class SignatureHandler {
 		dateFormat.setTimeZone(utcTimeZone);
 		final Calendar calendar = Calendar.getInstance(utcTimeZone);
 		final String timestamp = dateFormat.format(calendar.getTime());
-		final String toBeHashed = projectID + "::" + sharedSecret + "::" + timestamp;
-		return timestamp + "::" + hash(toBeHashed);
+		final String toBeHashed = projectID + TOKEN_SEPARATOR + sharedSecret + TOKEN_SEPARATOR + timestamp;
+		return timestamp + TOKEN_SEPARATOR + hash(toBeHashed);
 	}
 
 	/**
@@ -67,8 +72,8 @@ public class SignatureHandler {
 		dateFormat.setTimeZone(utcTimeZone);
 		final Calendar calendar = Calendar.getInstance(utcTimeZone);
 		final String timestamp = dateFormat.format(calendar.getTime());
-		final String toBeHashed = businessOriginID + "::" + merchantID + "::" + sharedSecret + "::" + timestamp;
-		return timestamp + "::" + hash(toBeHashed);
+		final String toBeHashed = businessOriginID + TOKEN_SEPARATOR + merchantID + TOKEN_SEPARATOR + sharedSecret + TOKEN_SEPARATOR + timestamp;
+		return timestamp + TOKEN_SEPARATOR + hash(toBeHashed);
 	}
 
 	/**
