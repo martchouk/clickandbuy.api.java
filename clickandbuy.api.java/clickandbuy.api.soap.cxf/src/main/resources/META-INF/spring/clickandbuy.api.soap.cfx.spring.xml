@@ -38,7 +38,7 @@
                   address="${clickandbuy.api.endpoint.soap}"/>
 	</beans>
 	
-	<beans profile="SANDBOX">          
+	<beans profile="SANDBOX" >          
 		<context:property-placeholder location="classpath*:clickandbuy.api.SANDBOX.properties"/>
 		<jaxws:client id="clickandbuyApiClientPay"
                   serviceClass="clickandbuy.api.soap.cfx.PayPortType"
