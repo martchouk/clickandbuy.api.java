@@ -8,6 +8,7 @@ import junit.framework.Assert;
 
 import org.apache.log4j.Logger;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -21,13 +22,14 @@ import com.clickandbuy.api.soap.cxf.RefundRequestRequest;
 import com.clickandbuy.api.soap.cxf.RefundRequestResponse;
 
 /**
- * Tests related to RefundRequest
+ * Tests related to RefundRequest. Ignore this test as it cannot be automated.
  * 
  * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
+@Ignore
 public class RefundRequestTest extends PayPortParentTest {
 
 	/**
