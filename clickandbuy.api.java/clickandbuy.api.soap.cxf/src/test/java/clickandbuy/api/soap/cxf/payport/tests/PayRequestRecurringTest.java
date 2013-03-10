@@ -25,8 +25,6 @@ import com.clickandbuy.api.soap.cxf.PayRequestRecurringResponse;
  * 
  * @author Ciprian I. Ileana
  * @author Nicolae Petridean
- * 
- * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @Ignore

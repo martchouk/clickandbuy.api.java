@@ -178,6 +178,5 @@ public class StatusRequestTest extends PayPortParentTest {
 		transactionIDList.getTransactionID().add(transactionID);
 
 		return transactionIDList;
-
 	}
 }

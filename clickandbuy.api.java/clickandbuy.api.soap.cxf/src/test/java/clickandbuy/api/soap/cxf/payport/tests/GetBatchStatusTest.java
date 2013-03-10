@@ -87,10 +87,13 @@ public class GetBatchStatusTest extends PayPortParentTest {
 		try {
 			getBatchStatusResponse = payPortType.getBatchStatus(getBatchStatusRequest);
 
+			Assert.assertNotNull("getBatchStatusResponse should not be null!", getBatchStatusResponse);
+			Assert.assertNotNull("getBatchStatusResponse.getBatchItemList() should not be null!", getBatchStatusResponse.getBatchItemList());
+			Assert.assertNotNull("getBatchStatusResponse.getBatchItemList().getBatchItem() list should not be null!", getBatchStatusResponse.getBatchItemList().getBatchItem());
+			Assert.assertEquals("getBatchStatusResponse.getBatchItemList().getBatchItem() list should contain only 1 element!", 1, getBatchStatusResponse.getBatchItemList().getBatchItem().size());
 			logger.debug("Batch with Batch ID: [" + getBatchStatusResponse.getBatch().getBatchID() + "] have status: [" + getBatchStatusResponse.getBatch().getBatchStatus() + "]");
-			for (final BatchItemIDStatus batchItemIDStatus : getBatchStatusResponse.getBatchItemList().getBatchItem()) {
-				logger.debug("Batch Item with Batch Item ID: [" + batchItemIDStatus.getBatchItemID() + "] have status: [" + batchItemIDStatus.getBatchItemStatus() + "]");
-			}
+			final BatchItemIDStatus batchItemIDStatus = getBatchStatusResponse.getBatchItemList().getBatchItem().get(0);
+			logger.debug("Batch Item with Batch Item ID: [" + batchItemIDStatus.getBatchItemID() + "] have status: [" + batchItemIDStatus.getBatchItemStatus() + "]");
 		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 		}
@@ -209,7 +212,6 @@ public class GetBatchStatusTest extends PayPortParentTest {
 		batchItemDetails.setExternalID(externalId);
 
 		return batchItemDetails;
-
 	}
 
 	/**
@@ -223,7 +225,6 @@ public class GetBatchStatusTest extends PayPortParentTest {
 		addBatchItemProcessingDetails.setPayRequestDetails(preparePayRequestDetails());
 
 		return addBatchItemProcessingDetails;
-
 	}
 
 	/**
@@ -252,7 +253,6 @@ public class GetBatchStatusTest extends PayPortParentTest {
 		orderDetails.setText(testData.getPayRequestText());
 
 		return orderDetails;
-
 	}
 
 	/**
@@ -276,10 +276,8 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	 */
 	private BatchItemIDList prepareBatchItemIDList() {
 		final BatchItemIDList batchItemIDList = new BatchItemIDList();
-
 		batchItemIDList.getBatchItemID().add(batchItemID);
 
 		return batchItemIDList;
-
 	}
 }
