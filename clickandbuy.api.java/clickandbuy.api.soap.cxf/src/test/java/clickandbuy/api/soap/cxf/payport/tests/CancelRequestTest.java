@@ -3,7 +3,6 @@
  */
 package clickandbuy.api.soap.cxf.payport.tests;
 
-import static clickandbuy.api.soap.cxf.util.TestUtil.prepareCancelRequestDetails;
 import static clickandbuy.api.soap.cxf.util.TestUtil.prepareMoney;
 import junit.framework.Assert;
 
@@ -16,6 +15,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import clickandbuy.api.soap.cxf.payport.data.PayPortTestDataSupplier;
 import clickandbuy.api.soap.cxf.payport.parent.PayPortParentTest;
 
+import com.clickandbuy.api.soap.cxf.CancelIdentifier;
+import com.clickandbuy.api.soap.cxf.CancelMode;
+import com.clickandbuy.api.soap.cxf.CancelRequestDetails;
 import com.clickandbuy.api.soap.cxf.CancelRequestRequest;
 import com.clickandbuy.api.soap.cxf.CancelRequestResponse;
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
@@ -155,5 +157,38 @@ public class CancelRequestTest extends PayPortParentTest {
 		orderDetails.setText(testData.getPayRequestText());
 
 		return orderDetails;
+	}
+
+	/**
+	 * Prepare cancel request details.
+	 * 
+	 * @param recurringPaymentAuthorizationID
+	 * @param transactionID
+	 * @param cancelMode
+	 * @return
+	 */
+	public static CancelRequestDetails prepareCancelRequestDetails(final Long recurringPaymentAuthorizationID, final Long transactionID, final CancelMode cancelMode) {
+		final CancelRequestDetails cancelRequestDetails = new CancelRequestDetails();
+
+		cancelRequestDetails.setCancelIdentifier(prepareCancelIdentifier(recurringPaymentAuthorizationID, transactionID));
+		cancelRequestDetails.setCancelMode(cancelMode);
+		return cancelRequestDetails;
+	}
+
+	/**
+	 * Prepare cancel identifier.
+	 * 
+	 * @param recurringPaymentAuthorizationID
+	 * @param transactionID
+	 * @return
+	 */
+	private static CancelIdentifier prepareCancelIdentifier(final Long recurringPaymentAuthorizationID, final Long transactionID) {
+		final CancelIdentifier cancelIdentifier = new CancelIdentifier();
+		if (recurringPaymentAuthorizationID != null) {
+			cancelIdentifier.setRecurringPaymentAuthorizationID(recurringPaymentAuthorizationID);
+		} else {
+			cancelIdentifier.setTransactionID(transactionID);
+		}
+		return cancelIdentifier;
 	}
 }

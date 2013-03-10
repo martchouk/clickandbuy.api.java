@@ -29,6 +29,7 @@ import com.clickandbuy.api.util.auth.CabApiUniqueDateFormat;
  * Tests related to GetAccountingDocuments
  * 
  * @author Ciprian I. Ileana
+ * @author Nicolae.Petridean
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
