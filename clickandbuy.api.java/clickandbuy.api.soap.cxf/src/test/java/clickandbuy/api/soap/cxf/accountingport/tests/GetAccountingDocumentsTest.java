@@ -14,15 +14,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import clickandbuy.api.soap.cxf.accountingport.data.AccountingPortTestDataSupplier;
 import clickandbuy.api.soap.cxf.accountingport.parent.AccountingPortParentTest;
-import clickandbuy.api.soap.cxf.feecalculator.data.FeeCalculatorPortTestDataSupplier;
 
 import com.clickandbuy.api.soap.cxf.DateRange;
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 import com.clickandbuy.api.soap.cxf.GetAccountingDocumentDetails;
 import com.clickandbuy.api.soap.cxf.GetAccountingDocumentsRequest;
 import com.clickandbuy.api.soap.cxf.GetAccountingDocumentsResponse;
-import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesDetails;
 import com.clickandbuy.api.soap.cxf.IntRange;
 import com.clickandbuy.api.soap.cxf.PagingSetting;
 import com.clickandbuy.api.util.auth.CabApiUniqueDateFormat;

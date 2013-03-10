@@ -13,7 +13,6 @@ import clickandbuy.api.soap.cxf.feecalculator.parent.FeeCalculatorPortParentTest
 import clickandbuy.api.soap.cxf.util.TestUtil;
 
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
-import com.clickandbuy.api.soap.cxf.GetFeeCardAverageTicketSizesDetails;
 import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesDetails;
 import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesRequest;
 import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesResponse;
@@ -69,7 +68,6 @@ public class GetFeeCardInvoicingCyclesTest extends FeeCalculatorPortParentTest {
 		Assert.assertNotNull(getFeeCardCategoriesResponse.getCategoryList());
 		Assert.assertNotNull(getFeeCardCategoriesResponse.getCategoryList().getCategory());
 		Assert.assertTrue(getFeeCardCategoriesResponse.getCategoryList().getCategory().size() > 0);
-
 	}
 
 	/**
@@ -96,7 +94,6 @@ public class GetFeeCardInvoicingCyclesTest extends FeeCalculatorPortParentTest {
 		Assert.assertNotNull(getFeeCardInvoicingCyclesResponse.getInvoicingCycleList());
 		Assert.assertNotNull(getFeeCardInvoicingCyclesResponse.getInvoicingCycleList().getInvoicingCycle());
 		Assert.assertTrue(getFeeCardInvoicingCyclesResponse.getInvoicingCycleList().getInvoicingCycle().size() > 0);
-
 	}
 
 	/**

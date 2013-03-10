@@ -21,7 +21,6 @@ import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesResponse;
 import com.clickandbuy.api.soap.cxf.GetFeeCardDetails;
 import com.clickandbuy.api.soap.cxf.GetFeeCardRequest;
 import com.clickandbuy.api.soap.cxf.GetFeeCardResponse;
-import com.clickandbuy.api.soap.cxf.GetFeeCardSettlementDelaysDetails;
 import com.clickandbuy.api.soap.cxf.Money;
 
 /**

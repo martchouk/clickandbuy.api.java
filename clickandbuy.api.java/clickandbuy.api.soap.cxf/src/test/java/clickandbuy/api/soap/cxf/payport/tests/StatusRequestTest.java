@@ -48,9 +48,11 @@ public class StatusRequestTest extends PayPortParentTest {
 
 	/**
 	 * test setup.
+	 * 
+	 * @throws ErrorDetails_Exception
 	 */
 	@Before
-	public void setUp() {
+	public void setUp() throws ErrorDetails_Exception {
 		configureCertificatesPolicy();
 
 		externalId = externalId + System.nanoTime() + "_";
@@ -61,9 +63,11 @@ public class StatusRequestTest extends PayPortParentTest {
 
 	/**
 	 * Tests the StatusRequest operation
+	 * 
+	 * @throws ErrorDetails_Exception
 	 */
 	@Test
-	public void testStatusRequest() {
+	public void testStatusRequest() throws ErrorDetails_Exception {
 		StatusRequestResponse statusRequestResponse = null;
 
 		final StatusRequestRequest statusRequestRequest = new StatusRequestRequest();
@@ -83,6 +87,7 @@ public class StatusRequestTest extends PayPortParentTest {
 			logger.debug("The transaction with ID: [" + transactionID + "] have the status: [" + statusRequestResponse.getTransactionList().getTransaction().get(0).getTransactionStatus() + "]");
 		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
 		}
 	}
 
@@ -90,8 +95,9 @@ public class StatusRequestTest extends PayPortParentTest {
 	 * Executes a PayRequest
 	 * 
 	 * @return the transaction ID received from the PayRequest
+	 * @throws ErrorDetails_Exception
 	 */
-	private long doPayRequest() {
+	private long doPayRequest() throws ErrorDetails_Exception {
 		Long payRequestTransactionID = null;
 		PayRequestResponse payRequestResponse = null;
 
@@ -110,6 +116,7 @@ public class StatusRequestTest extends PayPortParentTest {
 			logger.debug("Created transaction with ID: [" + payRequestTransactionID + "]");
 		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
 		}
 
 		return payRequestTransactionID;
