@@ -61,9 +61,11 @@ public class GetBatchStatusTest extends PayPortParentTest {
 
 	/**
 	 * test setup.
+	 * 
+	 * @throws ErrorDetails_Exception
 	 */
 	@Before
-	public void setUp() {
+	public void setUp() throws ErrorDetails_Exception {
 		configureCertificatesPolicy();
 
 		externalId = externalId + System.nanoTime() + "_";
@@ -75,9 +77,11 @@ public class GetBatchStatusTest extends PayPortParentTest {
 
 	/**
 	 * Tests the GetBatchStatus operation
+	 * 
+	 * @throws ErrorDetails_Exception
 	 */
 	@Test
-	public void testGetBatchStatus() {
+	public void testGetBatchStatus() throws ErrorDetails_Exception {
 		GetBatchStatusResponse getBatchStatusResponse = null;
 
 		final GetBatchStatusRequest getBatchStatusRequest = new GetBatchStatusRequest();
@@ -96,6 +100,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 			logger.debug("Batch Item with Batch Item ID: [" + batchItemIDStatus.getBatchItemID() + "] have status: [" + batchItemIDStatus.getBatchItemStatus() + "]");
 		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
 		}
 	}
 
@@ -103,8 +108,10 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	 * Runs a AddBatchItem operation
 	 * 
 	 * @return the ID of the added batch item
+	 * 
+	 * @throws ErrorDetails_Exception
 	 */
-	private Long doAddBatchItem() {
+	private Long doAddBatchItem() throws ErrorDetails_Exception {
 		AddBatchItemResponse addBatchItemResponse = null;
 
 		final AddBatchItemRequest addBatchItemRequest = new AddBatchItemRequest();
@@ -125,6 +132,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 			logger.debug("Successfully added BatchItem with ID: [" + batchItemID + "] to Batch with BatchID: [" + addBatchItemResponse.getBatch().getBatchID() + "]");
 		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
 		}
 
 		return batchItemID;
@@ -134,8 +142,10 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	 * Runs a createBatch operation.
 	 * 
 	 * @return the ID of the created batch
+	 * 
+	 * @throws ErrorDetails_Exception
 	 */
-	private Long doCreateBatch() {
+	private Long doCreateBatch() throws ErrorDetails_Exception {
 		Long tempBatchID = null;
 
 		CreateBatchResponse createBatchResponse = null;
@@ -155,6 +165,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 			logger.debug("Created batch with ID: [" + tempBatchID + "]");
 		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
 		}
 
 		return tempBatchID;
@@ -276,6 +287,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	 */
 	private BatchItemIDList prepareBatchItemIDList() {
 		final BatchItemIDList batchItemIDList = new BatchItemIDList();
+		
 		batchItemIDList.getBatchItemID().add(batchItemID);
 
 		return batchItemIDList;

@@ -1,5 +1,9 @@
+/**
+ * 
+ */
 package clickandbuy.api.soap.cxf.feecalculator.tests;
 
+import static clickandbuy.api.soap.cxf.util.TestUtil.getCategoryFromList;
 import junit.framework.Assert;
 
 import org.apache.log4j.Logger;
@@ -10,7 +14,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.feecalculator.data.FeeCalculatorPortTestDataSupplier;
 import clickandbuy.api.soap.cxf.feecalculator.parent.FeeCalculatorPortParentTest;
-import clickandbuy.api.soap.cxf.util.TestUtil;
 
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesDetails;
@@ -43,10 +46,10 @@ public class GetFeeCardInvoicingCyclesTest extends FeeCalculatorPortParentTest {
 	/**
 	 * test setup.
 	 * 
-	 * @throws Exception
+	 * @throws ErrorDetails_Exception
 	 */
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws ErrorDetails_Exception {
 		configureCertificatesPolicy();
 
 		// prepare fee card categories request.
@@ -103,9 +106,11 @@ public class GetFeeCardInvoicingCyclesTest extends FeeCalculatorPortParentTest {
 	 */
 	private GetFeeCardInvoicingCyclesDetails prepareGetFeeCardInvoicingCyclesDetails(final GetFeeCardCategoriesResponse getFeeCardCategoriesResponse) {
 		final GetFeeCardInvoicingCyclesDetails getFeeCardInvoicingCyclesDetails = new GetFeeCardInvoicingCyclesDetails();
+
 		getFeeCardInvoicingCyclesDetails.setBusinessOriginID(businessOriginID);
-		final long categoryId = TestUtil.getCategoryFromList(getFeeCardCategoriesResponse.getCategoryList().getCategory(), testData.getGetFeeCardAverageTicketSizesRequestCategory().trim());
+		final long categoryId = getCategoryFromList(getFeeCardCategoriesResponse.getCategoryList().getCategory(), testData.getGetFeeCardAverageTicketSizesRequestCategory().trim());
 		getFeeCardInvoicingCyclesDetails.setCategoryID(categoryId);
+
 		return getFeeCardInvoicingCyclesDetails;
 	}
 
@@ -116,7 +121,9 @@ public class GetFeeCardInvoicingCyclesTest extends FeeCalculatorPortParentTest {
 	 */
 	private GetFeeCardCategoriesDetails prepareGetFeeCardCategoriesDetails() {
 		final GetFeeCardCategoriesDetails getFeeCardCategoriesDetails = new GetFeeCardCategoriesDetails();
+
 		getFeeCardCategoriesDetails.setBusinessOriginID(businessOriginID);
+
 		return getFeeCardCategoriesDetails;
 	}
 }

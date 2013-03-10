@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package clickandbuy.api.soap.cxf.feecalculator.tests;
 
 import junit.framework.Assert;
@@ -43,10 +46,10 @@ public class GetFeeCardAverageTicketSizesTest extends FeeCalculatorPortParentTes
 	/**
 	 * test setup
 	 * 
-	 * @throws Exception
+	 * @throws ErrorDetails_Exception
 	 */
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws ErrorDetails_Exception {
 		configureCertificatesPolicy();
 		// prepare fee card categories request.
 		final GetFeeCardCategoriesRequest feeCardCategories = new GetFeeCardCategoriesRequest();
@@ -119,6 +122,7 @@ public class GetFeeCardAverageTicketSizesTest extends FeeCalculatorPortParentTes
 	 */
 	private GetFeeCardCategoriesDetails prepareGetFeeCardCategoriesDetails() {
 		final GetFeeCardCategoriesDetails getFeeCardCategoriesDetails = new GetFeeCardCategoriesDetails();
+
 		getFeeCardCategoriesDetails.setBusinessOriginID(businessOriginID);
 
 		return getFeeCardCategoriesDetails;

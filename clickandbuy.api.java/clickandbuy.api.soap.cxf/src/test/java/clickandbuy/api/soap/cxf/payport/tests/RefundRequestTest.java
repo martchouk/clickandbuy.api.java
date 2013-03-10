@@ -48,9 +48,11 @@ public class RefundRequestTest extends PayPortParentTest {
 
 	/**
 	 * Tests the RefundRequest operation
+	 * 
+	 * @throws ErrorDetails_Exception
 	 */
 	@Test
-	public void testRefundRequest() {
+	public void testRefundRequest() throws ErrorDetails_Exception {
 		RefundRequestResponse refundRequestResponse = null;
 
 		final RefundRequestRequest refundRequestRequest = new RefundRequestRequest();
@@ -71,6 +73,7 @@ public class RefundRequestTest extends PayPortParentTest {
 			logger.debug("And transaction type: [" + refundRequestResponse.getTransaction().getTransactionType() + "]");
 		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
 		}
 	}
 

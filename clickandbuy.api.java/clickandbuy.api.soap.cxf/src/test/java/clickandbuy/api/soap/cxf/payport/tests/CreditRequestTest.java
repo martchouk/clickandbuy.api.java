@@ -49,9 +49,11 @@ public class CreditRequestTest extends PayPortParentTest {
 
 	/**
 	 * Tests the CreditRequest operation
+	 * 
+	 * @throws ErrorDetails_Exception
 	 */
 	@Test
-	public void testCreditRequest() {
+	public void testCreditRequest() throws ErrorDetails_Exception {
 		CreditRequestResponse creditRequestResponse = null;
 
 		final CreditRequestRequest creditRequestRequest = new CreditRequestRequest();
@@ -72,6 +74,7 @@ public class CreditRequestTest extends PayPortParentTest {
 			logger.debug("And transaction type: [" + creditRequestResponse.getTransaction().getTransactionType() + "]");
 		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
 		}
 	}
 

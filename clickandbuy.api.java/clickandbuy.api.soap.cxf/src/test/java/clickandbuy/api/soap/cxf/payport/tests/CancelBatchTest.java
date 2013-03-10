@@ -43,10 +43,11 @@ public class CancelBatchTest extends PayPortParentTest {
 	private Long				batchID	= null;
 
 	/**
+	 * @throws ErrorDetails_Exception
 	 * 
 	 */
 	@Before
-	public void setUp() {
+	public void setUp() throws ErrorDetails_Exception {
 		configureCertificatesPolicy();
 
 		externalId = externalId + System.nanoTime() + "_";
@@ -57,9 +58,11 @@ public class CancelBatchTest extends PayPortParentTest {
 
 	/**
 	 * Tests the CancelBatch operation
+	 * 
+	 * @throws ErrorDetails_Exception
 	 */
 	@Test
-	public void testCancelBatch() {
+	public void testCancelBatch() throws ErrorDetails_Exception {
 		CancelBatchResponse cancelBatchResponse = new CancelBatchResponse();
 
 		final CancelBatchRequest cancelBatchRequest = new CancelBatchRequest();
@@ -75,6 +78,7 @@ public class CancelBatchTest extends PayPortParentTest {
 			logger.debug("Canceled batch with Id: [" + cancelBatchResponse.getBatch().getBatchID() + "]");
 		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
 		}
 	}
 
@@ -82,8 +86,10 @@ public class CancelBatchTest extends PayPortParentTest {
 	 * Runs a CreateBatch operation.
 	 * 
 	 * @return the ID of the created batch
+	 * 
+	 * @throws ErrorDetails_Exception
 	 */
-	private Long doCreateBatch() {
+	private Long doCreateBatch() throws ErrorDetails_Exception {
 		Long tempBatchID = null;
 
 		CreateBatchResponse createBatchResponse = null;
@@ -103,6 +109,7 @@ public class CancelBatchTest extends PayPortParentTest {
 			logger.debug("Created batch with ID: [" + tempBatchID + "]");
 		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
 		}
 
 		return tempBatchID;

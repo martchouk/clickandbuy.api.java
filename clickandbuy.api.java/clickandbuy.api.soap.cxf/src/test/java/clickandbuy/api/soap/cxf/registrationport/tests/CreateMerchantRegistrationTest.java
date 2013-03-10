@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package clickandbuy.api.soap.cxf.registrationport.tests;
 
 import java.util.Random;
@@ -35,11 +38,9 @@ public class CreateMerchantRegistrationTest extends RegistrationPortParentTest {
 
 	/**
 	 * test setup.
-	 * 
-	 * @throws Exception
 	 */
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		configureCertificatesPolicy();
 	}
 

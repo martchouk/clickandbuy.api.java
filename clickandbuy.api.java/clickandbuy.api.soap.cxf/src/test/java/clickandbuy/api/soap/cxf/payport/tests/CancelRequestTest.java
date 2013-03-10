@@ -54,9 +54,11 @@ public class CancelRequestTest extends PayPortParentTest {
 
 	/**
 	 * test setup.
+	 * 
+	 * @throws ErrorDetails_Exception
 	 */
 	@Before
-	public void setUp() {
+	public void setUp() throws ErrorDetails_Exception {
 		configureCertificatesPolicy();
 
 		externalId = externalId + System.nanoTime() + "_";
@@ -67,9 +69,11 @@ public class CancelRequestTest extends PayPortParentTest {
 
 	/**
 	 * Tests the CancelRequest operation
+	 * 
+	 * @throws ErrorDetails_Exception
 	 */
 	@Test
-	public void testCancelRequest() {
+	public void testCancelRequest() throws ErrorDetails_Exception {
 		CancelRequestResponse cancelRequestResponse = null;
 
 		final CancelRequestRequest cancelRequestRequest = new CancelRequestRequest();
@@ -88,6 +92,7 @@ public class CancelRequestTest extends PayPortParentTest {
 			logger.debug("Its current transaction status is: [" + cancelRequestResponse.getTransaction().getTransactionStatus() + "]");
 		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
 		}
 	}
 
@@ -95,8 +100,10 @@ public class CancelRequestTest extends PayPortParentTest {
 	 * Executes a PayRequest
 	 * 
 	 * @return the transaction ID received from the PayRequest
+	 * 
+	 * @throws ErrorDetails_Exception
 	 */
-	private long doPayRequest() {
+	private long doPayRequest() throws ErrorDetails_Exception {
 		Long payRequestTransactionID = null;
 		PayRequestResponse payRequestResponse = null;
 
@@ -115,6 +122,7 @@ public class CancelRequestTest extends PayPortParentTest {
 			logger.debug("Created transaction with ID: [" + payRequestTransactionID + "]");
 		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
 		}
 
 		return payRequestTransactionID;
@@ -184,11 +192,13 @@ public class CancelRequestTest extends PayPortParentTest {
 	 */
 	private static CancelIdentifier prepareCancelIdentifier(final Long recurringPaymentAuthorizationID, final Long transactionID) {
 		final CancelIdentifier cancelIdentifier = new CancelIdentifier();
+		
 		if (recurringPaymentAuthorizationID != null) {
 			cancelIdentifier.setRecurringPaymentAuthorizationID(recurringPaymentAuthorizationID);
 		} else {
 			cancelIdentifier.setTransactionID(transactionID);
 		}
+		
 		return cancelIdentifier;
 	}
 }

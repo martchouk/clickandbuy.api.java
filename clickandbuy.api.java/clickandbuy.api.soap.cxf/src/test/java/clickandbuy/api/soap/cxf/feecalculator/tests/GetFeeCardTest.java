@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package clickandbuy.api.soap.cxf.feecalculator.tests;
 
 import java.math.BigDecimal;
@@ -46,10 +49,12 @@ public class GetFeeCardTest extends FeeCalculatorPortParentTest {
 	/**
 	 * test setup.
 	 * 
+	 * @throws ErrorDetails_Exception
+	 * 
 	 * @throws Exception
 	 */
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws ErrorDetails_Exception {
 		configureCertificatesPolicy();
 
 		// prepare fee card categories request.
@@ -129,7 +134,9 @@ public class GetFeeCardTest extends FeeCalculatorPortParentTest {
 	 */
 	private GetFeeCardCategoriesDetails prepareGetFeeCardCategoriesDetails() {
 		final GetFeeCardCategoriesDetails getFeeCardCategoriesDetails = new GetFeeCardCategoriesDetails();
+		
 		getFeeCardCategoriesDetails.setBusinessOriginID(businessOriginID);
+		
 		return getFeeCardCategoriesDetails;
 	}
 }

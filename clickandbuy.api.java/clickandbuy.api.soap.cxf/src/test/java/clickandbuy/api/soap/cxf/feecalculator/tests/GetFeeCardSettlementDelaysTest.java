@@ -1,4 +1,9 @@
+/**
+ * 
+ */
 package clickandbuy.api.soap.cxf.feecalculator.tests;
+
+import static clickandbuy.api.soap.cxf.util.TestUtil.getCategoryFromList;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -9,7 +14,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.feecalculator.data.FeeCalculatorPortTestDataSupplier;
 import clickandbuy.api.soap.cxf.feecalculator.parent.FeeCalculatorPortParentTest;
-import clickandbuy.api.soap.cxf.util.TestUtil;
 
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesDetails;
@@ -40,11 +44,12 @@ public class GetFeeCardSettlementDelaysTest extends FeeCalculatorPortParentTest 
 	private GetFeeCardCategoriesResponse	getFeeCardCategoriesResponse	= null;
 
 	/**
+	 * test setup.
 	 * 
-	 * @throws Exception
+	 * @throws ErrorDetails_Exception
 	 */
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws ErrorDetails_Exception {
 		configureCertificatesPolicy();
 
 		// prepare fee card categories request.
@@ -103,9 +108,11 @@ public class GetFeeCardSettlementDelaysTest extends FeeCalculatorPortParentTest 
 	 */
 	private GetFeeCardSettlementDelaysDetails prepareGetFeeCardSettlementDelaysDetails(final GetFeeCardCategoriesResponse getFeeCardCategoriesResponse) {
 		final GetFeeCardSettlementDelaysDetails getFeeCardSettlementDelaysDetails = new GetFeeCardSettlementDelaysDetails();
+
 		getFeeCardSettlementDelaysDetails.setBusinessOriginID(businessOriginID);
-		final long categoryId = TestUtil.getCategoryFromList(getFeeCardCategoriesResponse.getCategoryList().getCategory(), testData.getGetFeeCardSettlementDelaysRequestCategory().trim());
+		final long categoryId = getCategoryFromList(getFeeCardCategoriesResponse.getCategoryList().getCategory(), testData.getGetFeeCardSettlementDelaysRequestCategory().trim());
 		getFeeCardSettlementDelaysDetails.setCategoryID(categoryId);
+
 		return getFeeCardSettlementDelaysDetails;
 	}
 
@@ -116,7 +123,9 @@ public class GetFeeCardSettlementDelaysTest extends FeeCalculatorPortParentTest 
 	 */
 	private GetFeeCardCategoriesDetails prepareGetFeeCardCategoriesDetails() {
 		final GetFeeCardCategoriesDetails getFeeCardCategoriesDetails = new GetFeeCardCategoriesDetails();
+
 		getFeeCardCategoriesDetails.setBusinessOriginID(businessOriginID);
+
 		return getFeeCardCategoriesDetails;
 	}
 }

@@ -10,11 +10,10 @@ import org.apache.xerces.impl.dv.util.HexBin;
 import org.springframework.stereotype.Component;
 
 /**
+ * Signature handler class. Used as Spring bean. Can be used to generate authentication tokens for Cab web service and as merchant registration token util.
+ * 
  * @author Ciprian I.Ileana
  * @author Nicolae.Petridean
- * 
- *         Signature handler class. Used as Spring bean. Can be used to generate authentication tokens for Cab web service and as merchant registration token util.
- * 
  */
 @Component
 public class SignatureHandler {
@@ -42,10 +41,10 @@ public class SignatureHandler {
 	 * Creates a valid token, for Cab ws client authentication, based on projectId and sharedSecret.
 	 * 
 	 * @param projectID
+	 *            the ID of the project
 	 * @param sharedSecret
-	 * @return String
-	 * 
-	 *         <timestamp>::<hex(sha1) hash of the string “[projectID]::[secretKey]::[timestamp]”>
+	 *            the obtained shared secret
+	 * @return String <timestamp>::<hex(sha1) hash of the string “[projectID]::[secretKey]::[timestamp]”>
 	 */
 	public String createAuthenticationToken(final long projectID, final String sharedSecret) {
 		final TimeZone utcTimeZone = TimeZone.getTimeZone(SIGNATURE_TIMEZONE);
@@ -63,8 +62,10 @@ public class SignatureHandler {
 	 * $timestamp + "::" + HEX(SHA1($businessOriginID + "::" + $merchantID + "::" + $sharedSecret + "::" + $timestamp)) with $timestamp being dateTimeWithFormat('yyyyMMddHHmmss') in UTC
 	 * 
 	 * @param projectID
+	 *            the ID of the project
 	 * @param sharedSecret
-	 * @return String
+	 *            the obtained shared secret
+	 * @return String the registration token as described
 	 */
 	public String createRegistrationToken(final String businessOriginID, final long merchantID, final String sharedSecret) {
 		final TimeZone utcTimeZone = TimeZone.getTimeZone(SIGNATURE_TIMEZONE);
@@ -80,7 +81,8 @@ public class SignatureHandler {
 	 * Makes a HEX(SHA1(input)) string.
 	 * 
 	 * @param input
-	 * @return
+	 *            what to be hashed
+	 * @return hashed as described above
 	 */
 	private String hash(final String input) {
 		try {

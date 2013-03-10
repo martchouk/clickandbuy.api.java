@@ -41,7 +41,7 @@ public class PayRequestRecurringTest extends PayPortParentTest {
 	 * @throws Exception
 	 */
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		configureCertificatesPolicy();
 
 		externalId = externalId + System.nanoTime() + "_";

@@ -47,9 +47,11 @@ public class CreateBatchTest extends PayPortParentTest {
 
 	/**
 	 * Tests the CreateBatch operation
+	 * 
+	 * @throws ErrorDetails_Exception
 	 */
 	@Test
-	public void testCreateBatch() {
+	public void testCreateBatch() throws ErrorDetails_Exception {
 		CreateBatchResponse createBatchResponse = null;
 
 		final CreateBatchRequest createBatchRequest = new CreateBatchRequest();
@@ -66,6 +68,7 @@ public class CreateBatchTest extends PayPortParentTest {
 			logger.debug("Created batch with ID: [" + createBatchResponse.getBatch().getBatchID() + "]");
 		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
 		}
 	}
 

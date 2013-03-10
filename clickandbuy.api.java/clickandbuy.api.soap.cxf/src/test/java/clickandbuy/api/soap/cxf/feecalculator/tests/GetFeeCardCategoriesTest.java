@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package clickandbuy.api.soap.cxf.feecalculator.tests;
 
 import org.apache.log4j.Logger;
@@ -32,11 +35,9 @@ public class GetFeeCardCategoriesTest extends FeeCalculatorPortParentTest {
 
 	/**
 	 * test setup.
-	 * 
-	 * @throws Exception
 	 */
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		configureCertificatesPolicy();
 	}
 
@@ -72,7 +73,9 @@ public class GetFeeCardCategoriesTest extends FeeCalculatorPortParentTest {
 	 */
 	private GetFeeCardCategoriesDetails prepareGetFeeCardCategoriesDetails() {
 		final GetFeeCardCategoriesDetails getFeeCardCategoriesDetails = new GetFeeCardCategoriesDetails();
+
 		getFeeCardCategoriesDetails.setBusinessOriginID(businessOriginID);
+
 		return getFeeCardCategoriesDetails;
 	}
 }

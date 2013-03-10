@@ -1,11 +1,13 @@
+/**
+ * 
+ */
 package clickandbuy.api.soap.cxf.accountingport.tests;
 
+import static clickandbuy.api.soap.cxf.util.TestUtil.toXMLGregorianCalendar;
+
 import java.text.ParseException;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.log4j.Logger;
@@ -24,7 +26,6 @@ import com.clickandbuy.api.soap.cxf.GetAccountingDocumentsRequest;
 import com.clickandbuy.api.soap.cxf.GetAccountingDocumentsResponse;
 import com.clickandbuy.api.soap.cxf.IntRange;
 import com.clickandbuy.api.soap.cxf.PagingSetting;
-import com.clickandbuy.api.util.auth.CabApiUniqueDateFormat;
 
 /**
  * Tests related to GetAccountingDocuments
@@ -43,22 +44,21 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 
 	/**
 	 * test setup.
-	 * 
-	 * @throws Exception
 	 */
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		configureCertificatesPolicy();
 	}
 
 	/**
 	 * Test the GetAccountingDocuments
 	 * 
-	 * @throws ParseException
 	 * @throws DatatypeConfigurationException
+	 * @throws ParseException
+	 * @throws ErrorDetails_Exception
 	 */
 	@Test
-	public void testGetAccountingDocuments() throws DatatypeConfigurationException, ParseException {
+	public void testGetAccountingDocuments() throws DatatypeConfigurationException, ParseException, ErrorDetails_Exception {
 		GetAccountingDocumentsResponse getAccountingDocumentsResponse = null;
 
 		final GetAccountingDocumentsRequest getAccountingDocumentsRequest = new GetAccountingDocumentsRequest();
@@ -71,6 +71,7 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 			logger.debug("Retrieved the following document list: " + getAccountingDocumentsResponse.getDocumentList());
 		} catch (final ErrorDetails_Exception errorDetails_Exception) {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
+			throw errorDetails_Exception;
 		}
 	}
 
@@ -78,20 +79,17 @@ public class GetAccountingDocumentsTest extends AccountingPortParentTest {
 	 * Prepares an {@link GetAccountingDocumentDetails} based on the test data provided by {@link AccountingPortTestDataSupplier}
 	 * 
 	 * @return the ${@link GetAccountingDocumentDetails}
+	 * 
+	 * @throws DatatypeConfigurationException
+	 * @throws ParseException
 	 */
 	private GetAccountingDocumentDetails prepareGetAccountingDocumentDetails() throws DatatypeConfigurationException, ParseException {
 		final GetAccountingDocumentDetails getAccountingDocumentDetails = new GetAccountingDocumentDetails();
 
 		final DateRange dateRange = new DateRange();
-		final long dateRAfter = CabApiUniqueDateFormat.getDayYYYYMMdd().parse(testData.getDateRangeAfter().trim()).getTime();
-		final long dateRBefore = CabApiUniqueDateFormat.getDayYYYYMMdd().parse(testData.getDateRangeBefore().trim()).getTime();
 
-		final GregorianCalendar gregory = new GregorianCalendar();
-		gregory.setTime(new Date(dateRAfter));
-		final XMLGregorianCalendar beginningDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(gregory);
-
-		gregory.setTime(new Date(dateRBefore));
-		final XMLGregorianCalendar endingDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(gregory);
+		final XMLGregorianCalendar beginningDate = toXMLGregorianCalendar(testData.getDateRangeAfter());
+		final XMLGregorianCalendar endingDate = toXMLGregorianCalendar(testData.getDateRangeBefore());
 
 		dateRange.setAfter(beginningDate);
 		dateRange.setBefore(endingDate);

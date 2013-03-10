@@ -4,6 +4,7 @@
 package clickandbuy.api.soap.cxf.payport.tests;
 
 import static clickandbuy.api.soap.cxf.util.TestUtil.prepareMoney;
+import static clickandbuy.api.soap.cxf.util.TestUtil.toXMLGregorianCalendar;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -20,7 +21,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import clickandbuy.api.soap.cxf.payport.data.PayPortTestDataSupplier;
 import clickandbuy.api.soap.cxf.payport.parent.PayPortParentTest;
-import clickandbuy.api.soap.cxf.util.TestUtil;
 
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
 import com.clickandbuy.api.soap.cxf.OrderDetailItemList;
@@ -67,6 +67,7 @@ public class PayRequestTest extends PayPortParentTest {
 	 * Test the PayRequest operation
 	 * 
 	 * @return the transaction ID
+	 * 
 	 * @throws ErrorDetails_Exception
 	 */
 	@Test
@@ -98,6 +99,9 @@ public class PayRequestTest extends PayPortParentTest {
 	 * Test the PayRequest operation for obtaining RecurringPaymentAuthorization
 	 * 
 	 * @return the transaction ID
+	 * 
+	 * @throws ParseException
+	 * @throws DatatypeConfigurationException
 	 * @throws ErrorDetails_Exception
 	 */
 	@Test
@@ -161,8 +165,9 @@ public class PayRequestTest extends PayPortParentTest {
 	 * Prepares an {@link PayRequestDetails} for normal payment requests (not recurring) based on the test data provided by {@link PayPortTestDataSupplier}
 	 * 
 	 * @return the ${@link PayRequestDetails}
-	 * @throws DatatypeConfigurationException
+	 * 
 	 * @throws ParseException
+	 * @throws DatatypeConfigurationException
 	 */
 	private PayRequestDetails preparePayRequestDetailsForRecurringAuthorization() throws ParseException, DatatypeConfigurationException {
 		final PayRequestDetails payRequestDetails = preparePayRequestDetails();
@@ -190,12 +195,15 @@ public class PayRequestTest extends PayPortParentTest {
 	 * Prepares an {@link RecurringPaymentAuthorization} based on the test data provided by {@link PayPortTestDataSupplier}
 	 * 
 	 * @return the ${@link RecurringPaymentAuthorization}
+	 * 
+	 * @throws ParseException
+	 * @throws DatatypeConfigurationException
 	 */
 	private RecurringPaymentAuthorization prepareRecurringPaymentAuthorization() throws ParseException, DatatypeConfigurationException {
 		final RecurringPaymentAuthorization recurringPaymentAuthorization = new RecurringPaymentAuthorization();
 
 		recurringPaymentAuthorization.setDescription(testData.getPayRequestCreateRecurringDescription());
-		recurringPaymentAuthorization.setExpireDate(TestUtil.toXMLGregorianCalendar(testData.getPayRequestCreateRecurringExpireDate()));
+		recurringPaymentAuthorization.setExpireDate(toXMLGregorianCalendar(testData.getPayRequestCreateRecurringExpireDate()));
 		recurringPaymentAuthorization.setAmountLimit(prepareMoney(BigDecimal.valueOf(100), "EUR"));
 		recurringPaymentAuthorization.setNumberLimit(100);
 
