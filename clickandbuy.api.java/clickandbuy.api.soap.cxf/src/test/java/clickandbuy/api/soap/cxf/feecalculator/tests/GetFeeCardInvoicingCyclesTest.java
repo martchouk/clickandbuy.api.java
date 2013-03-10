@@ -8,10 +8,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import clickandbuy.api.soap.cxf.feecalculator.data.FeeCalculatorPortTestDataSupplier;
 import clickandbuy.api.soap.cxf.feecalculator.parent.FeeCalculatorPortParentTest;
 import clickandbuy.api.soap.cxf.util.TestUtil;
 
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
+import com.clickandbuy.api.soap.cxf.GetFeeCardAverageTicketSizesDetails;
 import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesDetails;
 import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesRequest;
 import com.clickandbuy.api.soap.cxf.GetFeeCardCategoriesResponse;
@@ -98,8 +100,9 @@ public class GetFeeCardInvoicingCyclesTest extends FeeCalculatorPortParentTest {
 	}
 
 	/**
-	 * @param getFeeCardCategoriesResponse
-	 * @return
+	 * Prepares an {@link GetFeeCardInvoicingCyclesDetails} based on the test data provided by {@link FeeCalculatorPortTestDataSupplier}, and the card categories response .
+	 * 
+	 * @return the ${@link GetFeeCardInvoicingCyclesDetails}
 	 */
 	private GetFeeCardInvoicingCyclesDetails prepareGetFeeCardInvoicingCyclesDetails(final GetFeeCardCategoriesResponse getFeeCardCategoriesResponse) {
 		final GetFeeCardInvoicingCyclesDetails getFeeCardInvoicingCyclesDetails = new GetFeeCardInvoicingCyclesDetails();
@@ -110,9 +113,9 @@ public class GetFeeCardInvoicingCyclesTest extends FeeCalculatorPortParentTest {
 	}
 
 	/**
-	 * request builder method for retrieving fee card categories.
+	 * Prepares an {@link GetFeeCardCategoriesDetails} based on the test data provided by {@link FeeCalculatorPortTestDataSupplier}
 	 * 
-	 * @return
+	 * @return the ${@link GetFeeCardCategoriesDetails}
 	 */
 	private GetFeeCardCategoriesDetails prepareGetFeeCardCategoriesDetails() {
 		final GetFeeCardCategoriesDetails getFeeCardCategoriesDetails = new GetFeeCardCategoriesDetails();

@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import clickandbuy.api.soap.cxf.feecalculator.data.FeeCalculatorPortTestDataSupplier;
 import clickandbuy.api.soap.cxf.feecalculator.parent.FeeCalculatorPortParentTest;
 
 import com.clickandbuy.api.soap.cxf.ErrorDetails_Exception;
@@ -65,9 +66,9 @@ public class GetFeeCardCategoriesTest extends FeeCalculatorPortParentTest {
 	}
 
 	/**
-	 * request builder method for retrieving fee card categories.
+	 * Prepares an {@link GetFeeCardCategoriesDetails} based on the test data provided by {@link FeeCalculatorPortTestDataSupplier}
 	 * 
-	 * @return
+	 * @return the ${@link GetFeeCardCategoriesDetails}
 	 */
 	private GetFeeCardCategoriesDetails prepareGetFeeCardCategoriesDetails() {
 		final GetFeeCardCategoriesDetails getFeeCardCategoriesDetails = new GetFeeCardCategoriesDetails();

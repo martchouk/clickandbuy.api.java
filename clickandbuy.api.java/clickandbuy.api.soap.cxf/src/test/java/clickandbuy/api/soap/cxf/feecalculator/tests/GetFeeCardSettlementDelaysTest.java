@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import clickandbuy.api.soap.cxf.feecalculator.data.FeeCalculatorPortTestDataSupplier;
 import clickandbuy.api.soap.cxf.feecalculator.parent.FeeCalculatorPortParentTest;
 import clickandbuy.api.soap.cxf.util.TestUtil;
 
@@ -96,8 +97,9 @@ public class GetFeeCardSettlementDelaysTest extends FeeCalculatorPortParentTest 
 	}
 
 	/**
-	 * @param getFeeCardCategoriesResponse
-	 * @return
+	 * Prepares an {@link GetFeeCardSettlementDelaysDetails} based on the test data provided by {@link FeeCalculatorPortTestDataSupplier}, and also based on the card categories response
+	 * 
+	 * @return the ${@link GetFeeCardSettlementDelaysDetails}
 	 */
 	private GetFeeCardSettlementDelaysDetails prepareGetFeeCardSettlementDelaysDetails(final GetFeeCardCategoriesResponse getFeeCardCategoriesResponse) {
 		final GetFeeCardSettlementDelaysDetails getFeeCardSettlementDelaysDetails = new GetFeeCardSettlementDelaysDetails();
@@ -108,9 +110,9 @@ public class GetFeeCardSettlementDelaysTest extends FeeCalculatorPortParentTest 
 	}
 
 	/**
-	 * request builder method for retrieving fee card categories.
+	 * Prepares an {@link GetFeeCardCategoriesDetails} based on the test data provided by {@link FeeCalculatorPortTestDataSupplier}
 	 * 
-	 * @return
+	 * @return the ${@link GetFeeCardCategoriesDetails}
 	 */
 	private GetFeeCardCategoriesDetails prepareGetFeeCardCategoriesDetails() {
 		final GetFeeCardCategoriesDetails getFeeCardCategoriesDetails = new GetFeeCardCategoriesDetails();

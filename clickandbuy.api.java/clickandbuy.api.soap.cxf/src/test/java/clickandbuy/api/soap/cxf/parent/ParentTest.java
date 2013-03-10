@@ -18,6 +18,8 @@ import com.clickandbuy.api.soap.cxf.Authentication;
 import com.clickandbuy.api.util.auth.SignatureHandler;
 
 /**
+ * Abstract parent class for all ports. Loads the spring context and injects the mandatory parameters in the test context. It is also responsible for deciding the active profile.
+ * 
  * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
@@ -25,7 +27,7 @@ import com.clickandbuy.api.util.auth.SignatureHandler;
 @Configuration
 @ActiveProfiles("DEVELOPMENT2")
 @ContextConfiguration(locations = { "classpath:/META-INF/spring/itest/clickandbuy.api.soap.cxf.spring.xml" })
-public class ParentTest {
+public abstract class ParentTest {
 
 	/**
 	 * class logger.
@@ -69,11 +71,11 @@ public class ParentTest {
 	protected String			externalId;
 
 	/**
-	 * 
+	 * Utility
 	 */
 	protected void configureCertificatesPolicy(final Client proxy) {
 		logger.debug("Configuring certificates policy for [" + proxy + "]");
-		
+
 		final HTTPConduit conduit = (HTTPConduit) proxy.getConduit();
 		final TLSClientParameters tlsClientParameters = new TLSClientParameters();
 		tlsClientParameters.setTrustManagers(new TrustManager[] { new TrustAllX509TrustManager() });
@@ -102,4 +104,9 @@ public class ParentTest {
 	protected long nullToZero(final Long num) {
 		return num == null ? 0 : num.longValue();
 	}
+
+	/**
+	 * Configuration utility method for certificates policy.
+	 */
+	protected abstract void configureCertificatesPolicy();
 }

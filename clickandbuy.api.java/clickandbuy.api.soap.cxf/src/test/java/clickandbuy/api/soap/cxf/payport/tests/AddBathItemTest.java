@@ -172,7 +172,6 @@ public class AddBathItemTest extends PayPortParentTest {
 		batchItemDetails.setExternalID(externalId);
 
 		return batchItemDetails;
-
 	}
 
 	/**
@@ -186,7 +185,6 @@ public class AddBathItemTest extends PayPortParentTest {
 		addBatchItemProcessingDetails.setPayRequestDetails(preparePayRequestDetails());
 
 		return addBatchItemProcessingDetails;
-
 	}
 
 	/**
@@ -215,6 +213,5 @@ public class AddBathItemTest extends PayPortParentTest {
 		orderDetails.setText(testData.getPayRequestText());
 
 		return orderDetails;
-
 	}
 }

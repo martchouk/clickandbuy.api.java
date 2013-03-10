@@ -49,6 +49,7 @@ public class FeeCalculatorPortParentTest extends ParentTest {
 	/**
 	 * Configuration utility method for certificates policy.
 	 */
+	@Override
 	protected void configureCertificatesPolicy() {
 		if (acceptSelfSignedCertificates) {
 			logger.debug("Acceptance of self signed certificates is enabled for Fee Calculator Port.");

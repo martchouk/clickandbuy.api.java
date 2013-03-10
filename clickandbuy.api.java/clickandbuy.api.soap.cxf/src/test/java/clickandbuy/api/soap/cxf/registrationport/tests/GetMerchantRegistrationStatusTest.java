@@ -82,10 +82,9 @@ public class GetMerchantRegistrationStatusTest extends RegistrationPortParentTes
 	}
 
 	/**
-	 * Prepare get merchant registration status request.
+	 * Prepares an {@link GetMerchantRegistrationStatusDetails} based on the test data and the previously created merchant details.
 	 * 
-	 * @param createMerchantRegistrationResponse
-	 * @return
+	 * @return the {@link GetMerchantRegistrationStatusDetails}
 	 */
 	private GetMerchantRegistrationStatusDetails prepareGetMerchantRegistrationStatusDetails(final CreateMerchantRegistrationResponse createMerchantRegistrationResponse) {
 		final GetMerchantRegistrationStatusDetails getMerchantRegistrationStatusDetails = new GetMerchantRegistrationStatusDetails();
@@ -100,14 +99,13 @@ public class GetMerchantRegistrationStatusTest extends RegistrationPortParentTes
 	}
 
 	/**
-	 * Prepares an {@link CreateMerchantRegistrationDetails} based on the previously created batch
+	 * Prepares an {@link CreateMerchantRegistrationDetails} based on the accounting port test data injected in test context.
 	 * 
 	 * @return the {@link CreateMerchantRegistrationDetails}
 	 */
 	private CreateMerchantRegistrationDetails prepareCreateMerchantRegistrationDetails() {
 		final CreateMerchantRegistrationDetails createMerchantRegistrationDetails = new CreateMerchantRegistrationDetails();
 
-		// optional values
 		// createMerchantRegistrationDetails.setIntegrationData(merchantIntegration);
 		final MerchantRegistrationData registrationData = new MerchantRegistrationData();
 		// FIX for not registering the same merchant email address too many times.
