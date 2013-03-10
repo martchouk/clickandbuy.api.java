@@ -15,6 +15,8 @@ import clickandbuy.api.soap.cxf.registrationport.data.RegistrationPortTestDataSu
 import com.clickandbuy.api.soap.cxf.RegistrationPortType;
 
 /**
+ * Parent test for all registration port operation tests.
+ * 
  * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
@@ -47,7 +49,7 @@ public class RegistrationPortParentTest extends ParentTest {
 	/**
 	 * Configuration utility method for certificates policy.
 	 */
-	public void configureCertificatesPolicy() {
+	protected void configureCertificatesPolicy() {
 		if (acceptSelfSignedCertificates) {
 			logger.debug("Acceptance of self signed certificates is enabled for Registration Port.");
 			final Client proxy = ClientProxy.getClient(registrationPortType);

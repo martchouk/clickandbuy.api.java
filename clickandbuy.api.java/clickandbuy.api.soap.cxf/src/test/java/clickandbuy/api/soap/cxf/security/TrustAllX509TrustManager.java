@@ -10,9 +10,9 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 
-
 /**
- * Trust manager which trusts everything, allowing for self-signed SSL certificates to be used.
+ * Trust manager which trusts everything, allowing for self-signed SSL certificates to be used. This Trust Manager should be used only with test/sandbox environment, where the client api needs to support self signed certificates.
+ * 
  * 
  * @author Ciprian I. Ileana
  * @author Nicolae Petridean
@@ -52,7 +52,7 @@ public class TrustAllX509TrustManager implements X509TrustManager {
 	 * @throws NoSuchAlgorithmException
 	 */
 	public static synchronized void install() throws KeyManagementException, NoSuchAlgorithmException {
-		SSLContext context = SSLContext.getInstance("SSL");
+		final SSLContext context = SSLContext.getInstance("SSL");
 		context.init(null, new TrustManager[] { new TrustAllX509TrustManager() }, new SecureRandom());
 		HttpsURLConnection.setDefaultSSLSocketFactory(context.getSocketFactory());
 	}

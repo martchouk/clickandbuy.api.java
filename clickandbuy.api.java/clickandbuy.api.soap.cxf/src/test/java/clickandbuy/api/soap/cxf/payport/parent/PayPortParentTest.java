@@ -15,6 +15,8 @@ import clickandbuy.api.soap.cxf.payport.data.PayPortTestDataSupplier;
 import com.clickandbuy.api.soap.cxf.PayPortType;
 
 /**
+ * Parent test for all pay port operation tests.
+ * 
  * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
@@ -43,7 +45,7 @@ public class PayPortParentTest extends ParentTest {
 	 */
 	@Autowired
 	protected PayPortTestDataSupplier	testData;
-	
+
 	/**
 	 * Configuration utility method for certificates policy.
 	 */

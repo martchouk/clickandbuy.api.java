@@ -100,9 +100,9 @@ public class GetMerchantRegistrationStatusTest extends RegistrationPortParentTes
 	}
 
 	/**
-	 * Prepare create merchant registration request.
+	 * Prepares an {@link CreateMerchantRegistrationDetails} based on the previously created batch
 	 * 
-	 * @return
+	 * @return the {@link CreateMerchantRegistrationDetails}
 	 */
 	private CreateMerchantRegistrationDetails prepareCreateMerchantRegistrationDetails() {
 		final CreateMerchantRegistrationDetails createMerchantRegistrationDetails = new CreateMerchantRegistrationDetails();

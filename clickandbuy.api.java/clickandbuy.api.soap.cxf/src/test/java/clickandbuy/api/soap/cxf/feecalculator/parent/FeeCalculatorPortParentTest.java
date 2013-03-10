@@ -15,6 +15,8 @@ import clickandbuy.api.soap.cxf.parent.ParentTest;
 import com.clickandbuy.api.soap.cxf.FeeCalculatorPortType;
 
 /**
+ * Parent test for all fee port operation tests.
+ * 
  * @author Ciprian I. Ileana
  * @author Nicolae Petridean
  * 
@@ -47,7 +49,7 @@ public class FeeCalculatorPortParentTest extends ParentTest {
 	/**
 	 * Configuration utility method for certificates policy.
 	 */
-	public void configureCertificatesPolicy() {
+	protected void configureCertificatesPolicy() {
 		if (acceptSelfSignedCertificates) {
 			logger.debug("Acceptance of self signed certificates is enabled for Fee Calculator Port.");
 			final Client proxy = ClientProxy.getClient(feeCalculatorPortType);

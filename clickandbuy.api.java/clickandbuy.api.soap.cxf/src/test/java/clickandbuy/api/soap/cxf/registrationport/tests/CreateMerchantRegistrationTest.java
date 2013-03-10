@@ -44,10 +44,10 @@ public class CreateMerchantRegistrationTest extends RegistrationPortParentTest {
 	}
 
 	/**
-	 * Test the CreateMerchantRegistration
+	 * Test the CreateMerchantRegistration operation.
 	 * 
 	 * @throws ErrorDetails_Exception
-	 *             : thrown in case the merchant registration is not successfull.
+	 *             : thrown in case the merchant registration is not successful.
 	 */
 	@Test
 	public void testCreateMerchantRegistration() throws ErrorDetails_Exception {
@@ -63,13 +63,12 @@ public class CreateMerchantRegistrationTest extends RegistrationPortParentTest {
 			logger.error(errorDetails_Exception.getFaultInfo().getDescription());
 			throw errorDetails_Exception;
 		}
-
 	}
 
 	/**
-	 * Prepare create merchant registration request.
+	 * Prepares an {@link CreateMerchantRegistrationDetails} based on the previously created batch
 	 * 
-	 * @return
+	 * @return the {@link CreateMerchantRegistrationDetails}
 	 */
 	private CreateMerchantRegistrationDetails prepareCreateMerchantRegistrationDetails() {
 		final CreateMerchantRegistrationDetails createMerchantRegistrationDetails = new CreateMerchantRegistrationDetails();
