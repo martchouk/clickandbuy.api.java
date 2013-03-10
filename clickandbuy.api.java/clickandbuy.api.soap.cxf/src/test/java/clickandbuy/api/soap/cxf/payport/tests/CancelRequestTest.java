@@ -56,6 +56,8 @@ public class CancelRequestTest extends PayPortParentTest {
 	 * test setup.
 	 * 
 	 * @throws ErrorDetails_Exception
+	 *             if during communication (between the client API implementation and the ClickandBuy API system) the communication is disturbed or a logical or technical error occurs. The response from ClickandBuy system contains detailed
+	 *             error messages which facilitate the localization and eradication of the problem.
 	 */
 	@Before
 	public void setUp() throws ErrorDetails_Exception {
@@ -71,6 +73,8 @@ public class CancelRequestTest extends PayPortParentTest {
 	 * Tests the CancelRequest operation
 	 * 
 	 * @throws ErrorDetails_Exception
+	 *             if during communication (between the client API implementation and the ClickandBuy API system) the communication is disturbed or a logical or technical error occurs. The response from ClickandBuy system contains detailed
+	 *             error messages which facilitate the localization and eradication of the problem.
 	 */
 	@Test
 	public void testCancelRequest() throws ErrorDetails_Exception {
@@ -102,6 +106,8 @@ public class CancelRequestTest extends PayPortParentTest {
 	 * @return the transaction ID received from the PayRequest
 	 * 
 	 * @throws ErrorDetails_Exception
+	 *             if during communication (between the client API implementation and the ClickandBuy API system) the communication is disturbed or a logical or technical error occurs. The response from ClickandBuy system contains detailed
+	 *             error messages which facilitate the localization and eradication of the problem.
 	 */
 	private long doPayRequest() throws ErrorDetails_Exception {
 		Long payRequestTransactionID = null;
@@ -192,13 +198,13 @@ public class CancelRequestTest extends PayPortParentTest {
 	 */
 	private static CancelIdentifier prepareCancelIdentifier(final Long recurringPaymentAuthorizationID, final Long transactionID) {
 		final CancelIdentifier cancelIdentifier = new CancelIdentifier();
-		
+
 		if (recurringPaymentAuthorizationID != null) {
 			cancelIdentifier.setRecurringPaymentAuthorizationID(recurringPaymentAuthorizationID);
 		} else {
 			cancelIdentifier.setTransactionID(transactionID);
 		}
-		
+
 		return cancelIdentifier;
 	}
 }

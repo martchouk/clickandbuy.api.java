@@ -63,6 +63,8 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	 * test setup.
 	 * 
 	 * @throws ErrorDetails_Exception
+	 *             if during communication (between the client API implementation and the ClickandBuy API system) the communication is disturbed or a logical or technical error occurs. The response from ClickandBuy system contains detailed
+	 *             error messages which facilitate the localization and eradication of the problem.
 	 */
 	@Before
 	public void setUp() throws ErrorDetails_Exception {
@@ -79,6 +81,8 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	 * Tests the GetBatchStatus operation
 	 * 
 	 * @throws ErrorDetails_Exception
+	 *             if during communication (between the client API implementation and the ClickandBuy API system) the communication is disturbed or a logical or technical error occurs. The response from ClickandBuy system contains detailed
+	 *             error messages which facilitate the localization and eradication of the problem.
 	 */
 	@Test
 	public void testGetBatchStatus() throws ErrorDetails_Exception {
@@ -110,6 +114,8 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	 * @return the ID of the added batch item
 	 * 
 	 * @throws ErrorDetails_Exception
+	 *             if during communication (between the client API implementation and the ClickandBuy API system) the communication is disturbed or a logical or technical error occurs. The response from ClickandBuy system contains detailed
+	 *             error messages which facilitate the localization and eradication of the problem.
 	 */
 	private Long doAddBatchItem() throws ErrorDetails_Exception {
 		AddBatchItemResponse addBatchItemResponse = null;
@@ -144,6 +150,8 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	 * @return the ID of the created batch
 	 * 
 	 * @throws ErrorDetails_Exception
+	 *             if during communication (between the client API implementation and the ClickandBuy API system) the communication is disturbed or a logical or technical error occurs. The response from ClickandBuy system contains detailed
+	 *             error messages which facilitate the localization and eradication of the problem.
 	 */
 	private Long doCreateBatch() throws ErrorDetails_Exception {
 		Long tempBatchID = null;
@@ -287,7 +295,7 @@ public class GetBatchStatusTest extends PayPortParentTest {
 	 */
 	private BatchItemIDList prepareBatchItemIDList() {
 		final BatchItemIDList batchItemIDList = new BatchItemIDList();
-		
+
 		batchItemIDList.getBatchItemID().add(batchItemID);
 
 		return batchItemIDList;

@@ -50,6 +50,8 @@ public class StatusRequestTest extends PayPortParentTest {
 	 * test setup.
 	 * 
 	 * @throws ErrorDetails_Exception
+	 *             if during communication (between the client API implementation and the ClickandBuy API system) the communication is disturbed or a logical or technical error occurs. The response from ClickandBuy system contains detailed
+	 *             error messages which facilitate the localization and eradication of the problem.
 	 */
 	@Before
 	public void setUp() throws ErrorDetails_Exception {
@@ -65,6 +67,8 @@ public class StatusRequestTest extends PayPortParentTest {
 	 * Tests the StatusRequest operation
 	 * 
 	 * @throws ErrorDetails_Exception
+	 *             if during communication (between the client API implementation and the ClickandBuy API system) the communication is disturbed or a logical or technical error occurs. The response from ClickandBuy system contains detailed
+	 *             error messages which facilitate the localization and eradication of the problem.
 	 */
 	@Test
 	public void testStatusRequest() throws ErrorDetails_Exception {
@@ -95,7 +99,10 @@ public class StatusRequestTest extends PayPortParentTest {
 	 * Executes a PayRequest
 	 * 
 	 * @return the transaction ID received from the PayRequest
+	 * 
 	 * @throws ErrorDetails_Exception
+	 *             if during communication (between the client API implementation and the ClickandBuy API system) the communication is disturbed or a logical or technical error occurs. The response from ClickandBuy system contains detailed
+	 *             error messages which facilitate the localization and eradication of the problem.
 	 */
 	private long doPayRequest() throws ErrorDetails_Exception {
 		Long payRequestTransactionID = null;

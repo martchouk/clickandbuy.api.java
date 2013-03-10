@@ -48,7 +48,8 @@ public class CreateMerchantRegistrationTest extends RegistrationPortParentTest {
 	 * Test the CreateMerchantRegistration operation.
 	 * 
 	 * @throws ErrorDetails_Exception
-	 *             : thrown in case the merchant registration is not successful.
+	 *             if during communication (between the client API implementation and the ClickandBuy API system) the communication is disturbed or a logical or technical error occurs. The response from ClickandBuy system contains detailed
+	 *             error messages which facilitate the localization and eradication of the problem.
 	 */
 	@Test
 	public void testCreateMerchantRegistration() throws ErrorDetails_Exception {

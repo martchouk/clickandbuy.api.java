@@ -43,8 +43,11 @@ public class CancelBatchTest extends PayPortParentTest {
 	private Long				batchID	= null;
 
 	/**
-	 * @throws ErrorDetails_Exception
+	 * test setup.
 	 * 
+	 * @throws ErrorDetails_Exception
+	 *             if during communication (between the client API implementation and the ClickandBuy API system) the communication is disturbed or a logical or technical error occurs. The response from ClickandBuy system contains detailed
+	 *             error messages which facilitate the localization and eradication of the problem.
 	 */
 	@Before
 	public void setUp() throws ErrorDetails_Exception {
