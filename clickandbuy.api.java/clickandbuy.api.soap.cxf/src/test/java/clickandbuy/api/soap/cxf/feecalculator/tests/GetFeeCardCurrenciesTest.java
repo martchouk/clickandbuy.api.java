@@ -36,7 +36,7 @@ public class GetFeeCardCurrenciesTest extends FeeCalculatorPortParentTest {
 	 * test setup.
 	 */
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		configureCertificatesPolicy();
 	}
 
@@ -44,6 +44,8 @@ public class GetFeeCardCurrenciesTest extends FeeCalculatorPortParentTest {
 	 * Test the GetFeeCardCurrencies
 	 * 
 	 * @throws ErrorDetails_Exception
+	 *             if during communication (between the client API implementation and the ClickandBuy API system) the communication is disturbed or a logical or technical error occurs. The response from ClickandBuy system contains detailed
+	 *             error messages which facilitate the localization and eradication of the problem.
 	 */
 	@Test
 	public void testGetFeeCardCurrencies() throws ErrorDetails_Exception {

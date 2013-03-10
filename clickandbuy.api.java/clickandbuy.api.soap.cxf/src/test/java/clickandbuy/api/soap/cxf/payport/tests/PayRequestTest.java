@@ -69,6 +69,8 @@ public class PayRequestTest extends PayPortParentTest {
 	 * @return the transaction ID
 	 * 
 	 * @throws ErrorDetails_Exception
+	 *             if during communication (between the client API implementation and the ClickandBuy API system) the communication is disturbed or a logical or technical error occurs. The response from ClickandBuy system contains detailed
+	 *             error messages which facilitate the localization and eradication of the problem.
 	 */
 	@Test
 	public void testPayRequest() throws ErrorDetails_Exception {
@@ -103,6 +105,8 @@ public class PayRequestTest extends PayPortParentTest {
 	 * @throws ParseException
 	 * @throws DatatypeConfigurationException
 	 * @throws ErrorDetails_Exception
+	 *             if during communication (between the client API implementation and the ClickandBuy API system) the communication is disturbed or a logical or technical error occurs. The response from ClickandBuy system contains detailed
+	 *             error messages which facilitate the localization and eradication of the problem.
 	 */
 	@Test
 	public void testPayRequestForRecurringAuthorization() throws ParseException, DatatypeConfigurationException, ErrorDetails_Exception {

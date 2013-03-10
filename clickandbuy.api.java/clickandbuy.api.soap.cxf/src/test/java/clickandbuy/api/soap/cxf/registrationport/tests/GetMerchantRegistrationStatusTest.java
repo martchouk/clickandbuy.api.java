@@ -51,6 +51,8 @@ public class GetMerchantRegistrationStatusTest extends RegistrationPortParentTes
 	 * Test the AddBathItem
 	 * 
 	 * @throws ErrorDetails_Exception
+	 *             if during communication (between the client API implementation and the ClickandBuy API system) the communication is disturbed or a logical or technical error occurs. The response from ClickandBuy system contains detailed
+	 *             error messages which facilitate the localization and eradication of the problem.
 	 */
 	@Test
 	public void testGetMerchantRegistrationStatus() throws ErrorDetails_Exception {
