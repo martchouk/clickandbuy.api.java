@@ -12,7 +12,7 @@ import java.security.cert.X509Certificate;
 
 /**
  * @author Nicolae.Petridean
- * @author Ciprian.Ileana
+ * @author Ciprian I. Ileana
  */
 public class TrustAllX509TrustManager implements X509TrustManager {
 
